@@ -1,0 +1,87 @@
+/* ================= USER DASHBOARD ================= */
+
+.user-dashboard {
+  min-height: 100vh;
+  padding: 120px 40px 60px;
+  background: radial-gradient(circle at top, #0b1c2d, #020617);
+  color: #e5e7eb;
+}
+
+/* HEADER */
+.user-header {
+  margin-bottom: 40px;
+}
+
+.user-header h1 {
+  font-size: 1.8rem;
+  letter-spacing: 2px;
+}
+
+.user-header p {
+  opacity: 0.8;
+  margin-top: 6px;
+}
+
+/* DASHBOARD */
+.user-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-bottom: 50px;
+}
+
+.stat-card {
+  background: linear-gradient(180deg, #020617, #05070a);
+  border: 1px solid rgba(201,162,77,0.35);
+  border-radius: 14px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.6);
+}
+
+.stat-number {
+  font-size: 2.4rem;
+  font-weight: bold;
+  color: #c9a24d;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 1.5px;
+  opacity: 0.85;
+}
+
+/* MENU */
+.user-menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.user-menu button {
+  background: transparent;
+  border: 1px solid rgba(201,162,77,0.5);
+  color: #c9a24d;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  transition: 0.3s;
+}
+
+.user-menu button:hover {
+  background: #c9a24d;
+  color: #020617;
+}
+
+/* CONTEÚDO */
+.user-content {
+  background: linear-gradient(180deg, #020617, #05070a);
+  border: 1px solid rgba(201,162,77,0.25);
+  border-radius: 14px;
+  padding: 30px;
+}

@@ -1,0 +1,184 @@
+.home-page {
+  background: radial-gradient(circle at top, #0b1c2d, #020617);
+  min-height: 100vh;
+}
+
+/* ================= HERO ================= */
+.home-hero {
+  height: 78vh;
+  max-height: 720px;
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px auto 90px;
+  border: 1px solid rgba(201,162,77,0.4);
+  border-radius: 14px;
+  max-width: 1400px;
+  box-shadow: 0 0 80px rgba(0,0,0,0.85);
+}
+
+.hero-overlay {
+  background: linear-gradient(
+    to bottom,
+    rgba(2,6,23,0.55),
+    rgba(2,6,23,0.8)
+  );
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
+
+.hero-overlay h1 span {
+  color: #c9a24d;
+}
+
+.hero-overlay p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* BOTÕES */
+.hero-actions {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.gate-btn {
+  padding: 12px 28px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid #c9a24d;
+  color: #c9a24d;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.gate-btn:hover {
+  background: #c9a24d;
+  color: #020617;
+}
+
+/* ================= CONTEÚDO ================= */
+.gate-container {
+  max-width: 1200px;
+  margin: 0 auto 100px;
+  padding: 0 20px;
+}
+
+.gate-title {
+  text-align: center;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: #c9a24d;
+}
+
+.gate-text {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  color: #cbd5f5;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ================= GRID / CARDS ================= */
+.gate-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.panel-card {
+  background: linear-gradient(160deg, #020617, #020617cc);
+  border: 1px solid rgba(201,162,77,0.25);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 25px rgba(0,0,0,0.5);
+}
+
+.panel-card h3 {
+  color: #c9a24d;
+  margin-bottom: 10px;
+}
+
+/* ================= APREENSÕES ================= */
+.gate-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+}
+
+.stat-card {
+  background: linear-gradient(180deg, #020617, #020617cc);
+  border: 1px solid rgba(201,162,77,0.35);
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(0,0,0,0.6);
+}
+
+.stat-card .numero {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #c9a24d;
+}
+
+.stat-card .label {
+  display: block;
+  margin-top: 8px;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+/* ================= INSTAGRAM FIXO ================= */
+.instagram-float {
+  position: fixed;
+  right: 20px;
+  bottom: 30px;
+  background: #020617;
+  border: 1px solid #c9a24d;
+  color: #c9a24d;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  text-decoration: none;
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.instagram-float:hover {
+  background: #c9a24d;
+  color: #020617;
+}
+
+/* ================= FOOTER ================= */
+.gate-footer {
+  margin-top: 80px;
+  padding: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #9ca3af;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}

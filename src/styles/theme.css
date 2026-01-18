@@ -1,0 +1,74 @@
+/* ============================
+   GATE – TEMA GLOBAL OFICIAL
+   ============================ */
+
+:root {
+  --bg-main: #020617;
+  --bg-soft: #0b1c2d;
+  --bg-card: #0f172a;
+
+  --gold: #c9a24d;
+  --gold-soft: rgba(201, 162, 77, 0.4);
+
+  --text-main: #e5e7eb;
+  --text-soft: #9ca3af;
+
+  --border-soft: rgba(255,255,255,0.08);
+}
+
+/* ===== RESET CONTROLADO ===== */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-main);
+  color: var(--text-main);
+  font-family: Inter, system-ui, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* NÃO usar flex no body */
+body {
+  display: block;
+}
+
+/* ===== LINKS ===== */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--gold);
+}
+
+/* ===== BOTÕES ===== */
+button {
+  background: linear-gradient(180deg, #111827, #020617);
+  color: var(--text-main);
+  border: 1px solid var(--gold-soft);
+  border-radius: 6px;
+  padding: 8px 14px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--gold);
+}
+
+/* ===== CONTAINER PADRÃO ===== */
+.container {
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
+}
+
+/* ===== TÍTULOS ===== */
+h1, h2, h3 {
+  font-family: "Oswald", "Bebas Neue", sans-serif;
+  letter-spacing: 1px;
+  color: var(--text-main);
+}

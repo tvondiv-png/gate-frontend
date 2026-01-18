@@ -1,0 +1,60 @@
+/* ===== BASE SEÇÕES PAINEL ===== */
+
+.panel-section {
+  background: linear-gradient(180deg, #020617, #05070a);
+  border: 1px solid rgba(201,162,77,0.3);
+  border-radius: 14px;
+  padding: 30px;
+}
+
+.panel-section h2 {
+  color: #c9a24d;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.panel-card {
+  background: linear-gradient(180deg, #0f172a, #020617);
+  border: 1px solid rgba(201,162,77,0.25);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.panel-card small {
+  opacity: 0.7;
+  font-size: 0.75rem;
+}
+
+.panel-input,
+.panel-textarea,
+.panel-select {
+  width: 100%;
+  background: #020617;
+  border: 1px solid rgba(201,162,77,0.4);
+  color: #e5e7eb;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.panel-btn {
+  background: linear-gradient(135deg, #c9a24d, #9f7c2f);
+  color: #020617;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.panel-btn:hover {
+  filter: brightness(1.1);
+}

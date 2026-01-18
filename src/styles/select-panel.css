@@ -1,0 +1,87 @@
+.select-panel-page {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #0b1c2d, #020617);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+}
+
+.select-panel-box {
+  max-width: 900px;
+  width: 100%;
+  padding: 60px 40px;
+  text-align: center;
+}
+
+.select-panel-box h1 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+}
+
+.select-panel-box .subtitle {
+  opacity: 0.8;
+  margin-bottom: 50px;
+}
+
+.select-panel-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.panel-card {
+  background: linear-gradient(180deg, #020617, #050b14);
+  border: 1px solid rgba(201,162,77,0.4);
+  border-radius: 14px;
+  padding: 40px 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+}
+
+.panel-card.admin {
+  border-color: rgba(220,38,38,0.6);
+}
+
+.panel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+}
+
+.panel-card .icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 20px;
+}
+
+.panel-card h2 {
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+}
+
+.panel-card p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-bottom: 30px;
+}
+
+.panel-card button {
+  background: linear-gradient(180deg, #c9a24d, #a8832f);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #020617;
+  transition: 0.2s;
+}
+
+.panel-card.admin button {
+  background: linear-gradient(180deg, #dc2626, #991b1b);
+  color: #fff;
+}
+
+.panel-card button:hover {
+  opacity: 0.9;
+}

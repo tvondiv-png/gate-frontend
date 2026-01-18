@@ -1,0 +1,82 @@
+/* ===============================
+   ANIMAÇÕES – SISTEMA GATE
+================================ */
+
+/* ENTRADA GERAL DA PÁGINA */
+.page-enter {
+  animation: gateFadeIn 0.9s ease-out forwards;
+}
+
+@keyframes gateFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+/* ENTRADA EM CASCATA */
+.fade-up {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 0.6s ease-out forwards;
+}
+
+.fade-delay-1 { animation-delay: 0.1s; }
+.fade-delay-2 { animation-delay: 0.2s; }
+.fade-delay-3 { animation-delay: 0.3s; }
+.fade-delay-4 { animation-delay: 0.4s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* EFEITO SISTEMA OPERACIONAL (SCAN) */
+.system-scan {
+  position: relative;
+  overflow: hidden;
+}
+
+.system-scan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(212,175,55,0.08),
+    transparent
+  );
+  animation: scan 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes scan {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(100%); }
+}
+
+/* TABELAS – ENTRADA LATERAL */
+.table-row {
+  opacity: 0;
+  animation: rowIn 0.4s ease-out forwards;
+}
+
+@keyframes rowIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

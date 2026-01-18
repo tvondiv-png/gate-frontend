@@ -1,0 +1,59 @@
+/* ================== BASE ADM ================== */
+.admin-page {
+  min-height: 100vh;
+  padding: 120px 40px 60px;
+  background: radial-gradient(circle at top, #0b1c2d, #020617);
+  color: #e5e7eb;
+}
+
+.admin-page h1,
+.admin-page h2,
+.admin-page h3 {
+  color: #c9a24d;
+}
+
+.admin-section {
+  background: linear-gradient(180deg, #020617, #05070a);
+  border: 1px solid rgba(201,162,77,0.3);
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 30px;
+}
+
+/* tabelas */
+.admin-section table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-section th {
+  color: #c9a24d;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgba(201,162,77,0.4);
+}
+
+.admin-section td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.admin-section tr:hover {
+  background: rgba(201,162,77,0.08);
+}
+
+/* botões */
+.admin-btn {
+  background: linear-gradient(180deg, #c9a24d, #a8842c);
+  color: #020617;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.admin-btn.danger {
+  background: linear-gradient(180deg, #b22222, #7f1d1d);
+  color: #fff;
+}

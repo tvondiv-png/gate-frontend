@@ -1,0 +1,57 @@
+.gate-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, #020617, #020617ee);
+  border-bottom: 1px solid rgba(201,162,77,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 1000;
+}
+
+.gate-logo {
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #c9a24d;
+}
+
+.gate-navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.gate-navbar-links a {
+  color: #e5e7eb;
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+}
+
+.gate-navbar-links a.active {
+  color: #c9a24d;
+}
+
+.gate-navbar-links a.active::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #c9a24d;
+}
+
+.logout-btn {
+  background: linear-gradient(180deg, #dc2626, #991b1b);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
