@@ -2,6 +2,38 @@ import { useEffect, useState } from "react";
 import api from "../../api/api";
 import { useAuth } from "../../contexts/AuthContext";
 
+
+<button
+  onClick={async () => {
+    const confirmar = window.confirm(
+      "⚠️ ATENÇÃO!\n\nIsso irá apagar TODOS os RSOs APROVADOS e REJEITADOS.\n\nEssa ação NÃO pode ser desfeita.\n\nDeseja continuar?"
+    );
+
+    if (!confirmar) return;
+
+    try {
+      const res = await limparHistoricoRSO();
+      alert(`Histórico limpo!\nRSOs apagados: ${res.totalApagados}`);
+      window.location.reload();
+    } catch (error) {
+      alert("Erro ao apagar histórico de RSOs");
+    }
+  }}
+  style={{
+    background: "#8e0000",
+    color: "#fff",
+    border: "none",
+    padding: "10px 16px",
+    borderRadius: "6px",
+    cursor: "pointer",
+    marginBottom: "20px"
+  }}
+>
+  🗑️ Apagar Histórico de RSOs
+</button>
+
+
+
 export default function RSOHistoryAdmin() {
   const [lista, setLista] = useState([]);
   const { user } = useAuth();
@@ -17,7 +49,7 @@ export default function RSOHistoryAdmin() {
 
   const apagarTudo = async () => {
     if (!confirm("⚠️ Apagar TODO o histórico de RSOs?")) return;
-    await api.delete("/admin/rso/historico");
+    await api.delete("/api/admin/rso/historico");
     carregar();
   };
 

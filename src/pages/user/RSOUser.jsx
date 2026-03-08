@@ -17,6 +17,30 @@ const formatarHora = (data) => {
   return new Date(data).toLocaleTimeString("pt-BR");
 };
 
+/**
+ * 🔥 Usa totalMinutos se vier do backend (RSO aprovado)
+ * 🔥 Senão soma manualmente (RSO ativo / rejeitado)
+ */
+const somarTempoRSO = (rso) => {
+  if (rso.totalMinutos && rso.totalMinutos > 0) {
+    return rso.totalMinutos;
+  }
+
+  let total = 0;
+
+  if (rso.equipeFixa?.chefe?.tempoMinutos)
+    total += rso.equipeFixa.chefe.tempoMinutos;
+
+  if (rso.equipeFixa?.auxiliar?.tempoMinutos)
+    total += rso.equipeFixa.auxiliar.tempoMinutos;
+
+  Object.values(rso.equipeRotativa || {}).flat().forEach(p => {
+    if (p.tempoMinutos) total += p.tempoMinutos;
+  });
+
+  return total;
+};
+
 /* ================= COMPONENTE ================= */
 export default function RSOUser() {
   const [rsos, setRsos] = useState([]);
@@ -32,9 +56,10 @@ export default function RSOUser() {
 
   /* ===== ADICIONAR POLICIAL ===== */
   const [novoFuncional, setNovoFuncional] = useState("");
-  const [novoCargo, setNovoCargo] = useState("quarto");
+  const [novoCargo, setNovoCargo] = useState("motorista");
+  const [erroAdicionarPolicial, setErroAdicionarPolicial] = useState("");
 
-  /* ===== APREENSÃO ===== */
+  /* ===== APREENSÕES ===== */
   const [tipo, setTipo] = useState("");
   const [quantidade, setQuantidade] = useState("");
 
@@ -68,82 +93,67 @@ export default function RSOUser() {
     const equipeRotativa = {
       motorista: [{ funcional: Number(motorista) }]
     };
-
     if (quarto) equipeRotativa.quarto = [{ funcional: Number(quarto) }];
     if (quinto) equipeRotativa.quinto = [{ funcional: Number(quinto) }];
 
-    try {
-      await api.post("/rso", {
-        viatura,
-        equipeFixa: {
-          chefe: { funcional: Number(chefe) },
-          auxiliar: { funcional: Number(auxiliar) }
-        },
-        equipeRotativa
-      });
-
-      setViatura("");
-      setChefe("");
-      setAuxiliar("");
-      setMotorista("");
-      setQuarto("");
-      setQuinto("");
-
-      carregar();
-    } catch (err) {
-      console.error(err.response?.data || err);
-      alert("Erro ao abrir RSO");
-    }
-  };
-
-  const adicionarPolicial = async (id) => {
-    if (!novoFuncional) return;
-
-    await api.post(`/rso/${id}/adicionar-policial`, {
-      funcional: Number(novoFuncional),
-      cargo: novoCargo
+    await api.post("/api/rso", {
+      viatura,
+      equipeFixa: {
+        chefe: { funcional: Number(chefe) },
+        auxiliar: { funcional: Number(auxiliar) }
+      },
+      equipeRotativa
     });
 
-    setNovoFuncional("");
+    setViatura("");
+    setChefe("");
+    setAuxiliar("");
+    setMotorista("");
+    setQuarto("");
+    setQuinto("");
+
     carregar();
   };
 
   const adicionarApreensao = async (id) => {
     if (!tipo || !quantidade) return;
-
-    await api.post(`/rso/${id}/apreensao`, {
+    await api.post(`/api/rso/${id}/apreensao`, {
       tipo,
       quantidade: Number(quantidade)
     });
-
     setTipo("");
     setQuantidade("");
     carregar();
   };
 
-  const salvarObservacoes = async (id, valor, status) => {
-    if (status === "Ativo") {
-      await api.put(`/rso/${id}/observacoes`, { observacoes: valor });
-    }
-    if (status === "Rejeitado") {
-      await api.put(`/rso/${id}/editar`, { observacoes: valor });
-    }
-    carregar();
-  };
-
   const encerrarPolicial = async (id, cargo, index) => {
-    await api.put(`/rso/${id}/encerrar-policial/${cargo}/${index}`);
+    await api.put(`/api/rso/${id}/encerrar-policial/${cargo}/${index}`);
     carregar();
   };
 
   const encerrarRSO = async (id) => {
-    await api.put(`/rso/${id}/encerrar`);
+    await api.put(`/api/rso/${id}/encerrar`);
     carregar();
   };
 
   const excluirRSO = async (id) => {
-    if (!window.confirm("Deseja excluir este RSO aprovado do histórico?")) return;
-    await api.delete(`/rso/${id}`);
+    if (!window.confirm("Deseja excluir este RSO?")) return;
+    await api.delete(`/api/rso/${id}`);
+    carregar();
+  };
+
+  const reenviarRSO = async (id) => {
+    await api.put(`/api/rso/${id}/reenviar`);
+    carregar();
+  };
+
+  const salvarObservacoes = async (id, texto, status) => {
+    if (status === "Ativo") {
+      await api.put(`/api/rso/${id}/observacoes`, { observacoes: texto });
+    }
+    if (status === "Rejeitado") {
+      await api.put(`/api/rso/${id}/editar`, { observacoes: texto });
+    }
     carregar();
   };
 
@@ -163,8 +173,7 @@ export default function RSOUser() {
           onChange={e => setViatura(e.target.value)}
         />
 
-        {[
-          ["Chefe", chefe, setChefe],
+        {[["Chefe", chefe, setChefe],
           ["Auxiliar", auxiliar, setAuxiliar],
           ["Motorista", motorista, setMotorista],
           ["4º Homem (opcional)", quarto, setQuarto],
@@ -190,155 +199,203 @@ export default function RSOUser() {
         </button>
       </div>
 
-      {/* ===== HISTÓRICO ===== */}
+      {/* ===== MEUS RSOs ===== */}
       <h3 style={{ marginTop: 40 }}>Meus RSOs</h3>
 
-      {rsos.map(rso => (
-        <div key={rso._id} className="panel-card">
-          <strong>{rso.viatura}</strong> — {rso.status}
+      {rsos.map(rso => {
+        const totalMin = somarTempoRSO(rso);
 
-          <h4>Observações</h4>
-          {(rso.status === "Ativo" || rso.status === "Rejeitado") ? (
-            <textarea
-              className="panel-input"
-              defaultValue={rso.observacoes || ""}
-              onBlur={e =>
-                salvarObservacoes(rso._id, e.target.value, rso.status)
-              }
-            />
-          ) : (
-            <p>{rso.observacoes || "-"}</p>
-          )}
+        return (
+          <div key={rso._id} className="panel-card">
+            <strong>{rso.viatura}</strong> — {rso.status}
 
-          {rso.status === "Aprovado" && (
-            <button
-              className="panel-btn danger"
-              onClick={() => excluirRSO(rso._id)}
-            >
-              Excluir RSO
-            </button>
-          )}
-
-          {/* ===== APREENSÕES ===== */}
-          {rso.status === "Ativo" && (
-            <>
-              <h4>Apreensões</h4>
-
-              <select
-                className="panel-input"
-                value={tipo}
-                onChange={e => setTipo(e.target.value)}
-              >
-                <option value="">Tipo</option>
-                <option>Armas</option>
-                <option>Munições</option>
-                <option>Entorpecentes</option>
-                <option>Valores</option>
-                <option>Ilícitos</option>
-              </select>
-
-              <input
-                className="panel-input"
-                type="number"
-                placeholder="Quantidade"
-                value={quantidade}
-                onChange={e => setQuantidade(e.target.value)}
-              />
-
-              <button
-                className="panel-btn"
-                onClick={() => adicionarApreensao(rso._id)}
-              >
-                Adicionar Apreensão
-              </button>
-            </>
-          )}
-
-          {rso.apreensoes?.length > 0 && (
-            <>
-              <h4>Apreensões Registradas</h4>
-              <ul>
-                {rso.apreensoes.map((a, i) => (
-                  <li key={i}>{a.tipo} — {a.quantidade}</li>
-                ))}
-              </ul>
-            </>
-          )}
-
-          {/* ===== ADICIONAR POLICIAL ===== */}
-          {rso.status === "Ativo" && (
-            <>
-              <h4>Adicionar Policial</h4>
-
-              <input
-                className="panel-input"
-                placeholder="Funcional"
-                value={novoFuncional}
-                onChange={e => setNovoFuncional(e.target.value)}
-              />
-
-              <select
-                className="panel-input"
-                value={novoCargo}
-                onChange={e => setNovoCargo(e.target.value)}
-              >
-                <option value="motorista">Motorista</option>
-                <option value="quarto">4º Homem</option>
-                <option value="quinto">5º Homem</option>
-              </select>
-
-              <button
-                className="panel-btn"
-                onClick={() => adicionarPolicial(rso._id)}
-              >
-                Adicionar Policial
-              </button>
-            </>
-          )}
-
-          {/* ===== EQUIPE ===== */}
-          <h4>Equipe</h4>
-          <div className="panel-grid">
-            {[rso.equipeFixa.chefe, rso.equipeFixa.auxiliar].map((p, i) => (
-              <div key={i} className="panel-card mini">
-                <strong>{p.cargo}</strong>
-                <div>{p.nome} ({p.funcional})</div>
-                <small>{formatarHora(p.horaEntrada)} → {formatarHora(p.horaSaida)}</small>
-                <div>{formatarMinutos(p.tempoMinutos)}</div>
+            {rso.status === "Rejeitado" && rso.comentarioADM && (
+              <div className="panel-alert danger">
+                <strong>Motivo da rejeição (ADM):</strong>
+                <p>{rso.comentarioADM}</p>
               </div>
-            ))}
+            )}
 
-            {Object.entries(rso.equipeRotativa).map(([cargo, lista]) =>
-              lista.map((p, index) => (
-                <div key={`${cargo}-${index}`} className="panel-card mini">
+            <h4>Equipe</h4>
+            <div className="panel-grid">
+              {[rso.equipeFixa.chefe, rso.equipeFixa.auxiliar].map((p, i) => (
+                <div key={i} className="panel-card mini">
                   <strong>{p.cargo}</strong>
                   <div>{p.nome} ({p.funcional})</div>
                   <small>{formatarHora(p.horaEntrada)} → {formatarHora(p.horaSaida)}</small>
                   <div>{formatarMinutos(p.tempoMinutos)}</div>
-
-                  {rso.status === "Ativo" && p.status === "Ativo" && (
-                    <button
-                      className="panel-btn danger small"
-                      onClick={() => encerrarPolicial(rso._id, cargo, index)}
-                    >
-                      Encerrar
-                    </button>
-                  )}
                 </div>
-              ))
-            )}
-          </div>
+              ))}
 
-          {rso.status === "Ativo" && (
-            <button
-              className="panel-btn"
-              onClick={() => encerrarRSO(rso._id)}
-            >
-              Encerrar RSO
-            </button>
-          )}
-        </div>
-      ))}
+              {Object.entries(rso.equipeRotativa || {})
+  .filter(([_, lista]) => Array.isArray(lista) && lista.length > 0)
+  .map(([cargo, lista]) =>
+
+                lista.map((p, index) => (
+                  <div key={`${cargo}-${index}`} className="panel-card mini">
+                    <strong>{p.cargo}</strong>
+                    <div>{p.nome} ({p.funcional})</div>
+                    <small>{formatarHora(p.horaEntrada)} → {formatarHora(p.horaSaida)}</small>
+                    <div>{formatarMinutos(p.tempoMinutos)}</div>
+
+                    {rso.status === "Ativo" && p.status === "Ativo" && (
+                      <button
+                        className="panel-btn danger small"
+                        onClick={() => encerrarPolicial(rso._id, cargo, index)}
+                      >
+                        Encerrar
+                      </button>
+                    )}
+                  </div>
+                ))
+              )}
+            </div>
+
+            {/* ===== ADICIONAR POLICIAL ===== */}
+            {rso.status === "Ativo" && (
+              <>
+                <h4>Adicionar Policial</h4>
+
+                <select
+                  className="panel-input"
+                  value={novoFuncional}
+                  onChange={e => setNovoFuncional(e.target.value)}
+                >
+                  <option value="">Selecione o policial</option>
+                  {hierarquia.map(p => (
+                    <option key={p.funcional} value={p.funcional}>
+                      {p.patente} - {p.nome} ({p.funcional})
+                    </option>
+                  ))}
+                </select>
+
+                <select
+                  className="panel-input"
+                  value={novoCargo}
+                  onChange={e => setNovoCargo(e.target.value)}
+                >
+                  <option value="motorista">Motorista</option>
+                  <option value="quarto">4º Homem</option>
+                  <option value="quinto">5º Homem</option>
+                </select>
+
+                <button
+                  className="panel-btn"
+                  onClick={async () => {
+                    if (!novoFuncional || !novoCargo) return;
+
+                    try {
+                      setErroAdicionarPolicial("");
+
+                      await api.post(`/api/rso/${rso._id}/adicionar-policial`, {
+                        funcional: Number(novoFuncional),
+                        cargo: novoCargo
+                      });
+
+                      setNovoFuncional("");
+                      setNovoCargo("motorista");
+                      carregar();
+                    } catch (err) {
+                      setErroAdicionarPolicial(
+                        err.response?.data?.message ||
+                        "Policial já está em outro RSO"
+                      );
+                    }
+                  }}
+                >
+                  Adicionar Policial
+                </button>
+
+                {erroAdicionarPolicial && (
+                  <div className="panel-alert danger" style={{ marginTop: 10 }}>
+                    {erroAdicionarPolicial}
+                  </div>
+                )}
+              </>
+            )}
+
+            <h4>Observações</h4>
+            {(rso.status === "Ativo" || rso.status === "Rejeitado") ? (
+              <textarea
+                className="panel-input"
+                defaultValue={rso.observacoes || ""}
+                onBlur={e => salvarObservacoes(rso._id, e.target.value, rso.status)}
+              />
+            ) : (
+              <p>{rso.observacoes || "-"}</p>
+            )}
+
+            {rso.apreensoes?.length > 0 && (
+              <>
+                <h4>Apreensões Registradas</h4>
+                <ul>
+                  {rso.apreensoes.map((a, i) => (
+                    <li key={i}>{a.tipo} — {a.quantidade}</li>
+                  ))}
+                </ul>
+              </>
+            )}
+
+            {/* ===== REGISTRAR APREENSÃO (RSO ATIVO) ===== */}
+{rso.status === "Ativo" && (
+  <>
+    <h4>Registrar Apreensão</h4>
+
+    <select
+      className="panel-input"
+      value={tipo}
+      onChange={e => setTipo(e.target.value)}
+    >
+      <option value="">Tipo de apreensão</option>
+      <option value="Armas">Armas</option>
+      <option value="Munições">Munições</option>
+      <option value="Entorpecentes">Entorpecentes</option>
+      <option value="Valores">Valores</option>
+    </select>
+
+    <input
+      className="panel-input"
+      type="number"
+      placeholder="Quantidade"
+      value={quantidade}
+      onChange={e => setQuantidade(e.target.value)}
+    />
+
+    <button
+      className="panel-btn"
+      onClick={() => adicionarApreensao(rso._id)}
+    >
+      Adicionar Apreensão
+    </button>
+  </>
+)}
+
+
+            <h4>Tempo total de patrulhamento</h4>
+            <strong>{formatarMinutos(totalMin)}</strong>
+
+            <div style={{ marginTop: 20 }}>
+              {rso.status === "Ativo" && (
+                <button className="panel-btn" onClick={() => encerrarRSO(rso._id)}>
+                  Encerrar RSO
+                </button>
+              )}
+
+              {(rso.status === "Aprovado" || rso.status === "Rejeitado") && (
+                <button className="panel-btn danger" onClick={() => excluirRSO(rso._id)}>
+                  Excluir RSO
+                </button>
+              )}
+
+              {rso.status === "Rejeitado" && (
+                <button className="panel-btn" onClick={() => reenviarRSO(rso._id)}>
+                  Reenviar RSO
+                </button>
+              )}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }

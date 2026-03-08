@@ -19,7 +19,7 @@ export default function AbsencesAdmin() {
       alert("Informe o comentário");
       return;
     }
-    await api.post(`/absences/${id}/reject`, { comentario });
+    await api.post(`/api/absences/${id}/reject`, { comentario });
     setComentario("");
     load();
   };
@@ -57,7 +57,7 @@ export default function AbsencesAdmin() {
               <td>
                 {a.status === "Pendente" && (
                   <>
-                    <button onClick={() => api.post(`/absences/${a._id}/approve`).then(load)}>
+                    <button onClick={() => api.post(`/api/absences/${a._id}/approve`).then(load)}>
                       Aprovar
                     </button>
 
@@ -78,7 +78,7 @@ export default function AbsencesAdmin() {
                   style={{ color: "red" }}
                   onClick={() => {
                     if (window.confirm("Excluir esta ausência?")) {
-                      api.delete(`/absences/${a._id}`).then(load);
+                      api.delete(`/api/absences/${a._id}`).then(load);
                     }
                   }}
                 >

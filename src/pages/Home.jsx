@@ -98,7 +98,7 @@ export default function Home() {
         className="home-hero"
         style={{
           backgroundImage: slides[slideAtivo]
-            ? `url(http://localhost:5000${slides[slideAtivo].imagem})`
+            ? `url(${slides[slideAtivo].imagem})`
             : "none"
         }}
       >

@@ -3,7 +3,6 @@ import api from "../../api/api";
 
 export default function SignupRequests() {
   const [requests, setRequests] = useState([]);
-  const [comentario, setComentario] = useState("");
 
   const load = async () => {
     const res = await api.get("/api/signup");
@@ -15,35 +14,26 @@ export default function SignupRequests() {
   }, []);
 
   const aprovar = async (id) => {
-    if (!confirm("Aprovar solicitação de cadastro?")) return;
-    await api.put(`/signup/approve/${id}`);
+    if (!confirm("Aprovar solicitação?")) return;
+    await api.put(`/api/signup/approve/${id}`);
     load();
   };
 
   const rejeitar = async (id) => {
-    if (!comentario) {
-      alert("Informe o motivo da rejeição.");
-      return;
-    }
-
-    await api.put(`/signup/reject/${id}`, { comentario });
-    setComentario("");
+    if (!confirm("Rejeitar solicitação?")) return;
+    await api.put(`/api/signup/reject/${id}`);
     load();
   };
 
   const excluir = async (id) => {
-    if (!confirm("Excluir solicitação?")) return;
-    await api.delete(`/signup/${id}`);
+    if (!confirm("Excluir definitivamente esta solicitação?")) return;
+    await api.delete(`/api/signup/${id}`);
     load();
   };
 
   return (
-    <div>
+    <div style={{ padding: 40 }}>
       <h1>Solicitações de Cadastro</h1>
-
-      {requests.length === 0 && (
-        <p>Nenhuma solicitação pendente.</p>
-      )}
 
       <table width="100%" border="1" cellPadding="8">
         <thead>
@@ -58,7 +48,7 @@ export default function SignupRequests() {
         </thead>
 
         <tbody>
-          {requests.map((r) => (
+          {requests.map(r => (
             <tr key={r._id}>
               <td>{r.funcional}</td>
               <td>{r.nome}</td>
@@ -66,15 +56,17 @@ export default function SignupRequests() {
               <td>{r.status}</td>
               <td>{new Date(r.createdAt).toLocaleDateString()}</td>
               <td>
-                <button onClick={() => aprovar(r._id)}>
-                  Aprovar
-                </button>{" "}
+                {r.status === "Pendente" && (
+                  <>
+                    <button onClick={() => aprovar(r._id)}>Aprovar</button>{" "}
+                    <button onClick={() => rejeitar(r._id)}>Rejeitar</button>{" "}
+                  </>
+                )}
 
-                <button onClick={() => rejeitar(r._id)}>
-                  Rejeitar
-                </button>{" "}
-
-                <button onClick={() => excluir(r._id)}>
+                <button
+                  style={{ background: "darkred", color: "#fff" }}
+                  onClick={() => excluir(r._id)}
+                >
                   Excluir
                 </button>
               </td>
@@ -82,16 +74,6 @@ export default function SignupRequests() {
           ))}
         </tbody>
       </table>
-
-      <br />
-
-      <textarea
-        placeholder="Comentário para rejeição"
-        value={comentario}
-        onChange={(e) => setComentario(e.target.value)}
-        rows={3}
-        style={{ width: "100%" }}
-      />
     </div>
   );
 }

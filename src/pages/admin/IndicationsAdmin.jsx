@@ -21,7 +21,7 @@ export default function IndicationsAdmin() {
 
     setLoading(true);
     try {
-      await api.post(`/admin/indications/${id}/aprovar`);
+      await api.post(`/api/admin/indications/${id}/aprovar`);
       setSelected(null);
       loadIndications();
     } catch (err) {
@@ -40,7 +40,7 @@ export default function IndicationsAdmin() {
 
     setLoading(true);
     try {
-      await api.post(`/admin/indications/${id}/rejeitar`, {
+      await api.post(`/api/admin/indications/${id}/rejeitar`, {
         comentario
       });
       setComentario("");
@@ -55,59 +55,52 @@ export default function IndicationsAdmin() {
   };
 
   return (
-    <div style={{ padding: 40 }}>
+    <div className="admin-page">
       <h1>Indicações</h1>
 
-      {/* LISTA */}
-      <table border="1" cellPadding="8" width="100%">
-        <thead>
-          <tr>
-            <th>Personagem</th>
-            <th>Enviado por</th>
-            <th>Status</th>
-            <th>Data</th>
-            <th>Ação</th>
-          </tr>
-        </thead>
-        <tbody>
-          {indications.length === 0 && (
+      <div className="admin-section">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="5" align="center">
-                Nenhuma indicação encontrada
-              </td>
+              <th>Personagem</th>
+              <th>Enviado por</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th>Ação</th>
             </tr>
-          )}
+          </thead>
+          <tbody>
+            {indications.length === 0 && (
+              <tr>
+                <td colSpan="5" align="center">
+                  Nenhuma indicação encontrada
+                </td>
+              </tr>
+            )}
 
-          {indications.map(ind => (
-            <tr key={ind._id}>
-              <td>{ind.nomePersonagem}</td>
-              <td>
-                {ind.criadoPor?.nome} ({ind.criadoPor?.email})
-              </td>
-              <td>{ind.status}</td>
-              <td>
-                {new Date(ind.createdAt).toLocaleDateString("pt-BR")}
-              </td>
-              <td>
-                <button onClick={() => setSelected(ind)}>
-                  Ver
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            {indications.map(ind => (
+              <tr key={ind._id}>
+                <td>{ind.nomePersonagem}</td>
+                <td>
+                  {ind.criadoPor?.nome} ({ind.criadoPor?.email})
+                </td>
+                <td>{ind.status}</td>
+                <td>
+                  {new Date(ind.createdAt).toLocaleDateString("pt-BR")}
+                </td>
+                <td>
+                  <button className="admin-btn" onClick={() => setSelected(ind)}>
+                    Ver
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
-      {/* DETALHE */}
       {selected && (
-        <div
-          style={{
-            background: "#fff",
-            padding: 20,
-            marginTop: 30,
-            borderRadius: 6
-          }}
-        >
+        <div className="admin-section indication-modal">
           <h3>Detalhes da Indicação</h3>
 
           <p><strong>ID Personagem:</strong> {selected.idPersonagem}</p>
@@ -128,6 +121,7 @@ export default function IndicationsAdmin() {
               <hr />
 
               <button
+                className="admin-btn"
                 onClick={() => approve(selected._id)}
                 disabled={loading}
               >
@@ -135,9 +129,9 @@ export default function IndicationsAdmin() {
               </button>{" "}
 
               <button
+                className="admin-btn danger"
                 onClick={() => reject(selected._id)}
                 disabled={loading}
-                style={{ background: "darkred", color: "#fff" }}
               >
                 Rejeitar
               </button>
@@ -162,7 +156,7 @@ export default function IndicationsAdmin() {
 
           <br />
 
-          <button onClick={() => setSelected(null)}>
+          <button className="admin-btn" onClick={() => setSelected(null)}>
             Fechar
           </button>
         </div>

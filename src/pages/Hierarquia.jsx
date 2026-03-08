@@ -7,7 +7,7 @@ export default function Hierarquia() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    api.get("/hierarchy").then(res => setData(res.data));
+    api.get("/api/hierarchy").then(res => setData(res.data));
   }, []);
 
   return (

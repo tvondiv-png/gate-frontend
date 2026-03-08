@@ -1,5 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
+
 import "./styles/gate-theme.css";
 import "./styles/animations.css";
 import MainLayout from "./layouts/MainLayout";
@@ -13,6 +16,8 @@ import ChangePassword from "./pages/ChangePassword";
 import UserDashboard from "./pages/user/UserDashboard";
 import RSOUser from "./pages/user/RSOUser";
 import IndicationUser from "./pages/user/IndicationUser";
+import UserNotifications from "./pages/user/UserNotifications";
+
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import UserManagement from "./pages/admin/UserManagement";
@@ -29,6 +34,7 @@ import RSOHistoryAdmin from "./pages/admin/RSOHistoryAdmin";
 import IndicationsAdmin from "./pages/admin/IndicationsAdmin";
 import SeizuresAdmin from "./pages/admin/SeizuresAdmin";
 import HomeSlidesAdmin from "./pages/admin/HomeSlidesAdmin";
+
 
 import HierarchyPublic from "./pages/public/HierarchyPublic";
 import RegulationsPublic from "./pages/public/RegulationsPublic";
@@ -59,9 +65,19 @@ export default function App() {
         <Route path="/usuario" element={<UserDashboard />} />
         <Route path="/usuario/rso" element={<RSOUser />} />
         <Route path="/usuario/indicacao" element={<IndicationUser />} />
+        <Route path="/usuario/notificacoes" element={<UserNotifications />} />
+
 
         {/* ADMIN */}
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route
+  path="/admin"
+  element={
+    <ProtectedRoute roles={["admin", "superadmin"]}>
+      <AdminLayout />
+    </ProtectedRoute>
+  }
+>
+
           <Route index element={<AdminDashboard />} />
           <Route path="usuarios" element={<UserManagement />} />
           <Route path="hierarquia" element={<HierarchyAdmin />} />
@@ -77,6 +93,8 @@ export default function App() {
           <Route path="indicacoes" element={<IndicationsAdmin />} />
           <Route path="apreensoes" element={<SeizuresAdmin />} />
           <Route path="slideshow" element={<HomeSlidesAdmin />} />
+          
+
         </Route>
 
       </Routes>

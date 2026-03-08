@@ -19,7 +19,7 @@ export default function SeizuresAdmin() {
 
     setLoading(true);
     try {
-      await api.post("/apreensoes/zerar");
+      await api.post("/api/apreensoes/zerar");
       await load();
       alert("Apreensões zeradas com sucesso");
     } catch (err) {

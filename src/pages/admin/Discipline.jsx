@@ -50,7 +50,7 @@ export default function Discipline() {
       return;
     }
 
-    await api.post("/discipline", {
+    await api.post("/api/discipline", {
       policialId: form.policialId,
       tipo: "Investigação",
       descricao: form.descricaoInicial
@@ -62,7 +62,7 @@ export default function Discipline() {
 
   const excluirCaso = async () => {
     if (!window.confirm("Deseja excluir este processo?")) return;
-    await api.delete(`/discipline/${ipmSelecionado._id}`);
+    await api.delete(`/api/discipline/${ipmSelecionado._id}`);
     setIpmSelecionado(null);
     load();
   };
@@ -170,7 +170,7 @@ export default function Discipline() {
             className="admin-btn"
             onClick={async () => {
               await api.post(
-                `/discipline/${ipmSelecionado._id}/comentario`,
+                `/api/discipline/${ipmSelecionado._id}/comentario`,
                 { texto: comentario }
               );
               setComentario("");
@@ -198,7 +198,7 @@ export default function Discipline() {
             className="admin-btn"
             onClick={async () => {
               await api.post(
-                `/discipline/${ipmSelecionado._id}/convocar`,
+                `/api/discipline/${ipmSelecionado._id}/convocar`,
                 { mensagem: convocacao }
               );
               setConvocacao("");
@@ -232,7 +232,7 @@ export default function Discipline() {
                 className="admin-btn"
                 onClick={async () => {
                   await api.post(
-                    `/discipline/${ipmSelecionado._id}/concluir`,
+                    `/api/discipline/${ipmSelecionado._id}/concluir`,
                     { conclusao, sancoes }
                   );
                   setConclusao("");

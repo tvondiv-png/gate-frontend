@@ -3,7 +3,10 @@ import { useAuth } from "../contexts/AuthContext";
 import "./admin-menu.css";
 
 export default function AdminMenu() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+
+if (loading) return null;
+
 
   if (!user || (user.role !== "admin" && user.role !== "superadmin")) {
     return null;

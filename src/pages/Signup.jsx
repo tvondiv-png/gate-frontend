@@ -10,7 +10,7 @@ export default function Signup() {
     e.preventDefault();
 
     try {
-      await api.post("/signup", {
+      await api.post("/api/signup", {
         nome,
         funcional: Number(funcional),
         email

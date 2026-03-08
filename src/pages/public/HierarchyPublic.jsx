@@ -13,11 +13,27 @@ const ORDEM_CATEGORIAS = [
   "ESTAGIARIOS"
 ];
 
+/* ==========================
+   NORMALIZA PATENTE (FIX)
+   - remove acentos
+   - remove º ª
+   - padroniza hífen
+========================== */
+const normalizarPatente = (p) =>
+  (p || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[ºª]/g, "")
+    .replace(/[–—]/g, "-")
+    .toUpperCase()
+    .trim();
+
 export default function HierarchyPublic() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    api.get("/api/hierarchy/public")
+    api
+      .get("/api/hierarchy/public")
       .then(res => setData(res.data))
       .catch(err => {
         console.error(err);
@@ -36,7 +52,6 @@ export default function HierarchyPublic() {
 
   return (
     <div className="hierarchy-page">
-
       {/* ===== RESUMO ===== */}
       <section className="hierarchy-summary">
         <div className="summary-card total">
@@ -69,6 +84,34 @@ export default function HierarchyPublic() {
           const c = data[key];
           if (!c || c.total === 0) return null;
 
+          /* ==========================
+             ORDENAÇÃO MILITAR CORRETA
+             (ALINHADA COM A NORMALIZAÇÃO)
+          ========================== */
+          const membrosOrdenados = [...c.membros].sort((a, b) => {
+            const pa = normalizarPatente(a.patente);
+            const pb = normalizarPatente(b.patente);
+
+            const ordem = {
+              "CORONEL PM": 1,
+              "TENENTE-CORONEL PM": 2,
+              "MAJOR PM": 3,
+              "CAPITAO PM": 4,
+              "1 TENENTE PM": 5,
+              "2 TENENTE PM": 6,
+              "ASPIRANTE PM": 7,
+              "SUBTENENTE PM": 8,
+              "1 SARGENTO PM": 9,
+              "2 SARGENTO PM": 10,
+              "3 SARGENTO PM": 11,
+              "CABO PM": 12,
+              "SOLDADO 1 CLASSE PM": 13,
+              "SOLDADO 2 CLASSE PM": 14
+            };
+
+            return (ordem[pa] || 999) - (ordem[pb] || 999);
+          });
+
           return (
             <div key={key} className="category-block">
               <h2 style={{ borderColor: c.cor }}>
@@ -91,7 +134,7 @@ export default function HierarchyPublic() {
                 </thead>
 
                 <tbody>
-                  {c.membros.map((m, i) => {
+                  {membrosOrdenados.map((m, i) => {
                     const cursos = m.cursos ?? [];
                     const medalhas = m.medalhas ?? [];
 
@@ -100,7 +143,6 @@ export default function HierarchyPublic() {
                         <td>{m.funcional}</td>
                         <td>{m.nome}</td>
 
-                        {/* PATENTE */}
                         <td className="patente-cell">
                           {INSIGNIAS[m.patente] && (
                             <img
@@ -114,21 +156,18 @@ export default function HierarchyPublic() {
 
                         <td>{m.funcao || "-"}</td>
 
-                        {/* ENTRADA */}
                         <td>
                           {m.dataEntrada
                             ? new Date(m.dataEntrada).toLocaleDateString("pt-BR")
                             : "-"}
                         </td>
 
-                        {/* ÚLTIMA PROMOÇÃO */}
                         <td>
                           {m.ultimaPromocao
                             ? new Date(m.ultimaPromocao).toLocaleDateString("pt-BR")
                             : "-"}
                         </td>
 
-                        {/* CURSOS */}
                         <td>
                           {cursos.length > 0 ? (
                             <div className="hover-info">
@@ -142,7 +181,6 @@ export default function HierarchyPublic() {
                           ) : "0"}
                         </td>
 
-                        {/* MEDALHAS */}
                         <td>
                           {medalhas.length > 0 ? (
                             <div className="hover-info">

@@ -14,7 +14,7 @@ export default function RSOAdmin() {
   }, []);
 
   const aprovar = async (id) => {
-    await api.post(`/admin/rso/aprovar/${id}`);
+    await api.post(`/api/admin/rso/aprovar/${id}`);
     carregar();
   };
 
@@ -22,7 +22,7 @@ export default function RSOAdmin() {
     const comentario = prompt("Motivo da rejeição:");
     if (!comentario) return;
 
-    await api.post(`/admin/rso/rejeitar/${id}`, { comentario });
+    await api.post(`/api/admin/rso/rejeitar/${id}`, { comentario });
     carregar();
   };
 

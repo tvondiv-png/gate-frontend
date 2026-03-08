@@ -23,13 +23,13 @@ export default function PatrolHoursAdmin() {
 
   const zerarSemana = async () => {
     if (!confirm("Zerar horas semanais de todos?")) return;
-    await api.post("/admin/rso/horas/zerar-semana");
+    await api.post("/api/admin/rso/horas/zerar-semana");
     carregar();
   };
 
   const zerarMes = async () => {
     if (!confirm("Zerar horas mensais de todos?")) return;
-    await api.post("/admin/rso/horas/zerar-mes");
+    await api.post("/api/admin/rso/horas/zerar-mes");
     carregar();
   };
 

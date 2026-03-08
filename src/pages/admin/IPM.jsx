@@ -8,7 +8,7 @@ export default function IPM() {
   const [policialId, setPolicialId] = useState("");
 
   const load = async () => {
-    const i = await api.get("/ipm");
+    const i = await api.get("/api/ipm");
     const u = await api.get("/api/superadmin/users");
     setIpms(i.data);
     setUsers(u.data);
@@ -19,14 +19,14 @@ export default function IPM() {
   }, []);
 
   const criar = async () => {
-    await api.post("/ipm", { policialId, descricao });
+    await api.post("/api/ipm", { policialId, descricao });
     setDescricao("");
     setPolicialId("");
     load();
   };
 
   const status = async (id, status) => {
-    await api.put(`/ipm/${id}/status`, { status });
+    await api.put(`/api/ipm/${id}/status`, { status });
     load();
   };
 

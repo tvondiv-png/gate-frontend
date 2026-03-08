@@ -22,7 +22,7 @@ export default function SystemLogs() {
 
     setLoading(true);
     try {
-      await api.delete("/logs");
+      await api.delete("/api/logs");
       await loadLogs();
     } catch (err) {
       alert("Erro ao zerar logs");

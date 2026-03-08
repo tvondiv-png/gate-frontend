@@ -14,13 +14,13 @@ export default function UserManagement() {
   }, []);
 
   const updateRole = async (id, role) => {
-    await api.put(`/superadmin/users/${id}/role`, { role });
+    await api.put(`/api/superadmin/users/${id}/role`, { role });
     loadUsers();
   };
 
   const removeUser = async (id) => {
     if (!window.confirm("Deseja excluir este usuário?")) return;
-    await api.delete(`/superadmin/users/${id}`);
+    await api.delete(`/api/superadmin/users/${id}`);
     loadUsers();
   };
 

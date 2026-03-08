@@ -1,11 +1,11 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  baseURL: import.meta.env.VITE_API_URL,
   withCredentials: false
 });
 
-// Interceptor opcional (token)
+// 🔐 Interceptor de token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");

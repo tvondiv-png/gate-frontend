@@ -57,3 +57,16 @@
   background: linear-gradient(180deg, #b22222, #7f1d1d);
   color: #fff;
 }
+
+.admin-modal,
+.admin-card,
+.modal-content {
+  background: linear-gradient(180deg, #050b18, #020713) !important;
+  color: #fff;
+  border: 1px solid #1f2a44;
+}
+
+.indication-modal {
+  background: linear-gradient(180deg, #050b18, #020713);
+}
+

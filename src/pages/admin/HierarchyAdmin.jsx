@@ -52,16 +52,31 @@ const MEDALHAS = [
   "Láurea do Mérito Pessoal – 1º Grau"
 ];
 
+const CATEGORIAS = [
+  { value: "OFICIAIS_SUPERIORES", label: "Oficiais Superiores" },
+  { value: "OFICIAIS_INTERMEDIARIOS", label: "Oficiais Intermediários" },
+  { value: "OFICIAIS_SUBALTERNOS", label: "Oficiais Subalternos" },
+  { value: "PRACAS_ESPECIAIS", label: "Praças Especiais" },
+  { value: "PRACAS_GRADUADAS", label: "Praças Graduadas" },
+  { value: "PRACAS", label: "Praças" },
+  { value: "ESTAGIARIOS", label: "Estagiarios" }
+];
+
 // ============================
 // COMPONENTE
 // ============================
 export default function HierarchyAdmin() {
   const [lista, setLista] = useState([]);
   const [editando, setEditando] = useState(null);
+
   const [form, setForm] = useState({
+    nome: "",
     patente: "",
     funcao: "",
     status: "",
+    categoriaHierarquia: "",
+    dataEntrada: "",
+    dataUltimaPromocao: "",
     cursos: [],
     medalhas: []
   });
@@ -81,13 +96,17 @@ export default function HierarchyAdmin() {
   }, []);
 
   const editar = (p) => {
-    if (!p) return;
-
     setEditando(p._id);
     setForm({
+      nome: p.nome || "",
       patente: p.patente || "",
       funcao: p.funcao || "",
       status: p.status || "",
+      categoriaHierarquia: p.categoriaHierarquia || "",
+      dataEntrada: p.dataEntrada ? p.dataEntrada.substring(0, 10) : "",
+      dataUltimaPromocao: p.dataUltimaPromocao
+        ? p.dataUltimaPromocao.substring(0, 10)
+        : "",
       cursos: Array.isArray(p.cursos) ? p.cursos : [],
       medalhas: Array.isArray(p.medalhas) ? p.medalhas : []
     });
@@ -96,21 +115,21 @@ export default function HierarchyAdmin() {
   const toggleItem = (field, value) => {
     setForm(prev => ({
       ...prev,
-      [field]: prev[field]?.includes(value)
+      [field]: prev[field].includes(value)
         ? prev[field].filter(v => v !== value)
-        : [...(prev[field] || []), value]
+        : [...prev[field], value]
     }));
   };
 
   const salvar = async () => {
-    await api.put(`/hierarchy/${editando}`, form);
+    await api.put(`/api/hierarchy/${editando}`, form);
     setEditando(null);
     load();
   };
 
   const excluir = async (id) => {
     if (!window.confirm("Excluir policial da hierarquia?")) return;
-    await api.delete(`/hierarchy/${id}`);
+    await api.delete(`/api/hierarchy/${id}`);
     load();
   };
 
@@ -123,9 +142,12 @@ export default function HierarchyAdmin() {
           <tr>
             <th>Funcional</th>
             <th>Nome</th>
+            <th>Categoria</th>
             <th>Patente</th>
             <th>Função</th>
             <th>Status</th>
+            <th>Entrada</th>
+            <th>Última Promoção</th>
             <th>Cursos</th>
             <th>Medalhas</th>
             <th>Ações</th>
@@ -133,15 +155,49 @@ export default function HierarchyAdmin() {
         </thead>
 
         <tbody>
-          {Array.isArray(lista) && lista.map(p => (
+          {lista.map(p => (
             <tr key={p._id}>
-              <td>{p?.funcional ?? "-"}</td>
-              <td>{p?.nome ?? "-"}</td>
+              <td>{p.funcional}</td>
+
+              <td>
+                {editando === p._id ? (
+                  <input
+                    value={form.nome}
+                    onChange={e =>
+                      setForm({ ...form, nome: e.target.value })
+                    }
+                  />
+                ) : (
+                  p.nome
+                )}
+              </td>
 
               <td>
                 {editando === p._id ? (
                   <select
-                    value={form.patente || ""}
+                    value={form.categoriaHierarquia}
+                    onChange={e =>
+                      setForm({
+                        ...form,
+                        categoriaHierarquia: e.target.value
+                      })
+                    }
+                  >
+                    {CATEGORIAS.map(c => (
+                      <option key={c.value} value={c.value}>
+                        {c.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  p.categoriaHierarquia || "-"
+                )}
+              </td>
+
+              <td>
+                {editando === p._id ? (
+                  <select
+                    value={form.patente}
                     onChange={e =>
                       setForm({ ...form, patente: e.target.value })
                     }
@@ -151,14 +207,14 @@ export default function HierarchyAdmin() {
                     ))}
                   </select>
                 ) : (
-                  p?.patente ?? "-"
+                  p.patente
                 )}
               </td>
 
               <td>
                 {editando === p._id ? (
                   <select
-                    value={form.funcao || ""}
+                    value={form.funcao}
                     onChange={e =>
                       setForm({ ...form, funcao: e.target.value })
                     }
@@ -168,14 +224,14 @@ export default function HierarchyAdmin() {
                     ))}
                   </select>
                 ) : (
-                  p?.funcao ?? "-"
+                  p.funcao
                 )}
               </td>
 
               <td>
                 {editando === p._id ? (
                   <select
-                    value={form.status || ""}
+                    value={form.status}
                     onChange={e =>
                       setForm({ ...form, status: e.target.value })
                     }
@@ -185,17 +241,50 @@ export default function HierarchyAdmin() {
                     <option>Afastado</option>
                   </select>
                 ) : (
-                  p?.status ?? "-"
+                  p.status
                 )}
               </td>
 
-              <td title={p?.cursos?.join(", ")}>
-                {p?.cursos?.length || 0}
+              <td>
+                {editando === p._id ? (
+                  <input
+                    type="date"
+                    value={form.dataEntrada}
+                    onChange={e =>
+                      setForm({
+                        ...form,
+                        dataEntrada: e.target.value
+                      })
+                    }
+                  />
+                ) : (
+                  p.dataEntrada
+                    ? new Date(p.dataEntrada).toLocaleDateString("pt-BR")
+                    : "-"
+                )}
               </td>
 
-              <td title={p?.medalhas?.join(", ")}>
-                {p?.medalhas?.length || 0}
+              <td>
+                {editando === p._id ? (
+                  <input
+                    type="date"
+                    value={form.dataUltimaPromocao}
+                    onChange={e =>
+                      setForm({
+                        ...form,
+                        dataUltimaPromocao: e.target.value
+                      })
+                    }
+                  />
+                ) : (
+                  p.dataUltimaPromocao
+                    ? new Date(p.dataUltimaPromocao).toLocaleDateString("pt-BR")
+                    : "-"
+                )}
               </td>
+
+              <td>{p.cursos?.length || 0}</td>
+              <td>{p.medalhas?.length || 0}</td>
 
               <td>
                 {editando === p._id ? (
@@ -205,7 +294,7 @@ export default function HierarchyAdmin() {
                       <label key={c} style={{ display: "block" }}>
                         <input
                           type="checkbox"
-                          checked={form.cursos?.includes(c) || false}
+                          checked={form.cursos.includes(c)}
                           onChange={() => toggleItem("cursos", c)}
                         />
                         {c}
@@ -217,7 +306,7 @@ export default function HierarchyAdmin() {
                       <label key={m} style={{ display: "block" }}>
                         <input
                           type="checkbox"
-                          checked={form.medalhas?.includes(m) || false}
+                          checked={form.medalhas.includes(m)}
                           onChange={() => toggleItem("medalhas", m)}
                         />
                         {m}

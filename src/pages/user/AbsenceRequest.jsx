@@ -13,7 +13,7 @@ export default function AbsenceRequest() {
       return;
     }
 
-    await api.post("/absences", { dataInicio, dataFim, motivo });
+    await api.post("/api/absences", { dataInicio, dataFim, motivo });
     alert("Solicitação enviada");
     setDataInicio("");
     setDataFim("");

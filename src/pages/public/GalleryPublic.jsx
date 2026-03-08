@@ -18,27 +18,24 @@ export default function GalleryPublic() {
 
   return (
     <div className="gallery-page page-enter">
-
       <h1>Galeria GATE</h1>
 
       <div className="gallery-grid">
-        {items.map((item, i) => (
-          <div
-            key={item._id}
-            className={`gallery-item fade-up fade-delay-${(i % 4) + 1}`}
-            onClick={() =>
-              setAtivo(`http://localhost:5000/uploads/gallery/${item.imagem}`)
-            }
-          >
-            <img
-              src={`http://localhost:5000/uploads/gallery/${item.imagem}`}
-              alt={item.titulo}
-            />
-          </div>
-        ))}
+        {items.map((item, i) => {
+          const imageUrl = `/uploads/gallery/${item.imagem}`;
+
+          return (
+            <div
+              key={item._id}
+              className={`gallery-item fade-up fade-delay-${(i % 4) + 1}`}
+              onClick={() => setAtivo(imageUrl)}
+            >
+              <img src={imageUrl} alt={item.titulo} />
+            </div>
+          );
+        })}
       </div>
 
-      {/* ===== MODAL FULLSCREEN ===== */}
       {ativo && (
         <div className="gallery-modal" onClick={() => setAtivo(null)}>
           <span className="close">✕</span>

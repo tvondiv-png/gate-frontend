@@ -39,7 +39,7 @@ export default function IndicationUser() {
 
     try {
       setLoading(true);
-      await api.post("/indications", form);
+      await api.post("/api/indications", form);
 
       setForm({
         idPersonagem: "",

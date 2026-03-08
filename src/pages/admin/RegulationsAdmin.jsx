@@ -23,9 +23,9 @@ export default function RegulationsAdmin() {
 
   const submit = async () => {
     if (editing) {
-      await api.put(`/regulations/${editing}`, form);
+      await api.put(`/api/regulations/${editing}`, form);
     } else {
-      await api.post("/regulations", form);
+      await api.post("/api/regulations", form);
     }
 
     setForm({
@@ -50,7 +50,7 @@ export default function RegulationsAdmin() {
 
   const remove = async (id) => {
     if (!window.confirm("Excluir regulamento?")) return;
-    await api.delete(`/regulations/${id}`);
+    await api.delete(`/api/regulations/${id}`);
     load();
   };
 

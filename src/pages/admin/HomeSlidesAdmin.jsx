@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import api from "../../api/api";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export default function HomeSlidesAdmin() {
   const [slides, setSlides] = useState([]);
   const [imagem, setImagem] = useState(null);
@@ -15,16 +17,18 @@ export default function HomeSlidesAdmin() {
   }, []);
 
   const enviar = async () => {
+    if (!imagem) return;
+
     const form = new FormData();
     form.append("imagem", imagem);
 
-    await api.post("/slideshow/admin", form);
+    await api.post("/api/slideshow/admin", form);
     setImagem(null);
     carregar();
   };
 
   const excluir = async (id) => {
-    await api.delete(`/slideshow/admin/${id}`);
+    await api.delete(`/api/slideshow/admin/${id}`);
     carregar();
   };
 
@@ -43,7 +47,7 @@ export default function HomeSlidesAdmin() {
       {slides.map(s => (
         <div key={s._id}>
           <img
-            src={`http://localhost:5000${s.imagem}`}
+            src={`${API_URL}${s.imagem}`}
             style={{ width: 200 }}
           />
           <button onClick={() => excluir(s._id)}>Excluir</button>

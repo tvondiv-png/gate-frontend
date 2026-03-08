@@ -7,6 +7,7 @@ export default function GalleryAdmin() {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [ativo, setAtivo] = useState(null);
 
   const [form, setForm] = useState({
     titulo: "",
@@ -24,7 +25,7 @@ export default function GalleryAdmin() {
     load();
   }, []);
 
-  // 🔹 ADICIONAR IMAGEM
+  // ================= ADICIONAR IMAGEM =================
   const submit = async () => {
     if (!form.titulo || !file) {
       alert("Título e imagem são obrigatórios");
@@ -41,7 +42,7 @@ export default function GalleryAdmin() {
     formData.append("imagem", file);
 
     try {
-      await api.post("/gallery", formData, {
+      await api.post("/api/gallery", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 
@@ -62,10 +63,10 @@ export default function GalleryAdmin() {
     }
   };
 
-  // 🔹 EXCLUIR IMAGEM
+  // ================= EXCLUIR IMAGEM =================
   const remove = async (id) => {
     if (!window.confirm("Excluir esta imagem da galeria?")) return;
-    await api.delete(`/gallery/${id}`);
+    await api.delete(`/api/gallery/${id}`);
     load();
   };
 
@@ -143,9 +144,10 @@ export default function GalleryAdmin() {
             }}
           >
             <img
-              src={`http://localhost:5000/uploads/gallery/${item.imagem}`}
-              width="100"
-              alt=""
+              src={item.imagem}
+              alt={item.titulo}
+              style={{ maxWidth: 120, cursor: "pointer" }}
+              onClick={() => setAtivo(item.imagem)}
             />
 
             <div style={{ flex: 1 }}>
@@ -165,6 +167,14 @@ export default function GalleryAdmin() {
           </div>
         ))}
       </div>
+
+      {/* ===== MODAL FULLSCREEN ===== */}
+      {ativo && (
+        <div className="gallery-modal" onClick={() => setAtivo(null)}>
+          <span className="close">✕</span>
+          <img src={ativo} alt="Imagem ampliada" />
+        </div>
+      )}
     </div>
   );
 }
