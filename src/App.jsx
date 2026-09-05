@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -5,13 +6,11 @@ import {
 } from "react-router-dom";
 
 /* =========================================================
-   PROTEÇÕES
+   PROTEÇÕES  (leves, carregadas junto do app)
 ========================================================= */
 
 import ProtectedRoute from "./components/ProtectedRoute";
-
 import ProtectedComandoRoute from "./components/ProtectedComandoRoute";
-
 import ProtectedRocamRoute from "./components/ProtectedRocamRoute";
 
 /* =========================================================
@@ -22,156 +21,122 @@ import "./styles/gate-theme.css";
 import "./styles/animations.css";
 
 /* =========================================================
-   LAYOUTS
+   LAYOUTS  (wrappers de rota, carregados sob demanda)
 ========================================================= */
 
-import MainLayout from "./layouts/MainLayout";
-
-import AdminLayout from "./layouts/AdminLayout";
-
-import ComandoLayout from "./layouts/ComandoLayout";
-
-import RocamLayout from "./layouts/RocamLayout";
+const MainLayout = lazy(() => import("./layouts/MainLayout"));
+const AdminLayout = lazy(() => import("./layouts/AdminLayout"));
+const ComandoLayout = lazy(() => import("./layouts/ComandoLayout"));
+const RocamLayout = lazy(() => import("./layouts/RocamLayout"));
 
 /* =========================================================
    PÁGINAS GERAIS
 ========================================================= */
 
-import Home from "./pages/Home";
-
-import Login from "./pages/Login";
-
-import SelectPanel from "./pages/SelectPanel";
-
-import ChangePassword from "./pages/ChangePassword";
-
-import Signup from "./pages/Signup";
+const Home = lazy(() => import("./pages/Home"));
+const Login = lazy(() => import("./pages/Login"));
+const SelectPanel = lazy(() => import("./pages/SelectPanel"));
+const ChangePassword = lazy(() => import("./pages/ChangePassword"));
+const Signup = lazy(() => import("./pages/Signup"));
 
 /* =========================================================
    USER
 ========================================================= */
 
-import UserDashboard from "./pages/user/UserDashboard";
-
-import RSOUser from "./pages/user/RSOUser";
-
-import IndicationUser from "./pages/user/IndicationUser";
-
-import UserNotifications from "./pages/user/UserNotifications";
-
-import UserProfileRequests from "./pages/user/UserProfileRequests";
-
-import UserPenalCode from "./pages/user/UserPenalCode";
+const UserDashboard = lazy(() => import("./pages/user/UserDashboard"));
+const RSOUser = lazy(() => import("./pages/user/RSOUser"));
+const IndicationUser = lazy(() => import("./pages/user/IndicationUser"));
+const UserNotifications = lazy(() => import("./pages/user/UserNotifications"));
+const UserProfileRequests = lazy(() => import("./pages/user/UserProfileRequests"));
+const UserPenalCode = lazy(() => import("./pages/user/UserPenalCode"));
 
 /* =========================================================
    ADMIN
 ========================================================= */
 
-import AdminDashboard from "./pages/admin/AdminDashboard";
-
-import ConsultaPolicial from "./pages/admin/ConsultaPolicial";
-
-import AdvertenciaAdmin from "./pages/admin/AdvertenciaAdmin";
-
-import UserManagement from "./pages/admin/UserManagement";
-
-import HierarchyAdmin from "./pages/admin/HierarchyAdmin";
-
-import AbsencesAdmin from "./pages/admin/AbsencesAdmin";
-
-import SjdAdmin from "./pages/admin/SjdAdmin";
-
-import SystemLogs from "./pages/admin/SystemLogs";
-
-import GalleryAdmin from "./pages/admin/GalleryAdmin";
-
-import RegulationsAdmin from "./pages/admin/RegulationsAdmin";
-
-import SignupRequests from "./pages/admin/SignupRequests";
-
-import RSOAdmin from "./pages/admin/RSOAdmin";
-
-import AvaliacaoEstagiosAdmin from "./pages/admin/AvaliacaoEstagiosAdmin";
-
-import PatrolHoursAdmin from "./pages/admin/PatrolHoursAdmin";
-
-import RSOHistoryAdmin from "./pages/admin/RSOHistoryAdmin";
-
-import IndicationsAdmin from "./pages/admin/IndicationsAdmin";
-
-import SeizuresAdmin from "./pages/admin/SeizuresAdmin";
-
-import HomeSlidesAdmin from "./pages/admin/HomeSlidesAdmin";
-
-import ApresentacoesEstagiariosAdmin from "./pages/admin/ApresentacoesEstagiariosAdmin";
-
-import AdminActions from "./pages/admin/AdminActions";
-
-import ProfileUpdateRequestsAdmin from "./pages/admin/ProfileUpdateRequestsAdmin";
-
-import PenalCodeAdmin from "./pages/admin/PenalCodeAdmin";
-
-import BalancoOperacionalAdmin from "./pages/admin/BalancoOperacionalAdmin";
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const ConsultaPolicial = lazy(() => import("./pages/admin/ConsultaPolicial"));
+const AdvertenciaAdmin = lazy(() => import("./pages/admin/AdvertenciaAdmin"));
+const UserManagement = lazy(() => import("./pages/admin/UserManagement"));
+const HierarchyAdmin = lazy(() => import("./pages/admin/HierarchyAdmin"));
+const AbsencesAdmin = lazy(() => import("./pages/admin/AbsencesAdmin"));
+const SjdAdmin = lazy(() => import("./pages/admin/SjdAdmin"));
+const SystemLogs = lazy(() => import("./pages/admin/SystemLogs"));
+const GalleryAdmin = lazy(() => import("./pages/admin/GalleryAdmin"));
+const RegulationsAdmin = lazy(() => import("./pages/admin/RegulationsAdmin"));
+const SignupRequests = lazy(() => import("./pages/admin/SignupRequests"));
+const RSOAdmin = lazy(() => import("./pages/admin/RSOAdmin"));
+const AvaliacaoEstagiosAdmin = lazy(() => import("./pages/admin/AvaliacaoEstagiosAdmin"));
+const PatrolHoursAdmin = lazy(() => import("./pages/admin/PatrolHoursAdmin"));
+const RSOHistoryAdmin = lazy(() => import("./pages/admin/RSOHistoryAdmin"));
+const IndicationsAdmin = lazy(() => import("./pages/admin/IndicationsAdmin"));
+const SeizuresAdmin = lazy(() => import("./pages/admin/SeizuresAdmin"));
+const HomeSlidesAdmin = lazy(() => import("./pages/admin/HomeSlidesAdmin"));
+const ApresentacoesEstagiariosAdmin = lazy(() => import("./pages/admin/ApresentacoesEstagiariosAdmin"));
+const AdminActions = lazy(() => import("./pages/admin/AdminActions"));
+const ProfileUpdateRequestsAdmin = lazy(() => import("./pages/admin/ProfileUpdateRequestsAdmin"));
+const PenalCodeAdmin = lazy(() => import("./pages/admin/PenalCodeAdmin"));
+const BalancoOperacionalAdmin = lazy(() => import("./pages/admin/BalancoOperacionalAdmin"));
 
 /* =========================================================
    COMANDO
 ========================================================= */
 
-import ComandoDashboard from "./pages/comando/ComandoDashboard";
-
-import ComandoConsultas from "./pages/comando/ComandoConsultas";
-
-import ComandoDisciplina from "./pages/comando/ComandoDisciplina";
-
-import ComandoEfetivo from "./pages/comando/ComandoEfetivo";
-
-import ComandoProdutividade from "./pages/comando/ComandoProdutividade";
-
-import ComandoComunicados from "./pages/comando/ComandoComunicados";
-
-import ComandoDesempenho from "./pages/comando/ComandoDesempenho";
-
-import ComandoPatrulha from "./pages/comando/ComandoPatrulha";
-
-import ComandoAltoComando from "./pages/comando/ComandoAltoComando";
+const ComandoDashboard = lazy(() => import("./pages/comando/ComandoDashboard"));
+const ComandoConsultas = lazy(() => import("./pages/comando/ComandoConsultas"));
+const ComandoDisciplina = lazy(() => import("./pages/comando/ComandoDisciplina"));
+const ComandoEfetivo = lazy(() => import("./pages/comando/ComandoEfetivo"));
+const ComandoProdutividade = lazy(() => import("./pages/comando/ComandoProdutividade"));
+const ComandoComunicados = lazy(() => import("./pages/comando/ComandoComunicados"));
+const ComandoDesempenho = lazy(() => import("./pages/comando/ComandoDesempenho"));
+const ComandoPatrulha = lazy(() => import("./pages/comando/ComandoPatrulha"));
+const ComandoAltoComando = lazy(() => import("./pages/comando/ComandoAltoComando"));
 
 /* =========================================================
    ROCAM
 ========================================================= */
 
-import RocamDashboard from "./pages/rocam/RocamDashboard";
-
-import RocamHierarquia from "./pages/rocam/RocamHierarquia";
-
-import RocamNovoEstagiario from "./pages/rocam/RocamNovoEstagiario";
-
-import RocamEstagiarios from "./pages/rocam/RocamEstagiarios";
-
-import RocamFichaEstagiario from "./pages/rocam/RocamFichaEstagiario";
-
-import RocamAvaliarEstagiario from "./pages/rocam/RocamAvaliarEstagiario";
-
-import RocamAvaliacoes from "./pages/rocam/RocamAvaliacoes";
-
-import RocamMetas from "./pages/rocam/RocamMetas";
-
-import RocamBracais from "./pages/rocam/RocamBracais";
-
-import RocamComando from "./pages/rocam/RocamComando";
-
-import RocamMensagens from "./pages/rocam/RocamMensagens";
-
-import RocamAvisos from "./pages/rocam/RocamAvisos";
+const RocamDashboard = lazy(() => import("./pages/rocam/RocamDashboard"));
+const RocamHierarquia = lazy(() => import("./pages/rocam/RocamHierarquia"));
+const RocamNovoEstagiario = lazy(() => import("./pages/rocam/RocamNovoEstagiario"));
+const RocamEstagiarios = lazy(() => import("./pages/rocam/RocamEstagiarios"));
+const RocamFichaEstagiario = lazy(() => import("./pages/rocam/RocamFichaEstagiario"));
+const RocamAvaliarEstagiario = lazy(() => import("./pages/rocam/RocamAvaliarEstagiario"));
+const RocamAvaliacoes = lazy(() => import("./pages/rocam/RocamAvaliacoes"));
+const RocamMetas = lazy(() => import("./pages/rocam/RocamMetas"));
+const RocamBracais = lazy(() => import("./pages/rocam/RocamBracais"));
+const RocamComando = lazy(() => import("./pages/rocam/RocamComando"));
+const RocamMensagens = lazy(() => import("./pages/rocam/RocamMensagens"));
+const RocamAvisos = lazy(() => import("./pages/rocam/RocamAvisos"));
 
 /* =========================================================
    PUBLIC
 ========================================================= */
 
-import HierarchyPublic from "./pages/public/HierarchyPublic";
+const HierarchyPublic = lazy(() => import("./pages/public/HierarchyPublic"));
+const RegulationsPublic = lazy(() => import("./pages/public/RegulationsPublic"));
+const GalleryPublic = lazy(() => import("./pages/public/GalleryPublic"));
 
-import RegulationsPublic from "./pages/public/RegulationsPublic";
+/* =========================================================
+   FALLBACK DE CARREGAMENTO
+========================================================= */
 
-import GalleryPublic from "./pages/public/GalleryPublic";
+function PageLoader() {
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "60vh",
+        color: "#888",
+        fontSize: 14
+      }}
+    >
+      Carregando...
+    </div>
+  );
+}
 
 /* =========================================================
    APP
@@ -180,579 +145,186 @@ import GalleryPublic from "./pages/public/GalleryPublic";
 export default function App() {
   return (
     <Router>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
 
-      <Routes>
+          {/* ===================================================
+              PÚBLICO
+          =================================================== */}
 
-        {/* ===================================================
-            PÚBLICO
-        =================================================== */}
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/hierarquia" element={<HierarchyPublic />} />
+            <Route path="/regulamentos" element={<RegulationsPublic />} />
+            <Route path="/galeria" element={<GalleryPublic />} />
+            <Route path="/cadastro" element={<Signup />} />
+            <Route path="/alterar-senha" element={<ChangePassword />} />
+          </Route>
 
-        <Route
-          element={
-            <MainLayout />
-          }
-        >
+          {/* ===================================================
+              AUTH
+          =================================================== */}
 
-          <Route
-            path="/"
-            element={
-              <Home />
-            }
-          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/entrar" element={<Login />} />
+          <Route path="/select-panel" element={<SelectPanel />} />
 
-          <Route
-            path="/hierarquia"
-            element={
-              <HierarchyPublic />
-            }
-          />
-
-          <Route
-            path="/regulamentos"
-            element={
-              <RegulationsPublic />
-            }
-          />
+          {/* ===================================================
+              USUÁRIO
+          =================================================== */}
 
           <Route
-            path="/galeria"
+            path="/usuario"
             element={
-              <GalleryPublic />
-            }
-          />
-
-          <Route
-            path="/cadastro"
-            element={
-              <Signup />
-            }
-          />
-
-          <Route
-            path="/alterar-senha"
-            element={
-              <ChangePassword />
-            }
-          />
-
-        </Route>
-
-        {/* ===================================================
-            AUTH
-        =================================================== */}
-
-        <Route
-          path="/login"
-          element={
-            <Login />
-          }
-        />
-
-        <Route
-          path="/entrar"
-          element={
-            <Login />
-          }
-        />
-
-        <Route
-          path="/select-panel"
-          element={
-            <SelectPanel />
-          }
-        />
-
-        {/* ===================================================
-            USUÁRIO
-        =================================================== */}
-
-        <Route
-          path="/usuario"
-          element={
-            <ProtectedRoute
-              roles={[
-                "user",
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <UserDashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/usuario/rso"
-          element={
-            <ProtectedRoute
-              roles={[
-                "user",
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <RSOUser />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/usuario/indicacao"
-          element={
-            <ProtectedRoute
-              roles={[
-                "user",
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <IndicationUser />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/usuario/notificacoes"
-          element={
-            <ProtectedRoute
-              roles={[
-                "user",
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <UserNotifications />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/usuario/requisicoes-cadastrais"
-          element={
-            <ProtectedRoute
-              roles={[
-                "user",
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <UserProfileRequests />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/usuario/codigo-penal"
-          element={
-            <ProtectedRoute
-              roles={[
-                "user",
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <UserPenalCode />
-            </ProtectedRoute>
-          }
-        />
-
-        {/* ===================================================
-            ADMIN
-        =================================================== */}
-
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute
-              roles={[
-                "admin",
-                "superadmin"
-              ]}
-            >
-              <AdminLayout />
-            </ProtectedRoute>
-          }
-        >
-
-          <Route
-            index
-            element={
-              <AdminDashboard />
-            }
-          />
-
-          <Route
-            path="usuarios"
-            element={
-              <ProtectedRoute
-                roles={[
-                  "superadmin"
-                ]}
-              >
-                <UserManagement />
+              <ProtectedRoute roles={["user", "admin", "superadmin"]}>
+                <UserDashboard />
               </ProtectedRoute>
             }
           />
 
           <Route
-            path="hierarquia"
+            path="/usuario/rso"
             element={
-              <HierarchyAdmin />
+              <ProtectedRoute roles={["user", "admin", "superadmin"]}>
+                <RSOUser />
+              </ProtectedRoute>
             }
           />
 
           <Route
-            path="advertencias"
+            path="/usuario/indicacao"
             element={
-              <AdvertenciaAdmin />
+              <ProtectedRoute roles={["user", "admin", "superadmin"]}>
+                <IndicationUser />
+              </ProtectedRoute>
             }
           />
 
           <Route
-            path="consulta"
+            path="/usuario/notificacoes"
             element={
-              <ConsultaPolicial />
+              <ProtectedRoute roles={["user", "admin", "superadmin"]}>
+                <UserNotifications />
+              </ProtectedRoute>
             }
           />
 
           <Route
-            path="ausencias"
+            path="/usuario/requisicoes-cadastrais"
             element={
-              <AbsencesAdmin />
+              <ProtectedRoute roles={["user", "admin", "superadmin"]}>
+                <UserProfileRequests />
+              </ProtectedRoute>
             }
           />
 
           <Route
-            path="justica"
+            path="/usuario/codigo-penal"
             element={
-              <SjdAdmin />
+              <ProtectedRoute roles={["user", "admin", "superadmin"]}>
+                <UserPenalCode />
+              </ProtectedRoute>
             }
           />
+
+          {/* ===================================================
+              ADMIN
+          =================================================== */}
 
           <Route
-            path="sjd"
+            path="/admin"
             element={
-              <SjdAdmin />
+              <ProtectedRoute roles={["admin", "superadmin"]}>
+                <AdminLayout />
+              </ProtectedRoute>
             }
-          />
+          >
+            <Route index element={<AdminDashboard />} />
+
+            <Route
+              path="usuarios"
+              element={
+                <ProtectedRoute roles={["superadmin"]}>
+                  <UserManagement />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route path="hierarquia" element={<HierarchyAdmin />} />
+            <Route path="advertencias" element={<AdvertenciaAdmin />} />
+            <Route path="consulta" element={<ConsultaPolicial />} />
+            <Route path="ausencias" element={<AbsencesAdmin />} />
+            <Route path="justica" element={<SjdAdmin />} />
+            <Route path="sjd" element={<SjdAdmin />} />
+            <Route path="logs" element={<SystemLogs />} />
+            <Route path="galeria" element={<GalleryAdmin />} />
+            <Route path="regulamentos" element={<RegulationsAdmin />} />
+            <Route path="solicitacoes" element={<SignupRequests />} />
+            <Route path="rso" element={<RSOAdmin />} />
+            <Route path="rso-historico" element={<RSOHistoryAdmin />} />
+            <Route path="horas" element={<PatrolHoursAdmin />} />
+            <Route path="acoes" element={<AdminActions />} />
+            <Route path="apreensoes" element={<SeizuresAdmin />} />
+            <Route path="balanco-operacional" element={<BalancoOperacionalAdmin />} />
+            <Route path="avaliacoes-estagio" element={<AvaliacaoEstagiosAdmin />} />
+            <Route path="indicacoes" element={<IndicationsAdmin />} />
+            <Route path="apresentacoes-estagiarios" element={<ApresentacoesEstagiariosAdmin />} />
+            <Route path="requisicoes-cadastrais" element={<ProfileUpdateRequestsAdmin />} />
+            <Route path="slideshow" element={<HomeSlidesAdmin />} />
+            <Route path="codigo-penal" element={<PenalCodeAdmin />} />
+          </Route>
+
+          {/* ===================================================
+              COMANDO
+          =================================================== */}
 
           <Route
-            path="logs"
+            path="/comando"
             element={
-              <SystemLogs />
+              <ProtectedComandoRoute>
+                <ComandoLayout />
+              </ProtectedComandoRoute>
             }
-          />
+          >
+            <Route index element={<ComandoDashboard />} />
+            <Route path="consultas" element={<ComandoConsultas />} />
+            <Route path="disciplina" element={<ComandoDisciplina />} />
+            <Route path="efetivo" element={<ComandoEfetivo />} />
+            <Route path="produtividade" element={<ComandoProdutividade />} />
+            <Route path="comunicados" element={<ComandoComunicados />} />
+            <Route path="desempenho" element={<ComandoDesempenho />} />
+            <Route path="patrulha" element={<ComandoPatrulha />} />
+            <Route path="alto-comando" element={<ComandoAltoComando />} />
+          </Route>
+
+          {/* ===================================================
+              ROCAM
+          =================================================== */}
 
           <Route
-            path="galeria"
+            path="/rocam"
             element={
-              <GalleryAdmin />
+              <ProtectedRocamRoute>
+                <RocamLayout />
+              </ProtectedRocamRoute>
             }
-          />
+          >
+            <Route index element={<RocamDashboard />} />
+            <Route path="hierarquia" element={<RocamHierarquia />} />
+            <Route path="avaliar-estagiarios" element={<RocamAvaliarEstagiario />} />
+            <Route path="comando" element={<RocamComando />} />
+            <Route path="novo-estagiario" element={<RocamNovoEstagiario />} />
+            <Route path="estagiarios" element={<RocamEstagiarios />} />
+            <Route path="estagiarios/:userId" element={<RocamFichaEstagiario />} />
+            <Route path="bracais" element={<RocamBracais />} />
+            <Route path="metas" element={<RocamMetas />} />
+            <Route path="avaliacoes" element={<RocamAvaliacoes />} />
+            <Route path="mensagens" element={<RocamMensagens />} />
+            <Route path="avisos" element={<RocamAvisos />} />
+          </Route>
 
-          <Route
-            path="regulamentos"
-            element={
-              <RegulationsAdmin />
-            }
-          />
-
-          <Route
-            path="solicitacoes"
-            element={
-              <SignupRequests />
-            }
-          />
-
-          <Route
-            path="rso"
-            element={
-              <RSOAdmin />
-            }
-          />
-
-          <Route
-            path="rso-historico"
-            element={
-              <RSOHistoryAdmin />
-            }
-          />
-
-          <Route
-            path="horas"
-            element={
-              <PatrolHoursAdmin />
-            }
-          />
-
-          <Route
-            path="acoes"
-            element={
-              <AdminActions />
-            }
-          />
-
-          <Route
-            path="apreensoes"
-            element={
-              <SeizuresAdmin />
-            }
-          />
-
-          <Route
-            path="balanco-operacional"
-            element={
-              <BalancoOperacionalAdmin />
-            }
-          />
-
-          <Route
-            path="avaliacoes-estagio"
-            element={
-              <AvaliacaoEstagiosAdmin />
-            }
-          />
-
-          <Route
-            path="indicacoes"
-            element={
-              <IndicationsAdmin />
-            }
-          />
-
-          <Route
-            path="apresentacoes-estagiarios"
-            element={
-              <ApresentacoesEstagiariosAdmin />
-            }
-          />
-
-          <Route
-            path="requisicoes-cadastrais"
-            element={
-              <ProfileUpdateRequestsAdmin />
-            }
-          />
-
-          <Route
-            path="slideshow"
-            element={
-              <HomeSlidesAdmin />
-            }
-          />
-
-          <Route
-            path="codigo-penal"
-            element={
-              <PenalCodeAdmin />
-            }
-          />
-
-        </Route>
-
-        {/* ===================================================
-            COMANDO
-        =================================================== */}
-
-        <Route
-          path="/comando"
-          element={
-            <ProtectedComandoRoute>
-
-              <ComandoLayout />
-
-            </ProtectedComandoRoute>
-          }
-        >
-
-          <Route
-            index
-            element={
-              <ComandoDashboard />
-            }
-          />
-
-          <Route
-            path="consultas"
-            element={
-              <ComandoConsultas />
-            }
-          />
-
-          <Route
-            path="disciplina"
-            element={
-              <ComandoDisciplina />
-            }
-          />
-
-          <Route
-            path="efetivo"
-            element={
-              <ComandoEfetivo />
-            }
-          />
-
-          <Route
-            path="produtividade"
-            element={
-              <ComandoProdutividade />
-            }
-          />
-
-          <Route
-            path="comunicados"
-            element={
-              <ComandoComunicados />
-            }
-          />
-
-          <Route
-            path="desempenho"
-            element={
-              <ComandoDesempenho />
-            }
-          />
-
-          <Route
-            path="patrulha"
-            element={
-              <ComandoPatrulha />
-            }
-          />
-
-          <Route
-            path="alto-comando"
-            element={
-              <ComandoAltoComando />
-            }
-          />
-
-        </Route>
-
-        {/* ===================================================
-            ROCAM
-        =================================================== */}
-
-        <Route
-          path="/rocam"
-          element={
-            <ProtectedRocamRoute>
-
-              <RocamLayout />
-
-            </ProtectedRocamRoute>
-          }
-        >
-
-          {/* =================================================
-              DASHBOARD
-          ================================================= */}
-
-          <Route
-            index
-            element={
-              <RocamDashboard />
-            }
-          />
-
-          {/* =================================================
-              HIERARQUIA
-          ================================================= */}
-
-          <Route
-            path="hierarquia"
-            element={
-              <RocamHierarquia />
-            }
-          />
-
-          {/* =================================================
-              BRAÇAL ROCAM
-          ================================================= */}
-
-          <Route
-            path="avaliar-estagiarios"
-            element={
-              <RocamAvaliarEstagiario />
-            }
-          />
-
-          {/* =================================================
-              COMANDO ROCAM
-          ================================================= */}
-
-          <Route
-            path="comando"
-            element={
-              <RocamComando />
-            }
-          />
-
-          <Route
-            path="novo-estagiario"
-            element={
-              <RocamNovoEstagiario />
-            }
-          />
-
-          <Route
-            path="estagiarios"
-            element={
-              <RocamEstagiarios />
-            }
-          />
-
-          <Route
-            path="estagiarios/:userId"
-            element={
-              <RocamFichaEstagiario />
-            }
-          />
-
-          <Route
-            path="bracais"
-            element={
-              <RocamBracais />
-            }
-          />
-
-          <Route
-            path="metas"
-            element={
-              <RocamMetas />
-            }
-          />
-
-          <Route
-            path="avaliacoes"
-            element={
-              <RocamAvaliacoes />
-            }
-          />
-
-          {/* =================================================
-              COMUNICAÇÃO ROCAM
-          ================================================= */}
-
-          <Route
-            path="mensagens"
-            element={
-              <RocamMensagens />
-            }
-          />
-
-          <Route
-            path="avisos"
-            element={
-              <RocamAvisos />
-            }
-          />
-
-        </Route>
-
-      </Routes>
-
+        </Routes>
+      </Suspense>
     </Router>
   );
 }
