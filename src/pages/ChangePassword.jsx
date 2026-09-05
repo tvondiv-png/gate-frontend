@@ -4,14 +4,20 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function ChangePassword() {
+  const [senhaAtual, setSenhaAtual] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmar, setConfirmar] = useState("");
   const navigate = useNavigate();
   const { logout } = useAuth();
 
   const salvar = async () => {
+    if (!senhaAtual) {
+      alert("Informe a senha atual");
+      return;
+    }
+
     if (senha.length < 6) {
-      alert("Senha deve ter no mínimo 6 caracteres");
+      alert("A nova senha deve ter no mínimo 6 caracteres");
       return;
     }
 
@@ -21,14 +27,15 @@ export default function ChangePassword() {
     }
 
     try {
-      await api.put("/api/auth/change-password", { senha });
+      await api.put("/api/auth/change-password", { senhaAtual, senha });
 
       alert("Senha alterada com sucesso. Faça login novamente.");
       logout();
       navigate("/entrar");
     } catch (err) {
-      console.error("Erro ao alterar senha:", err);
-      alert("Erro ao alterar senha");
+      const msg =
+        err?.response?.data?.message || "Erro ao alterar senha";
+      alert(msg);
     }
   };
 
@@ -39,6 +46,13 @@ export default function ChangePassword() {
 
       <input
         type="password"
+        placeholder="Senha atual"
+        value={senhaAtual}
+        onChange={e => setSenhaAtual(e.target.value)}
+      /><br /><br />
+
+      <input
+        type="password"
         placeholder="Nova senha"
         value={senha}
         onChange={e => setSenha(e.target.value)}
@@ -46,7 +60,7 @@ export default function ChangePassword() {
 
       <input
         type="password"
-        placeholder="Confirmar senha"
+        placeholder="Confirmar nova senha"
         value={confirmar}
         onChange={e => setConfirmar(e.target.value)}
       /><br /><br />

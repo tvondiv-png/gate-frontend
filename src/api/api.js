@@ -5,7 +5,7 @@ const api = axios.create({
   withCredentials: false
 });
 
-// 🔐 Interceptor de token
+// 🔐 Injeta o token JWT em toda requisição
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -20,19 +20,3 @@ api.interceptors.request.use(
 );
 
 export default api;
-
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem("token");
-
-    console.log("TOKEN ENVIADO:", token);
-    console.log("URL:", config.url);
-
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
-
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
