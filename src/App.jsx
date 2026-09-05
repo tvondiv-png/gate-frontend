@@ -77,6 +77,7 @@ const AdminActions = lazy(() => import("./pages/admin/AdminActions"));
 const ProfileUpdateRequestsAdmin = lazy(() => import("./pages/admin/ProfileUpdateRequestsAdmin"));
 const PenalCodeAdmin = lazy(() => import("./pages/admin/PenalCodeAdmin"));
 const BalancoOperacionalAdmin = lazy(() => import("./pages/admin/BalancoOperacionalAdmin"));
+const HistoriaAdmin = lazy(() => import("./pages/admin/HistoriaAdmin"));
 
 /* =========================================================
    COMANDO
@@ -116,6 +117,7 @@ const RocamAvisos = lazy(() => import("./pages/rocam/RocamAvisos"));
 const HierarchyPublic = lazy(() => import("./pages/public/HierarchyPublic"));
 const RegulationsPublic = lazy(() => import("./pages/public/RegulationsPublic"));
 const GalleryPublic = lazy(() => import("./pages/public/GalleryPublic"));
+const HistoriaPublic = lazy(() => import("./pages/public/HistoriaPublic"));
 
 /* =========================================================
    FALLBACK DE CARREGAMENTO
@@ -156,6 +158,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/hierarquia" element={<HierarchyPublic />} />
             <Route path="/regulamentos" element={<RegulationsPublic />} />
+            <Route path="/historia" element={<HistoriaPublic />} />
             <Route path="/galeria" element={<GalleryPublic />} />
             <Route path="/cadastro" element={<Signup />} />
             <Route path="/alterar-senha" element={<ChangePassword />} />
@@ -272,6 +275,7 @@ export default function App() {
             <Route path="requisicoes-cadastrais" element={<ProfileUpdateRequestsAdmin />} />
             <Route path="slideshow" element={<HomeSlidesAdmin />} />
             <Route path="codigo-penal" element={<PenalCodeAdmin />} />
+            <Route path="historia" element={<HistoriaAdmin />} />
           </Route>
 
           {/* ===================================================

@@ -287,6 +287,17 @@ export default function AdminLayout() {
 
               icon:
                 "📚"
+            },
+
+            {
+              to:
+                "/admin/historia",
+
+              label:
+                "História do Anchieta",
+
+              icon:
+                "🏛️"
             }
           ]
         },

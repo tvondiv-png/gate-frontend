@@ -77,6 +77,13 @@ export default function Navbar() {
           </NavLink>
 
           <NavLink
+            to="/historia"
+            onClick={fecharMenu}
+          >
+            História
+          </NavLink>
+
+          <NavLink
             to="/galeria"
             onClick={fecharMenu}
           >
