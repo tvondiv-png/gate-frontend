@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api/api";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 
 export default function ChangePassword() {
   const [senhaAtual, setSenhaAtual] = useState("");
@@ -9,33 +10,34 @@ export default function ChangePassword() {
   const [confirmar, setConfirmar] = useState("");
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const toast = useToast();
 
   const salvar = async () => {
     if (!senhaAtual) {
-      alert("Informe a senha atual");
+      toast.warning("Informe a senha atual");
       return;
     }
 
     if (senha.length < 6) {
-      alert("A nova senha deve ter no mínimo 6 caracteres");
+      toast.warning("A nova senha deve ter no mínimo 6 caracteres");
       return;
     }
 
     if (senha !== confirmar) {
-      alert("As senhas não coincidem");
+      toast.warning("As senhas não coincidem");
       return;
     }
 
     try {
       await api.put("/api/auth/change-password", { senhaAtual, senha });
 
-      alert("Senha alterada com sucesso. Faça login novamente.");
+      toast.success("Senha alterada. Faça login novamente.");
       logout();
       navigate("/entrar");
     } catch (err) {
-      const msg =
-        err?.response?.data?.message || "Erro ao alterar senha";
-      alert(msg);
+      toast.error(
+        err?.response?.data?.message || "Erro ao alterar senha"
+      );
     }
   };
 

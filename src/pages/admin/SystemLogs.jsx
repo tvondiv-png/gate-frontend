@@ -1,8 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 import "../../styles/admin-module-premium.css";
 
 export default function SystemLogs() {
+  const toast = useToast();
+  const confirm = useConfirm();
+
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,17 +20,21 @@ export default function SystemLogs() {
   }, []);
 
   const clearLogs = async () => {
-    if (!window.confirm("Tem certeza que deseja zerar TODOS os logs?")) {
-      return;
-    }
+    const ok = await confirm({
+      title: "Zerar logs do sistema",
+      message: "Isso apaga TODO o histórico de ações e não pode ser desfeito. Continuar?",
+      confirmText: "Zerar tudo",
+      tone: "danger"
+    });
+    if (!ok) return;
 
     setLoading(true);
     try {
       await api.delete("/api/logs");
       await loadLogs();
-    } catch (err) {
-      alert("Erro ao zerar logs");
-      console.error(err);
+      toast.success("Logs zerados");
+    } catch {
+      toast.error("Erro ao zerar logs");
     } finally {
       setLoading(false);
     }

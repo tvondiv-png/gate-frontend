@@ -1,8 +1,11 @@
 import { useState } from "react";
 import api from "../api/api";
+import { useToast } from "../contexts/ToastContext";
 import "../styles/signup-premium.css";
 
 export default function Signup() {
+  const toast = useToast();
+
   const [nome, setNome] = useState("");
   const [funcional, setFuncional] = useState("");
   const [email, setEmail] = useState("");
@@ -18,7 +21,7 @@ export default function Signup() {
       !funcional ||
       !email.trim()
     ) {
-      alert("Preencha todos os campos");
+      toast.warning("Preencha todos os campos");
       return;
     }
 
@@ -32,14 +35,13 @@ export default function Signup() {
       });
 
       setEnviado(true);
+      toast.success("Solicitação enviada com sucesso");
 
       setNome("");
       setFuncional("");
       setEmail("");
     } catch (err) {
-      console.error(err);
-
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Erro ao enviar solicitação"
       );

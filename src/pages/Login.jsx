@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useToast } from "../contexts/ToastContext";
 import "./login.css";
 
 export default function Login() {
@@ -9,13 +10,14 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
 
   const { login } = useAuth();
+  const toast = useToast();
   const navigate = useNavigate();
 
   const submit = async (e) => {
     e?.preventDefault();
 
     if (!loginValue || !senha) {
-      alert("Preencha login e senha");
+      toast.warning("Preencha login e senha");
       return;
     }
 
@@ -34,9 +36,7 @@ export default function Login() {
 
       navigate("/select-panel");
     } catch (err) {
-      console.error(err);
-
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Login ou senha inválidos"
       );

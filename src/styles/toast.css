@@ -1,0 +1,209 @@
+/* ======================================================
+   GATE — TOASTS + CONFIRM DIALOG
+   ====================================================== */
+
+.gate-toast-viewport {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: min(92vw, 380px);
+  pointer-events: none;
+}
+
+.gate-toast {
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 12px 12px 14px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #0f172a, #060b16);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--gold, #c9a24d);
+  color: #e5e7eb;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
+  font-size: 0.9rem;
+  line-height: 1.35;
+  animation: gate-toast-in 0.18s ease-out;
+}
+
+@keyframes gate-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.gate-toast-success {
+  border-left-color: #3fb950;
+}
+.gate-toast-error {
+  border-left-color: #f85149;
+}
+.gate-toast-warning {
+  border-left-color: #d29922;
+}
+.gate-toast-info {
+  border-left-color: #4f9cf9;
+}
+
+.gate-toast-icon {
+  flex: 0 0 20px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #060b16;
+  margin-top: 1px;
+}
+.gate-toast-success .gate-toast-icon {
+  background: #3fb950;
+}
+.gate-toast-error .gate-toast-icon {
+  background: #f85149;
+}
+.gate-toast-warning .gate-toast-icon {
+  background: #d29922;
+}
+.gate-toast-info .gate-toast-icon {
+  background: #4f9cf9;
+}
+
+.gate-toast-msg {
+  flex: 1;
+  margin: 0;
+}
+
+.gate-toast-close {
+  flex: 0 0 auto;
+  background: none;
+  border: none;
+  color: #6b7280;
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+}
+.gate-toast-close:hover {
+  color: #e5e7eb;
+}
+
+/* ================= CONFIRM DIALOG ================= */
+
+.gate-confirm-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: rgba(2, 6, 16, 0.72);
+  backdrop-filter: blur(3px);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  animation: gate-fade-in 0.14s ease-out;
+}
+
+@keyframes gate-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.gate-confirm {
+  width: min(94vw, 420px);
+  background: linear-gradient(180deg, #0f172a, #060b16);
+  border: 1px solid rgba(201, 162, 77, 0.35);
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  animation: gate-confirm-in 0.16s ease-out;
+}
+
+@keyframes gate-confirm-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.gate-confirm-title {
+  margin: 0 0 8px;
+  font-size: 1.05rem;
+  color: var(--gold, #c9a24d);
+  letter-spacing: 0.3px;
+}
+
+.gate-confirm-msg {
+  margin: 0 0 20px;
+  color: #cbd5e1;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.gate-confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.gate-confirm-btn {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.gate-confirm-cancel {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+.gate-confirm-cancel:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.gate-confirm-ok {
+  background: var(--gold, #c9a24d);
+  color: #1a1205;
+}
+.gate-confirm-ok:hover {
+  filter: brightness(1.08);
+}
+.gate-confirm-ok.danger {
+  background: #f85149;
+  color: #fff;
+}
+
+@media (max-width: 480px) {
+  .gate-toast-viewport {
+    left: 12px;
+    right: 12px;
+    top: 12px;
+    max-width: none;
+  }
+  .gate-confirm-actions {
+    flex-direction: column-reverse;
+  }
+  .gate-confirm-btn {
+    width: 100%;
+  }
+}
