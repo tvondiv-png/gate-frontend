@@ -1,0 +1,979 @@
+/* =========================================================
+   ROCAM • NOVO ESTAGIÁRIO
+========================================================= */
+
+.rocam-new-page {
+  width: 100%;
+  display: grid;
+  gap: 18px;
+}
+
+.rocam-new-page form {
+  display: grid;
+  gap: 16px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.rocam-new-hero {
+  position: relative;
+
+  min-height: 180px;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 28px 30px;
+
+  border: 1px solid rgba(255,255,255,0.075);
+  border-radius: 21px;
+
+  background:
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(255,255,255,0.07),
+      transparent 25%
+    ),
+    linear-gradient(
+      135deg,
+      #111720,
+      #080c12 55%,
+      #05070a
+    );
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,0.22);
+
+  overflow: hidden;
+}
+
+.rocam-new-hero::after {
+  content: "ESTÁGIO";
+
+  position: absolute;
+
+  right: 20px;
+  bottom: -25px;
+
+  color: rgba(255,255,255,0.018);
+
+  font-size: 6rem;
+  font-weight: 950;
+
+  letter-spacing: 5px;
+}
+
+.rocam-new-kicker {
+  display: inline-block;
+
+  margin-bottom: 9px;
+
+  color: #9ca7b5;
+
+  font-size: 0.57rem;
+  font-weight: 950;
+
+  letter-spacing: 1.5px;
+}
+
+.rocam-new-hero h1 {
+  position: relative;
+  z-index: 1;
+
+  margin: 0;
+
+  color: #fff;
+
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 950;
+
+  letter-spacing: -0.8px;
+}
+
+.rocam-new-hero p {
+  position: relative;
+  z-index: 1;
+
+  max-width: 650px;
+
+  margin: 10px 0 0;
+
+  color: #818d9d;
+
+  font-size: 0.72rem;
+
+  line-height: 1.65;
+}
+
+.rocam-new-hero-status {
+  position: relative;
+  z-index: 2;
+
+  min-width: 235px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+
+  padding: 19px;
+
+  border-radius: 15px;
+
+  border: 1px solid rgba(255,255,255,0.085);
+
+  background: rgba(255,255,255,0.025);
+}
+
+.rocam-new-hero-status small {
+  color: #647183;
+
+  font-size: 0.53rem;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.rocam-new-hero-status strong {
+  color: #f8fafc;
+
+  font-size: 0.86rem;
+}
+
+.rocam-new-hero-status span {
+  color: #7f8b9b;
+
+  font-size: 0.62rem;
+}
+
+
+/* =========================================================
+   SEÇÕES
+========================================================= */
+
+.rocam-new-section {
+  padding: 21px;
+
+  border-radius: 17px;
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.027),
+      rgba(255,255,255,0.008)
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.12);
+}
+
+.rocam-new-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 13px;
+
+  margin-bottom: 18px;
+
+  padding-bottom: 15px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+}
+
+.rocam-new-section-number {
+  width: 37px;
+  height: 37px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255,255,255,0.09);
+
+  background: rgba(255,255,255,0.03);
+
+  color: #cbd3dd;
+
+  font-size: 0.59rem;
+  font-weight: 950;
+}
+
+.rocam-new-section-header small {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #596676;
+
+  font-size: 0.51rem;
+  font-weight: 950;
+
+  letter-spacing: 1px;
+}
+
+.rocam-new-section-header h2 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 0.95rem;
+}
+
+.rocam-new-section-header p {
+  margin: 5px 0 0;
+
+  color: #707d8e;
+
+  font-size: 0.64rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.rocam-new-grid-2 {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-top: 16px;
+}
+
+.rocam-new-field {
+  display: grid;
+  gap: 7px;
+}
+
+.rocam-new-field label {
+  color: #aab4c1;
+
+  font-size: 0.61rem;
+  font-weight: 850;
+}
+
+.rocam-new-field > small {
+  color: #596676;
+
+  font-size: 0.56rem;
+}
+
+.rocam-new-field input,
+.rocam-new-field textarea {
+  width: 100%;
+
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 11px;
+
+  outline: none;
+
+  background: rgba(2,4,7,0.52);
+
+  color: #f8fafc;
+
+  font: inherit;
+
+  transition: 0.18s ease;
+}
+
+.rocam-new-field input {
+  min-height: 43px;
+
+  padding: 0 12px;
+}
+
+.rocam-new-field textarea {
+  padding: 12px;
+
+  resize: vertical;
+}
+
+.rocam-new-field input:focus,
+.rocam-new-field textarea:focus {
+  border-color: rgba(255,255,255,0.19);
+
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.025);
+}
+
+
+/* =========================================================
+   POLICIAIS
+========================================================= */
+
+.rocam-new-police-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(245px, 1fr));
+
+  gap: 9px;
+
+  margin-top: 13px;
+}
+
+.rocam-new-police-card {
+  min-height: 88px;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  padding: 12px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.055);
+
+  background: rgba(255,255,255,0.012);
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.rocam-new-police-card:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(255,255,255,0.12);
+
+  background: rgba(255,255,255,0.025);
+}
+
+.rocam-new-police-card.selected {
+  border-color: rgba(34,197,94,0.28);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(34,197,94,0.075),
+      rgba(255,255,255,0.015)
+    );
+}
+
+.rocam-new-police-check {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  border: 1px solid rgba(255,255,255,0.09);
+
+  background: rgba(255,255,255,0.02);
+
+  color: #86efac;
+
+  font-size: 0.7rem;
+  font-weight: 950;
+}
+
+.rocam-new-police-data {
+  min-width: 0;
+
+  display: grid;
+  gap: 3px;
+}
+
+.rocam-new-police-data small {
+  color: #647183;
+
+  font-size: 0.52rem;
+}
+
+.rocam-new-police-data strong {
+  overflow: hidden;
+
+  color: #e8edf3;
+
+  font-size: 0.72rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.rocam-new-police-data span {
+  color: #748091;
+
+  font-size: 0.57rem;
+}
+
+.rocam-new-selected {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: 14px;
+
+  padding: 13px 15px;
+
+  border-radius: 11px;
+
+  border: 1px solid rgba(34,197,94,0.16);
+
+  background: rgba(34,197,94,0.035);
+}
+
+.rocam-new-selected div {
+  display: grid;
+  gap: 3px;
+}
+
+.rocam-new-selected small {
+  color: #5f7c6a;
+
+  font-size: 0.5rem;
+  font-weight: 900;
+}
+
+.rocam-new-selected strong {
+  color: #dce7df;
+
+  font-size: 0.7rem;
+}
+
+.rocam-new-selected > span {
+  color: #829189;
+
+  font-size: 0.58rem;
+}
+
+
+/* =========================================================
+   METAS
+========================================================= */
+
+.rocam-new-metrics-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0,1fr));
+
+  gap: 10px;
+}
+
+.rocam-new-metric {
+  min-height: 125px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.055);
+
+  background: rgba(255,255,255,0.012);
+}
+
+.rocam-new-metric span {
+  margin-bottom: 8px;
+
+  color: #647183;
+
+  font-size: 0.51rem;
+  font-weight: 900;
+
+  letter-spacing: 0.7px;
+}
+
+.rocam-new-metric input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: #f8fafc;
+
+  font-size: 1.65rem;
+  font-weight: 950;
+}
+
+.rocam-new-metric small {
+  margin-top: 3px;
+
+  color: #596676;
+
+  font-size: 0.55rem;
+}
+
+
+/* =========================================================
+   CRITÉRIOS / QUESTIONÁRIOS
+========================================================= */
+
+.rocam-new-options-grid,
+.rocam-new-question-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px,1fr));
+
+  gap: 9px;
+}
+
+.rocam-new-option {
+  min-height: 90px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+
+  padding: 13px;
+
+  border-radius: 11px;
+
+  border: 1px solid rgba(255,255,255,0.055);
+
+  background: rgba(255,255,255,0.01);
+
+  color: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.rocam-new-option:hover {
+  border-color: rgba(255,255,255,0.12);
+
+  background: rgba(255,255,255,0.025);
+}
+
+.rocam-new-option.active {
+  border-color: rgba(255,255,255,0.14);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.015)
+    );
+}
+
+.rocam-new-option-check {
+  width: 25px;
+  height: 25px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 7px;
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  color: #d8dee6;
+
+  font-size: 0.6rem;
+}
+
+.rocam-new-option > div:last-child {
+  display: grid;
+  gap: 5px;
+}
+
+.rocam-new-option strong {
+  color: #dce2e9;
+
+  font-size: 0.67rem;
+}
+
+.rocam-new-option span {
+  color: #687586;
+
+  font-size: 0.58rem;
+
+  line-height: 1.45;
+}
+
+.rocam-new-selection-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-top: 13px;
+
+  color: #6d7989;
+
+  font-size: 0.58rem;
+}
+
+.rocam-new-selection-count strong {
+  color: #d7dde5;
+}
+
+
+/* =========================================================
+   SWITCH
+========================================================= */
+
+.rocam-new-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 14px;
+
+  padding: 14px;
+
+  border-radius: 11px;
+
+  border: 1px solid rgba(255,255,255,0.055);
+
+  background: rgba(255,255,255,0.012);
+
+  cursor: pointer;
+}
+
+.rocam-new-switch-row > div {
+  display: grid;
+  gap: 4px;
+}
+
+.rocam-new-switch-row strong {
+  color: #dce2e9;
+
+  font-size: 0.68rem;
+}
+
+.rocam-new-switch-row span {
+  color: #687586;
+
+  font-size: 0.57rem;
+}
+
+.rocam-new-switch-row input {
+  width: 18px;
+  height: 18px;
+
+  accent-color: #64748b;
+}
+
+
+/* =========================================================
+   ALERTAS / EMPTY
+========================================================= */
+
+.rocam-new-empty {
+  margin-top: 12px;
+
+  padding: 15px;
+
+  border: 1px dashed rgba(255,255,255,0.08);
+  border-radius: 11px;
+
+  color: #647183;
+
+  font-size: 0.63rem;
+}
+
+.rocam-new-alert {
+  display: grid;
+  gap: 4px;
+
+  padding: 13px 15px;
+
+  border-radius: 11px;
+
+  font-size: 0.63rem;
+}
+
+.rocam-new-alert.error {
+  border: 1px solid rgba(239,68,68,0.2);
+
+  background: rgba(239,68,68,0.055);
+
+  color: #fca5a5;
+}
+
+.rocam-new-alert.success {
+  border: 1px solid rgba(34,197,94,0.2);
+
+  background: rgba(34,197,94,0.055);
+
+  color: #86efac;
+}
+
+
+/* =========================================================
+   CONFIRMAÇÃO
+========================================================= */
+
+.rocam-new-confirm {
+  padding: 22px;
+
+  border-radius: 17px;
+
+  border: 1px solid rgba(255,255,255,0.09);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255,255,255,0.055),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.035),
+      rgba(255,255,255,0.01)
+    );
+}
+
+.rocam-new-confirm-info small {
+  color: #647183;
+
+  font-size: 0.52rem;
+  font-weight: 950;
+
+  letter-spacing: 1px;
+}
+
+.rocam-new-confirm-info h2 {
+  margin: 5px 0;
+
+  color: #f8fafc;
+
+  font-size: 1rem;
+}
+
+.rocam-new-confirm-info p {
+  max-width: 700px;
+
+  margin: 0;
+
+  color: #748091;
+
+  font-size: 0.62rem;
+
+  line-height: 1.55;
+}
+
+.rocam-new-confirm-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0,1fr));
+
+  gap: 8px;
+
+  margin-top: 17px;
+}
+
+.rocam-new-confirm-summary > div {
+  padding: 12px;
+
+  border-radius: 10px;
+
+  border: 1px solid rgba(255,255,255,0.055);
+
+  background: rgba(0,0,0,0.12);
+}
+
+.rocam-new-confirm-summary span,
+.rocam-new-confirm-summary strong {
+  display: block;
+}
+
+.rocam-new-confirm-summary span {
+  margin-bottom: 4px;
+
+  color: #5f6b7b;
+
+  font-size: 0.51rem;
+
+  text-transform: uppercase;
+}
+
+.rocam-new-confirm-summary strong {
+  color: #cbd3dd;
+
+  font-size: 0.67rem;
+}
+
+.rocam-new-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 9px;
+
+  margin-top: 18px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid rgba(255,255,255,0.055);
+}
+
+.rocam-new-btn {
+  min-height: 41px;
+
+  padding: 0 16px;
+
+  border-radius: 10px;
+
+  font-size: 0.63rem;
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.rocam-new-btn.secondary {
+  border: 1px solid rgba(255,255,255,0.075);
+
+  background: rgba(255,255,255,0.02);
+
+  color: #9aa6b5;
+}
+
+.rocam-new-btn.primary {
+  border: 1px solid rgba(255,255,255,0.15);
+
+  background:
+    linear-gradient(
+      145deg,
+      #e7ebef,
+      #b8c0ca
+    );
+
+  color: #080b10;
+}
+
+.rocam-new-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.rocam-new-btn:disabled {
+  opacity: 0.4;
+
+  cursor: not-allowed;
+}
+
+
+/* =========================================================
+   ACESSO NEGADO
+========================================================= */
+
+.rocam-new-denied {
+  max-width: 650px;
+
+  padding: 28px;
+
+  border: 1px solid rgba(239,68,68,0.14);
+  border-radius: 17px;
+
+  background: rgba(239,68,68,0.025);
+}
+
+.rocam-new-denied > span {
+  color: #f87171;
+
+  font-size: 0.54rem;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.rocam-new-denied h1 {
+  margin: 7px 0;
+
+  color: #fff;
+}
+
+.rocam-new-denied p {
+  color: #7e8998;
+
+  font-size: 0.68rem;
+}
+
+.rocam-new-denied button {
+  margin-top: 10px;
+
+  padding: 10px 14px;
+
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 9px;
+
+  background: rgba(255,255,255,0.035);
+
+  color: #fff;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+  .rocam-new-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rocam-new-confirm-summary {
+    grid-template-columns:
+      repeat(2, minmax(0,1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .rocam-new-hero {
+    flex-direction: column;
+
+    min-height: auto;
+
+    padding: 22px;
+  }
+
+  .rocam-new-hero-status {
+    min-width: 0;
+  }
+
+  .rocam-new-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .rocam-new-confirm-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .rocam-new-actions {
+    flex-direction: column-reverse;
+  }
+
+  .rocam-new-btn {
+    width: 100%;
+  }
+}

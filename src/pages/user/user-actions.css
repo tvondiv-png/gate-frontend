@@ -1,0 +1,42 @@
+.user-actions-wrap label,
+.admin-actions-wrap label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.user-actions-wrap table,
+.admin-actions-wrap table {
+  border-collapse: collapse;
+}
+
+.user-actions-wrap th,
+.user-actions-wrap td,
+.admin-actions-wrap th,
+.admin-actions-wrap td {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.user-actions-wrap th,
+.admin-actions-wrap th {
+  letter-spacing: 0.04em;
+}
+
+.user-actions-wrap select,
+.user-actions-wrap input,
+.user-actions-wrap textarea {
+  background: #020b24;
+  color: #fff;
+}
+
+.user-actions-wrap select option {
+  background: #020b24;
+  color: #fff;
+}
+
+.user-actions-wrap select:focus,
+.user-actions-wrap input:focus,
+.user-actions-wrap textarea:focus {
+  border-color: #d4a017;
+  box-shadow: 0 0 0 2px rgba(212, 160, 23, 0.2);
+}

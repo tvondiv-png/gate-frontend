@@ -1,0 +1,133 @@
+.rocam-notices-page {
+  display: grid;
+  gap: 18px;
+}
+
+.rocam-notices-hero,
+.rocam-notices-compose {
+  padding: 20px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.012);
+}
+
+.rocam-notices-hero {
+  background:
+    linear-gradient(
+      135deg,
+      #111720,
+      #070b10
+    );
+}
+
+.rocam-notices-hero span {
+  color: #7c8998;
+
+  font-size: .52rem;
+}
+
+.rocam-notices-hero h1 {
+  margin: 5px 0;
+
+  color: #fff;
+}
+
+.rocam-notices-hero p {
+  color: #748091;
+}
+
+.rocam-notices-compose form {
+  display: grid;
+  gap: 9px;
+
+  margin-top: 12px;
+}
+
+.rocam-notices-compose input,
+.rocam-notices-compose select,
+.rocam-notices-compose textarea {
+  padding: 10px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    rgba(0,0,0,.2);
+
+  color: #fff;
+}
+
+.rocam-notices-compose button {
+  width: fit-content;
+
+  padding: 10px 14px;
+
+  border-radius: 9px;
+
+  border: 0;
+
+  background: #dce3ea;
+
+  color: #070a0e;
+
+  font-weight: 800;
+}
+
+.rocam-notices-list {
+  display: grid;
+  gap: 9px;
+}
+
+.rocam-notices-list article {
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.012);
+}
+
+.rocam-notices-list article.importante {
+  border-color:
+    rgba(245,158,11,.20);
+}
+
+.rocam-notices-list article.urgente {
+  border-color:
+    rgba(239,68,68,.24);
+}
+
+.rocam-notices-list span {
+  color: #748091;
+
+  font-size: .49rem;
+}
+
+.rocam-notices-list h2 {
+  margin: 5px 0;
+
+  color: #e3e9ef;
+
+  font-size: .78rem;
+}
+
+.rocam-notices-list p {
+  color: #748091;
+
+  font-size: .58rem;
+
+  line-height: 1.55;
+}

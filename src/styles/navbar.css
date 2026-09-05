@@ -1,57 +1,443 @@
 .gate-navbar {
   position: fixed;
+
   top: 0;
   left: 0;
   right: 0;
-  height: 80px;
-  background: linear-gradient(180deg, #020617, #020617ee);
-  border-bottom: 1px solid rgba(201,162,77,0.25);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
+
   z-index: 1000;
+
+  height: 94px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(2, 6, 23, 0.94),
+      rgba(4, 12, 25, 0.90)
+    );
+
+  backdrop-filter: blur(14px);
+
+  border-bottom:
+    1px solid rgba(59, 130, 246, 0.18);
+
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.30);
 }
 
-.gate-logo {
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: #c9a24d;
+.gate-navbar::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(37, 99, 235, 0.06),
+      rgba(220, 38, 38, 0.03),
+      transparent
+    );
 }
+
+.gate-navbar::after {
+  content: "";
+
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+  bottom: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #2563eb,
+      #dc2626,
+      transparent
+    );
+
+  opacity: 0.40;
+}
+
+.gate-navbar-inner {
+  max-width: 1320px;
+
+  height: 100%;
+
+  margin: 0 auto;
+
+  padding: 0 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+/* =========================================================
+   IDENTIDADE
+========================================================= */
+
+.gate-navbar-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+
+  cursor: pointer;
+
+  min-width: 0;
+}
+
+.gate-navbar-logo {
+  width: 68px;
+  height: 68px;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+
+  filter:
+    drop-shadow(
+      0 5px 12px rgba(0, 0, 0, 0.50)
+    )
+    drop-shadow(
+      0 0 18px rgba(37, 99, 235, 0.14)
+    );
+}
+
+.gate-navbar-brand {
+  display: flex;
+
+  flex-direction: column;
+
+  line-height: 1.15;
+}
+
+.gate-navbar-brand strong {
+  color: #ffffff;
+
+  font-size: 1.03rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+
+  white-space: nowrap;
+}
+
+.gate-navbar-brand small {
+  color: #93c5fd;
+
+  font-size: 0.74rem;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+
+  margin-top: 4px;
+}
+
+/* =========================================================
+   MENU MOBILE
+========================================================= */
+
+.gate-navbar-menu-btn {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid rgba(96, 165, 250, 0.20);
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #ffffff;
+
+  font-size: 1.1rem;
+
+  cursor: pointer;
+
+  transition: 0.22s ease;
+}
+
+.gate-navbar-menu-btn:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+/* =========================================================
+   LINKS
+========================================================= */
 
 .gate-navbar-links {
   display: flex;
+
   align-items: center;
-  gap: 24px;
+
+  gap: 8px;
 }
 
 .gate-navbar-links a {
-  color: #e5e7eb;
   text-decoration: none;
-  font-size: 0.9rem;
+
+  color: #dbe5f0;
+
+  font-size: 0.91rem;
+
+  font-weight: 700;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+
+  transition: 0.22s ease;
+
   position: relative;
 }
 
+.gate-navbar-links a:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.05);
+}
+
 .gate-navbar-links a.active {
-  color: #c9a24d;
+  color: #93c5fd;
+
+  background:
+    rgba(37, 99, 235, 0.12);
 }
 
 .gate-navbar-links a.active::after {
   content: "";
+
   position: absolute;
-  bottom: -8px;
-  left: 0;
-  right: 0;
+
+  left: 12px;
+  right: 12px;
+
+  bottom: 5px;
+
   height: 2px;
-  background: #c9a24d;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #2563eb,
+      transparent
+    );
+}
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.gate-navbar-primary-btn,
+.gate-navbar-ghost-btn,
+.logout-btn {
+  padding: 10px 14px;
+
+  border-radius: 10px;
+
+  font-size: 0.87rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.22s ease;
+}
+
+.gate-navbar-ghost-btn {
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #f1f5f9;
+
+  border:
+    1px solid rgba(96, 165, 250, 0.20);
+}
+
+.gate-navbar-ghost-btn:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border-color:
+    rgba(96, 165, 250, 0.32);
+
+  transform: translateY(-1px);
+}
+
+.gate-navbar-primary-btn {
+  border:
+    1px solid rgba(147, 197, 253, 0.20);
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(37, 99, 235, 0.16);
+}
+
+.gate-navbar-primary-btn:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.08);
 }
 
 .logout-btn {
-  background: linear-gradient(180deg, #dc2626, #991b1b);
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 0.85rem;
-  cursor: pointer;
+  border:
+    1px solid rgba(248, 113, 113, 0.20);
+
+  background:
+    linear-gradient(
+      180deg,
+      #dc2626,
+      #991b1b
+    );
+
+  color: #ffffff;
+}
+
+.logout-btn:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.08);
+}
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.main-public-content {
+  padding-top: 94px;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1024px) {
+
+  .gate-navbar-menu-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+
+  .gate-navbar-links {
+    position: absolute;
+
+    top: 94px;
+
+    left: 16px;
+    right: 16px;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+
+    padding: 14px;
+
+    border-radius: 18px;
+
+    background:
+      rgba(2, 6, 23, 0.97);
+
+    border:
+      1px solid rgba(59, 130, 246, 0.18);
+
+    box-shadow:
+      0 18px 44px rgba(0, 0, 0, 0.38);
+
+    backdrop-filter: blur(14px);
+  }
+
+  .gate-navbar-links.open {
+    display: flex;
+  }
+
+  .gate-navbar-links a,
+  .gate-navbar-primary-btn,
+  .gate-navbar-ghost-btn,
+  .logout-btn {
+    width: 100%;
+  }
+
+  .gate-navbar-links a.active::after {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+
+  .gate-navbar {
+    height: 78px;
+  }
+
+  .gate-navbar-inner {
+    padding: 0 14px;
+  }
+
+  .gate-navbar-left {
+    gap: 10px;
+  }
+
+  .gate-navbar-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .gate-navbar-brand strong {
+    font-size: 0.86rem;
+
+    letter-spacing: 0.5px;
+  }
+
+  .gate-navbar-brand small {
+    font-size: 0.68rem;
+  }
+
+  .gate-navbar-links {
+    top: 78px;
+  }
+
+  .main-public-content {
+    padding-top: 78px;
+  }
 }

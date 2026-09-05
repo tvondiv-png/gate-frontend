@@ -1,0 +1,1187 @@
+/* =========================================================
+   2º BPChq ANCHIETA
+   CONSULTA POLICIAL
+========================================================= */
+
+.consulta-page {
+  display: grid;
+  gap: 18px;
+
+  color: #f8fafc;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.consulta-topbar {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 16px;
+}
+
+.consulta-kicker {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #60a5fa;
+
+  font-size: 0.68rem;
+  font-weight: 900;
+
+  letter-spacing: 1.2px;
+}
+
+.consulta-topbar h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.4rem
+    );
+
+  line-height: 1.1;
+}
+
+.consulta-topbar p {
+  margin: 7px 0 0;
+
+  color: #8191a7;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.consulta-search-panel {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 0.75fr)
+    minmax(320px, 1.25fr);
+
+  gap: 20px;
+
+  align-items: center;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.12);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.08),
+      transparent 34%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.025),
+      rgba(255, 255, 255, 0.012)
+    );
+}
+
+.consulta-search-text span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #60a5fa;
+
+  font-size: 0.61rem;
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.consulta-search-text strong {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+}
+
+.consulta-search-text small {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #718198;
+}
+
+.consulta-search-form {
+  display: grid;
+
+  grid-template-columns:
+    minmax(180px, 1fr)
+    auto;
+
+  gap: 9px;
+}
+
+.consulta-input {
+  width: 100%;
+
+  min-height: 44px;
+
+  padding: 0 13px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.09);
+
+  background: #0a1019;
+
+  color: #ffffff;
+
+  outline: none;
+
+  transition: 0.18s ease;
+}
+
+.consulta-input:focus {
+  border-color:
+    rgba(59, 130, 246, 0.38);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59, 130, 246, 0.07);
+}
+
+.consulta-search-btn {
+  min-height: 44px;
+
+  padding: 0 18px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.30);
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1d4ed8
+    );
+
+  color: #ffffff;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.consulta-search-btn:hover {
+  transform: translateY(-1px);
+}
+
+.consulta-search-btn:disabled {
+  opacity: 0.55;
+
+  cursor: default;
+
+  transform: none;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+.consulta-empty-start {
+  min-height: 260px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  text-align: center;
+
+  border:
+    1px dashed
+    rgba(148, 163, 184, 0.10);
+
+  border-radius: 18px;
+
+  color: #64748b;
+}
+
+.consulta-empty-start strong {
+  color: #94a3b8;
+}
+
+.consulta-empty-start span {
+  max-width: 430px;
+
+  font-size: 0.8rem;
+}
+
+.consulta-empty-icon {
+  margin-bottom: 5px;
+
+  font-size: 1.7rem;
+
+  opacity: 0.65;
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.consulta-profile {
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.075);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.09),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.92),
+      rgba(2, 6, 23, 0.94)
+    );
+
+  box-shadow:
+    0 13px 32px
+    rgba(0, 0, 0, 0.16);
+}
+
+.consulta-profile-main {
+  display: grid;
+
+  grid-template-columns:
+    auto minmax(0, 1fr);
+
+  gap: 15px;
+
+  align-items: center;
+
+  padding: 21px;
+}
+
+.consulta-avatar {
+  width: 66px;
+  height: 66px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 17px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.20);
+
+  background:
+    rgba(59, 130, 246, 0.08);
+
+  color: #bfdbfe;
+
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+.consulta-profile-info {
+  min-width: 0;
+}
+
+.consulta-profile-title {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 14px;
+}
+
+.consulta-profile-title small {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 0.59rem;
+  font-weight: 850;
+
+  letter-spacing: 0.9px;
+}
+
+.consulta-profile-title h2 {
+  margin: 0;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 1.35rem;
+
+  text-overflow: ellipsis;
+}
+
+.consulta-profile-tags {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 9px;
+}
+
+.consulta-profile-tags > span {
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #94a3b8;
+
+  font-size: 0.68rem;
+}
+
+.consulta-profile-tags strong {
+  color: #cbd5e1;
+}
+
+.consulta-tag-rocam {
+  border-color:
+    rgba(239, 68, 68, 0.18)
+    !important;
+
+  background:
+    rgba(127, 29, 29, 0.07)
+    !important;
+
+  color: #fca5a5
+    !important;
+}
+
+.consulta-profile-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.055);
+}
+
+.consulta-profile-item {
+  padding: 13px 18px;
+
+  border-right:
+    1px solid
+    rgba(255, 255, 255, 0.05);
+}
+
+.consulta-profile-item:last-child {
+  border-right: 0;
+}
+
+.consulta-profile-item small,
+.consulta-profile-item strong {
+  display: block;
+}
+
+.consulta-profile-item small {
+  margin-bottom: 5px;
+
+  color: #64748b;
+
+  font-size: 0.58rem;
+
+  text-transform: uppercase;
+}
+
+.consulta-profile-item strong {
+  color: #cbd5e1;
+
+  font-size: 0.76rem;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.consulta-status {
+  flex-shrink: 0;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid currentColor;
+
+  font-size: 0.65rem;
+  font-weight: 900;
+
+  letter-spacing: 0.4px;
+}
+
+.consulta-status.success {
+  color: #4ade80;
+}
+
+.consulta-status.warning {
+  color: #facc15;
+}
+
+.consulta-status.danger {
+  color: #f87171;
+}
+
+
+/* =========================================================
+   HORAS
+========================================================= */
+
+.consulta-hours-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.consulta-hour-card {
+  min-height: 88px;
+
+  padding: 14px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.065);
+
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+.consulta-hour-card small {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 0.59rem;
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+}
+
+.consulta-hour-card strong {
+  color: #ffffff;
+
+  font-size: 1.25rem;
+}
+
+.consulta-hour-card.destaque {
+  border-color:
+    rgba(59, 130, 246, 0.19);
+
+  background:
+    rgba(59, 130, 246, 0.04);
+}
+
+.consulta-hour-card.warning {
+  border-color:
+    rgba(245, 158, 11, 0.18);
+}
+
+.consulta-hour-card.warning strong {
+  color: #fcd34d;
+}
+
+.consulta-hour-card.success {
+  border-color:
+    rgba(34, 197, 94, 0.18);
+}
+
+.consulta-hour-card.success strong {
+  color: #86efac;
+}
+
+
+/* =========================================================
+   OPERACIONAL
+========================================================= */
+
+.consulta-operacional-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 12px;
+}
+
+.consulta-op-card {
+  padding: 17px;
+
+  border-radius: 17px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.10);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(59, 130, 246, 0.035),
+      rgba(255, 255, 255, 0.010)
+    );
+}
+
+.consulta-op-card.rocam {
+  border-color:
+    rgba(239, 68, 68, 0.12);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(127, 29, 29, 0.055),
+      rgba(255, 255, 255, 0.008)
+    );
+}
+
+.consulta-op-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-bottom: 15px;
+}
+
+.consulta-op-header small {
+  display: block;
+
+  color: #64748b;
+
+  font-size: 0.59rem;
+  font-weight: 850;
+
+  letter-spacing: 0.8px;
+}
+
+.consulta-op-header h3 {
+  margin: 4px 0 0;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+}
+
+.consulta-op-type {
+  padding: 5px 9px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.18);
+
+  color: #93c5fd;
+
+  font-size: 0.61rem;
+  font-weight: 800;
+}
+
+.consulta-op-card.rocam
+.consulta-op-type {
+  border-color:
+    rgba(239, 68, 68, 0.18);
+
+  color: #fca5a5;
+}
+
+.consulta-op-info {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(120px, 1fr)
+    );
+
+  gap: 9px;
+}
+
+.consulta-op-info > div {
+  padding: 10px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255, 255, 255, 0.018);
+}
+
+.consulta-op-info small,
+.consulta-op-info strong {
+  display: block;
+}
+
+.consulta-op-info small {
+  margin-bottom: 4px;
+
+  color: #64748b;
+
+  font-size: 0.55rem;
+
+  text-transform: uppercase;
+}
+
+.consulta-op-info strong {
+  color: #cbd5e1;
+
+  font-size: 0.69rem;
+}
+
+.consulta-op-empty {
+  color: #64748b;
+
+  font-size: 0.75rem;
+}
+
+
+/* =========================================================
+   STATUS RSO
+========================================================= */
+
+.consulta-rso-status,
+.consulta-mini-status {
+  display: inline-flex;
+
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  font-size: 0.61rem;
+  font-weight: 800;
+}
+
+.consulta-rso-status.ativo {
+  background:
+    rgba(34, 197, 94, 0.09);
+
+  color: #86efac;
+}
+
+.consulta-rso-status.aprovado {
+  background:
+    rgba(59, 130, 246, 0.09);
+
+  color: #93c5fd;
+}
+
+.consulta-rso-status.rejeitado {
+  background:
+    rgba(239, 68, 68, 0.09);
+
+  color: #fca5a5;
+}
+
+.consulta-rso-status.pendente {
+  background:
+    rgba(245, 158, 11, 0.09);
+
+  color: #fcd34d;
+}
+
+
+/* =========================================================
+   PAINÉIS
+========================================================= */
+
+.consulta-info-grid,
+.consulta-history-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 12px;
+}
+
+.consulta-panel {
+  min-width: 0;
+
+  padding: 17px;
+
+  border-radius: 17px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.065);
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+.consulta-panel-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 13px;
+}
+
+.consulta-panel-header small {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #64748b;
+
+  font-size: 0.57rem;
+  font-weight: 850;
+
+  letter-spacing: 0.8px;
+}
+
+.consulta-panel-header h3 {
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 0.96rem;
+}
+
+.consulta-indicator {
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  font-size: 0.60rem;
+  font-weight: 800;
+}
+
+.consulta-indicator.success {
+  background:
+    rgba(34, 197, 94, 0.08);
+
+  color: #86efac;
+}
+
+.consulta-indicator.danger {
+  background:
+    rgba(239, 68, 68, 0.09);
+
+  color: #fca5a5;
+}
+
+.consulta-count {
+  min-width: 27px;
+  height: 27px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #94a3b8;
+
+  font-size: 0.65rem;
+  font-weight: 800;
+}
+
+
+/* =========================================================
+   DATA LIST
+========================================================= */
+
+.consulta-data-list {
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.05);
+
+  border-radius: 11px;
+}
+
+.consulta-data-list > div {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 10px 12px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+}
+
+.consulta-data-list > div:last-child {
+  border-bottom: 0;
+}
+
+.consulta-data-list span {
+  color: #718198;
+
+  font-size: 0.69rem;
+}
+
+.consulta-data-list strong {
+  color: #cbd5e1;
+
+  font-size: 0.71rem;
+}
+
+
+/* =========================================================
+   CURSOS / MEDALHAS
+========================================================= */
+
+.consulta-chips {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+}
+
+.consulta-chips span {
+  padding: 6px 9px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.14);
+
+  background:
+    rgba(59, 130, 246, 0.04);
+
+  color: #bfdbfe;
+
+  font-size: 0.66rem;
+}
+
+.consulta-chips.medalhas span {
+  border-color:
+    rgba(245, 158, 11, 0.15);
+
+  background:
+    rgba(245, 158, 11, 0.04);
+
+  color: #fde68a;
+}
+
+.consulta-panel-empty {
+  padding: 11px;
+
+  border-radius: 10px;
+
+  border:
+    1px dashed
+    rgba(148, 163, 184, 0.11);
+
+  color: #64748b;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.consulta-table-wrap {
+  overflow-x: auto;
+}
+
+.consulta-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.consulta-table th,
+.consulta-table td {
+  padding: 9px 8px;
+
+  text-align: left;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+}
+
+.consulta-table th {
+  color: #64748b;
+
+  font-size: 0.58rem;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+}
+
+.consulta-table td {
+  color: #aebdce;
+
+  font-size: 0.66rem;
+}
+
+.consulta-mini-status.danger {
+  background:
+    rgba(239, 68, 68, 0.08);
+
+  color: #fca5a5;
+}
+
+.consulta-mini-status.muted {
+  background:
+    rgba(148, 163, 184, 0.07);
+
+  color: #94a3b8;
+}
+
+
+/* =========================================================
+   ÚLTIMOS RSOs
+========================================================= */
+
+.consulta-rso-list {
+  display: grid;
+
+  gap: 8px;
+}
+
+.consulta-rso-item {
+  position: relative;
+
+  padding: 11px 12px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.05);
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+.consulta-rso-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+
+  width: 2px;
+
+  border-radius: 999px;
+
+  background: #3b82f6;
+}
+
+.consulta-rso-item.rocam::before {
+  background: #dc2626;
+}
+
+.consulta-rso-main {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+}
+
+.consulta-rso-main small,
+.consulta-rso-main strong {
+  display: block;
+}
+
+.consulta-rso-main small {
+  color: #64748b;
+
+  font-size: 0.57rem;
+}
+
+.consulta-rso-main strong {
+  margin-top: 3px;
+
+  color: #dbe4ef;
+
+  font-size: 0.76rem;
+}
+
+.consulta-rso-meta {
+  display: flex;
+
+  gap: 5px;
+
+  flex-wrap: wrap;
+
+  margin-top: 7px;
+
+  color: #64748b;
+
+  font-size: 0.62rem;
+}
+
+.consulta-rso-item p {
+  margin: 8px 0 0;
+
+  color: #8495a9;
+
+  font-size: 0.65rem;
+
+  line-height: 1.45;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .consulta-search-panel,
+  .consulta-operacional-grid,
+  .consulta-info-grid,
+  .consulta-history-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consulta-hours-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .consulta-search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .consulta-profile-main {
+    grid-template-columns: 1fr;
+  }
+
+  .consulta-avatar {
+    width: 55px;
+    height: 55px;
+  }
+
+  .consulta-profile-title {
+    flex-direction: column;
+  }
+
+  .consulta-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consulta-profile-item {
+    border-right: 0;
+
+    border-bottom:
+      1px solid
+      rgba(255, 255, 255, 0.05);
+  }
+
+  .consulta-profile-item:last-child {
+    border-bottom: 0;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  .consulta-hours-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .consulta-search-panel,
+  .consulta-profile-main,
+  .consulta-panel,
+  .consulta-op-card {
+    padding: 14px;
+  }
+
+}

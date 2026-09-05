@@ -2,3 +2,7 @@ node_modules
 dist
 .env
 .env.*
+
+# Artefatos de build / pacotes
+*.tar.gz
+*.zip

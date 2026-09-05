@@ -1,0 +1,748 @@
+.rocam-reviews-page {
+  display: grid;
+  gap: 18px;
+}
+
+.rocam-reviews-hero {
+  min-height: 165px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 27px 30px;
+
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.06),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #111720,
+      #070b10
+    );
+}
+
+.rocam-reviews-kicker {
+  color: #7c8998;
+
+  font-size: .54rem;
+  font-weight: 950;
+
+  letter-spacing: 1.5px;
+}
+
+.rocam-reviews-hero h1 {
+  margin: 6px 0 0;
+
+  color: #fff;
+
+  font-size: 2.25rem;
+}
+
+.rocam-reviews-hero p {
+  max-width: 650px;
+
+  margin: 8px 0 0;
+
+  color: #778495;
+
+  font-size: .68rem;
+
+  line-height: 1.6;
+}
+
+.rocam-reviews-hero-icon {
+  width: 90px;
+  height: 90px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 10px;
+
+  border-radius: 16px;
+
+  background: #eef2f6;
+}
+
+.rocam-reviews-hero-icon img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.rocam-reviews-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0,1fr));
+
+  gap: 9px;
+}
+
+.rocam-reviews-summary > div {
+  min-height: 95px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,.05);
+
+  background: rgba(255,255,255,.012);
+}
+
+.rocam-reviews-summary small {
+  color: #5e6b7b;
+
+  font-size: .48rem;
+  font-weight: 900;
+}
+
+.rocam-reviews-summary strong {
+  margin-top: 5px;
+
+  color: #dfe5ec;
+
+  font-size: 1.25rem;
+}
+
+.rocam-reviews-summary .pending {
+  border-color: rgba(245,158,11,.14);
+}
+
+.rocam-reviews-summary .success {
+  border-color: rgba(34,197,94,.14);
+}
+
+.rocam-reviews-summary .danger {
+  border-color: rgba(239,68,68,.14);
+}
+
+.rocam-reviews-toolbar {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0,1fr) 220px;
+
+  gap: 10px;
+
+  padding: 15px;
+
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.012);
+}
+
+.rocam-reviews-search,
+.rocam-reviews-filter {
+  display: grid;
+  gap: 6px;
+}
+
+.rocam-reviews-toolbar label {
+  color: #748091;
+
+  font-size: .55rem;
+}
+
+.rocam-reviews-toolbar input,
+.rocam-reviews-toolbar select,
+.rocam-review-modal-field textarea {
+  width: 100%;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 9px;
+
+  outline: 0;
+
+  background: rgba(0,0,0,.20);
+
+  color: #fff;
+}
+
+.rocam-reviews-toolbar input,
+.rocam-reviews-toolbar select {
+  min-height: 40px;
+
+  padding: 0 11px;
+}
+
+.rocam-reviews-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(330px,1fr)
+    );
+
+  gap: 11px;
+}
+
+.rocam-review-card {
+  padding: 16px;
+
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.027),
+      rgba(255,255,255,.007)
+    );
+}
+
+.rocam-review-head {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.rocam-review-head small {
+  color: #647183;
+
+  font-size: .5rem;
+}
+
+.rocam-review-head h2 {
+  margin: 3px 0;
+
+  color: #e5ebf1;
+
+  font-size: .78rem;
+}
+
+.rocam-review-head span {
+  color: #657283;
+
+  font-size: .53rem;
+}
+
+.rocam-review-note {
+  text-align: right;
+}
+
+.rocam-review-note strong {
+  display: block;
+
+  color: #fff;
+
+  font-size: 1.25rem;
+}
+
+.rocam-review-meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: 12px;
+
+  padding-top: 10px;
+
+  border-top: 1px solid rgba(255,255,255,.045);
+}
+
+.rocam-review-meta > span {
+  padding: 4px 6px;
+
+  border-radius: 6px;
+
+  background: rgba(255,255,255,.018);
+
+  color: #667384;
+
+  font-size: .48rem;
+}
+
+.rocam-review-meta .status {
+  margin-left: auto;
+}
+
+.rocam-review-criteria {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0,1fr));
+
+  gap: 6px;
+
+  margin-top: 12px;
+}
+
+.rocam-review-criteria > div {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 8px;
+
+  border: 1px solid rgba(255,255,255,.04);
+  border-radius: 8px;
+}
+
+.rocam-review-criteria span {
+  width: 19px;
+  height: 19px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 5px;
+}
+
+.rocam-review-criteria strong {
+  font-size: .52rem;
+}
+
+.rocam-review-criteria .ok span {
+  background: rgba(34,197,94,.08);
+
+  color: #86efac;
+}
+
+.rocam-review-criteria .ok strong {
+  color: #9eb9a6;
+}
+
+.rocam-review-criteria .fail span {
+  background: rgba(239,68,68,.08);
+
+  color: #fca5a5;
+}
+
+.rocam-review-criteria .fail strong {
+  color: #b9a1a1;
+}
+
+.rocam-review-comment,
+.rocam-review-command-comment {
+  margin-top: 11px;
+
+  padding: 10px;
+
+  border-radius: 8px;
+
+  background: rgba(255,255,255,.012);
+}
+
+.rocam-review-comment small,
+.rocam-review-command-comment small {
+  color: #5f6c7c;
+
+  font-size: .47rem;
+  font-weight: 900;
+}
+
+.rocam-review-comment p,
+.rocam-review-command-comment p {
+  margin: 5px 0 0;
+
+  color: #748091;
+
+  font-size: .54rem;
+
+  line-height: 1.5;
+}
+
+.rocam-review-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 12px;
+
+  padding-top: 11px;
+
+  border-top: 1px solid rgba(255,255,255,.045);
+}
+
+.rocam-review-footer span {
+  color: #637080;
+
+  font-size: .49rem;
+}
+
+.rocam-review-footer button {
+  min-height: 34px;
+
+  padding: 0 10px;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 8px;
+
+  background: rgba(255,255,255,.025);
+
+  color: #a4afbc;
+
+  font-size: .53rem;
+
+  cursor: pointer;
+}
+
+.rocam-reviews-empty {
+  min-height: 110px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  border: 1px dashed rgba(255,255,255,.08);
+  border-radius: 12px;
+
+  color: #657283;
+
+  font-size: .59rem;
+}
+
+.rocam-reviews-empty strong {
+  color: #97a3b2;
+}
+
+.rocam-reviews-alert {
+  padding: 12px 14px;
+
+  border-radius: 9px;
+
+  font-size: .58rem;
+}
+
+.rocam-reviews-alert.error {
+  border: 1px solid rgba(239,68,68,.16);
+
+  background: rgba(239,68,68,.045);
+
+  color: #fca5a5;
+}
+
+.rocam-reviews-alert.success {
+  border: 1px solid rgba(34,197,94,.16);
+
+  background: rgba(34,197,94,.045);
+
+  color: #86efac;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.rocam-review-modal-backdrop {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  display: grid;
+  place-items: center;
+
+  padding: 20px;
+
+  background: rgba(0,0,0,.72);
+
+  backdrop-filter: blur(5px);
+}
+
+.rocam-review-modal {
+  width: min(760px, 100%);
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 20px;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #10151d,
+      #06090e
+    );
+
+  box-shadow:
+    0 30px 80px
+    rgba(0,0,0,.55);
+}
+
+.rocam-review-modal-header {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 14px;
+
+  border-bottom: 1px solid rgba(255,255,255,.055);
+}
+
+.rocam-review-modal-header small {
+  color: #647183;
+
+  font-size: .5rem;
+}
+
+.rocam-review-modal-header h2 {
+  margin: 4px 0;
+
+  color: #fff;
+
+  font-size: .95rem;
+}
+
+.rocam-review-modal-header span {
+  color: #748091;
+
+  font-size: .55rem;
+}
+
+.rocam-review-modal-header > strong {
+  color: #fff;
+
+  font-size: 1.5rem;
+}
+
+.rocam-review-modal-criteria {
+  display: grid;
+  gap: 7px;
+
+  margin-top: 14px;
+}
+
+.rocam-review-modal-criteria > div {
+  display: grid;
+
+  grid-template-columns:
+    25px 1fr;
+
+  gap: 8px;
+
+  padding: 9px;
+
+  border: 1px solid rgba(255,255,255,.045);
+  border-radius: 8px;
+}
+
+.rocam-review-modal-criteria > div > span {
+  width: 22px;
+  height: 22px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 6px;
+}
+
+.rocam-review-modal-criteria .ok > span {
+  background: rgba(34,197,94,.08);
+
+  color: #86efac;
+}
+
+.rocam-review-modal-criteria .fail > span {
+  background: rgba(239,68,68,.08);
+
+  color: #fca5a5;
+}
+
+.rocam-review-modal-criteria strong {
+  color: #b7c1cd;
+
+  font-size: .58rem;
+}
+
+.rocam-review-modal-criteria small {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #687586;
+
+  font-size: .49rem;
+}
+
+.rocam-review-modal-criteria p {
+  margin: 5px 0 0;
+
+  color: #748091;
+
+  font-size: .52rem;
+}
+
+.rocam-review-modal-bracal {
+  margin-top: 13px;
+
+  padding: 11px;
+
+  border-radius: 9px;
+
+  background: rgba(255,255,255,.012);
+}
+
+.rocam-review-modal-bracal small {
+  color: #5f6c7c;
+
+  font-size: .48rem;
+}
+
+.rocam-review-modal-bracal p {
+  margin: 5px 0 0;
+
+  color: #778495;
+
+  font-size: .55rem;
+}
+
+.rocam-review-modal-field {
+  display: grid;
+  gap: 6px;
+
+  margin-top: 13px;
+}
+
+.rocam-review-modal-field label {
+  color: #748091;
+
+  font-size: .55rem;
+}
+
+.rocam-review-modal-field textarea {
+  padding: 10px;
+
+  resize: vertical;
+}
+
+.rocam-review-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  margin-top: 14px;
+
+  padding-top: 13px;
+
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.rocam-review-modal-actions button {
+  min-height: 38px;
+
+  padding: 0 11px;
+
+  border-radius: 8px;
+
+  font-size: .54rem;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.rocam-review-modal-actions .cancel {
+  border: 1px solid rgba(255,255,255,.07);
+
+  background: rgba(255,255,255,.02);
+
+  color: #8d99a8;
+}
+
+.rocam-review-modal-actions .return {
+  border: 1px solid rgba(239,68,68,.16);
+
+  background: rgba(239,68,68,.055);
+
+  color: #fca5a5;
+}
+
+.rocam-review-modal-actions .validate {
+  border: 1px solid rgba(34,197,94,.18);
+
+  background: rgba(34,197,94,.065);
+
+  color: #86efac;
+}
+
+.rocam-reviews-denied {
+  max-width: 650px;
+
+  padding: 24px;
+
+  border: 1px solid rgba(239,68,68,.14);
+  border-radius: 15px;
+
+  background: rgba(239,68,68,.025);
+}
+
+.rocam-reviews-denied span {
+  color: #f87171;
+
+  font-size: .5rem;
+}
+
+.rocam-reviews-denied h1 {
+  color: #fff;
+}
+
+.rocam-reviews-denied p {
+  color: #778495;
+
+  font-size: .61rem;
+}
+
+@media (max-width: 800px) {
+  .rocam-reviews-summary {
+    grid-template-columns:
+      repeat(2,1fr);
+  }
+
+  .rocam-reviews-toolbar {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .rocam-reviews-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rocam-reviews-summary,
+  .rocam-review-criteria {
+    grid-template-columns: 1fr;
+  }
+
+  .rocam-review-modal-actions {
+    flex-direction: column;
+  }
+
+  .rocam-review-modal-actions button {
+    width: 100%;
+  }
+}

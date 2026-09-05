@@ -1,0 +1,1018 @@
+/* =========================================================
+   2º BPChq ANCHIETA
+   COMANDO - CONSULTA POLICIAL
+========================================================= */
+
+.comando-consultas-page {
+  display: grid;
+
+  gap: 18px;
+
+  color: #f8fafc;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.comando-consultas-hero {
+  padding: 24px;
+
+  border-radius: 22px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.10);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.10),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.94),
+      rgba(2, 6, 23, 0.97)
+    );
+
+  box-shadow:
+    0 15px 38px
+    rgba(0, 0, 0, 0.20);
+}
+
+.comando-consultas-kicker {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #60a5fa;
+
+  font-size: 0.64rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1.3px;
+}
+
+.comando-consultas-hero h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.4rem
+    );
+
+  line-height: 1.1;
+}
+
+.comando-consultas-hero p {
+  max-width: 760px;
+
+  margin:
+    9px 0 0;
+
+  color: #94a3b8;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   BUSCA
+========================================================= */
+
+.comando-consultas-search {
+  display: grid;
+
+  grid-template-columns:
+    minmax(220px, 0.65fr)
+    minmax(400px, 1.35fr);
+
+  gap: 18px;
+
+  align-items: center;
+
+  padding: 16px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.065);
+
+  background:
+    rgba(255, 255, 255, 0.015);
+}
+
+.comando-consultas-search-info {
+  display: grid;
+
+  gap: 4px;
+}
+
+.comando-consultas-search-info small {
+  color: #60a5fa;
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+}
+
+.comando-consultas-search-info strong {
+  color: #ffffff;
+
+  font-size: 0.95rem;
+}
+
+.comando-consultas-search-info span {
+  color: #64748b;
+
+  font-size: 0.68rem;
+}
+
+.comando-consultas-search-form {
+  display: grid;
+
+  grid-template-columns:
+    minmax(180px, 1fr)
+    auto
+    auto;
+
+  gap: 8px;
+}
+
+.comando-consultas-input {
+  width: 100%;
+
+  min-height: 42px;
+
+  padding:
+    0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+
+  background: #090f18;
+
+  color: #ffffff;
+
+  outline: none;
+
+  transition: 0.18s ease;
+}
+
+.comando-consultas-input:focus {
+  border-color:
+    rgba(59, 130, 246, 0.38);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59, 130, 246, 0.06);
+}
+
+.comando-consultas-btn {
+  min-height: 42px;
+
+  padding:
+    0 13px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #cbd5e1;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.comando-consultas-btn:hover {
+  transform: translateY(-1px);
+}
+
+.comando-consultas-btn.primary {
+  border-color:
+    rgba(59, 130, 246, 0.22);
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  color: #bfdbfe;
+}
+
+.comando-consultas-btn:disabled {
+  opacity: 0.55;
+
+  cursor: default;
+
+  transform: none;
+}
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+.comando-consultas-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.comando-consultas-summary-card {
+  min-height: 82px;
+
+  padding: 13px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+.comando-consultas-summary-card small,
+.comando-consultas-summary-card strong {
+  display: block;
+}
+
+.comando-consultas-summary-card small {
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 0.57rem;
+
+  font-weight: 850;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+}
+
+.comando-consultas-summary-card strong {
+  color: #ffffff;
+
+  font-size: 1.35rem;
+}
+
+.comando-consultas-summary-card.success {
+  border-color:
+    rgba(34, 197, 94, 0.14);
+}
+
+.comando-consultas-summary-card.success strong {
+  color: #86efac;
+}
+
+.comando-consultas-summary-card.warning {
+  border-color:
+    rgba(245, 158, 11, 0.14);
+}
+
+.comando-consultas-summary-card.warning strong {
+  color: #fcd34d;
+}
+
+.comando-consultas-summary-card.danger {
+  border-color:
+    rgba(239, 68, 68, 0.14);
+}
+
+.comando-consultas-summary-card.danger strong {
+  color: #fca5a5;
+}
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.comando-consultas-empty {
+  min-height: 250px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  text-align: center;
+
+  border:
+    1px dashed
+    rgba(148, 163, 184, 0.10);
+
+  border-radius: 16px;
+
+  color: #64748b;
+}
+
+.comando-consultas-empty strong {
+  color: #94a3b8;
+}
+
+.comando-consultas-empty span {
+  max-width: 430px;
+
+  font-size: 0.72rem;
+}
+
+.comando-consultas-empty-icon {
+  font-size: 1.7rem;
+
+  opacity: 0.65;
+}
+
+/* =========================================================
+   LISTA
+========================================================= */
+
+.comando-consultas-list {
+  display: grid;
+
+  gap: 15px;
+}
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.comando-consulta-profile {
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.80),
+      rgba(2, 6, 23, 0.90)
+    );
+
+  box-shadow:
+    0 12px 32px
+    rgba(0, 0, 0, 0.17);
+}
+
+.comando-consulta-profile-head {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 20px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.05);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(59, 130, 246, 0.06),
+      transparent 35%
+    );
+}
+
+.comando-consulta-profile-main {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.comando-consulta-avatar {
+  width: 58px;
+  height: 58px;
+
+  display: grid;
+
+  place-items: center;
+
+  flex-shrink: 0;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.17);
+
+  background:
+    rgba(59, 130, 246, 0.06);
+
+  color: #bfdbfe;
+
+  font-size: 1.2rem;
+
+  font-weight: 900;
+}
+
+.comando-consulta-profile-main small {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #64748b;
+
+  font-size: 0.57rem;
+
+  font-weight: 850;
+
+  letter-spacing: 0.7px;
+}
+
+.comando-consulta-profile-main h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1.25rem;
+}
+
+.comando-consulta-profile-meta {
+  display: flex;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+
+  margin-top: 7px;
+}
+
+.comando-consulta-profile-meta span {
+  padding:
+    4px 7px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.055);
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  color: #718198;
+
+  font-size: 0.61rem;
+}
+
+.comando-consulta-profile-meta strong {
+  color: #aebdce;
+}
+
+.comando-consulta-head-badges {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.comando-consulta-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 27px;
+
+  padding:
+    0 8px;
+
+  border-radius: 999px;
+
+  font-size: 0.58rem;
+
+  font-weight: 850;
+
+  white-space: nowrap;
+}
+
+.comando-consulta-badge.success {
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.17);
+
+  background:
+    rgba(34, 197, 94, 0.055);
+
+  color: #86efac;
+}
+
+.comando-consulta-badge.warning {
+  border:
+    1px solid
+    rgba(245, 158, 11, 0.18);
+
+  background:
+    rgba(245, 158, 11, 0.055);
+
+  color: #fcd34d;
+}
+
+.comando-consulta-badge.danger {
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.18);
+
+  background:
+    rgba(127, 29, 29, 0.06);
+
+  color: #fca5a5;
+}
+
+.comando-consulta-badge.info {
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.18);
+
+  background:
+    rgba(59, 130, 246, 0.055);
+
+  color: #93c5fd;
+}
+
+.comando-consulta-badge.neutral {
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.11);
+
+  background:
+    rgba(148, 163, 184, 0.035);
+
+  color: #94a3b8;
+}
+
+/* =========================================================
+   BLOCK
+========================================================= */
+
+.comando-consulta-block {
+  margin:
+    14px;
+
+  padding: 15px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.055);
+
+  background:
+    rgba(255, 255, 255, 0.012);
+}
+
+.comando-consulta-block-title {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.comando-consulta-block-title small {
+  display: block;
+
+  margin-bottom: 3px;
+
+  color: #64748b;
+
+  font-size: 0.55rem;
+
+  font-weight: 850;
+
+  letter-spacing: 0.7px;
+}
+
+.comando-consulta-block-title h3 {
+  margin: 0;
+
+  color: #f8fafc;
+
+  font-size: 0.92rem;
+}
+
+/* =========================================================
+   GRIDS
+========================================================= */
+
+.comando-consulta-grid-2 {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+}
+
+.comando-consulta-kv-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+}
+
+.comando-consulta-kv,
+.comando-consulta-metric {
+  min-width: 0;
+
+  padding: 10px;
+
+  border-radius: 10px;
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+.comando-consulta-kv small,
+.comando-consulta-kv strong,
+.comando-consulta-metric small,
+.comando-consulta-metric strong {
+  display: block;
+}
+
+.comando-consulta-kv small,
+.comando-consulta-metric small {
+  margin-bottom: 4px;
+
+  color: #64748b;
+
+  font-size: 0.54rem;
+
+  text-transform: uppercase;
+}
+
+.comando-consulta-kv strong {
+  color: #aebdce;
+
+  font-size: 0.67rem;
+}
+
+.comando-consulta-metric-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+}
+
+.comando-consulta-metric strong {
+  color: #ffffff;
+
+  font-size: 1rem;
+}
+
+/* =========================================================
+   DATA LIST
+========================================================= */
+
+.comando-consulta-data-list {
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+}
+
+.comando-consulta-data-list > div {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 9px 10px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.04);
+}
+
+.comando-consulta-data-list > div:last-child {
+  border-bottom: 0;
+}
+
+.comando-consulta-data-list span {
+  color: #718198;
+
+  font-size: 0.64rem;
+}
+
+.comando-consulta-data-list strong {
+  color: #cbd5e1;
+
+  font-size: 0.69rem;
+}
+
+/* =========================================================
+   NOTE
+========================================================= */
+
+.comando-consulta-note {
+  margin-top: 10px;
+
+  padding: 11px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(245, 158, 11, 0.12);
+
+  background:
+    rgba(245, 158, 11, 0.03);
+}
+
+.comando-consulta-note small {
+  display: block;
+
+  color: #f59e0b;
+
+  font-size: 0.55rem;
+
+  font-weight: 850;
+}
+
+.comando-consulta-note p {
+  margin:
+    5px 0 0;
+
+  color: #aebdce;
+
+  font-size: 0.68rem;
+
+  line-height: 1.5;
+}
+
+/* =========================================================
+   CHIPS
+========================================================= */
+
+.comando-consulta-count {
+  min-width: 26px;
+  height: 26px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  color: #94a3b8;
+
+  font-size: 0.6rem;
+
+  font-weight: 850;
+}
+
+.comando-consulta-chips {
+  display: flex;
+
+  gap: 6px;
+
+  flex-wrap: wrap;
+}
+
+.comando-consulta-chips span {
+  padding:
+    5px 8px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.13);
+
+  background:
+    rgba(59, 130, 246, 0.035);
+
+  color: #bfdbfe;
+
+  font-size: 0.61rem;
+}
+
+.comando-consulta-chips.medalhas span {
+  border-color:
+    rgba(245, 158, 11, 0.13);
+
+  background:
+    rgba(245, 158, 11, 0.035);
+
+  color: #fde68a;
+}
+
+.comando-consulta-empty-small {
+  padding: 10px;
+
+  border-radius: 9px;
+
+  border:
+    1px dashed
+    rgba(148, 163, 184, 0.09);
+
+  color: #64748b;
+
+  font-size: 0.63rem;
+}
+
+/* =========================================================
+   RECENT
+========================================================= */
+
+.comando-consulta-recent-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(0, 1fr)
+    );
+
+  gap: 8px;
+}
+
+.comando-consulta-recent {
+  min-height: 100px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 11px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+
+  background:
+    rgba(255, 255, 255, 0.012);
+}
+
+.comando-consulta-recent small {
+  color: #64748b;
+
+  font-size: 0.54rem;
+
+  font-weight: 850;
+
+  letter-spacing: 0.6px;
+}
+
+.comando-consulta-recent strong {
+  color: #dbe4ef;
+
+  font-size: 0.71rem;
+}
+
+.comando-consulta-recent span {
+  color: #718198;
+
+  font-size: 0.62rem;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .comando-consultas-search {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-consultas-summary {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+  .comando-consulta-kv-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0, 1fr)
+      );
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .comando-consultas-search-form {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-consulta-profile-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .comando-consulta-head-badges {
+    justify-content: flex-start;
+  }
+
+  .comando-consulta-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-consulta-metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-consulta-recent-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+@media (max-width: 520px) {
+
+  .comando-consultas-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-consulta-kv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-consulta-profile-main {
+    align-items: flex-start;
+  }
+
+  .comando-consulta-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+}

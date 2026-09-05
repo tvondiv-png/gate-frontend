@@ -1,0 +1,363 @@
+.elite-page {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  color: #edf3ff;
+}
+
+.elite-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0b1220, #1a2236);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.elite-kicker {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: #f0c14b;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.elite-hero h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.elite-hero p {
+  margin: 0;
+  color: #c6d3ea;
+  max-width: 760px;
+}
+
+.elite-semaforo {
+  min-width: 270px;
+  padding: 18px;
+  border-radius: 18px;
+  display: grid;
+  gap: 6px;
+  align-content: center;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+}
+
+.elite-semaforo small {
+  color: #cbd6ea;
+}
+
+.elite-semaforo strong {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.elite-semaforo span {
+  color: #d7e0ef;
+  font-size: 14px;
+}
+
+.elite-semaforo.success {
+  background: rgba(25, 135, 84, 0.18);
+  border: 1px solid rgba(25, 135, 84, 0.28);
+}
+
+.elite-semaforo.warning {
+  background: rgba(255, 193, 7, 0.16);
+  border: 1px solid rgba(255, 193, 7, 0.28);
+}
+
+.elite-semaforo.danger {
+  background: rgba(220, 53, 69, 0.18);
+  border: 1px solid rgba(220, 53, 69, 0.28);
+}
+
+.elite-actions {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+.elite-btn {
+  border: 0;
+  border-radius: 14px;
+  padding: 13px 16px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+}
+
+.elite-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.elite-btn.danger {
+  background: rgba(220, 53, 69, 0.92);
+}
+
+.elite-btn.warning {
+  background: rgba(255, 193, 7, 0.92);
+  color: #111;
+}
+
+.elite-btn.success {
+  background: rgba(25, 135, 84, 0.92);
+}
+
+.elite-alerta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.16);
+}
+
+.elite-alerta.danger {
+  background: rgba(220, 53, 69, 0.18);
+  border: 1px solid rgba(220, 53, 69, 0.28);
+}
+
+.elite-alerta strong {
+  display: block;
+  margin: 6px 0;
+  font-size: 18px;
+}
+
+.elite-alerta p {
+  margin: 0;
+  color: #f5d7db;
+}
+
+.elite-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.elite-kpi {
+  padding: 18px;
+  border-radius: 18px;
+  background: #131d31;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.elite-kpi small {
+  display: block;
+  margin-bottom: 8px;
+  color: #9fb2d0;
+}
+
+.elite-kpi strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.elite-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.elite-card {
+  padding: 20px;
+  border-radius: 22px;
+  background: #131d31;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.elite-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.elite-card-header h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.elite-card-header span {
+  color: #aabbd7;
+  font-size: 14px;
+}
+
+.elite-link {
+  border: 0;
+  border-radius: 14px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.elite-link:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.elite-list,
+.elite-ranking,
+.elite-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.elite-list-item,
+.elite-ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.elite-list-item.critico {
+  border-left: 4px solid #ef4444;
+}
+
+.elite-list-item.alto,
+.elite-list-item.medio {
+  border-left: 4px solid #f59e0b;
+}
+
+.elite-list-item.ok {
+  border-left: 4px solid #22c55e;
+}
+
+.elite-list-item strong,
+.elite-ranking-info strong {
+  display: block;
+}
+
+.elite-list-item span,
+.elite-list-right small,
+.elite-ranking-info span {
+  color: #b8c7df;
+  font-size: 13px;
+}
+
+.elite-list-right {
+  text-align: right;
+}
+
+.elite-list-right b {
+  display: block;
+  font-size: 16px;
+}
+
+.elite-ranking-pos {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f0c14b, #d89f12);
+  color: #111;
+  font-weight: 900;
+  flex-shrink: 0;
+  box-shadow: 0 6px 16px rgba(216, 159, 18, 0.25);
+}
+
+.elite-ranking-item {
+  justify-content: flex-start;
+}
+
+.elite-ranking-info {
+  flex: 1;
+}
+
+.elite-ranking-value {
+  font-size: 20px;
+  font-weight: 900;
+  color: #f0c14b;
+}
+
+.elite-bar-row {
+  display: grid;
+  gap: 8px;
+}
+
+.elite-bar-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.elite-bar-label span {
+  color: #b8c7df;
+  font-size: 13px;
+}
+
+.elite-bar-track {
+  height: 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.elite-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f97316, #ef4444);
+}
+
+.elite-empty {
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  color: #b8c7df;
+}
+
+@media (max-width: 1400px) {
+  .elite-actions {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .elite-kpi-grid,
+  .elite-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .elite-hero {
+    flex-direction: column;
+  }
+
+  .elite-semaforo {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .elite-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .elite-hero h1 {
+    font-size: 28px;
+  }
+
+  .elite-kpi strong {
+    font-size: 24px;
+  }
+}

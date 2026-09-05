@@ -1,0 +1,423 @@
+.comando-dashboard-page {
+  display: grid;
+  gap: 22px;
+  color: #eef4ff;
+}
+
+.comando-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 28px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #0f172a, #182742);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.28);
+}
+
+.comando-kicker {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  color: #f0c14b;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.comando-hero h1 {
+  margin: 0 0 8px;
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.comando-hero p {
+  margin: 0;
+  max-width: 760px;
+  color: #cbd6ea;
+  line-height: 1.5;
+}
+
+.comando-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.comando-action-btn,
+.comando-link-btn,
+.comando-shortcut {
+  border: 0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.2s ease;
+  font-weight: 700;
+}
+
+.comando-action-btn {
+  padding: 14px 18px;
+  background: linear-gradient(135deg, #f0c14b, #d89f12);
+  color: #111;
+}
+
+.comando-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.24);
+}
+
+.comando-action-btn.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.comando-action-btn.danger {
+  background: rgba(220, 53, 69, 0.92);
+  color: #fff;
+}
+
+.comando-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.comando-summary-grid.single-row {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.comando-summary-card {
+  padding: 18px;
+  border-radius: 20px;
+  background: #13213a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  min-height: 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.comando-summary-card small {
+  display: block;
+  color: #9fb2d0;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.comando-summary-card strong {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.comando-summary-card.destaque {
+  background: linear-gradient(135deg, #182742, #1f3255);
+}
+
+.comando-summary-card.alert {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.2), rgba(220, 53, 69, 0.08));
+}
+
+.comando-summary-card.warning {
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.18), rgba(255, 193, 7, 0.08));
+}
+
+.comando-summary-card.danger {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.22), rgba(220, 53, 69, 0.1));
+}
+
+.comando-summary-card.info {
+  background: linear-gradient(135deg, rgba(13, 110, 253, 0.16), rgba(13, 110, 253, 0.08));
+}
+
+.comando-summary-card.success {
+  background: linear-gradient(135deg, rgba(25, 135, 84, 0.18), rgba(25, 135, 84, 0.08));
+}
+
+.comando-section {
+  padding: 20px;
+  border-radius: 22px;
+  background: #13213a;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comando-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.comando-section-header h2 {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.comando-section-header span {
+  color: #aabbd7;
+  font-size: 14px;
+}
+
+.comando-link-btn {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.comando-link-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.comando-link-btn.danger {
+  background: rgba(220, 53, 69, 0.92);
+  color: #fff;
+}
+
+.comando-main-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 18px;
+}
+
+.comando-alert-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.comando-alert-card {
+  padding: 18px;
+  border-radius: 18px;
+}
+
+.comando-alert-card strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.comando-alert-card p {
+  margin: 0;
+  color: #dce6f7;
+  line-height: 1.4;
+}
+
+.comando-alert-card.danger {
+  background: rgba(220, 53, 69, 0.18);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.comando-alert-card.warning {
+  background: rgba(255, 193, 7, 0.14);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.comando-alert-card.info {
+  background: rgba(13, 110, 253, 0.14);
+  border: 1px solid rgba(13, 110, 253, 0.3);
+}
+
+.comando-ranking-list,
+.comando-critical-list,
+.comando-shortcuts,
+.comando-bars-list {
+  display: grid;
+  gap: 12px;
+}
+
+.comando-ranking-card,
+.comando-critical-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.comando-ranking-pos {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #f0c14b, #d89f12);
+  color: #111;
+  font-weight: 800;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.comando-ranking-info,
+.comando-critical-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.comando-ranking-info strong,
+.comando-critical-card strong {
+  font-size: 15px;
+}
+
+.comando-ranking-info span,
+.comando-critical-card span,
+.comando-critical-card small {
+  color: #b8c7df;
+  font-size: 13px;
+}
+
+.comando-ranking-hours {
+  font-size: 22px;
+  font-weight: 800;
+  color: #f0c14b;
+  white-space: nowrap;
+}
+
+.comando-table-wrap {
+  overflow-x: auto;
+}
+
+.comando-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comando-table th,
+.comando-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: left;
+  font-size: 14px;
+  vertical-align: middle;
+}
+
+.comando-table th {
+  color: #9fb2d0;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.comando-table td strong {
+  font-weight: 800;
+}
+
+.comando-shortcut {
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  text-align: left;
+}
+
+.comando-shortcut:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.comando-shortcut.danger {
+  background: rgba(220, 53, 69, 0.16);
+}
+
+.comando-empty {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #b8c7df;
+}
+
+.comando-bar-item {
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.comando-bar-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.comando-bar-header strong {
+  font-size: 14px;
+}
+
+.comando-bar-header span {
+  color: #cbd6ea;
+  font-size: 13px;
+}
+
+.comando-bar-track {
+  width: 100%;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.comando-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #f0c14b, #d89f12);
+}
+
+.status {
+  min-width: 120px;
+  text-align: center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.status.success {
+  background: rgba(25, 135, 84, 0.2);
+  color: #97e1b7;
+}
+
+.status.warning {
+  background: rgba(255, 193, 7, 0.18);
+  color: #ffe08a;
+}
+
+.status.info {
+  background: rgba(13, 110, 253, 0.18);
+  color: #9bc2ff;
+}
+
+.status.danger {
+  background: rgba(220, 53, 69, 0.18);
+  color: #ffb7c0;
+}
+
+@media (max-width: 1200px) {
+  .comando-summary-grid,
+  .comando-summary-grid.single-row,
+  .comando-alert-grid,
+  .comando-main-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .comando-hero {
+    flex-direction: column;
+  }
+
+  .comando-hero h1 {
+    font-size: 28px;
+  }
+
+  .comando-hero-actions {
+    width: 100%;
+  }
+
+  .comando-action-btn {
+    width: 100%;
+  }
+
+  .status {
+    min-width: 90px;
+    padding: 8px 10px;
+  }
+}

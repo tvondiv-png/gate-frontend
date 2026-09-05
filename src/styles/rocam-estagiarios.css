@@ -1,0 +1,996 @@
+/* =========================================================
+   ROCAM • ESTAGIÁRIOS
+========================================================= */
+
+.rocam-trainees-page {
+  width: 100%;
+
+  display: grid;
+  gap: 18px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.rocam-trainees-hero {
+  position: relative;
+
+  min-height: 170px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 22px;
+
+  padding: 27px 29px;
+
+  border-radius: 20px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.075);
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(255, 255, 255, 0.065),
+      transparent 27%
+    ),
+    linear-gradient(
+      135deg,
+      #111720,
+      #080c12 55%,
+      #05070a
+    );
+
+  box-shadow:
+    0 18px 42px
+    rgba(0, 0, 0, 0.22);
+
+  overflow: hidden;
+}
+
+.rocam-trainees-hero::after {
+  content: "ROCAM";
+
+  position: absolute;
+
+  right: 20px;
+  bottom: -35px;
+
+  color:
+    rgba(
+      255,
+      255,
+      255,
+      0.017
+    );
+
+  font-size: 7rem;
+  font-weight: 950;
+
+  letter-spacing: 5px;
+}
+
+.rocam-trainees-kicker {
+  position: relative;
+  z-index: 2;
+
+  display: inline-block;
+
+  margin-bottom: 7px;
+
+  color: #8995a5;
+
+  font-size: 0.55rem;
+  font-weight: 950;
+
+  letter-spacing: 1.5px;
+}
+
+.rocam-trainees-hero h1 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.6rem
+    );
+
+  font-weight: 950;
+
+  letter-spacing: -0.8px;
+}
+
+.rocam-trainees-hero p {
+  position: relative;
+  z-index: 2;
+
+  max-width: 670px;
+
+  margin: 9px 0 0;
+
+  color: #7d8999;
+
+  font-size: 0.69rem;
+
+  line-height: 1.65;
+}
+
+.rocam-trainees-hero-actions {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  gap: 8px;
+
+  flex-wrap: wrap;
+}
+
+
+/* =========================================================
+   BOTÕES
+========================================================= */
+
+.rocam-trainees-btn {
+  min-height: 41px;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  font-size: 0.62rem;
+  font-weight: 850;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.rocam-trainees-btn.primary {
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.18);
+
+  background:
+    linear-gradient(
+      145deg,
+      #e7ebef,
+      #aeb7c3
+    );
+
+  color: #080b10;
+}
+
+.rocam-trainees-btn.secondary {
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  background:
+    rgba(
+      255,
+      255,
+      255,
+      0.025
+    );
+
+  color: #a9b4c2;
+}
+
+.rocam-trainees-btn:hover {
+  transform:
+    translateY(-1px);
+}
+
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+.rocam-trainees-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.rocam-trainees-summary-card {
+  min-height: 105px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 15px 17px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(
+        255,
+        255,
+        255,
+        0.03
+      ),
+      rgba(
+        255,
+        255,
+        255,
+        0.008
+      )
+    );
+}
+
+.rocam-trainees-summary-card small {
+  color: #606d7d;
+
+  font-size: 0.51rem;
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+}
+
+.rocam-trainees-summary-card strong {
+  margin-top: 5px;
+
+  color: #f1f5f9;
+
+  font-size: 1.4rem;
+}
+
+.rocam-trainees-summary-card span {
+  margin-top: 3px;
+
+  color: #687586;
+
+  font-size: 0.56rem;
+}
+
+.rocam-trainees-summary-card.success {
+  border-color:
+    rgba(
+      34,
+      197,
+      94,
+      0.12
+    );
+}
+
+.rocam-trainees-summary-card.waiting {
+  border-color:
+    rgba(
+      245,
+      158,
+      11,
+      0.13
+    );
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.rocam-trainees-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding: 15px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.055);
+
+  background:
+    rgba(255,255,255,0.012);
+}
+
+.rocam-trainees-search {
+  width: min(480px, 100%);
+
+  display: grid;
+  gap: 6px;
+}
+
+.rocam-trainees-search label {
+  color: #7c8999;
+
+  font-size: 0.57rem;
+  font-weight: 800;
+}
+
+.rocam-trainees-search input {
+  width: 100%;
+
+  min-height: 41px;
+
+  padding: 0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.075);
+
+  outline: none;
+
+  background:
+    rgba(2,4,7,0.5);
+
+  color: #fff;
+
+  font: inherit;
+}
+
+.rocam-trainees-search input:focus {
+  border-color:
+    rgba(255,255,255,0.17);
+}
+
+.rocam-trainees-count {
+  color: #667384;
+
+  font-size: 0.59rem;
+}
+
+.rocam-trainees-count strong {
+  color: #b8c2ce;
+}
+
+
+/* =========================================================
+   LISTA
+========================================================= */
+
+.rocam-trainees-list {
+  display: grid;
+  gap: 13px;
+}
+
+.rocam-trainee-card {
+  padding: 19px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.06);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.027),
+      rgba(255,255,255,0.007)
+    );
+
+  box-shadow:
+    0 13px 30px
+    rgba(0,0,0,0.13);
+}
+
+
+/* =========================================================
+   CABEÇALHO DO ESTAGIÁRIO
+========================================================= */
+
+.rocam-trainee-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  padding-bottom: 14px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,0.05);
+}
+
+.rocam-trainee-identity {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.rocam-trainee-avatar {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.09);
+
+  background:
+    linear-gradient(
+      145deg,
+      #252c36,
+      #0f141b
+    );
+
+  color: #fff;
+
+  font-size: 0.66rem;
+  font-weight: 950;
+}
+
+.rocam-trainee-identity small {
+  display: block;
+
+  margin-bottom: 2px;
+
+  color: #647183;
+
+  font-size: 0.53rem;
+}
+
+.rocam-trainee-identity h2 {
+  margin: 0;
+
+  color: #edf1f5;
+
+  font-size: 0.82rem;
+}
+
+.rocam-trainee-identity span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #687586;
+
+  font-size: 0.56rem;
+}
+
+.rocam-trainee-header-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  gap: 6px;
+}
+
+.rocam-trainee-header-right > small {
+  color: #657283;
+
+  font-size: 0.54rem;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.rocam-trainee-status {
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  font-size: 0.51rem;
+  font-weight: 900;
+
+  letter-spacing: 0.4px;
+
+  text-transform: uppercase;
+}
+
+.rocam-trainee-status.active {
+  color: #a9b5c3;
+
+  border:
+    1px solid
+    rgba(148,163,184,0.13);
+
+  background:
+    rgba(148,163,184,0.045);
+}
+
+.rocam-trainee-status.success {
+  color: #86efac;
+
+  border:
+    1px solid
+    rgba(34,197,94,0.20);
+
+  background:
+    rgba(34,197,94,0.055);
+}
+
+.rocam-trainee-status.waiting {
+  color: #fcd34d;
+
+  border:
+    1px solid
+    rgba(245,158,11,0.20);
+
+  background:
+    rgba(245,158,11,0.055);
+}
+
+.rocam-trainee-status.danger {
+  color: #fca5a5;
+
+  border:
+    1px solid
+    rgba(239,68,68,0.20);
+
+  background:
+    rgba(239,68,68,0.055);
+}
+
+
+/* =========================================================
+   PROGRESSO GERAL
+========================================================= */
+
+.rocam-trainee-overall {
+  margin-top: 16px;
+}
+
+.rocam-trainee-overall-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 8px;
+}
+
+.rocam-trainee-overall-title small {
+  display: block;
+
+  color: #5e6b7b;
+
+  font-size: 0.48rem;
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+}
+
+.rocam-trainee-overall-title strong {
+  display: block;
+
+  margin-top: 2px;
+
+  color: #aeb8c5;
+
+  font-size: 0.62rem;
+}
+
+.rocam-trainee-overall-title > span {
+  color: #f8fafc;
+
+  font-size: 1.05rem;
+  font-weight: 950;
+}
+
+.rocam-trainee-overall-track {
+  height: 9px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,0.045);
+}
+
+.rocam-trainee-overall-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #64748b,
+      #cbd5e1
+    );
+
+  transition:
+    width 0.3s ease;
+}
+
+
+/* =========================================================
+   METAS
+========================================================= */
+
+.rocam-trainee-goals-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+
+  gap: 9px;
+
+  margin-top: 16px;
+}
+
+.rocam-trainee-goal {
+  padding: 12px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.05);
+
+  background:
+    rgba(255,255,255,0.01);
+}
+
+.rocam-trainee-goal-top {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 8px;
+
+  margin-bottom: 7px;
+}
+
+.rocam-trainee-goal-top span {
+  color: #657283;
+
+  font-size: 0.52rem;
+}
+
+.rocam-trainee-goal-top strong {
+  color: #bac4cf;
+
+  font-size: 0.56rem;
+}
+
+.rocam-trainee-progress-track {
+  height: 5px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,0.045);
+}
+
+.rocam-trainee-progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #94a3b8;
+}
+
+.rocam-trainee-goal > small {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #596676;
+
+  font-size: 0.48rem;
+}
+
+
+/* =========================================================
+   DETALHES
+========================================================= */
+
+.rocam-trainee-details {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+
+  gap: 8px;
+
+  margin-top: 11px;
+}
+
+.rocam-trainee-details > div {
+  padding: 10px;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255,255,255,0.01);
+
+  border:
+    1px solid
+    rgba(255,255,255,0.04);
+}
+
+.rocam-trainee-details small,
+.rocam-trainee-details strong {
+  display: block;
+}
+
+.rocam-trainee-details small {
+  color: #586575;
+
+  font-size: 0.48rem;
+}
+
+.rocam-trainee-details strong {
+  margin-top: 4px;
+
+  color: #9eabb9;
+
+  font-size: 0.58rem;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.rocam-trainee-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+
+  margin-top: 14px;
+
+  padding-top: 13px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,0.05);
+}
+
+.rocam-trainee-btn {
+  min-height: 36px;
+
+  padding: 0 11px;
+
+  border-radius: 9px;
+
+  font-size: 0.56rem;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.rocam-trainee-btn.ghost {
+  border:
+    1px solid
+    rgba(255,255,255,0.07);
+
+  background:
+    rgba(255,255,255,0.02);
+
+  color: #8793a2;
+}
+
+.rocam-trainee-btn.success {
+  border:
+    1px solid
+    rgba(34,197,94,0.18);
+
+  background:
+    rgba(34,197,94,0.06);
+
+  color: #86efac;
+}
+
+.rocam-trainee-btn:disabled {
+  opacity: 0.38;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   EMPTY / ERRO
+========================================================= */
+
+.rocam-trainees-empty {
+  min-height: 120px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  padding: 20px;
+
+  border:
+    1px dashed
+    rgba(255,255,255,0.08);
+
+  border-radius: 14px;
+
+  color: #657283;
+
+  font-size: 0.63rem;
+}
+
+.rocam-trainees-empty strong {
+  color: #9ca7b5;
+}
+
+.rocam-trainees-alert {
+  padding: 13px 15px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(239,68,68,0.17);
+
+  background:
+    rgba(239,68,68,0.045);
+
+  color: #fca5a5;
+
+  font-size: 0.62rem;
+}
+
+
+/* =========================================================
+   NEGADO
+========================================================= */
+
+.rocam-trainees-denied {
+  max-width: 650px;
+
+  padding: 25px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid
+    rgba(239,68,68,0.14);
+
+  background:
+    rgba(239,68,68,0.025);
+}
+
+.rocam-trainees-denied > span {
+  color: #f87171;
+
+  font-size: 0.52rem;
+  font-weight: 900;
+}
+
+.rocam-trainees-denied h1 {
+  margin: 7px 0;
+
+  color: #fff;
+}
+
+.rocam-trainees-denied p {
+  color: #7e8998;
+
+  font-size: 0.66rem;
+}
+
+.rocam-trainees-denied button {
+  margin-top: 10px;
+
+  padding: 9px 13px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(255,255,255,0.08);
+
+  background:
+    rgba(255,255,255,0.03);
+
+  color: #fff;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px) {
+  .rocam-trainees-summary,
+  .rocam-trainee-goals-grid,
+  .rocam-trainee-details {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+  }
+}
+
+@media (max-width: 700px) {
+  .rocam-trainees-hero {
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-height: auto;
+
+    padding: 22px;
+  }
+
+  .rocam-trainees-hero-actions {
+    width: 100%;
+  }
+
+  .rocam-trainees-btn {
+    flex: 1;
+  }
+
+  .rocam-trainees-summary,
+  .rocam-trainee-goals-grid,
+  .rocam-trainee-details {
+    grid-template-columns:
+      1fr;
+  }
+
+  .rocam-trainees-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .rocam-trainee-header {
+    flex-direction: column;
+  }
+
+  .rocam-trainee-header-right {
+    align-items: flex-start;
+  }
+
+  .rocam-trainee-actions {
+    justify-content: stretch;
+  }
+
+  .rocam-trainee-btn {
+    flex: 1;
+  }
+}

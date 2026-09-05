@@ -1,0 +1,196 @@
+.user-discipline-page {
+  display: grid;
+  gap: 20px;
+  color: #fff;
+}
+
+.user-discipline-header,
+.user-discipline-summary,
+.discipline-case-list,
+.discipline-case-detail {
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255,255,255,0.02);
+}
+
+.user-discipline-header h2,
+.discipline-block-header h3,
+.discipline-detail-header h3 {
+  margin: 0;
+}
+
+.user-discipline-header p {
+  margin: 8px 0 0;
+  color: rgba(255,255,255,0.75);
+}
+
+.user-discipline-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.discipline-summary-card {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+}
+
+.discipline-summary-card.warning {
+  border-color: rgba(245,158,11,0.35);
+}
+
+.discipline-summary-card.alert {
+  border-color: rgba(234,179,8,0.35);
+}
+
+.discipline-summary-card.danger {
+  border-color: rgba(239,68,68,0.35);
+}
+
+.discipline-summary-card small {
+  display: block;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 8px;
+}
+
+.discipline-summary-card strong {
+  font-size: 24px;
+}
+
+.user-discipline-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.3fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.discipline-case-list-wrap,
+.discipline-detail-wrap,
+.discipline-timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.discipline-case-card {
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+  color: #fff;
+  cursor: pointer;
+}
+
+.discipline-case-card.active,
+.discipline-case-card:hover {
+  border-color: rgba(212,160,23,0.45);
+  background: rgba(212,160,23,0.06);
+}
+
+.discipline-case-card-top,
+.discipline-detail-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.discipline-status-badge {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.discipline-case-card p,
+.discipline-detail-section p {
+  color: rgba(255,255,255,0.8);
+}
+
+.discipline-empty-detail {
+  color: rgba(255,255,255,0.65);
+}
+
+.discipline-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.discipline-detail-box,
+.discipline-detail-section,
+.discipline-timeline-item {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+}
+
+.discipline-detail-box small {
+  display: block;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 6px;
+}
+
+.discipline-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.discipline-chip {
+  border: 1px solid rgba(212,160,23,0.35);
+  background: rgba(212,160,23,0.08);
+  color: #fff;
+  border-radius: 999px;
+  padding: 7px 10px;
+  font-size: 12px;
+}
+
+.discipline-manifest-box {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.discipline-manifest-box select,
+.discipline-manifest-box textarea,
+.discipline-manifest-box button,
+.discipline-detail-section button {
+  border-radius: 10px;
+}
+
+.discipline-manifest-box select,
+.discipline-manifest-box textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: #020b24;
+  color: #fff;
+}
+
+.discipline-detail-section button,
+.discipline-manifest-box button {
+  padding: 12px 14px;
+  border: 1px solid rgba(212,160,23,0.4);
+  background: rgba(212,160,23,0.12);
+  color: #fff;
+  cursor: pointer;
+}
+
+.discipline-detail-section.sanction {
+  border-color: rgba(239,68,68,0.35);
+  background: rgba(239,68,68,0.06);
+}
+
+@media (max-width: 980px) {
+  .user-discipline-grid {
+    grid-template-columns: 1fr;
+  }
+}

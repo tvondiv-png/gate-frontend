@@ -1,0 +1,2253 @@
+/* =========================================================
+   2º BPChq ANCHIETA
+   CENTRO DE COMANDO
+========================================================= */
+
+.comando-layout {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  color: #f8fafc;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(127, 29, 29, 0.08),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at bottom right,
+      rgba(148, 163, 184, 0.05),
+      transparent 24%
+    ),
+    linear-gradient(
+      145deg,
+      #05070c 0%,
+      #0b1018 48%,
+      #05070c 100%
+    );
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.comando-sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 18px;
+  overflow: hidden;
+  z-index: 40;
+
+  border-right:
+    1px solid rgba(148, 163, 184, 0.10);
+
+  background:
+    radial-gradient(
+      circle at top,
+      rgba(127, 29, 29, 0.10),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8, 10, 15, 0.99),
+      rgba(3, 5, 9, 0.99)
+    );
+
+  box-shadow:
+    18px 0 48px rgba(0, 0, 0, 0.28);
+}
+
+.comando-sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding-bottom: 16px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.065);
+}
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.comando-brand {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.comando-brand-logo-wrap {
+  width: 58px;
+  height: 58px;
+
+  flex-shrink: 0;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 17px;
+
+  border:
+    1px solid rgba(220, 38, 38, 0.18);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(127, 29, 29, 0.15),
+      rgba(255, 255, 255, 0.018)
+    );
+
+  box-shadow:
+    0 12px 26px rgba(0, 0, 0, 0.30);
+}
+
+.comando-brand-logo {
+  width: 46px;
+  height: 46px;
+  display: block;
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 8px 14px rgba(0, 0, 0, 0.42)
+    );
+}
+
+.comando-brand-text {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.comando-brand-text strong {
+  color: #ffffff;
+  font-size: 0.94rem;
+  font-weight: 850;
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+.comando-brand-text small {
+  margin-top: 4px;
+  color: #8b98aa;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   FECHAR / MENU
+========================================================= */
+
+.comando-sidebar-close {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  padding: 0;
+
+  border-radius: 11px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.03);
+
+  color: #e5e7eb;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.comando-sidebar-close:hover {
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   USUÁRIO
+========================================================= */
+
+.comando-user-card {
+  margin-top: 16px;
+
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+
+  gap: 12px;
+  padding: 14px;
+
+  border-radius: 17px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.032),
+      rgba(255, 255, 255, 0.012)
+    );
+
+  box-shadow:
+    0 12px 24px rgba(0, 0, 0, 0.16);
+}
+
+.comando-user-avatar {
+  width: 48px;
+  height: 48px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 14px;
+
+  border:
+    1px solid rgba(220, 38, 38, 0.22);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(127, 29, 29, 0.26),
+      rgba(69, 10, 10, 0.12)
+    );
+
+  color: #fee2e2;
+
+  font-size: 1.08rem;
+  font-weight: 900;
+}
+
+.comando-user-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.comando-user-info strong {
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 0.84rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.comando-user-info span {
+  overflow: hidden;
+  color: #c7ced8;
+  font-size: 0.74rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.comando-user-info small {
+  display: inline-flex;
+  width: fit-content;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid rgba(220, 38, 38, 0.18);
+
+  background:
+    rgba(127, 29, 29, 0.10);
+
+  color: #fca5a5;
+
+  font-size: 0.62rem;
+  font-weight: 850;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+.comando-nav {
+  flex: 1;
+  min-height: 0;
+
+  margin-top: 16px;
+
+  padding-right: 5px;
+  padding-bottom: 18px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: thin;
+  scrollbar-color:
+    rgba(148, 163, 184, 0.20)
+    transparent;
+}
+
+.comando-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+.comando-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.comando-nav::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background:
+    rgba(148, 163, 184, 0.16);
+}
+
+.comando-nav-group {
+  display: grid;
+  gap: 5px;
+  margin-bottom: 18px;
+}
+
+.comando-nav-title {
+  display: block;
+  margin: 0 8px 4px;
+
+  color: #656f7d;
+
+  font-size: 0.64rem;
+  font-weight: 900;
+
+  letter-spacing: 1.35px;
+  text-transform: uppercase;
+}
+
+.comando-nav-link {
+  position: relative;
+
+  min-height: 45px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+  padding: 0 13px;
+
+  border-radius: 12px;
+
+  border:
+    1px solid transparent;
+
+  color: #b8c1ce;
+
+  text-decoration: none;
+
+  font-size: 0.82rem;
+  font-weight: 650;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.comando-nav-link:hover {
+  color: #ffffff;
+
+  background:
+    rgba(255, 255, 255, 0.035);
+
+  border-color:
+    rgba(255, 255, 255, 0.055);
+
+  transform: translateX(2px);
+}
+
+.comando-nav-link.active {
+  color: #ffffff;
+
+  border-color:
+    rgba(220, 38, 38, 0.22);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(127, 29, 29, 0.22),
+      rgba(69, 10, 10, 0.06)
+    );
+
+  box-shadow:
+    inset 3px 0 0 rgba(239, 68, 68, 0.82);
+}
+
+.comando-nav-icon {
+  width: 23px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+  justify-content: center;
+
+  font-size: 1rem;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.comando-sidebar-footer {
+  padding-top: 14px;
+
+  border-top:
+    1px solid rgba(255, 255, 255, 0.065);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(3, 5, 9, 0),
+      rgba(3, 5, 9, 0.95) 20%
+    );
+}
+
+.comando-footer-unit {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.comando-footer-unit strong {
+  display: block;
+
+  color: #d1d5db;
+
+  font-size: 0.72rem;
+  letter-spacing: 1.25px;
+
+  text-transform: uppercase;
+}
+
+.comando-footer-unit span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #656f7d;
+
+  font-size: 0.67rem;
+}
+
+.comando-footer-actions {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+}
+
+.comando-footer-btn {
+  min-height: 41px;
+
+  padding: 8px 9px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.075);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #b8c1ce;
+
+  text-align: center;
+
+  font-size: 0.70rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.comando-footer-btn:hover {
+  transform: translateY(-1px);
+}
+
+.comando-footer-btn.user {
+  color: #93c5fd;
+
+  border-color:
+    rgba(59, 130, 246, 0.18);
+
+  background:
+    rgba(59, 130, 246, 0.055);
+}
+
+.comando-footer-btn.user:hover {
+  background:
+    rgba(59, 130, 246, 0.11);
+}
+
+.comando-footer-btn.panel {
+  color: #d1d5db;
+
+  border-color:
+    rgba(148, 163, 184, 0.18);
+
+  background:
+    rgba(148, 163, 184, 0.045);
+}
+
+.comando-footer-btn.panel:hover {
+  background:
+    rgba(148, 163, 184, 0.10);
+}
+
+.comando-footer-btn.home {
+  color: #86efac;
+
+  border-color:
+    rgba(34, 197, 94, 0.17);
+
+  background:
+    rgba(34, 197, 94, 0.045);
+}
+
+.comando-footer-btn.home:hover {
+  background:
+    rgba(34, 197, 94, 0.10);
+}
+
+.comando-footer-btn.danger {
+  color: #fca5a5;
+
+  border-color:
+    rgba(239, 68, 68, 0.20);
+
+  background:
+    rgba(127, 29, 29, 0.12);
+}
+
+.comando-footer-btn.danger:hover {
+  background:
+    rgba(127, 29, 29, 0.22);
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.comando-main {
+  min-width: 0;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   TOPBAR
+========================================================= */
+
+.comando-topbar {
+  position: sticky;
+  top: 0;
+
+  z-index: 20;
+
+  min-height: 76px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+  padding: 0 24px;
+
+  border-bottom:
+    1px solid rgba(148, 163, 184, 0.09);
+
+  background:
+    rgba(4, 6, 10, 0.86);
+
+  backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.14);
+}
+
+.comando-topbar-left {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 13px;
+}
+
+.comando-menu-btn {
+  display: none;
+
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border-radius: 11px;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.09);
+
+  background:
+    rgba(255, 255, 255, 0.03);
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  font-size: 1.05rem;
+
+  transition: 0.2s ease;
+}
+
+.comando-menu-btn:hover {
+  background:
+    rgba(255, 255, 255, 0.07);
+
+  transform: translateY(-1px);
+}
+
+.comando-topbar-info {
+  min-width: 0;
+
+  display: grid;
+  gap: 3px;
+}
+
+.comando-topbar-kicker {
+  color: #b91c1c;
+
+  font-size: 0.66rem;
+  font-weight: 900;
+
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+}
+
+.comando-topbar-info strong {
+  overflow: hidden;
+
+  color: #ffffff;
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.comando-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.comando-topbar-user {
+  display: grid;
+  gap: 2px;
+  text-align: right;
+}
+
+.comando-topbar-user small {
+  color: #656f7d;
+
+  font-size: 0.64rem;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+}
+
+.comando-topbar-user strong {
+  max-width: 220px;
+
+  overflow: hidden;
+
+  color: #d1d5db;
+
+  font-size: 0.76rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.comando-topbar-clock {
+  padding: 8px 11px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid rgba(148, 163, 184, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.022);
+
+  color: #7f8895;
+
+  font-size: 0.70rem;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.comando-content {
+  width: 100%;
+  flex: 1;
+  padding: 26px;
+}
+
+/* =========================================================
+   OVERLAY
+========================================================= */
+
+.comando-sidebar-overlay {
+  display: none;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px) {
+  .comando-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .comando-sidebar {
+    position: fixed;
+
+    left: 0;
+    top: 0;
+
+    width: 320px;
+    max-width: 88vw;
+
+    transform:
+      translateX(-105%);
+
+    transition:
+      transform 0.25s ease;
+
+    box-shadow:
+      22px 0 50px rgba(0, 0, 0, 0.42);
+  }
+
+  .comando-layout.sidebar-open
+  .comando-sidebar {
+    transform:
+      translateX(0);
+  }
+
+  .comando-menu-btn,
+  .comando-sidebar-close {
+    display: inline-flex;
+  }
+
+  .comando-sidebar-overlay {
+    display: block;
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 30;
+
+    background:
+      rgba(0, 0, 0, 0.56);
+
+    backdrop-filter: blur(2px);
+  }
+}
+
+@media (max-width: 760px) {
+  .comando-content {
+    padding: 16px;
+  }
+
+  .comando-topbar {
+    min-height: 68px;
+    padding: 0 15px;
+  }
+
+  .comando-topbar-kicker {
+    font-size: 0.59rem;
+  }
+
+  .comando-topbar-info strong {
+    font-size: 0.86rem;
+  }
+
+  .comando-topbar-user {
+    display: none;
+  }
+
+  .comando-topbar-clock {
+    padding: 7px 8px;
+    font-size: 0.62rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .comando-topbar-clock {
+    display: none;
+  }
+
+  .comando-sidebar {
+    width: 292px;
+  }
+
+  .comando-brand-logo-wrap {
+    width: 52px;
+    height: 52px;
+  }
+
+  .comando-brand-logo {
+    width: 41px;
+    height: 41px;
+  }
+
+  .comando-brand-text strong {
+    font-size: 0.86rem;
+  }
+}
+
+/* =========================================================
+   PÁGINAS INTERNAS - BASE ELITE
+========================================================= */
+
+.elite-page {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  color: #edf3ff;
+}
+
+.elite-hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+
+  padding: 28px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b1018,
+      #141b27
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.22);
+}
+
+.elite-kicker {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #ef4444;
+
+  font-size: 12px;
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.elite-hero h1 {
+  margin: 0 0 8px;
+
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.elite-hero p {
+  margin: 0;
+
+  max-width: 760px;
+
+  color: #c6d3ea;
+}
+
+.elite-semaforo {
+  min-width: 270px;
+
+  padding: 18px;
+
+  border-radius: 18px;
+
+  display: grid;
+  gap: 6px;
+  align-content: center;
+
+  box-shadow:
+    inset 0 0 0 1px
+    rgba(255,255,255,0.04);
+}
+
+.elite-semaforo small {
+  color: #cbd6ea;
+}
+
+.elite-semaforo strong {
+  font-size: 26px;
+  line-height: 1;
+}
+
+.elite-semaforo span {
+  color: #d7e0ef;
+  font-size: 14px;
+}
+
+.elite-semaforo.success {
+  background:
+    rgba(25, 135, 84, 0.18);
+
+  border:
+    1px solid rgba(25, 135, 84, 0.28);
+}
+
+.elite-semaforo.warning {
+  background:
+    rgba(255, 193, 7, 0.16);
+
+  border:
+    1px solid rgba(255, 193, 7, 0.28);
+}
+
+.elite-semaforo.danger {
+  background:
+    rgba(220, 53, 69, 0.18);
+
+  border:
+    1px solid rgba(220, 53, 69, 0.28);
+}
+
+.elite-actions {
+  display: grid;
+
+  grid-template-columns:
+    repeat(6, 1fr);
+
+  gap: 12px;
+}
+
+.elite-btn {
+  border: 0;
+
+  border-radius: 14px;
+
+  padding: 13px 16px;
+
+  cursor: pointer;
+
+  font-weight: 800;
+  font-size: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color: #fff;
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease;
+
+  box-shadow:
+    0 6px 18px rgba(0,0,0,0.18);
+}
+
+.elite-btn:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(255, 255, 255, 0.12);
+}
+
+.elite-btn.danger {
+  background:
+    rgba(220, 53, 69, 0.92);
+}
+
+.elite-btn.warning {
+  background:
+    rgba(255, 193, 7, 0.92);
+
+  color: #111;
+}
+
+.elite-btn.success {
+  background:
+    rgba(25, 135, 84, 0.92);
+}
+
+.elite-alerta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 16px;
+
+  padding: 20px;
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.16);
+}
+
+.elite-alerta.danger {
+  background:
+    rgba(220, 53, 69, 0.18);
+
+  border:
+    1px solid rgba(220, 53, 69, 0.28);
+}
+
+.elite-alerta strong {
+  display: block;
+
+  margin: 6px 0;
+
+  font-size: 18px;
+}
+
+.elite-alerta p {
+  margin: 0;
+
+  color: #f5d7db;
+}
+
+.elite-kpi-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(6, 1fr);
+
+  gap: 14px;
+}
+
+.elite-kpi {
+  padding: 18px;
+
+  border-radius: 18px;
+
+  background: #131923;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+.elite-kpi small {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #9fb2d0;
+}
+
+.elite-kpi strong {
+  font-size: 30px;
+  line-height: 1;
+}
+
+.elite-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.elite-card {
+  padding: 20px;
+
+  border-radius: 22px;
+
+  background: #131923;
+
+  border:
+    1px solid rgba(255,255,255,0.06);
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.16);
+}
+
+.elite-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 14px;
+}
+
+.elite-card-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 20px;
+}
+
+.elite-card-header span {
+  color: #aabbd7;
+  font-size: 14px;
+}
+
+.elite-link {
+  border: 0;
+
+  border-radius: 14px;
+
+  padding: 10px 14px;
+
+  cursor: pointer;
+
+  font-weight: 800;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color: #fff;
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease;
+}
+
+.elite-link:hover {
+  transform: translateY(-2px);
+
+  background:
+    rgba(255, 255, 255, 0.12);
+}
+
+.elite-list,
+.elite-ranking,
+.elite-bars {
+  display: grid;
+  gap: 10px;
+}
+
+.elite-list-item,
+.elite-ranking-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+.elite-list-item.critico {
+  border-left:
+    4px solid #ef4444;
+}
+
+.elite-list-item.alto,
+.elite-list-item.medio {
+  border-left:
+    4px solid #f59e0b;
+}
+
+.elite-list-item.ok {
+  border-left:
+    4px solid #22c55e;
+}
+
+.elite-list-item strong,
+.elite-ranking-info strong {
+  display: block;
+}
+
+.elite-list-item span,
+.elite-list-right small,
+.elite-ranking-info span {
+  color: #b8c7df;
+  font-size: 13px;
+}
+
+.elite-list-right {
+  text-align: right;
+}
+
+.elite-list-right b {
+  display: block;
+
+  font-size: 16px;
+}
+
+.elite-ranking-pos {
+  width: 52px;
+  height: 52px;
+
+  border-radius: 14px;
+
+  display: grid;
+  place-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #991b1b,
+      #7f1d1d
+    );
+
+  color: #fff;
+
+  font-weight: 900;
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 6px 16px
+    rgba(127, 29, 29, 0.25);
+}
+
+.elite-ranking-item {
+  justify-content: flex-start;
+}
+
+.elite-ranking-info {
+  flex: 1;
+}
+
+.elite-ranking-value {
+  font-size: 20px;
+  font-weight: 900;
+  color: #fca5a5;
+}
+
+.elite-bar-row {
+  display: grid;
+  gap: 8px;
+}
+
+.elite-bar-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.elite-bar-label span {
+  color: #b8c7df;
+  font-size: 13px;
+}
+
+.elite-bar-track {
+  height: 12px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255,255,255,0.08);
+
+  overflow: hidden;
+}
+
+.elite-bar-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #991b1b,
+      #ef4444
+    );
+}
+
+.elite-empty {
+  padding: 14px;
+
+  border-radius: 14px;
+
+  background:
+    rgba(255,255,255,0.04);
+
+  color: #b8c7df;
+}
+
+/* =========================================================
+   DASHBOARD DO COMANDO
+========================================================= */
+
+.comando-dashboard-page {
+  display: grid;
+  gap: 22px;
+  color: #eef4ff;
+}
+
+.comando-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 18px;
+
+  padding: 28px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b1018,
+      #151d29
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  box-shadow:
+    0 12px 34px rgba(0, 0, 0, 0.28);
+}
+
+.comando-kicker {
+  display: inline-block;
+
+  margin-bottom: 8px;
+
+  color: #ef4444;
+
+  font-size: 12px;
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+}
+
+.comando-hero h1 {
+  margin: 0 0 8px;
+
+  font-size: 34px;
+  line-height: 1.1;
+}
+
+.comando-hero p {
+  margin: 0;
+
+  max-width: 760px;
+
+  color: #cbd6ea;
+
+  line-height: 1.5;
+}
+
+.comando-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.comando-action-btn,
+.comando-link-btn,
+.comando-shortcut {
+  border: 0;
+
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+
+  font-weight: 700;
+}
+
+.comando-action-btn {
+  padding: 14px 18px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #991b1b,
+      #7f1d1d
+    );
+
+  color: #fff;
+}
+
+.comando-action-btn:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 10px 20px
+    rgba(0, 0, 0, 0.24);
+}
+
+.comando-action-btn.secondary {
+  background:
+    rgba(255, 255, 255, 0.1);
+
+  color: #fff;
+}
+
+.comando-action-btn.danger {
+  background:
+    rgba(220, 53, 69, 0.92);
+
+  color: #fff;
+}
+
+.comando-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+.comando-summary-grid.single-row {
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+}
+
+.comando-summary-card {
+  min-height: 96px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 18px;
+
+  border-radius: 20px;
+
+  background: #131923;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comando-summary-card small {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: #9fb2d0;
+
+  font-size: 12px;
+}
+
+.comando-summary-card strong {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.comando-summary-card.destaque {
+  background:
+    linear-gradient(
+      135deg,
+      #171d27,
+      #202938
+    );
+}
+
+.comando-summary-card.alert {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(220, 53, 69, 0.2),
+      rgba(220, 53, 69, 0.08)
+    );
+}
+
+.comando-summary-card.warning {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 193, 7, 0.18),
+      rgba(255, 193, 7, 0.08)
+    );
+}
+
+.comando-summary-card.danger {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(220, 53, 69, 0.22),
+      rgba(220, 53, 69, 0.1)
+    );
+}
+
+.comando-summary-card.info {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(13, 110, 253, 0.16),
+      rgba(13, 110, 253, 0.08)
+    );
+}
+
+.comando-summary-card.success {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(25, 135, 84, 0.18),
+      rgba(25, 135, 84, 0.08)
+    );
+}
+
+.comando-section {
+  padding: 20px;
+
+  border-radius: 22px;
+
+  background: #131923;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.comando-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 14px;
+
+  margin-bottom: 16px;
+}
+
+.comando-section-header h2 {
+  margin: 0 0 4px;
+
+  font-size: 20px;
+}
+
+.comando-section-header span {
+  color: #aabbd7;
+
+  font-size: 14px;
+}
+
+.comando-link-btn {
+  padding: 10px 14px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color: #fff;
+}
+
+.comando-link-btn:hover {
+  background:
+    rgba(255, 255, 255, 0.14);
+}
+
+.comando-link-btn.danger {
+  background:
+    rgba(220, 53, 69, 0.92);
+
+  color: #fff;
+}
+
+.comando-main-grid {
+  display: grid;
+
+  grid-template-columns:
+    1.2fr 1fr;
+
+  gap: 18px;
+}
+
+.comando-alert-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+.comando-alert-card {
+  padding: 18px;
+
+  border-radius: 18px;
+}
+
+.comando-alert-card strong {
+  display: block;
+
+  margin-bottom: 8px;
+}
+
+.comando-alert-card p {
+  margin: 0;
+
+  color: #dce6f7;
+
+  line-height: 1.4;
+}
+
+.comando-alert-card.danger {
+  background:
+    rgba(220, 53, 69, 0.18);
+
+  border:
+    1px solid rgba(220, 53, 69, 0.3);
+}
+
+.comando-alert-card.warning {
+  background:
+    rgba(255, 193, 7, 0.14);
+
+  border:
+    1px solid rgba(255, 193, 7, 0.3);
+}
+
+.comando-alert-card.info {
+  background:
+    rgba(13, 110, 253, 0.14);
+
+  border:
+    1px solid rgba(13, 110, 253, 0.3);
+}
+
+.comando-ranking-list,
+.comando-critical-list,
+.comando-shortcuts,
+.comando-bars-list {
+  display: grid;
+  gap: 12px;
+}
+
+.comando-ranking-card,
+.comando-critical-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  padding: 14px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+.comando-ranking-pos {
+  width: 54px;
+  height: 54px;
+
+  border-radius: 16px;
+
+  display: grid;
+  place-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #991b1b,
+      #7f1d1d
+    );
+
+  color: #fff;
+
+  font-weight: 800;
+  font-size: 18px;
+
+  flex-shrink: 0;
+}
+
+.comando-ranking-info,
+.comando-critical-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.comando-ranking-info strong,
+.comando-critical-card strong {
+  font-size: 15px;
+}
+
+.comando-ranking-info span,
+.comando-critical-card span,
+.comando-critical-card small {
+  color: #b8c7df;
+
+  font-size: 13px;
+}
+
+.comando-ranking-hours {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fca5a5;
+  white-space: nowrap;
+}
+
+.comando-table-wrap {
+  overflow-x: auto;
+}
+
+.comando-table {
+  width: 100%;
+
+  border-collapse: collapse;
+}
+
+.comando-table th,
+.comando-table td {
+  padding: 12px 10px;
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.06);
+
+  text-align: left;
+
+  font-size: 14px;
+
+  vertical-align: middle;
+}
+
+.comando-table th {
+  color: #9fb2d0;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+.comando-table td strong {
+  font-weight: 800;
+}
+
+.comando-shortcut {
+  padding: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+
+  color: #fff;
+
+  text-align: left;
+}
+
+.comando-shortcut:hover {
+  background:
+    rgba(255, 255, 255, 0.12);
+
+  transform: translateY(-1px);
+}
+
+.comando-shortcut.danger {
+  background:
+    rgba(220, 53, 69, 0.16);
+}
+
+.comando-empty {
+  padding: 18px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  color: #b8c7df;
+}
+
+.comando-bar-item {
+  padding: 12px 14px;
+
+  border-radius: 16px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+.comando-bar-header {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+}
+
+.comando-bar-header strong {
+  font-size: 14px;
+}
+
+.comando-bar-header span {
+  color: #cbd6ea;
+
+  font-size: 13px;
+}
+
+.comando-bar-track {
+  width: 100%;
+  height: 10px;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  overflow: hidden;
+}
+
+.comando-bar-fill {
+  height: 100%;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #7f1d1d,
+      #ef4444
+    );
+}
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.status {
+  min-width: 120px;
+
+  text-align: center;
+
+  padding: 10px 12px;
+
+  border-radius: 12px;
+
+  font-weight: 700;
+  font-size: 13px;
+
+  white-space: nowrap;
+}
+
+.status.success {
+  background:
+    rgba(25, 135, 84, 0.2);
+
+  color: #97e1b7;
+}
+
+.status.warning {
+  background:
+    rgba(255, 193, 7, 0.18);
+
+  color: #ffe08a;
+}
+
+.status.info {
+  background:
+    rgba(13, 110, 253, 0.18);
+
+  color: #9bc2ff;
+}
+
+.status.danger {
+  background:
+    rgba(220, 53, 69, 0.18);
+
+  color: #ffb7c0;
+}
+
+/* =========================================================
+   EFETIVO
+========================================================= */
+
+.efetivo-page {
+  padding: 20px;
+
+  color: #fff;
+
+  display: grid;
+
+  gap: 18px;
+}
+
+.efetivo-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 16px;
+
+  padding: 22px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #0b1018,
+      #151d29
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.efetivo-header h1 {
+  margin: 0 0 6px;
+}
+
+.efetivo-header p {
+  margin: 0;
+
+  color: #c9d6ea;
+}
+
+.efetivo-btn {
+  border: 0;
+
+  border-radius: 12px;
+
+  padding: 12px 16px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #991b1b,
+      #7f1d1d
+    );
+
+  color: #fff;
+
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.efetivo-btn.secondary {
+  background:
+    rgba(255, 255, 255, 0.1);
+
+  color: #fff;
+}
+
+.efetivo-cards {
+  display: grid;
+  gap: 12px;
+}
+
+.efetivo-cards.categorias {
+  grid-template-columns:
+    repeat(4, 1fr);
+}
+
+.efetivo-cards.resumo {
+  grid-template-columns:
+    repeat(4, 1fr);
+}
+
+.card {
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  background: #111827;
+
+  border:
+    1px solid #1f2937;
+
+  font-weight: 700;
+}
+
+.card.blue {
+  border-left:
+    4px solid #3b82f6;
+}
+
+.card.green {
+  border-left:
+    4px solid #22c55e;
+}
+
+.card.purple {
+  border-left:
+    4px solid #a855f7;
+}
+
+.card.gold {
+  border-left:
+    4px solid #991b1b;
+}
+
+.card.success {
+  border-left:
+    4px solid #22c55e;
+}
+
+.card.yellow {
+  border-left:
+    4px solid #facc15;
+}
+
+.card.red {
+  border-left:
+    4px solid #ef4444;
+}
+
+.efetivo-filtros {
+  display: grid;
+
+  grid-template-columns:
+    1.6fr 1fr 1fr 1fr 1fr 1fr auto;
+
+  gap: 10px;
+}
+
+.efetivo-filtros input,
+.efetivo-filtros select {
+  padding: 12px;
+
+  border-radius: 12px;
+
+  border: 0;
+
+  background: #111827;
+
+  color: #fff;
+}
+
+.efetivo-table {
+  background: #0f172a;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255, 255, 255, 0.06);
+}
+
+.row {
+  display: grid;
+
+  grid-template-columns:
+    90px 1.4fr 180px 200px 120px 130px 120px 80px 80px 90px 110px;
+
+  padding: 12px 10px;
+
+  border-bottom:
+    1px solid #1f2937;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.row.header {
+  background: #020617;
+
+  font-weight: 800;
+
+  color: #b8c7df;
+}
+
+.nome-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.nome-cell small {
+  color: #8fa4c4;
+
+  font-size: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 88px;
+
+  padding: 7px 10px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.pill.success {
+  background:
+    rgba(25, 135, 84, 0.18);
+
+  color: #9be7bc;
+}
+
+.pill.warning {
+  background:
+    rgba(255, 193, 7, 0.18);
+
+  color: #ffe08a;
+}
+
+.pill.danger {
+  background:
+    rgba(220, 53, 69, 0.18);
+
+  color: #ffb7c0;
+}
+
+.mini-btn {
+  border: 0;
+
+  border-radius: 10px;
+
+  padding: 8px 12px;
+
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  color: #fff;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.mini-btn:hover {
+  background:
+    rgba(255, 255, 255, 0.14);
+}
+
+/* =========================================================
+   RESPONSIVO PÁGINAS INTERNAS
+========================================================= */
+
+@media (max-width: 1400px) {
+  .elite-actions {
+    grid-template-columns:
+      repeat(3, 1fr);
+  }
+
+  .efetivo-cards.categorias,
+  .efetivo-cards.resumo,
+  .efetivo-filtros {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .row {
+    grid-template-columns: 1fr;
+  }
+
+  .row.header {
+    display: none;
+  }
+
+  .efetivo-table {
+    display: grid;
+    gap: 12px;
+
+    background: transparent;
+    border: 0;
+  }
+
+  .row {
+    background: #0f172a;
+
+    border-radius: 14px;
+
+    border:
+      1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+@media (max-width: 1200px) {
+  .elite-kpi-grid,
+  .elite-grid-2,
+  .comando-summary-grid,
+  .comando-summary-grid.single-row,
+  .comando-alert-grid,
+  .comando-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .elite-hero {
+    flex-direction: column;
+  }
+
+  .elite-semaforo {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 900px) {
+  .elite-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .elite-hero h1,
+  .comando-hero h1 {
+    font-size: 28px;
+  }
+
+  .elite-kpi strong {
+    font-size: 24px;
+  }
+
+  .comando-hero {
+    flex-direction: column;
+  }
+
+  .comando-hero-actions {
+    width: 100%;
+  }
+
+  .comando-action-btn {
+    width: 100%;
+  }
+
+  .status {
+    min-width: 90px;
+
+    padding: 8px 10px;
+  }
+}

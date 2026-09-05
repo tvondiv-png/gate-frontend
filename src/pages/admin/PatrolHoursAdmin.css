@@ -1,0 +1,1019 @@
+/* =========================================================
+   2º BPChq ANCHIETA
+   HORAS DE PATRULHA - ADMIN
+========================================================= */
+
+.patrol-admin-page {
+  color: #f8fafc;
+  padding: 0;
+}
+
+.patrol-container {
+  display: grid;
+  gap: 18px;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.patrol-hero {
+  border: 1px solid rgba(148, 163, 184, 0.10);
+  border-radius: 22px;
+  padding: 24px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.10),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.94),
+      rgba(2, 6, 23, 0.96)
+    );
+
+  box-shadow:
+    0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.patrol-hero h1 {
+  margin: 0 0 8px;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.4rem
+    );
+
+  line-height: 1.08;
+}
+
+.patrol-hero p {
+  margin: 0;
+
+  max-width: 780px;
+
+  color: #94a3b8;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   TABS
+========================================================= */
+
+.patrol-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.patrol-tab-btn {
+  min-height: 40px;
+
+  padding: 0 14px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  color: #94a3b8;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.patrol-tab-btn:hover {
+  background:
+    rgba(255, 255, 255, 0.035);
+}
+
+.patrol-tab-btn.active {
+  border-color:
+    rgba(59, 130, 246, 0.24);
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  color: #bfdbfe;
+}
+
+/* =========================================================
+   CARD BASE
+========================================================= */
+
+.patrol-card {
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.065);
+
+  border-radius: 18px;
+
+  padding: 17px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.018),
+      rgba(255, 255, 255, 0.010)
+    );
+
+  box-shadow:
+    0 10px 28px
+    rgba(0, 0, 0, 0.14);
+}
+
+.patrol-card h2,
+.patrol-card h3 {
+  margin-top: 0;
+
+  color: #f8fafc;
+}
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.patrol-filters-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(210px, 1fr)
+    );
+
+  gap: 11px;
+}
+
+.patrol-filter-group {
+  display: grid;
+  gap: 6px;
+}
+
+.patrol-label {
+  color: #718198;
+
+  font-size: 0.62rem;
+  font-weight: 850;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+}
+
+.patrol-input {
+  width: 100%;
+  min-height: 42px;
+
+  padding: 0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+
+  background: #090f18;
+
+  color: #ffffff;
+
+  outline: none;
+
+  transition: 0.18s ease;
+}
+
+textarea.patrol-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.patrol-input:focus {
+  border-color:
+    rgba(59, 130, 246, 0.38);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59, 130, 246, 0.06);
+}
+
+.patrol-input option {
+  background: #090f18;
+  color: #ffffff;
+}
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.patrol-actions {
+  display: flex;
+
+  gap: 8px;
+
+  flex-wrap: wrap;
+
+  margin-top: 15px;
+}
+
+.patrol-btn {
+  min-height: 38px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #f8fafc;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.patrol-btn:hover {
+  transform: translateY(-1px);
+}
+
+.patrol-btn-primary {
+  border-color:
+    rgba(59, 130, 246, 0.24);
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  color: #bfdbfe;
+}
+
+.patrol-btn-secondary {
+  border-color:
+    rgba(148, 163, 184, 0.11);
+
+  background:
+    rgba(148, 163, 184, 0.035);
+
+  color: #cbd5e1;
+}
+
+.patrol-btn-success {
+  border-color:
+    rgba(34, 197, 94, 0.20);
+
+  background:
+    rgba(34, 197, 94, 0.06);
+
+  color: #86efac;
+}
+
+.patrol-btn-warning {
+  border-color:
+    rgba(245, 158, 11, 0.22);
+
+  background:
+    rgba(245, 158, 11, 0.07);
+
+  color: #fcd34d;
+}
+
+.patrol-btn-danger {
+  border-color:
+    rgba(239, 68, 68, 0.24);
+
+  background:
+    rgba(127, 29, 29, 0.08);
+
+  color: #fca5a5;
+}
+
+.patrol-btn-sm {
+  min-height: 32px;
+
+  padding: 0 9px;
+
+  border-radius: 8px;
+
+  font-size: 0.62rem;
+}
+
+/* compatibilidade temporária com JSX atual */
+
+.btn {
+  min-height: 38px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.10);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #f8fafc;
+
+  font-size: 0.68rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: 0.18s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  border-color:
+    rgba(59, 130, 246, 0.24);
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  color: #bfdbfe;
+}
+
+.btn-secondary {
+  border-color:
+    rgba(148, 163, 184, 0.11);
+
+  background:
+    rgba(148, 163, 184, 0.035);
+
+  color: #cbd5e1;
+}
+
+.btn-warning {
+  border-color:
+    rgba(245, 158, 11, 0.22);
+
+  background:
+    rgba(245, 158, 11, 0.07);
+
+  color: #fcd34d;
+}
+
+.btn-danger {
+  border-color:
+    rgba(239, 68, 68, 0.24);
+
+  background:
+    rgba(127, 29, 29, 0.08);
+
+  color: #fca5a5;
+}
+
+.btn-danger-sm,
+.btn-secondary-sm {
+  min-height: 31px;
+
+  padding: 0 9px;
+
+  border-radius: 8px;
+
+  font-size: 0.61rem;
+  font-weight: 800;
+
+  cursor: pointer;
+}
+
+.btn-danger-sm {
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.22);
+
+  background:
+    rgba(127, 29, 29, 0.07);
+
+  color: #fca5a5;
+}
+
+.btn-secondary-sm {
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.18);
+
+  background:
+    rgba(59, 130, 246, 0.05);
+
+  color: #93c5fd;
+}
+
+/* =========================================================
+   RELATÓRIO
+========================================================= */
+
+.patrol-report-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 16px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 15px;
+}
+
+.patrol-muted {
+  margin-top: 5px;
+
+  color: #718198;
+
+  font-size: 0.72rem;
+}
+
+.patrol-report-filters {
+  max-width: 560px;
+
+  color: #7f8ea3;
+
+  font-size: 0.7rem;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+.patrol-cards-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(160px, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.patrol-card-resumo {
+  position: relative;
+
+  overflow: hidden;
+
+  min-height: 86px;
+
+  padding: 13px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+.patrol-card-resumo::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(59, 130, 246, 0.55),
+      transparent
+    );
+}
+
+.patrol-card-resumo-titulo {
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 0.58rem;
+
+  font-weight: 850;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+.patrol-card-resumo-valor {
+  color: #ffffff;
+
+  font-size: 1.25rem;
+
+  font-weight: 900;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.patrol-section-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 12px;
+}
+
+.patrol-section-header h2,
+.patrol-section-header h3 {
+  margin: 0;
+}
+
+.patrol-section-count {
+  color: #64748b;
+
+  font-size: 0.65rem;
+}
+
+/* =========================================================
+   TABELAS
+========================================================= */
+
+.patrol-table-wrapper {
+  overflow-x: auto;
+
+  border-radius: 12px;
+}
+
+.patrol-table {
+  width: 100%;
+
+  min-width: 980px;
+
+  border-collapse: collapse;
+}
+
+.patrol-table th,
+.patrol-table td {
+  padding: 10px 9px;
+
+  text-align: left;
+
+  vertical-align: middle;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+}
+
+.patrol-table th {
+  color: #64748b;
+
+  font-size: 0.57rem;
+  font-weight: 850;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+.patrol-table td {
+  color: #b6c2d2;
+
+  font-size: 0.68rem;
+}
+
+.patrol-table tbody tr {
+  transition: 0.16s ease;
+}
+
+.patrol-table tbody tr:hover {
+  background:
+    rgba(255, 255, 255, 0.016);
+}
+
+.patrol-empty-cell {
+  text-align: center;
+
+  color: #64748b;
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.patrol-status-badge,
+.patrol-badge,
+.patrol-removed-section-badge {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 27px;
+
+  padding: 0 8px;
+
+  border-radius: 999px;
+
+  font-size: 0.59rem;
+  font-weight: 850;
+
+  white-space: nowrap;
+}
+
+.status-ativo {
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.18);
+
+  background:
+    rgba(34, 197, 94, 0.055);
+
+  color: #86efac;
+}
+
+.status-ausente {
+  border:
+    1px solid
+    rgba(245, 158, 11, 0.19);
+
+  background:
+    rgba(245, 158, 11, 0.055);
+
+  color: #fcd34d;
+}
+
+.status-afastado {
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.19);
+
+  background:
+    rgba(127, 29, 29, 0.06);
+
+  color: #fca5a5;
+}
+
+.patrol-badge-success {
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.18);
+
+  background:
+    rgba(34, 197, 94, 0.055);
+
+  color: #86efac;
+}
+
+.patrol-badge-danger {
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.19);
+
+  background:
+    rgba(127, 29, 29, 0.06);
+
+  color: #fca5a5;
+}
+
+.patrol-badge-warning {
+  border:
+    1px solid
+    rgba(245, 158, 11, 0.19);
+
+  background:
+    rgba(245, 158, 11, 0.055);
+
+  color: #fcd34d;
+}
+
+/* =========================================================
+   AUSÊNCIA
+========================================================= */
+
+.patrol-absence-textarea {
+  min-height: 74px;
+
+  resize: vertical;
+}
+
+/* =========================================================
+   REMOVIDOS
+========================================================= */
+
+.patrol-removed-subtitle {
+  margin: 5px 0 0;
+
+  color: #64748b;
+
+  font-size: 0.71rem;
+}
+
+.patrol-removed-empty {
+  padding: 12px;
+
+  border-radius: 11px;
+
+  border:
+    1px dashed
+    rgba(148, 163, 184, 0.10);
+
+  color: #64748b;
+
+  font-size: 0.7rem;
+}
+
+.patrol-removed-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(270px, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.patrol-removed-card {
+  padding: 13px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+.patrol-removed-card-header {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.patrol-removed-main {
+  display: grid;
+  gap: 3px;
+}
+
+.patrol-removed-name {
+  color: #f8fafc;
+
+  font-size: 0.79rem;
+
+  font-weight: 850;
+}
+
+.patrol-removed-meta {
+  color: #718198;
+
+  font-size: 0.63rem;
+}
+
+.patrol-removed-badges {
+  display: flex;
+
+  gap: 6px;
+
+  flex-wrap: wrap;
+}
+
+.patrol-removed-section-badge {
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.16);
+
+  background:
+    rgba(59, 130, 246, 0.045);
+
+  color: #93c5fd;
+}
+
+.patrol-removed-details {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(130px, 1fr)
+    );
+
+  gap: 8px;
+
+  margin-top: 11px;
+}
+
+.patrol-removed-detail-item {
+  display: grid;
+  gap: 3px;
+}
+
+.patrol-removed-detail-label {
+  color: #64748b;
+
+  font-size: 0.58rem;
+
+  text-transform: uppercase;
+}
+
+.patrol-removed-detail-item strong {
+  color: #cbd5e1;
+
+  font-size: 0.69rem;
+}
+
+.patrol-removed-actions {
+  margin-top: 11px;
+}
+
+/* =========================================================
+   RESUMO EXECUTIVO
+========================================================= */
+
+.patrol-executive-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(210px, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.patrol-status-bar {
+  grid-column: 1 / -1;
+
+  padding: 11px 12px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  background:
+    rgba(255, 255, 255, 0.014);
+}
+
+/* =========================================================
+   ÁREA DE PERIGO
+========================================================= */
+
+.patrol-danger-zone {
+  border:
+    1px solid
+    rgba(239, 68, 68, 0.13);
+
+  border-radius: 16px;
+
+  padding: 15px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(127, 29, 29, 0.08),
+      transparent 35%
+    ),
+    rgba(127, 29, 29, 0.025);
+}
+
+.patrol-danger-zone h3 {
+  margin: 0 0 5px;
+
+  color: #fecaca;
+}
+
+.patrol-danger-zone p {
+  margin: 0;
+
+  color: #7f8ea3;
+
+  font-size: 0.7rem;
+}
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+.no-print {
+  display: block;
+}
+
+@media print {
+
+  .no-print {
+    display: none !important;
+  }
+
+  .patrol-admin-page,
+  .patrol-container,
+  .patrol-card,
+  .patrol-card-resumo {
+    background: #ffffff !important;
+
+    color: #000000 !important;
+
+    box-shadow: none !important;
+
+    border:
+      1px solid
+      #d1d5db !important;
+  }
+
+  .patrol-table th,
+  .patrol-table td {
+    color: #000000 !important;
+
+    border-bottom:
+      1px solid
+      #d1d5db !important;
+  }
+
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .patrol-report-header {
+    flex-direction: column;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .patrol-hero {
+    padding: 18px;
+  }
+
+  .patrol-filters-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .patrol-actions {
+    display: grid;
+
+    grid-template-columns: 1fr;
+  }
+
+  .btn,
+  .patrol-btn {
+    width: 100%;
+  }
+
+}

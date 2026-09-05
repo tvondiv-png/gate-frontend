@@ -1,0 +1,1047 @@
+/* =========================================================
+   ROCAM • BRAÇAIS
+========================================================= */
+
+.rocam-bracais-page {
+  width: 100%;
+
+  display: grid;
+
+  gap: 17px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.rocam-bracais-hero {
+  min-height: 175px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content:
+    space-between;
+
+  gap: 25px;
+
+  padding: 26px;
+
+  border-radius: 19px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.075);
+
+  background:
+    radial-gradient(
+      circle at 85% 10%,
+      rgba(255,255,255,.055),
+      transparent 27%
+    ),
+    linear-gradient(
+      135deg,
+      #111720,
+      #070a0f
+    );
+
+  box-shadow:
+    0 18px 40px
+    rgba(0,0,0,.22);
+}
+
+.rocam-bracais-kicker {
+  color: #748091;
+
+  font-size: .52rem;
+
+  font-weight: 950;
+
+  letter-spacing: 1.2px;
+}
+
+.rocam-bracais-hero h1 {
+  margin: 7px 0 0;
+
+  color: #fff;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.5rem
+    );
+}
+
+.rocam-bracais-hero p {
+  max-width: 700px;
+
+  margin:
+    8px 0 0;
+
+  color: #778393;
+
+  font-size: .63rem;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   HERO ACTIONS
+========================================================= */
+
+.rocam-bracais-hero-actions {
+  min-width: 220px;
+
+  display: grid;
+
+  gap: 9px;
+}
+
+.rocam-bracais-total {
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.018);
+}
+
+.rocam-bracais-total small,
+.rocam-bracais-total strong {
+  display: block;
+}
+
+.rocam-bracais-total small {
+  color: #657181;
+
+  font-size: .49rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracais-total strong {
+  margin-top: 5px;
+
+  color: #fff;
+
+  font-size: 1.3rem;
+}
+
+.rocam-bracais-add-btn {
+  min-height: 42px;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.11);
+
+  background:
+    rgba(255,255,255,.06);
+
+  color: #fff;
+
+  font-size: .58rem;
+
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.rocam-bracais-add-btn:hover {
+  background:
+    rgba(255,255,255,.10);
+}
+
+
+/* =========================================================
+   ALERTAS
+========================================================= */
+
+.rocam-bracais-alert {
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  font-size: .59rem;
+}
+
+.rocam-bracais-alert.error {
+  border:
+    1px solid
+    rgba(239,68,68,.15);
+
+  background:
+    rgba(239,68,68,.04);
+
+  color: #fca5a5;
+}
+
+.rocam-bracais-alert.success {
+  border:
+    1px solid
+    rgba(34,197,94,.16);
+
+  background:
+    rgba(34,197,94,.04);
+
+  color: #86efac;
+}
+
+
+/* =========================================================
+   FERRAMENTAS
+========================================================= */
+
+.rocam-bracais-tools {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 10px;
+}
+
+.rocam-bracais-search {
+  flex: 1;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-height: 42px;
+
+  padding: 0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.012);
+}
+
+.rocam-bracais-search span {
+  color: #667383;
+}
+
+.rocam-bracais-search input {
+  width: 100%;
+
+  border: 0;
+
+  outline: 0;
+
+  background:
+    transparent;
+
+  color: #fff;
+
+  font-size: .6rem;
+}
+
+.rocam-bracais-search input::placeholder {
+  color: #566272;
+}
+
+.rocam-bracais-refresh {
+  min-width: 115px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.06);
+
+  background:
+    rgba(255,255,255,.018);
+
+  color: #8f9aa8;
+
+  font-size: .56rem;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.rocam-bracais-section {
+  padding: 18px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.055);
+
+  background:
+    rgba(255,255,255,.01);
+}
+
+.rocam-bracais-section-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content:
+    space-between;
+
+  gap: 10px;
+
+  margin-bottom: 13px;
+
+  padding-bottom: 12px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.05);
+}
+
+.rocam-bracais-section-header small {
+  display: block;
+
+  color: #596676;
+
+  font-size: .49rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracais-section-header h2 {
+  margin: 4px 0 0;
+
+  color: #e5eaf0;
+
+  font-size: .9rem;
+}
+
+.rocam-bracais-section-header > strong {
+  color: #aeb9c5;
+
+  font-size: .9rem;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.rocam-bracais-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(280px,1fr)
+    );
+
+  gap: 10px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.rocam-bracal-card {
+  padding: 14px;
+
+  border-radius: 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.052);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.02),
+      rgba(255,255,255,.006)
+    );
+}
+
+.rocam-bracal-card-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.rocam-bracal-avatar {
+  width: 43px;
+
+  height: 43px;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  background:
+    linear-gradient(
+      145deg,
+      #202833,
+      #0d1117
+    );
+
+  color: #fff;
+
+  font-size: .66rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracal-main {
+  flex: 1;
+
+  min-width: 0;
+
+  display: grid;
+
+  gap: 2px;
+}
+
+.rocam-bracal-main small {
+  color: #647181;
+
+  font-size: .47rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracal-main strong {
+  overflow: hidden;
+
+  color: #dce3ea;
+
+  font-size: .65rem;
+
+  text-overflow:
+    ellipsis;
+
+  white-space:
+    nowrap;
+}
+
+.rocam-bracal-main span {
+  color: #647181;
+
+  font-size: .51rem;
+}
+
+.rocam-bracal-status {
+  padding: 5px 7px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(34,197,94,.14);
+
+  background:
+    rgba(34,197,94,.04);
+
+  color: #86efac;
+
+  font-size: .43rem;
+
+  font-weight: 900;
+}
+
+
+/* =========================================================
+   CARD INFO
+========================================================= */
+
+.rocam-bracal-info-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0,1fr)
+    );
+
+  gap: 7px;
+
+  margin-top: 12px;
+}
+
+.rocam-bracal-info-grid > div {
+  padding: 9px;
+
+  border-radius: 8px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.035);
+
+  background:
+    rgba(255,255,255,.007);
+}
+
+.rocam-bracal-info-grid small,
+.rocam-bracal-info-grid strong {
+  display: block;
+}
+
+.rocam-bracal-info-grid small {
+  color: #566373;
+
+  font-size: .44rem;
+}
+
+.rocam-bracal-info-grid strong {
+  margin-top: 4px;
+
+  color: #8e9aa8;
+
+  font-size: .52rem;
+}
+
+.rocam-bracal-footer {
+  margin-top: 10px;
+
+  padding-top: 9px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.04);
+
+  color: #5e6a79;
+
+  font-size: .49rem;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.rocam-bracais-empty {
+  padding: 18px;
+
+  border-radius: 10px;
+
+  border:
+    1px dashed
+    rgba(255,255,255,.07);
+
+  color: #667383;
+
+  font-size: .58rem;
+}
+
+
+/* =========================================================
+   INFO
+========================================================= */
+
+.rocam-bracais-info-box {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding: 15px;
+
+  border-radius: 12px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.05);
+
+  background:
+    rgba(255,255,255,.009);
+}
+
+.rocam-bracais-info-icon {
+  width: 28px;
+
+  height: 28px;
+
+  flex-shrink: 0;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 8px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  color: #8290a0;
+
+  font-size: .57rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracais-info-box strong {
+  color: #aeb8c4;
+
+  font-size: .59rem;
+}
+
+.rocam-bracais-info-box p {
+  margin: 4px 0 0;
+
+  color: #687585;
+
+  font-size: .54rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.rocam-bracais-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 220;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 20px;
+
+  background:
+    rgba(0,0,0,.78);
+
+  backdrop-filter:
+    blur(6px);
+}
+
+.rocam-bracais-modal {
+  width:
+    min(
+      620px,
+      100%
+    );
+
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 22px;
+
+  border-radius: 17px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.09);
+
+  background:
+    linear-gradient(
+      145deg,
+      #111720,
+      #06090e
+    );
+
+  box-shadow:
+    0 35px 90px
+    rgba(0,0,0,.65);
+}
+
+.rocam-bracais-modal-header {
+  display: flex;
+
+  justify-content:
+    space-between;
+
+  gap: 15px;
+
+  padding-bottom: 14px;
+
+  border-bottom:
+    1px solid
+    rgba(255,255,255,.055);
+}
+
+.rocam-bracais-modal-header small {
+  color: #667383;
+
+  font-size: .49rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracais-modal-header h2 {
+  margin: 5px 0 3px;
+
+  color: #fff;
+
+  font-size: 1rem;
+}
+
+.rocam-bracais-modal-header p {
+  margin: 0;
+
+  color: #748091;
+
+  font-size: .56rem;
+}
+
+.rocam-bracais-modal-header > button {
+  width: 34px;
+
+  height: 34px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.02);
+
+  color: #fff;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   WARNING
+========================================================= */
+
+.rocam-bracais-modal-warning {
+  margin-top: 14px;
+
+  padding: 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(59,130,246,.12);
+
+  background:
+    rgba(59,130,246,.035);
+}
+
+.rocam-bracais-modal-warning strong {
+  color: #93c5fd;
+
+  font-size: .57rem;
+}
+
+.rocam-bracais-modal-warning p {
+  margin: 5px 0 0;
+
+  color: #788696;
+
+  font-size: .54rem;
+
+  line-height: 1.55;
+}
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
+.rocam-bracais-field {
+  display: grid;
+
+  gap: 6px;
+
+  margin-top: 14px;
+}
+
+.rocam-bracais-field label {
+  color: #7b8796;
+
+  font-size: .54rem;
+}
+
+.rocam-bracais-field select,
+.rocam-bracais-field input {
+  width: 100%;
+
+  box-sizing:
+    border-box;
+
+  min-height: 42px;
+
+  padding: 0 11px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.08);
+
+  outline: none;
+
+  background: #090d12;
+
+  color: #fff;
+
+  font-size: .58rem;
+}
+
+.rocam-bracais-field-note {
+  color: #6c7888;
+
+  font-size: .49rem;
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.rocam-bracais-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+
+  gap: 7px;
+
+  margin-top: 15px;
+}
+
+.rocam-bracais-summary > div {
+  padding: 10px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.045);
+
+  background:
+    rgba(255,255,255,.008);
+}
+
+.rocam-bracais-summary small,
+.rocam-bracais-summary strong {
+  display: block;
+}
+
+.rocam-bracais-summary small {
+  color: #596676;
+
+  font-size: .43rem;
+}
+
+.rocam-bracais-summary strong {
+  margin-top: 4px;
+
+  color: #98a4b2;
+
+  font-size: .51rem;
+}
+
+
+/* =========================================================
+   MODAL ACTIONS
+========================================================= */
+
+.rocam-bracais-modal-actions {
+  display: flex;
+
+  justify-content:
+    flex-end;
+
+  gap: 8px;
+
+  margin-top: 17px;
+
+  padding-top: 14px;
+
+  border-top:
+    1px solid
+    rgba(255,255,255,.05);
+}
+
+.rocam-bracais-modal-actions button {
+  min-height: 40px;
+
+  padding: 0 14px;
+
+  border-radius: 9px;
+
+  font-size: .56rem;
+
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.rocam-bracais-modal-actions .cancel {
+  border:
+    1px solid
+    rgba(255,255,255,.07);
+
+  background:
+    rgba(255,255,255,.018);
+
+  color: #8a96a5;
+}
+
+.rocam-bracais-modal-actions .confirm {
+  border:
+    1px solid
+    rgba(34,197,94,.18);
+
+  background:
+    rgba(34,197,94,.065);
+
+  color: #86efac;
+}
+
+.rocam-bracais-modal-actions
+button:disabled {
+  opacity: .4;
+
+  cursor: default;
+}
+
+
+/* =========================================================
+   ACESSO NEGADO
+========================================================= */
+
+.rocam-bracais-denied {
+  max-width: 650px;
+
+  padding: 24px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(239,68,68,.13);
+
+  background:
+    rgba(239,68,68,.025);
+}
+
+.rocam-bracais-denied > span {
+  color: #f87171;
+
+  font-size: .5rem;
+
+  font-weight: 900;
+}
+
+.rocam-bracais-denied h1 {
+  margin: 6px 0;
+
+  color: #fff;
+}
+
+.rocam-bracais-denied p {
+  color: #7b8797;
+
+  font-size: .62rem;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (
+  max-width: 800px
+) {
+  .rocam-bracais-hero {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+  .rocam-bracais-hero-actions {
+    min-width: 0;
+  }
+
+  .rocam-bracais-summary {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+  }
+}
+
+@media (
+  max-width: 600px
+) {
+  .rocam-bracais-tools {
+    flex-direction:
+      column;
+  }
+
+  .rocam-bracais-refresh {
+    width: 100%;
+
+    min-height: 40px;
+  }
+
+  .rocam-bracais-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .rocam-bracal-info-grid {
+    grid-template-columns:
+      1fr;
+  }
+
+  .rocam-bracais-summary {
+    grid-template-columns:
+      1fr;
+  }
+
+  .rocam-bracais-modal-actions {
+    flex-direction:
+      column;
+  }
+
+  .rocam-bracais-modal-actions button {
+    width: 100%;
+  }
+}

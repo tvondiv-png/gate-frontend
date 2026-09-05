@@ -1,0 +1,427 @@
+.rso-admin-page {
+  display: grid;
+  gap: 22px;
+  color: #fff;
+}
+
+.rso-admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.rso-admin-topbar h1 {
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: 0.4px;
+}
+
+.rso-admin-topbar p {
+  margin: 6px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.rso-admin-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.rso-admin-summary-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  box-shadow: 0 10px 30px rgba(0,0,0,0.22);
+}
+
+.rso-admin-summary-card::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(212,160,23,0), rgba(212,160,23,0.85), rgba(212,160,23,0));
+}
+
+.rso-admin-summary-card small {
+  display: block;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.8px;
+}
+
+.rso-admin-summary-card strong {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.rso-admin-section {
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(212,160,23,0.08), transparent 30%),
+    linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.015));
+  box-shadow: 0 14px 34px rgba(0,0,0,0.22);
+}
+
+.rso-admin-section-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.rso-admin-section-title h3 {
+  margin: 0;
+}
+
+.rso-admin-section-title span {
+  color: rgba(255,255,255,0.65);
+  font-size: 14px;
+}
+
+.rso-admin-search,
+.rso-admin-input,
+.rso-admin-textarea,
+.rso-admin-select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(2,11,36,0.86);
+  color: #fff;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.rso-admin-search:focus,
+.rso-admin-input:focus,
+.rso-admin-textarea:focus,
+.rso-admin-select:focus {
+  border-color: rgba(212,160,23,0.65);
+  box-shadow: 0 0 0 3px rgba(212,160,23,0.12);
+}
+
+.rso-admin-textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.rso-admin-btn {
+  border: 1px solid rgba(212,160,23,0.48);
+  background: linear-gradient(180deg, rgba(212,160,23,0.24), rgba(212,160,23,0.14));
+  color: #fff;
+  border-radius: 12px;
+  padding: 11px 16px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.2s ease;
+}
+
+.rso-admin-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(212,160,23,0.12);
+}
+
+.rso-admin-btn.danger {
+  border-color: rgba(239,68,68,0.45);
+  background: linear-gradient(180deg, rgba(239,68,68,0.18), rgba(239,68,68,0.1));
+}
+
+.rso-admin-btn.blue {
+  border-color: rgba(59,130,246,0.45);
+  background: linear-gradient(180deg, rgba(59,130,246,0.18), rgba(59,130,246,0.10));
+}
+
+.rso-admin-table-wrap {
+  overflow-x: auto;
+}
+
+.rso-admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rso-admin-table th,
+.rso-admin-table td {
+  padding: 12px 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  text-align: left;
+  vertical-align: top;
+}
+
+.rso-admin-table th {
+  color: #d4a017;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.rso-admin-row-active {
+  background: rgba(212,160,23,0.06);
+}
+
+.rso-admin-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.rso-admin-badge {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+.rso-admin-badge.pendente {
+  color: #facc15;
+}
+
+.rso-admin-badge.ativo {
+  color: #60a5fa;
+}
+
+.rso-admin-badge.aprovado {
+  color: #4ade80;
+}
+
+.rso-admin-badge.rejeitado {
+  color: #f87171;
+}
+
+.rso-admin-detail {
+  display: grid;
+  gap: 18px;
+}
+
+.rso-admin-hero {
+  display: grid;
+  gap: 16px;
+  border: 1px solid rgba(212,160,23,0.22);
+  border-radius: 20px;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top right, rgba(212,160,23,0.12), transparent 26%),
+    linear-gradient(180deg, rgba(255,255,255,0.022), rgba(255,255,255,0.01));
+}
+
+.rso-admin-hero-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.rso-admin-hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.rso-admin-hero-title small {
+  color: rgba(255,255,255,0.62);
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  font-size: 11px;
+}
+
+.rso-admin-hero-title h3 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.rso-admin-hero-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.rso-admin-box {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+}
+
+.rso-admin-box small {
+  display: block;
+  color: rgba(255,255,255,0.62);
+  margin-bottom: 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.rso-admin-box strong {
+  font-size: 16px;
+}
+
+.rso-admin-alert {
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+
+.rso-admin-alert p {
+  margin: 8px 0 0;
+}
+
+.rso-admin-alert.info {
+  border: 1px solid rgba(59,130,246,0.28);
+  background: rgba(59,130,246,0.08);
+  color: #bfdbfe;
+}
+
+.rso-admin-alert.danger {
+  border: 1px solid rgba(239,68,68,0.28);
+  background: rgba(239,68,68,0.08);
+  color: #fecaca;
+}
+
+.rso-admin-grid-main {
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 18px;
+}
+
+.rso-admin-stack {
+  display: grid;
+  gap: 18px;
+}
+
+.rso-admin-block {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255,255,255,0.02);
+}
+
+.rso-admin-block-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.rso-admin-block-title h4 {
+  margin: 0;
+}
+
+.rso-admin-block-title span {
+  font-size: 12px;
+  border: 1px solid rgba(212,160,23,0.35);
+  border-radius: 999px;
+  padding: 4px 10px;
+  color: #d4a017;
+}
+
+.rso-admin-team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.rso-admin-person-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+  display: grid;
+  gap: 8px;
+}
+
+.rso-admin-person-card.fixa {
+  border-color: rgba(212,160,23,0.28);
+  background: rgba(212,160,23,0.05);
+}
+
+.rso-admin-person-card small {
+  color: rgba(255,255,255,0.65);
+}
+
+.rso-admin-person-card .tempo {
+  color: #d4a017;
+  font-weight: 700;
+}
+
+.rso-admin-inline-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.rso-admin-inline-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.rso-admin-readonly {
+  min-height: 80px;
+  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.02);
+  color: rgba(255,255,255,0.84);
+}
+
+.rso-admin-capture-list {
+  display: grid;
+  gap: 10px;
+}
+
+.rso-admin-capture-card {
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.18);
+}
+
+.rso-admin-decision-box {
+  display: grid;
+  gap: 12px;
+  border: 1px solid rgba(212,160,23,0.4);
+  border-radius: 18px;
+  padding: 16px;
+  background:
+    radial-gradient(circle at top right, rgba(212,160,23,0.15), transparent 28%),
+    linear-gradient(180deg, rgba(212,160,23,0.08), rgba(212,160,23,0.03));
+}
+
+.rso-admin-empty {
+  color: rgba(255,255,255,0.62);
+  border: 1px dashed rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 14px;
+}
+
+@media (max-width: 1100px) {
+  .rso-admin-grid-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .rso-admin-inline-grid,
+  .rso-admin-inline-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../../api/api";
-import "../../styles/panel-sections.css";
+import "./user-module-premium.css";
 
 export default function AbsenceRequest() {
   const [dataInicio, setDataInicio] = useState("");
@@ -13,41 +13,66 @@ export default function AbsenceRequest() {
       return;
     }
 
-    await api.post("/api/absences", { dataInicio, dataFim, motivo });
-    alert("Solicitação enviada");
-    setDataInicio("");
-    setDataFim("");
-    setMotivo("");
+    try {
+      await api.post("/api/absences", { dataInicio, dataFim, motivo });
+      alert("Solicitação enviada");
+      setDataInicio("");
+      setDataFim("");
+      setMotivo("");
+    } catch (err) {
+      console.error(err);
+      alert(err.response?.data?.message || "Erro ao enviar solicitação");
+    }
   };
 
   return (
-    <div className="panel-section">
-      <h2>Solicitação de Ausência</h2>
+    <div className="user-module-page">
+      <div className="user-module-topbar">
+        <div>
+          <h2>Solicitação de Ausência</h2>
+          <p>Formalize sua ausência com período e justificativa.</p>
+        </div>
+      </div>
 
-      <input
-        type="date"
-        className="panel-input"
-        value={dataInicio}
-        onChange={e => setDataInicio(e.target.value)}
-      />
+      <section className="user-module-section">
+        <div className="user-module-section-title">
+          <div>
+            <h3>Nova solicitação</h3>
+            <span>Preencha o período da ausência e a motivação.</span>
+          </div>
+        </div>
 
-      <input
-        type="date"
-        className="panel-input"
-        value={dataFim}
-        onChange={e => setDataFim(e.target.value)}
-      />
+        <div className="user-module-grid">
+          <input
+            type="date"
+            className="user-module-input"
+            value={dataInicio}
+            onChange={(e) => setDataInicio(e.target.value)}
+          />
 
-      <textarea
-        className="panel-textarea"
-        placeholder="Motivo da ausência"
-        value={motivo}
-        onChange={e => setMotivo(e.target.value)}
-      />
+          <input
+            type="date"
+            className="user-module-input"
+            value={dataFim}
+            onChange={(e) => setDataFim(e.target.value)}
+          />
+        </div>
 
-      <button className="panel-btn" onClick={submit}>
-        Enviar Solicitação
-      </button>
+        <div style={{ marginTop: 12 }}>
+          <textarea
+            className="user-module-textarea"
+            placeholder="Motivo da ausência"
+            value={motivo}
+            onChange={(e) => setMotivo(e.target.value)}
+          />
+        </div>
+
+        <div className="user-module-actions">
+          <button className="user-module-btn" onClick={submit}>
+            Enviar solicitação
+          </button>
+        </div>
+      </section>
     </div>
   );
 }

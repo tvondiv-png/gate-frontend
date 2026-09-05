@@ -1,86 +1,910 @@
-/* ===============================
-   REGULAMENTOS – DOCUMENTO OFICIAL
-================================ */
+/* =========================================================
+   2º BPChq ANCHIETA
+   REGULAMENTOS PÚBLICOS
+========================================================= */
 
 .regulations-page {
   min-height: 100vh;
-  padding: 140px 40px 60px;
-  background: linear-gradient(180deg, #05070a, #000);
-  color: #eaeaea;
-  max-width: 1100px;
-  margin: auto;
+
+  padding:
+    120px 20px 60px;
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.08),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at top right,
+      rgba(15, 23, 42, 0.46),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #020617 0%,
+      #07111f 50%,
+      #020617 100%
+    );
+
+  color: #f8fafc;
 }
 
-.regulations-page h1 {
-  margin-bottom: 50px;
-  text-align: center;
-  letter-spacing: 4px;
-  color: #d4af37;
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.regulations-hero {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin:
+    0 auto 20px;
+
+  padding: 26px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  gap: 24px;
+
+  border-radius: 22px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.10);
+
+  background:
+    radial-gradient(
+      circle at top left,
+      rgba(37, 99, 235, 0.10),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.95),
+      rgba(2, 6, 23, 0.97)
+    );
+
+  box-shadow:
+    0 15px 40px
+    rgba(0, 0, 0, 0.22);
 }
 
-.empty {
-  text-align: center;
-  opacity: 0.7;
+.regulations-hero-main {
+  min-width: 0;
 }
 
-/* DOCUMENTO */
+.regulations-hero-top {
+  display: flex;
+
+  align-items: center;
+
+  gap: 16px;
+}
+
+.regulations-logo {
+  width: 76px;
+  height: 76px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 9px 20px
+      rgba(0, 0, 0, 0.35)
+    );
+}
+
+.regulations-kicker {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #60a5fa;
+
+  font-size: 0.66rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1.4px;
+}
+
+.regulations-hero h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      1.8rem,
+      3vw,
+      2.5rem
+    );
+
+  line-height: 1.1;
+}
+
+.regulations-hero-main > p {
+  max-width: 760px;
+
+  margin:
+    16px 0 0;
+
+  color: #94a3b8;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   HERO STAT
+========================================================= */
+
+.regulations-hero-side {
+  display: flex;
+}
+
+.regulations-stat-card {
+  min-width: 185px;
+
+  padding: 18px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  border-radius: 16px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.13);
+
+  background:
+    rgba(59, 130, 246, 0.035);
+}
+
+.regulations-stat-card small {
+  color: #64748b;
+
+  font-size: 0.62rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.7px;
+}
+
+.regulations-stat-card strong {
+  color: #ffffff;
+
+  font-size: 2rem;
+}
+
+.regulations-stat-card span {
+  color: #718198;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+.regulations-summary {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin:
+    0 auto 12px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(0, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.regulations-summary-card {
+  min-height: 78px;
+
+  padding: 13px 15px;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.10);
+
+  background:
+    rgba(59, 130, 246, 0.025);
+}
+
+.regulations-summary-card.rocam {
+  border-color:
+    rgba(220, 38, 38, 0.14);
+
+  background:
+    rgba(127, 29, 29, 0.045);
+}
+
+.regulations-summary-card small,
+.regulations-summary-card strong {
+  display: block;
+}
+
+.regulations-summary-card small {
+  margin-bottom: 7px;
+
+  color: #64748b;
+
+  font-size: 0.61rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+}
+
+.regulations-summary-card strong {
+  color: #ffffff;
+
+  font-size: 1.4rem;
+}
+
+.regulations-summary-card.rocam strong {
+  color: #fca5a5;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.regulations-toolbar {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin:
+    0 auto 16px;
+
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  padding: 12px;
+
+  border-radius: 15px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.06);
+
+  background:
+    rgba(255, 255, 255, 0.015);
+}
+
+.regulations-tabs {
+  display: flex;
+
+  gap: 7px;
+
+  flex-wrap: wrap;
+}
+
+.regulations-tab {
+  min-height: 39px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+
+  background:
+    rgba(255, 255, 255, 0.018);
+
+  color: #94a3b8;
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    0.18s ease;
+}
+
+.regulations-tab span {
+  min-width: 23px;
+  height: 23px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 999px;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+
+  font-size: 0.6rem;
+}
+
+.regulations-tab:hover {
+  background:
+    rgba(255, 255, 255, 0.035);
+}
+
+.regulations-tab.active {
+  border-color:
+    rgba(59, 130, 246, 0.25);
+
+  background:
+    rgba(59, 130, 246, 0.07);
+
+  color: #bfdbfe;
+}
+
+.regulations-tab.rocam.active {
+  border-color:
+    rgba(220, 38, 38, 0.22);
+
+  background:
+    rgba(127, 29, 29, 0.08);
+
+  color: #fca5a5;
+}
+
+.regulations-search-wrap {
+  width: 100%;
+
+  max-width: 330px;
+}
+
+.regulations-search {
+  width: 100%;
+
+  min-height: 40px;
+
+  padding:
+    0 12px;
+
+  border-radius: 10px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.09);
+
+  background: #090f18;
+
+  color: #ffffff;
+
+  outline: none;
+}
+
+.regulations-search:focus {
+  border-color:
+    rgba(59, 130, 246, 0.36);
+
+  box-shadow:
+    0 0 0 3px
+    rgba(59, 130, 246, 0.06);
+}
+
+
+/* =========================================================
+   CATEGORY HEADER
+========================================================= */
+
+.regulations-category-header {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin:
+    0 auto 14px;
+
+  padding:
+    16px 18px;
+
+  border-left:
+    3px solid #3b82f6;
+
+  border-radius:
+    0 13px 13px 0;
+
+  background:
+    rgba(59, 130, 246, 0.025);
+}
+
+.regulations-category-header.rocam {
+  border-left-color:
+    #dc2626;
+
+  background:
+    rgba(127, 29, 29, 0.035);
+}
+
+.regulations-category-header span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #60a5fa;
+
+  font-size: 0.58rem;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+}
+
+.regulations-category-header.rocam span {
+  color: #f87171;
+}
+
+.regulations-category-header h2 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1.15rem;
+}
+
+.regulations-category-header p {
+  margin:
+    6px 0 0;
+
+  color: #718198;
+
+  font-size: 0.75rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   LISTA
+========================================================= */
+
+.regulations-list {
+  width: 100%;
+
+  max-width: 1400px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  gap: 12px;
+}
+
+
+/* =========================================================
+   DOCUMENTO
+========================================================= */
+
 .regulation-doc {
-  background: linear-gradient(180deg, #0f172a, #020617);
-  border: 1px solid rgba(212,175,55,0.35);
-  padding: 40px;
-  margin-bottom: 40px;
-  box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
-  position: relative;
+  overflow: hidden;
+
+  border-radius: 17px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.065);
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(15, 23, 42, 0.80),
+      rgba(2, 6, 23, 0.88)
+    );
+
+  box-shadow:
+    0 8px 24px
+    rgba(0, 0, 0, 0.14);
 }
 
-/* BORDA INTERNA */
-.regulation-doc::before {
-  content: "";
-  position: absolute;
-  inset: 14px;
-  border: 1px dashed rgba(212,175,55,0.25);
-  pointer-events: none;
+.regulation-doc.rocam {
+  border-color:
+    rgba(220, 38, 38, 0.12);
 }
 
-/* CABEÇALHO */
+
+/* =========================================================
+   HEADER DOCUMENTO
+========================================================= */
+
 .doc-header {
-  border-bottom: 1px solid rgba(212,175,55,0.4);
-  margin-bottom: 20px;
-  padding-bottom: 10px;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 16px;
+
+  padding: 17px 19px;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.05);
+}
+
+.doc-header-main {
+  min-width: 0;
+}
+
+.doc-badge {
+  display: inline-flex;
+
+  margin-bottom: 7px;
+
+  padding: 4px 8px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.17);
+
+  background:
+    rgba(59, 130, 246, 0.05);
+
+  color: #93c5fd;
+
+  font-size: 0.57rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+}
+
+.regulation-doc.rocam
+.doc-badge {
+  border-color:
+    rgba(220, 38, 38, 0.18);
+
+  background:
+    rgba(127, 29, 29, 0.07);
+
+  color: #fca5a5;
 }
 
 .doc-header h2 {
-  color: #d4af37;
-  letter-spacing: 2px;
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 1.1rem;
+
+  line-height: 1.35;
 }
 
-/* TEXTO */
-.desc {
-  margin: 20px 0;
-  opacity: 0.9;
+.doc-number {
+  flex-shrink: 0;
+
+  color: #334155;
+
+  font-size: 1.6rem;
+
+  font-weight: 900;
+}
+
+.regulation-doc.rocam
+.doc-number {
+  color: #451a1a;
+}
+
+
+/* =========================================================
+   DESCRIÇÃO
+========================================================= */
+
+.regulation-doc .desc {
+  margin: 0;
+
+  padding:
+    14px 19px;
+
+  color: #94a3b8;
+
+  font-size: 0.78rem;
+
+  line-height: 1.6;
+
+  border-bottom:
+    1px solid
+    rgba(255, 255, 255, 0.04);
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.regulation-content {
+  padding: 17px 19px;
 }
 
 .conteudo {
-  background: #020617;
-  padding: 20px;
+  margin: 0;
+
   white-space: pre-wrap;
-  border-left: 3px solid #d4af37;
-  font-family: "Courier New", monospace;
-  font-size: 0.95rem;
+
+  word-break: break-word;
+
+  font-family: inherit;
+
+  color: #cbd5e1;
+
+  font-size: 0.78rem;
+
+  line-height: 1.75;
 }
 
-/* PDF */
+
+/* =========================================================
+   PDF
+========================================================= */
+
+.regulation-actions {
+  padding:
+    0 19px 17px;
+}
+
 .pdf-link {
-  display: inline-block;
-  margin-top: 25px;
-  color: #d4af37;
-  border: 1px solid #d4af37;
-  padding: 10px 18px;
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  min-height: 38px;
+
+  padding:
+    0 11px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.18);
+
+  background:
+    rgba(59, 130, 246, 0.05);
+
+  color: #93c5fd;
+
   text-decoration: none;
-  transition: 0.3s;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  transition:
+    0.18s ease;
 }
 
 .pdf-link:hover {
-  background: #d4af37;
-  color: #000;
+  background:
+    rgba(59, 130, 246, 0.10);
+}
+
+.regulation-doc.rocam
+.pdf-link {
+  border-color:
+    rgba(220, 38, 38, 0.18);
+
+  background:
+    rgba(127, 29, 29, 0.05);
+
+  color: #fca5a5;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.regulation-footer {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+
+  padding:
+    10px 19px;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.045);
+
+  background:
+    rgba(0, 0, 0, 0.08);
+
+  color: #526176;
+
+  font-size: 0.6rem;
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.regulations-empty-box {
+  width: 100%;
+
+  max-width: 1400px;
+
+  min-height: 240px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  text-align: center;
+
+  border:
+    1px dashed
+    rgba(148, 163, 184, 0.11);
+
+  border-radius: 17px;
+
+  color: #64748b;
+}
+
+.regulations-empty-box strong {
+  color: #94a3b8;
+}
+
+.regulations-empty-box span {
+  font-size: 0.73rem;
+}
+
+.regulations-spinner {
+  width: 38px;
+  height: 38px;
+
+  margin-bottom: 5px;
+
+  border-radius: 50%;
+
+  border:
+    3px solid
+    rgba(59, 130, 246, 0.11);
+
+  border-top-color:
+    #3b82f6;
+
+  animation:
+    regulationsSpin
+    0.8s linear infinite;
+}
+
+@keyframes regulationsSpin {
+  to {
+    transform:
+      rotate(360deg);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .regulations-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .regulations-stat-card {
+    width: 100%;
+  }
+
+  .regulations-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .regulations-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .regulations-search-wrap {
+    max-width: none;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .regulations-page {
+    padding:
+      110px 14px 45px;
+  }
+
+  .regulations-hero {
+    padding: 18px;
+  }
+
+  .regulations-hero-top {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .regulations-logo {
+    width: 66px;
+    height: 66px;
+  }
+
+  .regulations-tabs {
+    display: grid;
+
+    grid-template-columns: 1fr;
+  }
+
+  .regulations-tab {
+    justify-content: space-between;
+  }
+
+  .doc-header {
+    padding:
+      15px;
+  }
+
+  .regulation-doc .desc,
+  .regulation-content,
+  .regulation-actions,
+  .regulation-footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
 }

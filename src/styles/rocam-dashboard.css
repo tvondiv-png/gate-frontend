@@ -1,0 +1,752 @@
+/* =========================================================
+   ROCAM • DASHBOARD
+========================================================= */
+
+.rocam-dashboard-page {
+  width: 100%;
+
+  display: grid;
+  gap: 18px;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.rocam-dashboard-hero {
+  position: relative;
+
+  min-height: 205px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 25px;
+
+  padding: 30px 32px;
+
+  border-radius: 22px;
+
+  border: 1px solid rgba(255,255,255,0.075);
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,0.075),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 0% 0%,
+      rgba(148,163,184,0.065),
+      transparent 31%
+    ),
+    linear-gradient(
+      135deg,
+      #111720 0%,
+      #090d13 50%,
+      #05070a 100%
+    );
+
+  box-shadow:
+    0 22px 50px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.035);
+
+  overflow: hidden;
+}
+
+.rocam-dashboard-hero::before {
+  content: "ROCAM";
+
+  position: absolute;
+
+  right: 25px;
+  bottom: -30px;
+
+  color: rgba(255,255,255,0.018);
+
+  font-size: 8rem;
+  font-weight: 950;
+
+  letter-spacing: 7px;
+
+  pointer-events: none;
+}
+
+.rocam-dashboard-hero::after {
+  content: "";
+
+  position: absolute;
+
+  left: 32px;
+  bottom: 0;
+
+  width: 110px;
+  height: 2px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f8fafc,
+      transparent
+    );
+
+  opacity: 0.55;
+}
+
+.rocam-dashboard-kicker {
+  display: inline-flex;
+
+  margin-bottom: 10px;
+
+  padding: 6px 9px;
+
+  border-radius: 7px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.035);
+
+  color: #b8c1cc;
+
+  font-size: 0.56rem;
+  font-weight: 950;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+.rocam-dashboard-hero h1 {
+  position: relative;
+
+  z-index: 1;
+
+  margin: 0;
+
+  max-width: 760px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      2rem,
+      3.5vw,
+      3rem
+    );
+
+  font-weight: 950;
+
+  letter-spacing: -1.2px;
+
+  line-height: 1.03;
+}
+
+.rocam-dashboard-hero p {
+  position: relative;
+
+  z-index: 1;
+
+  max-width: 680px;
+
+  margin: 12px 0 0;
+
+  color: #8793a3;
+
+  font-size: 0.76rem;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   CARD DA FUNÇÃO ROCAM
+========================================================= */
+
+.rocam-dashboard-role {
+  position: relative;
+
+  z-index: 2;
+
+  min-width: 245px;
+  max-width: 290px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 7px;
+
+  padding: 21px;
+
+  border-radius: 17px;
+
+  border: 1px solid rgba(255,255,255,0.09);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.065),
+      rgba(255,255,255,0.018)
+    );
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.18),
+    inset 0 1px 0 rgba(255,255,255,0.035);
+}
+
+.rocam-dashboard-role::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+
+  width: 2px;
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      #d5d9df,
+      transparent
+    );
+
+  opacity: 0.6;
+}
+
+.rocam-dashboard-role small {
+  color: #667384;
+
+  font-size: 0.55rem;
+  font-weight: 950;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+.rocam-dashboard-role strong {
+  color: #ffffff;
+
+  font-size: 1.18rem;
+  font-weight: 900;
+}
+
+.rocam-dashboard-role span {
+  color: #929eae;
+
+  font-size: 0.66rem;
+
+  line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESUMO
+========================================================= */
+
+.rocam-dashboard-summary {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+
+  gap: 12px;
+}
+
+.rocam-dashboard-summary-card {
+  position: relative;
+
+  min-height: 112px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 17px 18px;
+
+  border-radius: 15px;
+
+  border: 1px solid rgba(255,255,255,0.065);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.034),
+      rgba(255,255,255,0.011)
+    );
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.13),
+    inset 0 1px 0 rgba(255,255,255,0.02);
+
+  overflow: hidden;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.rocam-dashboard-summary-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255,255,255,0.12);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.05),
+      rgba(255,255,255,0.018)
+    );
+}
+
+.rocam-dashboard-summary-card::after {
+  content: "";
+
+  position: absolute;
+
+  left: 18px;
+  right: 18px;
+  bottom: 0;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,0.25),
+      transparent
+    );
+}
+
+.rocam-dashboard-summary-card small,
+.rocam-dashboard-summary-card strong {
+  display: block;
+}
+
+.rocam-dashboard-summary-card small {
+  margin-bottom: 10px;
+
+  color: #657283;
+
+  font-size: 0.54rem;
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+
+  text-transform: uppercase;
+}
+
+.rocam-dashboard-summary-card strong {
+  color: #e9edf2;
+
+  font-size: 0.88rem;
+  font-weight: 850;
+}
+
+.rocam-dashboard-summary-card.destaque {
+  border-color: rgba(255,255,255,0.12);
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(255,255,255,0.07),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.055),
+      rgba(255,255,255,0.018)
+    );
+}
+
+
+/* =========================================================
+   CARDS PRINCIPAIS
+========================================================= */
+
+.rocam-dashboard-card,
+.rocam-hierarchy-group {
+  position: relative;
+
+  padding: 20px;
+
+  border-radius: 17px;
+
+  border: 1px solid rgba(255,255,255,0.06);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.026),
+      rgba(255,255,255,0.008)
+    );
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.13),
+    inset 0 1px 0 rgba(255,255,255,0.02);
+}
+
+
+/* =========================================================
+   TÍTULOS
+========================================================= */
+
+.rocam-dashboard-card-title,
+.rocam-hierarchy-group-title {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 16px;
+
+  padding-bottom: 13px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.055);
+}
+
+.rocam-dashboard-card-title small,
+.rocam-hierarchy-group-title small {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #5d6979;
+
+  font-size: 0.52rem;
+  font-weight: 950;
+
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+.rocam-dashboard-card-title h2,
+.rocam-hierarchy-group-title h2 {
+  margin: 0;
+
+  color: #f1f5f9;
+
+  font-size: 1rem;
+  font-weight: 850;
+}
+
+.rocam-hierarchy-group-title > span {
+  min-width: 31px;
+  height: 31px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  background: rgba(255,255,255,0.025);
+
+  color: #aeb8c5;
+
+  font-size: 0.62rem;
+  font-weight: 850;
+}
+
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.rocam-dashboard-empty {
+  position: relative;
+
+  min-height: 75px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 17px 18px 17px 45px;
+
+  border-radius: 12px;
+
+  border: 1px dashed rgba(255,255,255,0.09);
+
+  background: rgba(255,255,255,0.009);
+
+  color: #657284;
+
+  font-size: 0.67rem;
+}
+
+.rocam-dashboard-empty::before {
+  content: "—";
+
+  position: absolute;
+
+  left: 18px;
+
+  width: 17px;
+  height: 17px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.1);
+
+  color: #7b8797;
+
+  font-size: 0.6rem;
+}
+
+
+/* =========================================================
+   COMANDO
+========================================================= */
+
+.rocam-dashboard-command-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      4,
+      minmax(0,1fr)
+    );
+
+  gap: 10px;
+}
+
+.rocam-dashboard-command-grid > div {
+  min-height: 77px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 14px;
+
+  border-radius: 11px;
+
+  border: 1px solid rgba(255,255,255,0.05);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,0.024),
+      rgba(255,255,255,0.008)
+    );
+}
+
+.rocam-dashboard-command-grid small,
+.rocam-dashboard-command-grid strong {
+  display: block;
+}
+
+.rocam-dashboard-command-grid small {
+  color: #5d6979;
+
+  font-size: 0.52rem;
+  font-weight: 850;
+
+  text-transform: uppercase;
+}
+
+.rocam-dashboard-command-grid strong {
+  margin-top: 6px;
+
+  color: #bac4d0;
+
+  font-size: 0.7rem;
+}
+
+
+/* =========================================================
+   HIERARQUIA
+========================================================= */
+
+.rocam-hierarchy-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(265px,1fr)
+    );
+
+  gap: 11px;
+}
+
+.rocam-hierarchy-person {
+  position: relative;
+
+  min-height: 105px;
+
+  padding: 14px 15px 14px 17px;
+
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.055);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.025),
+      rgba(255,255,255,0.008)
+    );
+
+  overflow: hidden;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease;
+}
+
+.rocam-hierarchy-person::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 13px;
+  bottom: 13px;
+
+  width: 2px;
+
+  border-radius: 999px;
+
+  background: #9aa4b1;
+
+  opacity: 0.35;
+}
+
+.rocam-hierarchy-person:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255,255,255,0.11);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,0.04),
+      rgba(255,255,255,0.012)
+    );
+}
+
+.rocam-hierarchy-person-top {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: flex-start;
+
+  gap: 10px;
+}
+
+.rocam-hierarchy-person-top small,
+.rocam-hierarchy-person-top strong {
+  display: block;
+}
+
+.rocam-hierarchy-person-top small {
+  margin-bottom: 4px;
+
+  color: #697587;
+
+  font-size: 0.55rem;
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.rocam-hierarchy-person-top strong {
+  color: #e7ebf0;
+
+  font-size: 0.77rem;
+  font-weight: 850;
+}
+
+.rocam-hierarchy-person-top > span {
+  padding: 4px 7px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(255,255,255,0.07);
+
+  background: rgba(255,255,255,0.02);
+
+  color: #98a4b3;
+
+  font-size: 0.53rem;
+}
+
+.rocam-hierarchy-person-meta {
+  display: grid;
+  gap: 4px;
+
+  margin-top: 11px;
+
+  padding-top: 9px;
+
+  border-top: 1px solid rgba(255,255,255,0.045);
+
+  color: #697587;
+
+  font-size: 0.59rem;
+}
+
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .rocam-dashboard-summary,
+  .rocam-dashboard-command-grid {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(0,1fr)
+      );
+  }
+}
+
+@media (max-width: 760px) {
+
+  .rocam-dashboard-hero {
+    min-height: auto;
+
+    flex-direction: column;
+
+    padding: 23px;
+  }
+
+  .rocam-dashboard-hero::before {
+    font-size: 5rem;
+  }
+
+  .rocam-dashboard-role {
+    min-width: 0;
+    max-width: none;
+  }
+
+  .rocam-dashboard-summary,
+  .rocam-dashboard-command-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .rocam-hierarchy-grid {
+    grid-template-columns: 1fr;
+  }
+}

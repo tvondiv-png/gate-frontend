@@ -1,0 +1,557 @@
+.rocam-evaluate-page {
+  display: grid;
+  gap: 18px;
+}
+
+.rocam-evaluate-hero {
+  min-height: 165px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 27px 30px;
+
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 20px;
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(255,255,255,.06),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #111720,
+      #070b10
+    );
+}
+
+.rocam-evaluate-hero > div:first-child > span {
+  color: #7c8998;
+
+  font-size: .54rem;
+  font-weight: 950;
+
+  letter-spacing: 1.5px;
+}
+
+.rocam-evaluate-hero h1 {
+  margin: 6px 0 0;
+
+  color: #fff;
+
+  font-size: 2.25rem;
+}
+
+.rocam-evaluate-hero p {
+  max-width: 620px;
+
+  margin: 8px 0 0;
+
+  color: #778495;
+
+  font-size: .68rem;
+
+  line-height: 1.6;
+}
+
+.rocam-evaluate-hero-mark {
+  width: 90px;
+  height: 90px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 10px;
+
+  border-radius: 16px;
+
+  background: #eef2f6;
+}
+
+.rocam-evaluate-hero-mark img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+}
+
+.rocam-evaluate-toolbar {
+  padding: 16px;
+
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.012);
+}
+
+.rocam-evaluate-toolbar > div {
+  max-width: 480px;
+
+  display: grid;
+  gap: 6px;
+}
+
+.rocam-evaluate-toolbar label {
+  color: #7c8998;
+
+  font-size: .58rem;
+}
+
+.rocam-evaluate-toolbar input,
+.rocam-evaluate-comment textarea {
+  width: 100%;
+
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 10px;
+
+  outline: none;
+
+  background: rgba(0,0,0,.2);
+
+  color: #fff;
+}
+
+.rocam-evaluate-toolbar input {
+  min-height: 42px;
+
+  padding: 0 12px;
+}
+
+.rocam-evaluate-trainee-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(230px, 1fr)
+    );
+
+  gap: 10px;
+}
+
+.rocam-evaluate-trainee {
+  padding: 18px;
+
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.028),
+      rgba(255,255,255,.008)
+    );
+}
+
+.rocam-evaluate-avatar {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+
+  margin-bottom: 12px;
+
+  border-radius: 11px;
+
+  background: #18202a;
+
+  color: #fff;
+
+  font-size: .65rem;
+  font-weight: 900;
+}
+
+.rocam-evaluate-trainee small {
+  color: #667384;
+
+  font-size: .52rem;
+}
+
+.rocam-evaluate-trainee h2 {
+  margin: 4px 0;
+
+  color: #e8edf2;
+
+  font-size: .78rem;
+}
+
+.rocam-evaluate-trainee p,
+.rocam-evaluate-trainee span {
+  display: block;
+
+  color: #687586;
+
+  font-size: .55rem;
+}
+
+.rocam-evaluate-trainee button {
+  width: 100%;
+  min-height: 37px;
+
+  margin-top: 13px;
+
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 9px;
+
+  background: rgba(255,255,255,.035);
+
+  color: #cbd5e1;
+
+  cursor: pointer;
+}
+
+.rocam-evaluate-selected {
+  display: grid;
+
+  grid-template-columns:
+    auto 1fr auto;
+
+  align-items: center;
+
+  gap: 15px;
+
+  padding: 17px;
+
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 14px;
+
+  background: rgba(255,255,255,.015);
+}
+
+.rocam-evaluate-back {
+  border: 0;
+
+  background: transparent;
+
+  color: #7d8998;
+
+  cursor: pointer;
+}
+
+.rocam-evaluate-selected small {
+  color: #606d7d;
+
+  font-size: .5rem;
+}
+
+.rocam-evaluate-selected h2 {
+  margin: 4px 0;
+
+  color: #eef2f6;
+
+  font-size: .86rem;
+}
+
+.rocam-evaluate-selected span {
+  color: #687586;
+
+  font-size: .54rem;
+}
+
+.rocam-evaluate-score {
+  text-align: right;
+}
+
+.rocam-evaluate-score strong {
+  display: block;
+
+  color: #fff;
+
+  font-size: 1.5rem;
+}
+
+.rocam-evaluate-criteria {
+  display: grid;
+  gap: 8px;
+}
+
+.rocam-evaluate-criterion {
+  display: grid;
+
+  grid-template-columns:
+    38px 1fr auto;
+
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  border: 1px solid rgba(255,255,255,.055);
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.01);
+}
+
+.rocam-evaluate-criterion.ok {
+  border-color: rgba(34,197,94,.16);
+
+  background: rgba(34,197,94,.025);
+}
+
+.rocam-evaluate-criterion.fail {
+  border-color: rgba(239,68,68,.16);
+
+  background: rgba(239,68,68,.025);
+}
+
+.rocam-evaluate-criterion-number {
+  width: 32px;
+  height: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 9px;
+
+  background: rgba(255,255,255,.035);
+
+  color: #8491a1;
+
+  font-size: .55rem;
+}
+
+.rocam-evaluate-criterion-main {
+  display: grid;
+  gap: 3px;
+}
+
+.rocam-evaluate-criterion-main strong {
+  color: #cdd5df;
+
+  font-size: .66rem;
+}
+
+.rocam-evaluate-criterion-main span {
+  color: #647183;
+
+  font-size: .53rem;
+}
+
+.rocam-evaluate-answers {
+  display: flex;
+  gap: 7px;
+}
+
+.rocam-evaluate-answers button {
+  min-height: 35px;
+
+  padding: 0 10px;
+
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 8px;
+
+  background: rgba(255,255,255,.02);
+
+  color: #8c99a8;
+
+  font-size: .55rem;
+
+  cursor: pointer;
+}
+
+.rocam-evaluate-answers button.selected {
+  border-color: rgba(34,197,94,.25);
+
+  background: rgba(34,197,94,.08);
+
+  color: #86efac;
+}
+
+.rocam-evaluate-answers button.negative.selected {
+  border-color: rgba(239,68,68,.25);
+
+  background: rgba(239,68,68,.08);
+
+  color: #fca5a5;
+}
+
+.rocam-evaluate-summary {
+  padding: 18px;
+
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 15px;
+
+  background: rgba(255,255,255,.012);
+}
+
+.rocam-evaluate-numbers {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 8px;
+}
+
+.rocam-evaluate-numbers > div {
+  padding: 11px;
+
+  border: 1px solid rgba(255,255,255,.045);
+  border-radius: 9px;
+}
+
+.rocam-evaluate-numbers small {
+  display: block;
+
+  color: #5d6a7a;
+
+  font-size: .47rem;
+}
+
+.rocam-evaluate-numbers strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #d5dce5;
+
+  font-size: .8rem;
+}
+
+.rocam-evaluate-numbers .positive strong {
+  color: #86efac;
+}
+
+.rocam-evaluate-numbers .negative strong {
+  color: #fca5a5;
+}
+
+.rocam-evaluate-comment {
+  display: grid;
+  gap: 6px;
+
+  margin-top: 14px;
+}
+
+.rocam-evaluate-comment label {
+  color: #788596;
+
+  font-size: .56rem;
+}
+
+.rocam-evaluate-comment textarea {
+  padding: 11px;
+
+  resize: vertical;
+}
+
+.rocam-evaluate-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 14px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(255,255,255,.05);
+}
+
+.rocam-evaluate-actions span {
+  color: #687586;
+
+  font-size: .54rem;
+}
+
+.rocam-evaluate-actions button {
+  min-height: 40px;
+
+  padding: 0 15px;
+
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e2e8f0,
+      #a9b4c1
+    );
+
+  color: #080b10;
+
+  font-size: .59rem;
+  font-weight: 850;
+
+  cursor: pointer;
+}
+
+.rocam-evaluate-actions button:disabled {
+  opacity: .4;
+
+  cursor: default;
+}
+
+.rocam-evaluate-alert,
+.rocam-evaluate-empty {
+  padding: 14px;
+
+  border-radius: 10px;
+
+  font-size: .6rem;
+}
+
+.rocam-evaluate-alert.error {
+  border: 1px solid rgba(239,68,68,.17);
+
+  background: rgba(239,68,68,.045);
+
+  color: #fca5a5;
+}
+
+.rocam-evaluate-alert.success {
+  border: 1px solid rgba(34,197,94,.17);
+
+  background: rgba(34,197,94,.045);
+
+  color: #86efac;
+}
+
+.rocam-evaluate-empty {
+  border: 1px dashed rgba(255,255,255,.08);
+
+  color: #657283;
+}
+
+@media (max-width: 760px) {
+  .rocam-evaluate-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .rocam-evaluate-selected {
+    grid-template-columns: 1fr;
+  }
+
+  .rocam-evaluate-score {
+    text-align: left;
+  }
+
+  .rocam-evaluate-criterion {
+    grid-template-columns:
+      35px 1fr;
+  }
+
+  .rocam-evaluate-answers {
+    grid-column: 1 / -1;
+  }
+
+  .rocam-evaluate-numbers {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .rocam-evaluate-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

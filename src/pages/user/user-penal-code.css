@@ -1,0 +1,400 @@
+.penal-page {
+  display: grid;
+  gap: 20px;
+  color: #fff;
+}
+
+.penal-hero {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(212, 160, 23, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+  display: grid;
+  gap: 18px;
+}
+
+.penal-kicker {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #d4a017;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.penal-hero h1 {
+  margin: 0 0 8px 0;
+  font-size: 34px;
+}
+
+.penal-hero p {
+  margin: 0;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.6;
+}
+
+.penal-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.penal-summary-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(255,255,255,0.02);
+}
+
+.penal-summary-card small {
+  display: block;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.penal-summary-card strong {
+  font-size: 26px;
+}
+
+.penal-toolbar,
+.penal-side-block,
+.penal-detail-panel,
+.penal-footer-note {
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 18px;
+  background: rgba(255,255,255,0.02);
+}
+
+.penal-search-box input {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: #020b24;
+  color: #fff;
+  outline: none;
+}
+
+.penal-search-box input:focus {
+  border-color: rgba(212, 160, 23, 0.6);
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.12);
+}
+
+.penal-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.penal-filters button,
+.penal-chip,
+.penal-mini-item,
+.penal-related-card,
+.penal-fav-btn {
+  border: 1px solid rgba(212, 160, 23, 0.35);
+  background: rgba(212, 160, 23, 0.06);
+  color: #fff;
+  border-radius: 12px;
+  padding: 9px 12px;
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.penal-filters button:hover,
+.penal-chip:hover,
+.penal-mini-item:hover,
+.penal-related-card:hover,
+.penal-fav-btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(212, 160, 23, 0.55);
+  background: rgba(212, 160, 23, 0.12);
+}
+
+.penal-filters button.active {
+  border-color: #d4a017;
+  background: rgba(212, 160, 23, 0.18);
+}
+
+.penal-quick-access {
+  margin-top: 16px;
+  display: grid;
+  gap: 10px;
+}
+
+.penal-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.penal-chip.static {
+  cursor: default;
+}
+
+.penal-dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.9fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.penal-left-column,
+.penal-right-column {
+  display: grid;
+  gap: 20px;
+}
+
+.penal-side-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.penal-side-header h3 {
+  margin: 0;
+}
+
+.penal-list {
+  display: grid;
+  gap: 12px;
+  max-height: 980px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.penal-list-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 16px;
+  background: rgba(255,255,255,0.02);
+  cursor: pointer;
+  transition: 0.18s ease;
+}
+
+.penal-list-card:hover,
+.penal-list-card.selected {
+  transform: translateY(-1px);
+  border-color: rgba(212, 160, 23, 0.4);
+  background: rgba(255,255,255,0.03);
+}
+
+.penal-list-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+}
+
+.penal-article-code {
+  font-size: 12px;
+  color: #d4a017;
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.penal-list-card h4 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.penal-list-card p {
+  color: rgba(255,255,255,0.76);
+  line-height: 1.55;
+  margin: 10px 0 12px;
+}
+
+.penal-list-meta,
+.penal-detail-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.penal-badge {
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.penal-badge.neutral {
+  color: rgba(255,255,255,0.85);
+  border-color: rgba(255,255,255,0.18);
+}
+
+.penal-badge.danger {
+  color: #f87171;
+  border-color: rgba(248, 113, 113, 0.4);
+}
+
+.penal-list-values {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.penal-list-values small,
+.penal-detail-box small {
+  display: block;
+  color: rgba(255,255,255,0.58);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+}
+
+.penal-list-values strong,
+.penal-detail-box strong {
+  font-size: 16px;
+}
+
+.penal-fav-btn.active {
+  background: rgba(212, 160, 23, 0.22);
+}
+
+.penal-fav-btn.large {
+  min-width: 132px;
+}
+
+.penal-mini-section {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.penal-mini-list {
+  display: grid;
+  gap: 8px;
+}
+
+.penal-mini-item {
+  text-align: left;
+}
+
+.penal-detail-panel {
+  display: grid;
+  gap: 16px;
+  position: sticky;
+  top: 20px;
+}
+
+.penal-detail-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+.penal-detail-article {
+  display: inline-block;
+  color: #d4a017;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.penal-detail-header h2 {
+  margin: 0;
+  font-size: 30px;
+}
+
+.penal-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.penal-detail-box,
+.penal-related-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+}
+
+.penal-detail-text {
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 14px;
+  background: rgba(255,255,255,0.02);
+}
+
+.penal-detail-text h4 {
+  margin: 0 0 10px;
+}
+
+.penal-detail-text p,
+.penal-detail-text li {
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+}
+
+.penal-related-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.penal-related-card {
+  text-align: left;
+}
+
+.penal-related-card strong {
+  display: block;
+  margin-bottom: 6px;
+}
+
+.penal-empty-state {
+  border: 1px dashed rgba(255,255,255,0.14);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  color: rgba(255,255,255,0.7);
+}
+
+.penal-footer-note strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.penal-footer-note p {
+  margin: 0;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.6;
+}
+
+@media (max-width: 1100px) {
+  .penal-dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .penal-detail-panel {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .penal-hero h1 {
+    font-size: 28px;
+  }
+
+  .penal-detail-grid,
+  .penal-related-grid,
+  .penal-list-values {
+    grid-template-columns: 1fr;
+  }
+
+  .penal-detail-header {
+    flex-direction: column;
+  }
+}

@@ -1,87 +1,956 @@
 .select-panel-page {
   min-height: 100vh;
-  background: radial-gradient(circle at top, #0b1c2d, #020617);
+  position: relative;
+  overflow: hidden;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #e5e7eb;
+
+  padding: 42px 22px;
+
+  color: #f8fafc;
+
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(148, 163, 184, 0.10),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(30, 64, 175, 0.10),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #020617 0%,
+      #07111d 42%,
+      #0a1422 68%,
+      #020617 100%
+    );
 }
+
+/* =========================================================
+   GRID DE FUNDO
+========================================================= */
+
+.select-panel-bg {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.15;
+
+  background-image:
+    linear-gradient(
+      rgba(148, 163, 184, 0.10) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(148, 163, 184, 0.10) 1px,
+      transparent 1px
+    );
+
+  background-size: 46px 46px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.8),
+      transparent 92%
+    );
+}
+
+/* =========================================================
+   LUZES
+========================================================= */
+
+.select-panel-light {
+  position: absolute;
+
+  width: 480px;
+  height: 480px;
+
+  border-radius: 50%;
+
+  filter: blur(110px);
+
+  opacity: 0.08;
+
+  pointer-events: none;
+}
+
+.select-panel-light-left {
+  top: -180px;
+  left: -160px;
+
+  background: #f8fafc;
+}
+
+.select-panel-light-right {
+  right: -160px;
+  bottom: -220px;
+
+  background: #2563eb;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .select-panel-box {
-  max-width: 900px;
   width: 100%;
-  padding: 60px 40px;
+  max-width: 1280px;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.select-panel-header {
+  max-width: 850px;
+
+  margin: 0 auto 42px;
+
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.select-panel-box h1 {
-  font-size: 2.4rem;
-  margin-bottom: 10px;
+.select-panel-main-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 16px;
 }
 
-.select-panel-box .subtitle {
-  opacity: 0.8;
-  margin-bottom: 50px;
+.select-panel-main-logo {
+  width: 126px;
+  height: 126px;
+
+  display: block;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 12px 26px
+      rgba(0, 0, 0, 0.42)
+    )
+    drop-shadow(
+      0 0 24px
+      rgba(226, 232, 240, 0.08)
+    );
 }
+
+.select-panel-kicker {
+  display: inline-flex;
+
+  padding: 7px 14px;
+
+  margin-bottom: 13px;
+
+  border-radius: 999px;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.22);
+
+  background:
+    rgba(148, 163, 184, 0.07);
+
+  color: #cbd5e1;
+
+  font-size: 0.76rem;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+}
+
+.select-panel-header h1 {
+  margin: 0 0 12px;
+
+  color: #ffffff;
+
+  font-size:
+    clamp(
+      2.25rem,
+      4vw,
+      3.4rem
+    );
+
+  line-height: 1.05;
+
+  letter-spacing: -1px;
+}
+
+.select-panel-header .subtitle {
+  max-width: 740px;
+
+  margin: 0;
+
+  color: #aebdce;
+
+  line-height: 1.8;
+
+  font-size: 1rem;
+}
+
+/* =========================================================
+   USUÁRIO
+========================================================= */
+
+.select-panel-user {
+  margin-top: 22px;
+
+  padding: 12px 18px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  flex-wrap: wrap;
+
+  justify-content: center;
+
+  border-radius: 14px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+.select-panel-user span {
+  color: #64748b;
+
+  font-size: 0.78rem;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+.select-panel-user strong {
+  color: #fff;
+
+  font-size: 0.9rem;
+}
+
+.select-panel-user small {
+  color: #94a3b8;
+
+  font-size: 0.8rem;
+}
+
+/* =========================================================
+   GRID
+========================================================= */
 
 .select-panel-cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
+
+  gap: 22px;
+
+  align-items: stretch;
 }
 
-.panel-card {
-  background: linear-gradient(180deg, #020617, #050b14);
-  border: 1px solid rgba(201,162,77,0.4);
-  border-radius: 14px;
-  padding: 40px 30px;
+.select-panel-cards.panels-1 {
+  max-width: 450px;
+  margin: 0 auto;
+
+  grid-template-columns: 1fr;
+}
+
+.select-panel-cards.panels-2 {
+  max-width: 900px;
+  margin: 0 auto;
+
+  grid-template-columns:
+    repeat(
+      2,
+      minmax(300px, 1fr)
+    );
+}
+
+.select-panel-cards.panels-3 {
+  grid-template-columns:
+    repeat(
+      3,
+      minmax(280px, 1fr)
+    );
+}
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.panel-access-card {
+  position: relative;
+
+  min-height: 450px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 30px 26px 26px;
+
+  border-radius: 24px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.08);
+
+  background:
+    linear-gradient(
+      160deg,
+      rgba(15, 23, 42, 0.95),
+      rgba(2, 6, 23, 0.97)
+    );
+
+  box-shadow:
+    0 24px 55px
+      rgba(0, 0, 0, 0.33),
+    inset 0 1px
+      rgba(255, 255, 255, 0.03);
+
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
-.panel-card.admin {
-  border-color: rgba(220,38,38,0.6);
+.panel-access-card:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(148, 163, 184, 0.26);
+
+  box-shadow:
+    0 30px 65px
+      rgba(0, 0, 0, 0.42);
 }
 
-.panel-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+.panel-access-glow {
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  right: -120px;
+  top: -130px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(30px);
+
+  opacity: 0.10;
 }
 
-.panel-card .icon {
-  font-size: 3rem;
-  display: block;
+/* =========================================================
+   DIFERENÇA DOS PAINÉIS
+========================================================= */
+
+.panel-access-card.user {
+  border-top:
+    2px solid
+    rgba(34, 197, 94, 0.56);
+}
+
+.panel-access-card.user
+.panel-access-glow {
+  background: #22c55e;
+}
+
+.panel-access-card.admin {
+  border-top:
+    2px solid
+    rgba(59, 130, 246, 0.62);
+}
+
+.panel-access-card.admin
+.panel-access-glow {
+  background: #3b82f6;
+}
+
+.panel-access-card.comando {
+  border-top:
+    2px solid
+    rgba(226, 232, 240, 0.60);
+}
+
+.panel-access-card.comando
+.panel-access-glow {
+  background: #cbd5e1;
+}
+
+/* =========================================================
+   LOGO DO CARD
+========================================================= */
+
+.panel-card-top {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  margin-bottom: 16px;
+}
+
+.panel-card-top.centered {
+  justify-content: center;
+}
+
+.panel-card-logo {
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 9px 18px
+      rgba(0, 0, 0, 0.38)
+    );
+}
+
+.panel-card-logo.large {
+  width: 88px;
+  height: 88px;
+}
+
+/* =========================================================
+   BADGES
+========================================================= */
+
+.panel-access-badge {
+  position: relative;
+  z-index: 2;
+
+  display: inline-flex;
+
+  margin-bottom: 15px;
+
+  padding: 6px 11px;
+
+  border-radius: 999px;
+
+  font-size: 0.68rem;
+  font-weight: 900;
+
+  letter-spacing: 1.2px;
+}
+
+.panel-access-badge.operacional {
+  color: #86efac;
+
+  background:
+    rgba(34, 197, 94, 0.10);
+
+  border:
+    1px solid
+    rgba(34, 197, 94, 0.24);
+}
+
+.panel-access-badge.administrativo {
+  color: #93c5fd;
+
+  background:
+    rgba(59, 130, 246, 0.10);
+
+  border:
+    1px solid
+    rgba(59, 130, 246, 0.24);
+}
+
+.panel-access-badge.comando {
+  color: #e2e8f0;
+
+  background:
+    rgba(226, 232, 240, 0.07);
+
+  border:
+    1px solid
+    rgba(226, 232, 240, 0.18);
+}
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.panel-access-card h2 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0 0 13px;
+
+  color: #fff;
+
+  text-align: center;
+
+  font-size: 1.45rem;
+}
+
+.panel-access-card p {
+  position: relative;
+  z-index: 2;
+
+  flex: 1;
+
+  margin: 0 0 20px;
+
+  color: #aebdce;
+
+  text-align: center;
+
+  line-height: 1.75;
+
+  font-size: 0.92rem;
+}
+
+.panel-access-features {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+
+  flex-wrap: wrap;
+
   margin-bottom: 20px;
 }
 
-.panel-card h2 {
-  margin-bottom: 10px;
-  font-size: 1.4rem;
+.panel-access-features span {
+  padding: 7px 9px;
+
+  border-radius: 9px;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.07);
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #cbd5e1;
+
+  font-size: 0.75rem;
 }
 
-.panel-card p {
-  font-size: 0.9rem;
-  opacity: 0.85;
-  margin-bottom: 30px;
-}
+/* =========================================================
+   BOTÕES
+========================================================= */
 
-.panel-card button {
-  background: linear-gradient(180deg, #c9a24d, #a8832f);
+.panel-access-card button {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  padding: 13px 16px;
+
   border: none;
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-weight: bold;
+
+  border-radius: 12px;
+
   cursor: pointer;
-  color: #020617;
-  transition: 0.2s;
-}
 
-.panel-card.admin button {
-  background: linear-gradient(180deg, #dc2626, #991b1b);
   color: #fff;
+
+  font-weight: 800;
+
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
 }
 
-.panel-card button:hover {
-  opacity: 0.9;
+.panel-access-card.user button {
+  background:
+    linear-gradient(
+      135deg,
+      #15803d,
+      #166534
+    );
+}
+
+.panel-access-card.admin button {
+  background:
+    linear-gradient(
+      135deg,
+      #2563eb,
+      #1e40af
+    );
+}
+
+.panel-access-card.comando button {
+  color: #0f172a;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e2e8f0,
+      #94a3b8
+    );
+}
+
+.panel-access-card button:hover {
+  transform: translateY(-1px);
+
+  filter: brightness(1.08);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.select-panel-footer {
+  margin-top: 34px;
+
+  text-align: center;
+}
+
+.select-panel-footer strong {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #cbd5e1;
+
+  font-size: 0.82rem;
+
+  letter-spacing: 1px;
+}
+
+.select-panel-footer span {
+  color: #64748b;
+
+  font-size: 0.76rem;
+}
+
+/* =========================================================
+   RESPONSIVO
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .select-panel-cards.panels-3 {
+    grid-template-columns:
+      repeat(
+        2,
+        minmax(280px, 1fr)
+      );
+  }
+
+  .select-panel-cards.panels-3
+  .panel-access-card:last-child {
+    grid-column:
+      1 / -1;
+
+    max-width: 440px;
+
+    width: 100%;
+
+    justify-self: center;
+  }
+
+}
+
+/* =========================================================
+   RESPONSIVO ORIGINAL
+========================================================= */
+
+@media (max-width: 1050px) {
+  .select-panel-cards.panels-3 {
+    grid-template-columns:
+      repeat(2, minmax(280px, 1fr));
+  }
+
+  .select-panel-cards.panels-3
+  .panel-access-card:last-child {
+    grid-column: 1 / -1;
+
+    max-width: 440px;
+    width: 100%;
+
+    justify-self: center;
+  }
+}
+
+@media (max-width: 760px) {
+  .select-panel-page {
+    padding: 28px 15px;
+  }
+
+  .select-panel-main-logo {
+    width: 102px;
+    height: 102px;
+  }
+
+  .select-panel-header {
+    margin-bottom: 28px;
+  }
+
+  .select-panel-header h1 {
+    font-size: 2rem;
+  }
+
+  .select-panel-cards.panels-2,
+  .select-panel-cards.panels-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .select-panel-cards.panels-3
+  .panel-access-card:last-child {
+    grid-column: auto;
+
+    max-width: none;
+  }
+
+  .panel-access-card {
+    min-height: auto;
+
+    padding: 26px 20px;
+  }
+
+  .panel-card-logo.large {
+    width: 74px;
+    height: 74px;
+  }
+}
+
+
+/* =========================================================
+   CENTRAL DE ACESSO — 4 PAINÉIS
+========================================================= */
+
+.select-panel-box {
+  width: 100%;
+  max-width: 1540px;
+}
+
+.select-panel-cards.panels-4 {
+  width: 100%;
+
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr)) !important;
+
+  gap: 18px;
+
+  align-items: stretch;
+}
+
+.select-panel-cards.panels-4
+.panel-access-card {
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+}
+
+
+/* =========================================================
+   CARD ROCAM
+========================================================= */
+
+.panel-access-card.rocam {
+  position: relative;
+
+  border-top:
+    2px solid
+    rgba(203, 213, 225, 0.70);
+
+  border-left-color:
+    rgba(255, 255, 255, 0.10);
+
+  border-right-color:
+    rgba(255, 255, 255, 0.10);
+
+  border-bottom-color:
+    rgba(255, 255, 255, 0.10);
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(255, 255, 255, 0.07),
+      transparent 36%
+    ),
+    linear-gradient(
+      160deg,
+      #101620 0%,
+      #070b11 58%,
+      #04070b 100%
+    );
+}
+
+.panel-access-card.rocam:hover {
+  transform: translateY(-7px);
+
+  border-color:
+    rgba(203, 213, 225, 0.26);
+
+  border-top-color:
+    rgba(226, 232, 240, 0.85);
+
+  box-shadow:
+    0 30px 65px
+    rgba(0, 0, 0, 0.42);
+}
+
+.panel-access-card.rocam
+.panel-access-glow {
+  background: #cbd5e1;
+}
+
+
+/* =========================================================
+   LOGO ROCAM
+========================================================= */
+
+.panel-access-card.rocam
+.panel-card-top.centered {
+  min-height: 105px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-access-card.rocam
+.panel-card-logo.large {
+  width: 88px;
+  height: 88px;
+
+  padding: 9px;
+
+  object-fit: contain;
+
+  border-radius: 16px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #e2e8f0
+    );
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.35);
+
+  box-shadow:
+    0 10px 25px
+      rgba(0, 0, 0, 0.35),
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.95);
+
+  filter:
+    contrast(1.15);
+}
+
+
+/* =========================================================
+   BADGE ROCAM
+========================================================= */
+
+.panel-access-badge.rocam {
+  color: #e2e8f0;
+
+  background:
+    rgba(226, 232, 240, 0.07);
+
+  border:
+    1px solid
+    rgba(226, 232, 240, 0.18);
+}
+
+
+/* =========================================================
+   BOTÃO ROCAM
+========================================================= */
+
+.panel-access-card.rocam button {
+  color: #ffffff;
+
+  border:
+    1px solid
+    rgba(255, 255, 255, 0.11);
+
+  background:
+    linear-gradient(
+      135deg,
+      #29313c,
+      #111820
+    );
+}
+
+.panel-access-card.rocam button:hover {
+  background:
+    linear-gradient(
+      135deg,
+      #384352,
+      #19222d
+    );
+}
+
+
+/* =========================================================
+   RESPONSIVO — 4 PAINÉIS
+========================================================= */
+
+/*
+  Desktop / monitor:
+  4 lado a lado.
+*/
+@media (min-width: 1251px) {
+  .select-panel-cards.panels-4 {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/*
+  Notebook menor:
+  2 + 2.
+*/
+@media (min-width: 761px) and (max-width: 1250px) {
+  .select-panel-cards.panels-4 {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/*
+  Celular:
+  um embaixo do outro.
+*/
+@media (max-width: 760px) {
+  .select-panel-cards.panels-4 {
+    grid-template-columns:
+      1fr !important;
+  }
+
+  .panel-access-card.rocam
+  .panel-card-logo.large {
+    width: 74px;
+    height: 74px;
+  }
 }

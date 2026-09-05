@@ -6,12 +6,10 @@ export default function ProtectedRoute({ children, roles }) {
 
   if (loading) return null;
 
-  if (!user) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!user) return <Navigate to="/login" />;
 
   if (roles && !roles.includes(user.role)) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/select-panel" />;
   }
 
   return children;
