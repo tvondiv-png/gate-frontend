@@ -750,3 +750,234 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ======================================================
+   DASHBOARD ROCAM — widgets de dados
+   ====================================================== */
+
+.rd-muted {
+  color: #8b95a4;
+}
+
+.rd-pill {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  letter-spacing: 0.5px;
+  background: rgba(201, 162, 77, 0.14);
+  border: 1px solid rgba(201, 162, 77, 0.35);
+  color: var(--gold, #c9a24d);
+  white-space: nowrap;
+}
+
+.rd-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+.rd-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #c9a24d, #e6c982);
+  transition: width 0.4s ease;
+}
+
+.rd-progress-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin: 6px 0 18px;
+}
+.rd-progress-num {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #f5f5f5;
+  line-height: 1;
+}
+.rd-progress-num span {
+  font-size: 1rem;
+  color: var(--gold, #c9a24d);
+  margin-left: 2px;
+}
+
+.rd-metas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+.rd-meta {
+  position: relative;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-left: 3px solid #6b7280;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rd-meta.ok {
+  border-left-color: #3fb950;
+}
+.rd-meta.pendente {
+  border-left-color: #d29922;
+}
+.rd-meta-label {
+  font-size: 0.75rem;
+  color: #9aa4b2;
+}
+.rd-meta strong {
+  font-size: 1.05rem;
+  color: #f5f5f5;
+}
+.rd-meta-status {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  color: #3fb950;
+}
+.rd-meta.pendente .rd-meta-status {
+  color: #d29922;
+}
+
+.rd-pendencias {
+  margin: 14px 0 0;
+  font-size: 0.86rem;
+  color: #d29922;
+}
+
+.rd-stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+.rd-stat {
+  padding: 14px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  text-align: center;
+}
+.rd-stat strong {
+  display: block;
+  font-size: 1.7rem;
+  color: #f5f5f5;
+}
+.rd-stat span {
+  font-size: 0.76rem;
+  color: #9aa4b2;
+}
+.rd-stat.alerta {
+  border-color: rgba(248, 81, 73, 0.4);
+}
+.rd-stat.alerta strong {
+  color: #f85149;
+}
+.rd-stat.info {
+  border-color: rgba(79, 156, 249, 0.4);
+}
+
+.rd-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rd-list-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+.rd-list-row > div:first-child {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.rd-list-row strong {
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+.rd-nota {
+  font-weight: 700;
+  color: var(--gold, #c9a24d);
+}
+.rd-tag {
+  font-size: 0.68rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #b8c0cc;
+}
+.rd-tag.validada {
+  background: rgba(63, 185, 80, 0.18);
+  color: #3fb950;
+}
+.rd-tag.devolvida {
+  background: rgba(210, 153, 34, 0.18);
+  color: #d29922;
+}
+.rd-tag.pendente_comando {
+  background: rgba(79, 156, 249, 0.18);
+  color: #4f9cf9;
+}
+
+.rd-alertas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.rd-alerta {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(248, 81, 73, 0.08);
+  border: 1px solid rgba(248, 81, 73, 0.25);
+  font-size: 0.86rem;
+  color: #f3d0cd;
+}
+.rd-alerta-dot {
+  flex: 0 0 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f85149;
+  margin-top: 5px;
+}
+
+.rd-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.rd-timeline-item {
+  display: flex;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+.rd-timeline-item:last-child {
+  border-bottom: none;
+}
+.rd-timeline-dot {
+  flex: 0 0 9px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold, #c9a24d);
+  margin-top: 5px;
+}
+.rd-timeline-item strong {
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+.rd-timeline-item p {
+  margin: 3px 0;
+  font-size: 0.82rem;
+}
