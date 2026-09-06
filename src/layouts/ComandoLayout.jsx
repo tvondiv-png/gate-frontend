@@ -42,6 +42,11 @@ export default function ComandoLayout() {
             icon: "📈"
           },
           {
+            to: "/comando/metas",
+            label: "Metas do Comando",
+            icon: "🎯"
+          },
+          {
             to: "/comando/consultas",
             label: "Consulta Policial",
             icon: "🔎"

@@ -15,6 +15,7 @@ import UserProfileRequests from "./UserProfileRequests";
 import UserPenalCode from "./UserPenalCode";
 
 import "./user-dashboard.css";
+import "../../styles/comando-metas.css";
 
 export default function UserDashboard() {
   const { user } = useAuth();
@@ -27,6 +28,9 @@ export default function UserDashboard() {
 
   const [comunicadosComando, setComunicadosComando] = useState([]);
   const [altoComandoAtivo, setAltoComandoAtivo] = useState(null);
+
+  const [metasComando, setMetasComando] = useState([]);
+  const [metasTemNaoVista, setMetasTemNaoVista] = useState(false);
 
   const formatarHoras = (min) => {
     if (!min) return "0h";
@@ -62,13 +66,26 @@ export default function UserDashboard() {
       setLoading(true);
 
       try {
-        const [dashboardData, advertenciaRes, comunicadoRes, altoRes] =
+        const [dashboardData, advertenciaRes, comunicadoRes, altoRes, metasRes] =
           await Promise.allSettled([
             carregarDashboardUsuario(),
             api.get("/api/advertencias/minha"),
             api.get("/api/comando/comunicado/usuario"),
-            api.get("/api/high-command-notices/active")
+            api.get("/api/high-command-notices/active"),
+            api.get("/api/user/dashboard/metas")
           ]);
+
+        if (metasRes.status === "fulfilled") {
+          setMetasComando(
+            Array.isArray(metasRes.value.data?.metas)
+              ? metasRes.value.data.metas
+              : []
+          );
+          setMetasTemNaoVista(!!metasRes.value.data?.temNaoVista);
+        } else {
+          setMetasComando([]);
+          setMetasTemNaoVista(false);
+        }
 
         if (dashboardData.status === "fulfilled") {
           setDashboard(dashboardData.value);
@@ -158,6 +175,16 @@ export default function UserDashboard() {
     }
   ];
 }, [dashboard]);
+
+  const marcarMetasVistas = async () => {
+    try {
+      await api.post("/api/user/dashboard/metas/vistas");
+      setMetasTemNaoVista(false);
+      setMetasComando((prev) => prev.map((m) => ({ ...m, vista: true })));
+    } catch {
+      /* silencioso */
+    }
+  };
 
   const atalhos = [
     { key: "rso", label: "RSO", icon: "🚓" },
@@ -356,6 +383,30 @@ export default function UserDashboard() {
         </section>
       )}
 
+      {metasComando.length > 0 && metasTemNaoVista && (
+        <section className="user-warning-banner user-metas-banner">
+          <div className="user-warning-icon">🎯</div>
+          <div className="user-warning-content">
+            <h3>Atenção: meta estabelecida pelo Comando</h3>
+            <p>
+              O Comando publicou{" "}
+              <strong>
+                {metasComando.length} meta
+                {metasComando.length > 1 ? "s" : ""}
+              </strong>{" "}
+              para você. Acompanhe o cumprimento no seu painel.
+            </p>
+            <button
+              className="user-home-btn"
+              type="button"
+              onClick={marcarMetasVistas}
+            >
+              Estou ciente
+            </button>
+          </div>
+        </section>
+      )}
+
       <section className="user-dashboard-menu-section">
         <div className="user-dashboard-menu-top">
           <div>
@@ -398,6 +449,62 @@ export default function UserDashboard() {
 
       {view === "home" && (
         <>
+          {metasComando.length > 0 && (
+            <section className="user-dashboard-menu-section">
+              <div className="user-dashboard-menu-top">
+                <div>
+                  <h2>Minhas metas do Comando</h2>
+                  <span>Acompanhamento do que o Comando estabeleceu para você.</span>
+                </div>
+              </div>
+
+              <div className="user-metas-lista">
+                {metasComando.map((m) => {
+                  const pct = Math.max(0, Math.min(100, Number(m.percentual || 0)));
+                  const unid = m.tipo === "HORAS" ? "h" : "ações";
+                  return (
+                    <div key={m._id} className="user-meta-item">
+                      <h4>{m.titulo}</h4>
+                      <div className="um-meta-info">
+                        {m.tipo === "HORAS" ? "Horas de patrulhamento" : "Ações aprovadas"}{" "}
+                        · {m.periodo === "MENSAL" ? "no mês" : "na semana"} · meta{" "}
+                        {m.valorAlvo} {unid} · prazo{" "}
+                        {new Date(m.dataFim).toLocaleDateString("pt-BR")}
+                      </div>
+                      {m.descricao && (
+                        <p className="um-meta-info" style={{ marginTop: -4 }}>
+                          {m.descricao}
+                        </p>
+                      )}
+                      <div className="user-meta-bar">
+                        <div
+                          className="user-meta-bar-fill"
+                          style={{
+                            width: `${pct}%`,
+                            background:
+                              pct >= 100
+                                ? "#3fb950"
+                                : "linear-gradient(90deg,#c9a24d,#e6c982)"
+                          }}
+                        />
+                      </div>
+                      <div className="user-meta-progress-label">
+                        <span>
+                          {m.atual} / {m.alvo} {unid}
+                        </span>
+                        {m.atingiu ? (
+                          <span className="user-meta-ok">✓ Meta atingida</span>
+                        ) : (
+                          <span>{pct}%</span>
+                        )}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          )}
+
           <section className="user-summary-grid">
             {cardsResumo.map((card, index) => (
               <div

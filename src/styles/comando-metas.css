@@ -1,0 +1,181 @@
+/* ======================================================
+   METAS DO COMANDO
+   ====================================================== */
+
+.cm-muted {
+  color: #8b95a4;
+}
+
+.cm-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.09);
+  overflow: hidden;
+}
+.cm-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+.cm-cats {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+.cm-cat {
+  font-size: 0.86rem;
+  color: #cbd5e1;
+}
+
+.cm-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cm-card {
+  padding: 16px 18px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #0f172a, #070c17);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid var(--gold, #c9a24d);
+}
+.cm-card.expirada {
+  border-left-color: #f85149;
+}
+
+.cm-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.cm-card-head strong {
+  color: #f5f5f5;
+  font-size: 1.02rem;
+}
+
+.cm-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.cm-tag {
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #b8c0cc;
+}
+
+.cm-expirada-badge {
+  flex: 0 0 auto;
+  font-size: 0.74rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(248, 81, 73, 0.15);
+  border: 1px solid rgba(248, 81, 73, 0.4);
+  color: #f85149;
+  white-space: nowrap;
+}
+
+.cm-desc {
+  margin: 12px 0 0;
+  color: #c2cad6;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.cm-resumo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 14px 0 4px;
+}
+.cm-resumo-num {
+  text-align: center;
+}
+.cm-resumo-num strong {
+  display: block;
+  font-size: 1.3rem;
+  color: #f5f5f5;
+}
+.cm-resumo-num span {
+  font-size: 0.72rem;
+  color: #9aa4b2;
+}
+
+.cm-lembrete {
+  margin: 10px 0 0;
+  font-size: 0.82rem;
+  color: #f0a35e;
+}
+
+.cm-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.cm-detalhe {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ============ Banner + seção no painel do usuário ============ */
+
+.user-metas-banner {
+  border-left: 6px solid #c9a24d !important;
+}
+
+.user-metas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.user-meta-item {
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.user-meta-item h4 {
+  margin: 0 0 4px;
+  color: #f5f5f5;
+  font-size: 0.95rem;
+}
+.user-meta-item .um-meta-info {
+  font-size: 0.78rem;
+  color: #9aa4b2;
+  margin-bottom: 10px;
+}
+.user-meta-bar {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+.user-meta-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.user-meta-progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  margin-top: 6px;
+  color: #c2cad6;
+}
+.user-meta-ok {
+  color: #3fb950;
+  font-weight: 700;
+}

@@ -88,6 +88,7 @@ const ComandoConsultas = lazy(() => import("./pages/comando/ComandoConsultas"));
 const ComandoDisciplina = lazy(() => import("./pages/comando/ComandoDisciplina"));
 const ComandoEfetivo = lazy(() => import("./pages/comando/ComandoEfetivo"));
 const ComandoProdutividade = lazy(() => import("./pages/comando/ComandoProdutividade"));
+const ComandoMetas = lazy(() => import("./pages/comando/ComandoMetas"));
 const ComandoComunicados = lazy(() => import("./pages/comando/ComandoComunicados"));
 const ComandoDesempenho = lazy(() => import("./pages/comando/ComandoDesempenho"));
 const ComandoPatrulha = lazy(() => import("./pages/comando/ComandoPatrulha"));
@@ -295,6 +296,7 @@ export default function App() {
             <Route path="disciplina" element={<ComandoDisciplina />} />
             <Route path="efetivo" element={<ComandoEfetivo />} />
             <Route path="produtividade" element={<ComandoProdutividade />} />
+            <Route path="metas" element={<ComandoMetas />} />
             <Route path="comunicados" element={<ComandoComunicados />} />
             <Route path="desempenho" element={<ComandoDesempenho />} />
             <Route path="patrulha" element={<ComandoPatrulha />} />
