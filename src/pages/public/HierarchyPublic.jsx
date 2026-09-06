@@ -216,6 +216,16 @@ export default function HierarchyPublic() {
     }, [data, busca]);
 
   const rocamFiltrada = useMemo(() => {
+    const comando =
+      ordenarPorPatente(
+        rocam?.comando?.membros || []
+      );
+
+    const subcomando =
+      ordenarPorPatente(
+        rocam?.subcomando?.membros || []
+      );
+
     const bracais =
       ordenarPorPatente(
         rocam?.bracais?.membros || []
@@ -227,6 +237,12 @@ export default function HierarchyPublic() {
       );
 
     return {
+      comando:
+        filtrarLista(comando, busca),
+
+      subcomando:
+        filtrarLista(subcomando, busca),
+
       bracais:
         filtrarLista(
           bracais,
@@ -762,6 +778,89 @@ export default function HierarchyPublic() {
 
       {aba === "rocam" && (
         <section className="hierarchy-content rocam-content">
+
+          {/* =================================================
+              COMANDO / SUBCOMANDO ROCAM
+          ================================================= */}
+
+          {[
+            {
+              chave: "comando",
+              badge: "COMANDO ROCAM",
+              titulo: "Comando ROCAM",
+              qualifClasse: "comando",
+              lista: rocamFiltrada.comando
+            },
+            {
+              chave: "subcomando",
+              badge: "SUBCOMANDO ROCAM",
+              titulo: "Subcomando ROCAM",
+              qualifClasse: "subcomando",
+              lista: rocamFiltrada.subcomando
+            }
+          ].map((grupo) => (
+            <div
+              key={grupo.chave}
+              className={`category-block rocam-block ${grupo.chave}`}
+            >
+              <div className="category-header">
+                <div>
+                  <span className="category-badge rocam-badge">
+                    {grupo.badge}
+                  </span>
+                  <h2>
+                    {grupo.titulo}{" "}
+                    <small>({grupo.lista.length})</small>
+                  </h2>
+                </div>
+              </div>
+
+              <div className="hierarchy-table-wrapper">
+                <table className="hierarchy-table rocam-table">
+                  <thead>
+                    <tr>
+                      <th>Funcional</th>
+                      <th>Nome</th>
+                      <th>Patente</th>
+                      <th>Função</th>
+                      <th>Qualificação</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {grupo.lista.length === 0 ? (
+                      <tr>
+                        <td colSpan="6" className="hierarchy-empty">
+                          Nenhum policial neste grupo.
+                        </td>
+                      </tr>
+                    ) : (
+                      grupo.lista.map((m, i) => (
+                        <tr key={m._id || m.funcional || i}>
+                          <td>{m.funcional || "-"}</td>
+                          <td>{m.nome || "-"}</td>
+                          <td>
+                            <PatenteCell patente={m.patente} />
+                          </td>
+                          <td>{m.funcao || "-"}</td>
+                          <td>
+                            <span
+                              className={`rocam-qualification ${grupo.qualifClasse}`}
+                            >
+                              {grupo.titulo}
+                            </span>
+                          </td>
+                          <td>
+                            <StatusPill status={m.status} />
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
 
           {/* =================================================
               BRAÇAL ROCAM
