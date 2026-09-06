@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const badgeClass = (status) => {
   if (status === "Validado") return "success";
   if (status === "Rejeitado") return "danger";
@@ -14,6 +15,8 @@ const formatarDataHora = (valor) => {
 };
 
 export default function ApresentacoesEstagiariosAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [items, setItems] = useState([]);
   const [selecionado, setSelecionado] = useState(null);
   const [comentario, setComentario] = useState("");
@@ -27,7 +30,7 @@ export default function ApresentacoesEstagiariosAdmin() {
       setItems(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar apresentações.");
+      toast.error("Erro ao carregar apresentações.");
       setItems([]);
     }
   };
@@ -77,7 +80,7 @@ export default function ApresentacoesEstagiariosAdmin() {
       setComentario("");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao validar apresentação.");
+      toast.error(err.response?.data?.message || "Erro ao validar apresentação.");
     } finally {
       setLoading(false);
     }
@@ -85,7 +88,7 @@ export default function ApresentacoesEstagiariosAdmin() {
 
   const rejeitar = async (id) => {
     if (!comentario.trim()) {
-      alert("Informe o motivo da rejeição.");
+      toast.warning("Informe o motivo da rejeição.");
       return;
     }
 
@@ -99,14 +102,14 @@ export default function ApresentacoesEstagiariosAdmin() {
       setComentario("");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao rejeitar apresentação.");
+      toast.error(err.response?.data?.message || "Erro ao rejeitar apresentação.");
     } finally {
       setLoading(false);
     }
   };
 
   const excluir = async (id) => {
-    if (!window.confirm("Deseja excluir esta apresentação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja excluir esta apresentação?" }))) return;
 
     try {
       await api.delete(`/api/apresentacoes-estagiarios/${id}`);
@@ -118,7 +121,7 @@ export default function ApresentacoesEstagiariosAdmin() {
       }
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir apresentação.");
+      toast.error(err.response?.data?.message || "Erro ao excluir apresentação.");
     }
   };
 

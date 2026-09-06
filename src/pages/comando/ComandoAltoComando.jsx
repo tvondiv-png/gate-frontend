@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 export default function ComandoAltoComando() {
+  const toast = useToast();
   const [items, setItems] = useState([]);
   const [titulo, setTitulo] = useState("");
   const [mensagem, setMensagem] = useState("");
@@ -48,7 +50,7 @@ export default function ComandoAltoComando() {
       carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao criar comunicado");
+      toast.error(err.response?.data?.message || "Erro ao criar comunicado");
     }
   };
 
@@ -58,7 +60,7 @@ export default function ComandoAltoComando() {
       carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao encerrar comunicado");
+      toast.error(err.response?.data?.message || "Erro ao encerrar comunicado");
     }
   };
 

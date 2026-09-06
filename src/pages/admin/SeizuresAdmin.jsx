@@ -2,7 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 export default function SeizuresAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,15 +19,15 @@ export default function SeizuresAdmin() {
   }, []);
 
   const zerar = async () => {
-    if (!window.confirm("Deseja zerar TODAS as apreensões?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja zerar TODAS as apreensões?" }))) return;
 
     setLoading(true);
     try {
       await api.post("/api/apreensoes/zerar");
       await load();
-      alert("Apreensões zeradas com sucesso");
+      toast.success("Apreensões zeradas com sucesso");
     } catch (err) {
-      alert("Erro ao zerar apreensões");
+      toast.error("Erro ao zerar apreensões");
       console.error(err);
     } finally {
       setLoading(false);

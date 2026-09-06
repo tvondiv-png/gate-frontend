@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const badgeClass = (status) => {
   if (status === "Aprovado") return "success";
   if (status === "Rejeitado") return "danger";
@@ -10,6 +11,8 @@ const badgeClass = (status) => {
 };
 
 export default function IndicationsAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [indications, setIndications] = useState([]);
   const [selected, setSelected] = useState(null);
   const [comentario, setComentario] = useState("");
@@ -25,7 +28,7 @@ export default function IndicationsAdmin() {
   }, []);
 
   const approve = async (id) => {
-    if (!window.confirm("Deseja aprovar esta indicação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja aprovar esta indicação?" }))) return;
 
     setLoading(true);
     try {
@@ -33,7 +36,7 @@ export default function IndicationsAdmin() {
       setSelected(null);
       loadIndications();
     } catch (err) {
-      alert("Erro ao aprovar indicação");
+      toast.error("Erro ao aprovar indicação");
       console.error(err);
     } finally {
       setLoading(false);
@@ -42,7 +45,7 @@ export default function IndicationsAdmin() {
 
   const reject = async (id) => {
     if (!comentario.trim()) {
-      alert("Informe o motivo da rejeição");
+      toast.warning("Informe o motivo da rejeição");
       return;
     }
 
@@ -55,7 +58,7 @@ export default function IndicationsAdmin() {
       setSelected(null);
       loadIndications();
     } catch (err) {
-      alert("Erro ao rejeitar indicação");
+      toast.error("Erro ao rejeitar indicação");
       console.error(err);
     } finally {
       setLoading(false);

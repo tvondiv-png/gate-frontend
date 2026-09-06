@@ -17,7 +17,9 @@ import UserPenalCode from "./UserPenalCode";
 import "./user-dashboard.css";
 import "../../styles/comando-metas.css";
 
+import { useToast } from "../../contexts/ToastContext";
 export default function UserDashboard() {
+  const toast = useToast();
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -327,7 +329,7 @@ export default function UserDashboard() {
                         );
                       } catch (err) {
                         console.error(err);
-                        alert("Erro ao registrar ciência.");
+                        toast.error("Erro ao registrar ciência.");
                       }
                     }}
                   >

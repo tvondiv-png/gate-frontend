@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import api from "../../api/api";
 import "./user-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const ORDEM_PATENTES = {
   "Coronel PM": 1,
   "Tenente-Coronel PM": 2,
@@ -43,6 +44,8 @@ const formInicial = {
 };
 
 export default function AvaliacaoEstagiosUser() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const { user } = useAuth();
 
   const [estagiarios, setEstagiarios] = useState([]);
@@ -136,7 +139,7 @@ export default function AvaliacaoEstagiosUser() {
         horarioFinal: ""
       }));
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Não foi possível preencher automaticamente com este RSO."
       );
@@ -173,7 +176,7 @@ export default function AvaliacaoEstagiosUser() {
 
   const salvar = async () => {
     if (!estagiarioId || !form.data || !form.horarioInicial || !form.horarioFinal) {
-      alert("Preencha estagiário, data, horário inicial e horário final.");
+      toast.warning("Preencha estagiário, data, horário inicial e horário final.");
       return;
     }
 
@@ -186,26 +189,26 @@ export default function AvaliacaoEstagiosUser() {
         ...form
       });
 
-      alert("Avaliação enviada com sucesso");
+      toast.success("Avaliação enviada com sucesso");
       limparFormulario();
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao enviar avaliação");
+      toast.error(err.response?.data?.message || "Erro ao enviar avaliação");
     } finally {
       setLoading(false);
     }
   };
 
   const excluir = async (id) => {
-    if (!window.confirm("Excluir esta avaliação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Excluir esta avaliação?" }))) return;
 
     try {
       await api.delete(`/api/avaliacoes-estagio/${id}`);
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir avaliação");
+      toast.error(err.response?.data?.message || "Erro ao excluir avaliação");
     }
   };
 
@@ -226,7 +229,7 @@ export default function AvaliacaoEstagiosUser() {
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao reenviar avaliação");
+      toast.error(err.response?.data?.message || "Erro ao reenviar avaliação");
     }
   };
 

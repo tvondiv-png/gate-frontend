@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 /* =========================================================
    ORDEM DAS PATENTES
 ========================================================= */
@@ -237,6 +238,8 @@ const getRocamBadge = (valor) => {
 ========================================================= */
 
 export default function HierarchyAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [lista, setLista] = useState([]);
 
   const [editando, setEditando] =
@@ -335,7 +338,7 @@ export default function HierarchyAdmin() {
     const userId = getUserId(p);
 
     if (!userId) {
-      alert(
+      toast.warning(
         "ID do usuário não encontrado."
       );
 
@@ -434,7 +437,7 @@ export default function HierarchyAdmin() {
 
   const salvar = async () => {
     if (!editando) {
-      alert(
+      toast.warning(
         "ID do usuário não encontrado."
       );
 
@@ -462,7 +465,7 @@ export default function HierarchyAdmin() {
         payload
       );
 
-      alert(
+      toast.success(
         houvePromocao
           ? "Hierarquia atualizada com sucesso. Promoção detectada e reset de ações ativado."
           : "Hierarquia atualizada com sucesso."
@@ -474,7 +477,7 @@ export default function HierarchyAdmin() {
     } catch (err) {
       console.error(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Erro ao salvar"
       );
@@ -491,7 +494,7 @@ export default function HierarchyAdmin() {
     const userId = getUserId(p);
 
     if (!userId) {
-      alert(
+      toast.warning(
         "ID do usuário não encontrado."
       );
 
@@ -499,9 +502,7 @@ export default function HierarchyAdmin() {
     }
 
     if (
-      !window.confirm(
-        "Excluir policial da hierarquia?"
-      )
+      !(await confirm({ tone: "danger", message: "Excluir policial da hierarquia?" }))
     ) {
       return;
     }
@@ -515,7 +516,7 @@ export default function HierarchyAdmin() {
     } catch (err) {
       console.error(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Erro ao excluir"
       );

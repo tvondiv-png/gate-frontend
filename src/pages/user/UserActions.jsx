@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./user-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const ORDEM_PATENTES = {
   "Coronel PM": 1,
   "Tenente-Coronel PM": 2,
@@ -46,6 +47,7 @@ const statusClass = (status) => {
 };
 
 export default function UserActions() {
+  const toast = useToast();
   const [tab, setTab] = useState("nova");
   const [rules, setRules] = useState([]);
   const [hierarchy, setHierarchy] = useState([]);
@@ -93,7 +95,7 @@ export default function UserActions() {
     }
 
     if (erros.length > 0) {
-      alert(`Falha ao carregar: ${erros.join(", ")}`);
+      toast.error(`Falha ao carregar: ${erros.join(", ")}`);
     }
   };
 
@@ -211,13 +213,13 @@ export default function UserActions() {
     try {
       await api.post("/api/actions", form);
 
-      alert("Ação enviada para validação com sucesso");
+      toast.success("Ação enviada para validação com sucesso");
       limparFormulario();
       setTab("minhas");
       await carregarTudo();
     } catch (err) {
       console.error("Erro ao enviar ação:", err.response?.data || err);
-      alert(err.response?.data?.message || "Erro ao enviar ação");
+      toast.error(err.response?.data?.message || "Erro ao enviar ação");
     } finally {
       setLoading(false);
     }

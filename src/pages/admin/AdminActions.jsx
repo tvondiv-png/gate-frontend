@@ -2,10 +2,13 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./admin-actions.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const META_ACOES = 6;
 const PROXIMO_META = 4;
 
 export default function AdminActions() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [tab, setTab] = useState("pendentes");
   const [pendentes, setPendentes] = useState([]);
   const [historico, setHistorico] = useState([]);
@@ -98,7 +101,7 @@ const [formAdmin, setFormAdmin] = useState({
       );
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar painel de ações");
+      toast.error("Erro ao carregar painel de ações");
     }
   };
 
@@ -112,7 +115,7 @@ const [formAdmin, setFormAdmin] = useState({
         contabilizarMeta
       });
 
-      alert(
+      toast.warning(
         contabilizarMeta
           ? "Ação incluída na contagem da meta."
           : "Ação removida da contagem da meta."
@@ -127,7 +130,7 @@ const [formAdmin, setFormAdmin] = useState({
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao alterar contabilidade da meta.");
+      toast.error(err.response?.data?.message || "Erro ao alterar contabilidade da meta.");
     }
   };
 
@@ -140,7 +143,7 @@ const [formAdmin, setFormAdmin] = useState({
       setAcaoSelecionada(res.data || null);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao carregar detalhes da ação");
+      toast.error(err.response?.data?.message || "Erro ao carregar detalhes da ação");
       setDetalheAberto(false);
       setAcaoSelecionada(null);
     } finally {
@@ -163,12 +166,12 @@ const [formAdmin, setFormAdmin] = useState({
         contabilizarMeta: acaoSelecionada?.contabilizarMeta !== false
       });
 
-      alert("Ação aprovada com sucesso");
+      toast.success("Ação aprovada com sucesso");
       fecharDetalhes();
       carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao aprovar");
+      toast.error(err.response?.data?.message || "Erro ao aprovar");
     }
   };
 
@@ -182,12 +185,12 @@ const [formAdmin, setFormAdmin] = useState({
         observacaoAdmin: ""
       });
 
-      alert("Ação rejeitada com sucesso");
+      toast.success("Ação rejeitada com sucesso");
       fecharDetalhes();
       carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao rejeitar");
+      toast.error(err.response?.data?.message || "Erro ao rejeitar");
     }
   };
 
@@ -200,18 +203,21 @@ const [formAdmin, setFormAdmin] = useState({
         motivoExclusao: motivo
       });
 
-      alert("Histórico excluído com sucesso");
+      toast.success("Histórico excluído com sucesso");
       carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir histórico");
+      toast.error(err.response?.data?.message || "Erro ao excluir histórico");
     }
   };
 
   const limparMetricas = async () => {
-    const confirmar = window.confirm(
-      "Tem certeza que deseja remover esses dados das métricas? Essa ação removerá os registros da soma, ranking e histórico visível."
-    );
+    const confirmar = await confirm({
+      tone: "danger",
+      title: "Remover dados das métricas",
+      message:
+        "Isso removerá os registros da soma, ranking e histórico visível. Continuar?"
+    });
 
     if (!confirmar) return;
 
@@ -226,7 +232,7 @@ const [formAdmin, setFormAdmin] = useState({
 
       const res = await api.post("/api/admin/actions/metrics/clear", payload);
 
-      alert(res.data?.message || "Dados removidos das métricas com sucesso");
+      toast.success(res.data?.message || "Dados removidos das métricas com sucesso");
 
       setClearForm({
         userId: "",
@@ -239,7 +245,7 @@ const [formAdmin, setFormAdmin] = useState({
       carregar();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao limpar métricas");
+      toast.error(err.response?.data?.message || "Erro ao limpar métricas");
     }
   };
 
@@ -1257,7 +1263,7 @@ const [formAdmin, setFormAdmin] = useState({
           try {
             await api.post("/api/admin/actions/create", formAdmin);
 
-            alert("Ação cadastrada com sucesso pelo administrador.");
+            toast.success("Ação cadastrada com sucesso pelo administrador.");
 
             setFormAdmin({
               tipoAcao: "",
@@ -1274,7 +1280,7 @@ const [formAdmin, setFormAdmin] = useState({
             setTab("historico");
           } catch (err) {
             console.error(err);
-            alert(err.response?.data?.message || "Erro ao cadastrar ação.");
+            toast.error(err.response?.data?.message || "Erro ao cadastrar ação.");
           }
         }}
       >

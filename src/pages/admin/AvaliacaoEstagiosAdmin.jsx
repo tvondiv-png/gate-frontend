@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const statusBadgeClass = (status) => {
   if (status === "Validado") return "success";
   if (status === "Revisao") return "warning";
@@ -15,6 +16,8 @@ const formatarDataHora = (valor) => {
 };
 
 export default function AvaliacaoEstagiosAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [items, setItems] = useState([]);
   const [selecionado, setSelecionado] = useState(null);
   const [comentario, setComentario] = useState("");
@@ -28,7 +31,7 @@ export default function AvaliacaoEstagiosAdmin() {
       setItems(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao carregar avaliações.");
+      toast.error(err.response?.data?.message || "Erro ao carregar avaliações.");
       setItems([]);
     }
   };
@@ -81,7 +84,7 @@ export default function AvaliacaoEstagiosAdmin() {
       setComentario("");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao validar avaliação.");
+      toast.error(err.response?.data?.message || "Erro ao validar avaliação.");
     } finally {
       setLoading(false);
     }
@@ -89,7 +92,7 @@ export default function AvaliacaoEstagiosAdmin() {
 
   const revisar = async (id) => {
     if (!comentario.trim()) {
-      alert("Informe o comentário para revisão.");
+      toast.warning("Informe o comentário para revisão.");
       return;
     }
 
@@ -103,14 +106,14 @@ export default function AvaliacaoEstagiosAdmin() {
       setComentario("");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao enviar para revisão.");
+      toast.error(err.response?.data?.message || "Erro ao enviar para revisão.");
     } finally {
       setLoading(false);
     }
   };
 
   const excluir = async (id) => {
-    if (!window.confirm("Deseja excluir esta avaliação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja excluir esta avaliação?" }))) return;
 
     try {
       await api.delete(`/api/avaliacoes-estagio/${id}/admin`);
@@ -121,20 +124,20 @@ export default function AvaliacaoEstagiosAdmin() {
       }
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir avaliação.");
+      toast.error(err.response?.data?.message || "Erro ao excluir avaliação.");
     }
   };
 
   const zerarHistorico = async () => {
-    if (!window.confirm("Deseja zerar todo o histórico das avaliações?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja zerar todo o histórico das avaliações?" }))) return;
 
     try {
       await api.delete("/api/avaliacoes-estagio/admin/historico");
       await load();
-      alert("Histórico zerado com sucesso.");
+      toast.success("Histórico zerado com sucesso.");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao zerar histórico.");
+      toast.error(err.response?.data?.message || "Erro ao zerar histórico.");
     }
   };
 

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useConfirm } from "../../contexts/ToastContext";
 const badgeClass = (status) => {
   if (status === "Aprovado") return "success";
   if (status === "Rejeitado") return "danger";
@@ -10,6 +11,7 @@ const badgeClass = (status) => {
 };
 
 export default function SignupRequests() {
+  const confirm = useConfirm();
   const [requests, setRequests] = useState([]);
 
   const load = async () => {
@@ -22,19 +24,19 @@ export default function SignupRequests() {
   }, []);
 
   const aprovar = async (id) => {
-    if (!window.confirm("Aprovar solicitação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Aprovar solicitação?" }))) return;
     await api.put(`/api/signup/approve/${id}`);
     load();
   };
 
   const rejeitar = async (id) => {
-    if (!window.confirm("Rejeitar solicitação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Rejeitar solicitação?" }))) return;
     await api.put(`/api/signup/reject/${id}`);
     load();
   };
 
   const excluir = async (id) => {
-    if (!window.confirm("Excluir definitivamente esta solicitação?")) return;
+    if (!(await confirm({ tone: "danger", message: "Excluir definitivamente esta solicitação?" }))) return;
     await api.delete(`/api/signup/${id}`);
     load();
   };

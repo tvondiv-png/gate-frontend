@@ -4,6 +4,7 @@ import api from "../../api/api";
 
 import "../../styles/comando-consultas.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const META_SEMANAL_MIN = 360;
 
 const formatarData = (data) => {
@@ -111,6 +112,7 @@ const metaTexto = (minutos) => {
 };
 
 export default function ComandoConsultas() {
+  const toast = useToast();
   const [searchParams] = useSearchParams();
 
   const [busca, setBusca] = useState(
@@ -131,7 +133,7 @@ export default function ComandoConsultas() {
     ).trim();
 
     if (!termo) {
-      alert("Digite o nome ou a funcional");
+      toast.warning("Digite o nome ou a funcional");
       return;
     }
 
@@ -158,7 +160,7 @@ export default function ComandoConsultas() {
 
       setLista([]);
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao realizar consulta"
       );

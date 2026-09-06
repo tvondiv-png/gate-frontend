@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import api from "../api/api";
 
+import { useToast } from "../contexts/ToastContext";
 export default function HighCommandNoticeModal() {
+  const toast = useToast();
   const [notice, setNotice] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -28,7 +30,7 @@ export default function HighCommandNoticeModal() {
       setNotice(null);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao responder comunicado");
+      toast.error(err.response?.data?.message || "Erro ao responder comunicado");
     } finally {
       setLoading(false);
     }

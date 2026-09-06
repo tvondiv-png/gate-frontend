@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const statusBadge = (status) => {
   if (status === "Aprovado") return "success";
   if (status === "Rejeitado") return "danger";
@@ -87,6 +88,7 @@ const montarIntegrantesComTempo = (rso) => {
 };
 
 export default function RSOHistoryAdmin() {
+  const toast = useToast();
   const [items, setItems] = useState([]);
   const [selecionado, setSelecionado] = useState(null);
   const [busca, setBusca] = useState("");
@@ -101,7 +103,7 @@ export default function RSOHistoryAdmin() {
       setItems(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar histórico de RSO.");
+      toast.error("Erro ao carregar histórico de RSO.");
       setItems([]);
     } finally {
       setLoading(false);
@@ -123,7 +125,7 @@ export default function RSOHistoryAdmin() {
         console.error(err);
 
         if (mounted) {
-          alert("Erro ao carregar histórico de RSO.");
+          toast.error("Erro ao carregar histórico de RSO.");
           setItems([]);
         }
       } finally {

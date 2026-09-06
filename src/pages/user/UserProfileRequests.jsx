@@ -6,6 +6,7 @@ import {
 } from "../../services/profileUpdateRequestService";
 import "./user-profile-requests.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const TIPOS = [
   { value: "CURSO", label: "Curso", icon: "🎓" },
   { value: "MEDALHA", label: "Medalha", icon: "🏅" },
@@ -65,6 +66,7 @@ function getTipoIcon(tipo) {
 }
 
 export default function UserProfileRequests() {
+  const toast = useToast();
   const [metadata, setMetadata] = useState({
     cursos: [],
     medalhas: [],
@@ -100,7 +102,7 @@ export default function UserProfileRequests() {
       setHistorico(Array.isArray(list) ? list : []);
     } catch (error) {
       console.error(error);
-      alert("Erro ao carregar central de atualização cadastral");
+      toast.error("Erro ao carregar central de atualização cadastral");
     } finally {
       setLoadingPage(false);
     }
@@ -167,12 +169,12 @@ export default function UserProfileRequests() {
         novaFuncional: form.novaFuncional ? Number(form.novaFuncional) : ""
       });
 
-      alert("Requisição enviada com sucesso.");
+      toast.success("Requisição enviada com sucesso.");
       limparFormulario();
       await carregar();
     } catch (error) {
       console.error(error);
-      alert(error?.response?.data?.message || "Erro ao enviar requisição");
+      toast.error(error?.response?.data?.message || "Erro ao enviar requisição");
     } finally {
       setLoading(false);
     }

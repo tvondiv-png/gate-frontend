@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./user-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const ORDEM_PATENTES = {
   "Coronel PM": 1,
   "Tenente-Coronel PM": 2,
@@ -27,6 +28,7 @@ const getStatusBadgeClass = (status) => {
 };
 
 export default function ApresentacaoEstagiariosUser() {
+  const toast = useToast();
   const [estagiarios, setEstagiarios] = useState([]);
   const [historico, setHistorico] = useState([]);
   const [funcionalEstagiario, setFuncionalEstagiario] = useState("");
@@ -65,7 +67,7 @@ export default function ApresentacaoEstagiariosUser() {
 
   const registrar = async () => {
     if (!funcionalEstagiario) {
-      alert("Selecione o estagiário");
+      toast.warning("Selecione o estagiário");
       return;
     }
 
@@ -75,12 +77,12 @@ export default function ApresentacaoEstagiariosUser() {
         observacao
       });
 
-      alert("Apresentação registrada com sucesso");
+      toast.success("Apresentação registrada com sucesso");
       setFuncionalEstagiario("");
       setObservacao("");
       carregar();
     } catch (err) {
-      alert(err.response?.data?.message || "Erro ao registrar apresentação");
+      toast.error(err.response?.data?.message || "Erro ao registrar apresentação");
     }
   };
 

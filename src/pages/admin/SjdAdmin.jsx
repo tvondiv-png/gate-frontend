@@ -3,6 +3,7 @@ import api from "../../api/api";
 import "../../styles/admin-base.css";
 import "./sjd-admin.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const SANCOES = [
   { value: "ARQUIVAMENTO", label: "Arquivamento" },
   { value: "ORIENTACAO_VERBAL", label: "Orientação verbal" },
@@ -111,6 +112,8 @@ function sugerirPad(score) {
 }
 
 export default function SjdAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [casos, setCasos] = useState([]);
   const [policiais, setPoliciais] = useState([]);
   const [penalCodes, setPenalCodes] = useState([]);
@@ -203,7 +206,7 @@ export default function SjdAdmin() {
       });
     } catch (err) {
       console.error(err);
-      alert("Erro ao abrir processo");
+      toast.error("Erro ao abrir processo");
     }
   };
 
@@ -289,7 +292,7 @@ export default function SjdAdmin() {
 
   const criarCaso = async () => {
     if (!form.policialId || !form.descricao.trim()) {
-      alert("Selecione o policial e preencha a descrição");
+      toast.warning("Selecione o policial e preencha a descrição");
       return;
     }
 
@@ -313,16 +316,16 @@ export default function SjdAdmin() {
       });
 
       await load();
-      alert("Processo criado com sucesso");
+      toast.success("Processo criado com sucesso");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao criar processo");
+      toast.error(err.response?.data?.message || "Erro ao criar processo");
     }
   };
 
   const enviarComentario = async () => {
     if (!selecionado?._id || !comentario.trim()) {
-      alert("Digite o comentário");
+      toast.warning("Digite o comentário");
       return;
     }
 
@@ -335,13 +338,13 @@ export default function SjdAdmin() {
       await load(true);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao comentar");
+      toast.error(err.response?.data?.message || "Erro ao comentar");
     }
   };
 
   const enviarConvocacao = async () => {
     if (!selecionado?._id || !convocacao.mensagem.trim()) {
-      alert("Informe a convocação");
+      toast.warning("Informe a convocação");
       return;
     }
 
@@ -358,7 +361,7 @@ export default function SjdAdmin() {
       await load(true);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao convocar");
+      toast.error(err.response?.data?.message || "Erro ao convocar");
     }
   };
 
@@ -422,7 +425,7 @@ export default function SjdAdmin() {
   const concluirCaso = async () => {
     if (!selecionado?._id) return;
     if (!conclusao.trim()) {
-      alert("Informe a conclusão");
+      toast.warning("Informe a conclusão");
       return;
     }
 
@@ -437,16 +440,16 @@ export default function SjdAdmin() {
       });
 
       await load(true);
-      alert("Processo concluído com sucesso");
+      toast.success("Processo concluído com sucesso");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao concluir processo");
+      toast.error(err.response?.data?.message || "Erro ao concluir processo");
     }
   };
 
   const excluirCaso = async () => {
     if (!selecionado?._id) return;
-    if (!window.confirm("Deseja realmente excluir este processo?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja realmente excluir este processo?" }))) return;
 
     try {
       await api.delete(`/api/discipline/${selecionado._id}`);
@@ -454,7 +457,7 @@ export default function SjdAdmin() {
       await load();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir processo");
+      toast.error(err.response?.data?.message || "Erro ao excluir processo");
     }
   };
 

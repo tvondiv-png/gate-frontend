@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const API_URL =
   import.meta.env.VITE_API_URL ||
   "http://localhost:5000";
 
 export default function HomeSlidesAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [slides, setSlides] = useState([]);
 
   const [imagem, setImagem] = useState(null);
@@ -66,7 +69,7 @@ export default function HomeSlidesAdmin() {
 
       setSlides([]);
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao carregar slideshow"
       );
@@ -131,7 +134,7 @@ export default function HomeSlidesAdmin() {
 
   const enviar = async () => {
     if (!imagem) {
-      alert(
+      toast.warning(
         "Selecione uma imagem"
       );
 
@@ -183,7 +186,7 @@ export default function HomeSlidesAdmin() {
 
       await carregar();
 
-      alert(
+      toast.success(
         "Slide adicionado com sucesso"
       );
     } catch (err) {
@@ -192,7 +195,7 @@ export default function HomeSlidesAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao enviar slide"
       );
@@ -242,7 +245,7 @@ export default function HomeSlidesAdmin() {
         ordemNumerica
       )
     ) {
-      alert(
+      toast.warning(
         "Informe uma ordem válida"
       );
 
@@ -263,7 +266,7 @@ export default function HomeSlidesAdmin() {
 
       await carregar();
 
-      alert(
+      toast.success(
         "Slide atualizado com sucesso"
       );
     } catch (err) {
@@ -272,7 +275,7 @@ export default function HomeSlidesAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao editar slide"
       );
@@ -290,11 +293,9 @@ export default function HomeSlidesAdmin() {
       !slide.ativo;
 
     const confirmar =
-      window.confirm(
-        novoStatus
+      await confirm({ tone: "danger", message: novoStatus
           ? "Ativar este slide na Home?"
-          : "Desativar este slide da Home?"
-      );
+          : "Desativar este slide da Home?" });
 
     if (!confirmar) {
       return;
@@ -316,7 +317,7 @@ export default function HomeSlidesAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao alterar status do slide"
       );
@@ -332,13 +333,11 @@ export default function HomeSlidesAdmin() {
     tituloSlide
   ) => {
     const confirmar =
-      window.confirm(
-        `Excluir ${
+      await confirm({ tone: "danger", message: `Excluir ${
           tituloSlide
             ? `"${tituloSlide}"`
             : "este slide"
-        } do slideshow?`
-      );
+        } do slideshow?` });
 
     if (!confirmar) {
       return;
@@ -356,7 +355,7 @@ export default function HomeSlidesAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao excluir slide"
       );

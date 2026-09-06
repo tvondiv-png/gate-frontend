@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const FORM_INICIAL = {
   titulo: "",
   descricao: "",
@@ -21,6 +22,8 @@ const labelCategoria = (
 };
 
 export default function RegulationsAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [regs, setRegs] =
     useState([]);
 
@@ -56,7 +59,7 @@ export default function RegulationsAdmin() {
 
       setRegs([]);
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao carregar regulamentos"
       );
@@ -83,7 +86,7 @@ export default function RegulationsAdmin() {
 
   const submit = async () => {
     if (!form.titulo.trim()) {
-      alert(
+      toast.warning(
         "Informe o título do regulamento"
       );
 
@@ -109,7 +112,7 @@ export default function RegulationsAdmin() {
 
       await load();
 
-      alert(
+      toast.success(
         editing
           ? "Regulamento atualizado com sucesso"
           : "Regulamento criado com sucesso"
@@ -120,7 +123,7 @@ export default function RegulationsAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao salvar regulamento"
       );
@@ -180,7 +183,7 @@ export default function RegulationsAdmin() {
     } catch (err) {
       console.error(err);
 
-      alert(
+      toast.error(
         "Erro ao alterar publicação"
       );
     }
@@ -195,9 +198,7 @@ export default function RegulationsAdmin() {
     titulo
   ) => {
     if (
-      !window.confirm(
-        `Excluir o regulamento "${titulo}"?`
-      )
+      !(await confirm({ tone: "danger", message: `Excluir o regulamento "${titulo}"?` }))
     ) {
       return;
     }
@@ -215,7 +216,7 @@ export default function RegulationsAdmin() {
     } catch (err) {
       console.error(err);
 
-      alert(
+      toast.error(
         "Erro ao excluir regulamento"
       );
     }

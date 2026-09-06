@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useConfirm } from "../../contexts/ToastContext";
 const ORDEM_PATENTES = {
   "Coronel PM": 1,
   "Tenente-Coronel PM": 2,
@@ -40,6 +41,7 @@ const temAcessoComando = (user) => {
 };
 
 export default function UserManagement() {
+  const confirm = useConfirm();
   const [users, setUsers] = useState([]);
   const [busca, setBusca] = useState("");
   const [loading, setLoading] = useState(true);
@@ -144,9 +146,7 @@ export default function UserManagement() {
     const label =
       ROLE_LABELS[role] || role;
 
-    const confirmar = window.confirm(
-      `Deseja alterar o acesso de "${nome}" para ${label}?`
-    );
+    const confirmar = await confirm({ tone: "danger", message: `Deseja alterar o acesso de "${nome}" para ${label}?` });
 
     if (!confirmar) return;
 
@@ -183,9 +183,7 @@ export default function UserManagement() {
     id,
     nome
   ) => {
-    const confirmar = window.confirm(
-      `Deseja realmente excluir o usuário "${nome}"?\n\nEsta ação deve ser utilizada somente quando o cadastro precisar ser removido do sistema.`
-    );
+    const confirmar = await confirm({ tone: "danger", message: `Deseja realmente excluir o usuário "${nome}"?\n\nEsta ação deve ser utilizada somente quando o cadastro precisar ser removido do sistema.` });
 
     if (!confirmar) return;
 

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./rso-user.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 /* =========================================================
    UTILITÁRIOS
 ========================================================= */
@@ -468,6 +469,8 @@ const montarMensagemConflito = (
 ========================================================= */
 
 export default function RSOUser() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [rsos, setRsos] =
     useState([]);
 
@@ -1348,7 +1351,7 @@ export default function RSOUser() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
           "Erro ao adicionar apreensão"
@@ -1375,7 +1378,7 @@ export default function RSOUser() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
           "Erro ao encerrar policial"
@@ -1390,9 +1393,7 @@ export default function RSOUser() {
   const encerrarRSO =
     async (id) => {
       if (
-        !window.confirm(
-          "Deseja encerrar este RSO? Todos os integrantes ainda ativos terão o ponto encerrado."
-        )
+        !(await confirm({ tone: "danger", message: "Deseja encerrar este RSO? Todos os integrantes ainda ativos terão o ponto encerrado." }))
       ) {
         return;
       }
@@ -1406,7 +1407,7 @@ export default function RSOUser() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
           "Erro ao encerrar RSO"
@@ -1421,9 +1422,7 @@ export default function RSOUser() {
   const excluirRSO =
     async (id) => {
       if (
-        !window.confirm(
-          "Deseja excluir este RSO?"
-        )
+        !(await confirm({ tone: "danger", message: "Deseja excluir este RSO?" }))
       ) {
         return;
       }
@@ -1437,7 +1436,7 @@ export default function RSOUser() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
           "Erro ao excluir RSO"
@@ -1460,7 +1459,7 @@ export default function RSOUser() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
           "Erro ao reenviar RSO"
@@ -1509,7 +1508,7 @@ export default function RSOUser() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
           "Erro ao salvar observações"

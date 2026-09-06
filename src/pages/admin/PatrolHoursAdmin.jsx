@@ -3,6 +3,7 @@ import jsPDF from "jspdf";
 import api from "../../api/api";
 import "./PatrolHoursAdmin.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const formatarTempo = (min = 0) => {
   const valor = Number(min || 0);
 
@@ -453,6 +454,8 @@ function RemovedList({ items, onRestore, weeklyThresholdHours }) {
 }
 
 export default function PatrolHoursAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [abaRelatorio, setAbaRelatorio] = useState("atual");
 
   const [lista, setLista] = useState([]);
@@ -565,7 +568,7 @@ export default function PatrolHoursAdmin() {
       setReport(res.data);
     } catch (error) {
       console.error(error);
-      alert("Erro ao carregar relatório.");
+      toast.error("Erro ao carregar relatório.");
     } finally {
       setLoading(false);
     }
@@ -604,7 +607,7 @@ export default function PatrolHoursAdmin() {
         return;
       }
 
-      alert("Erro ao carregar histórico.");
+      toast.error("Erro ao carregar histórico.");
     }
   };
 
@@ -644,7 +647,7 @@ export default function PatrolHoursAdmin() {
         return;
       }
 
-      alert("Erro ao carregar relatório histórico.");
+      toast.error("Erro ao carregar relatório histórico.");
     } finally {
       setLoading(false);
     }
@@ -693,7 +696,7 @@ export default function PatrolHoursAdmin() {
         });
       } catch (error) {
         console.error(error);
-        alert("Erro ao carregar dados da página.");
+        toast.error("Erro ao carregar dados da página.");
       }
     })();
   }, []);
@@ -832,23 +835,21 @@ export default function PatrolHoursAdmin() {
     try {
       await api.put(`/api/patrol-hours/${id}/absence-status`, form);
       await Promise.all([loadList(), loadReport(), loadHistory(), loadHistoryReport()]);
-      alert("Ausência atualizada com sucesso.");
+      toast.success("Ausência atualizada com sucesso.");
     } catch (error) {
       console.error(error);
-      alert(error?.response?.data?.message || "Erro ao atualizar ausência.");
+      toast.error(error?.response?.data?.message || "Erro ao atualizar ausência.");
     }
   };
 
   const zerarSemana = async () => {
-    const ok = window.confirm(
-      "Deseja realmente zerar as horas semanais de todos os policiais? O histórico será salvo."
-    );
+    const ok = await confirm({ tone: "danger", message: "Deseja realmente zerar as horas semanais de todos os policiais? O histórico será salvo." });
     if (!ok) return;
 
     try {
       const res = await api.post("/api/patrol-hours/reset-week");
       await Promise.all([loadList(), loadReport(), loadHistory(), loadHistoryReport()]);
-      alert(
+      toast.success(
         `${res.data?.message || "Horas semanais zeradas com sucesso."}\n` +
           `Registros alterados: ${res.data?.modifiedCount || 0}\n` +
           `Histórico salvo: ${res.data?.historyInsertedCount || 0}\n` +
@@ -856,7 +857,7 @@ export default function PatrolHoursAdmin() {
       );
     } catch (error) {
       console.error(error);
-      alert(
+      toast.error(
         error?.response?.data?.error ||
           error?.response?.data?.message ||
           "Erro ao zerar horas semanais."
@@ -865,15 +866,13 @@ export default function PatrolHoursAdmin() {
   };
 
   const zerarMes = async () => {
-    const ok = window.confirm(
-      "Deseja realmente zerar as horas mensais de todos os policiais? O histórico será salvo."
-    );
+    const ok = await confirm({ tone: "danger", message: "Deseja realmente zerar as horas mensais de todos os policiais? O histórico será salvo." });
     if (!ok) return;
 
     try {
       const res = await api.post("/api/patrol-hours/reset-month");
       await Promise.all([loadList(), loadReport(), loadHistory(), loadHistoryReport()]);
-      alert(
+      toast.success(
         `${res.data?.message || "Horas mensais zeradas com sucesso."}\n` +
           `Registros alterados: ${res.data?.modifiedCount || 0}\n` +
           `Histórico salvo: ${res.data?.historyInsertedCount || 0}\n` +
@@ -881,7 +880,7 @@ export default function PatrolHoursAdmin() {
       );
     } catch (error) {
       console.error(error);
-      alert(
+      toast.error(
         error?.response?.data?.error ||
           error?.response?.data?.message ||
           "Erro ao zerar horas mensais."
@@ -890,16 +889,16 @@ export default function PatrolHoursAdmin() {
   };
 
   const zerarHistorico = async () => {
-    const ok = window.confirm("Deseja realmente apagar todo o histórico de horas?");
+    const ok = await confirm({ tone: "danger", message: "Deseja realmente apagar todo o histórico de horas?" });
     if (!ok) return;
 
     try {
       await api.delete("/api/patrol-hours/history/clear");
       await Promise.all([loadHistory(), loadHistoryReport()]);
-      alert("Histórico apagado com sucesso.");
+      toast.success("Histórico apagado com sucesso.");
     } catch (error) {
       console.error(error);
-      alert("Erro ao apagar histórico.");
+      toast.error("Erro ao apagar histórico.");
     }
   };
 
@@ -1287,7 +1286,7 @@ export default function PatrolHoursAdmin() {
       doc.save(`relatorio-horas-${abaRelatorio}-${tipoExportacao}-${Date.now()}.pdf`);
     } catch (error) {
       console.error(error);
-      alert("Erro ao exportar PDF.");
+      toast.error("Erro ao exportar PDF.");
     }
   };
 

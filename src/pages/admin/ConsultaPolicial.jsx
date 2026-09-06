@@ -4,6 +4,7 @@ import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 import "../../styles/consulta-policial.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const badgeClass = (status) => {
   if (status === "Regular") return "success";
   if (status === "Atenção") return "warning";
@@ -23,6 +24,7 @@ const statusRsoClass = (status) => {
 };
 
 export default function ConsultaPolicial() {
+  const toast = useToast();
   const [funcional, setFuncional] = useState("");
   const [dados, setDados] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -33,7 +35,7 @@ export default function ConsultaPolicial() {
 
   const buscar = async () => {
     if (!funcional) {
-      alert("Digite a funcional");
+      toast.warning("Digite a funcional");
       return;
     }
 
@@ -46,7 +48,7 @@ export default function ConsultaPolicial() {
 
       setDados(res.data);
     } catch (err) {
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Erro na consulta"
       );

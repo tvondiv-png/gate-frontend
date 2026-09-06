@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const ORDEM_PATENTES = {
   "Coronel PM": 1,
   "Tenente-Coronel PM": 2,
@@ -59,6 +60,8 @@ const getAdvertenciasAcumuladas = (tipo) => {
 };
 
 export default function AdvertenciaAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [policiais, setPoliciais] = useState([]);
   const [advertencias, setAdvertencias] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -83,7 +86,7 @@ export default function AdvertenciaAdmin() {
       setPoliciais(ordenarPorPatente(lista));
     } catch (err) {
       console.error("Erro ao carregar policiais:", err);
-      alert("Erro ao carregar lista de policiais.");
+      toast.error("Erro ao carregar lista de policiais.");
       setPoliciais([]);
     }
   };
@@ -94,7 +97,7 @@ export default function AdvertenciaAdmin() {
       setAdvertencias(Array.isArray(res.data) ? res.data : []);
     } catch (err) {
       console.error("Erro ao carregar advertências:", err);
-      alert(err.response?.data?.message || "Erro ao carregar advertências.");
+      toast.error(err.response?.data?.message || "Erro ao carregar advertências.");
       setAdvertencias([]);
     }
   };
@@ -193,14 +196,14 @@ export default function AdvertenciaAdmin() {
 
   const prepararProximaAdvDosFiltrados = () => {
     if (!policiaisFiltrados.length) {
-      alert("Nenhum policial encontrado no filtro.");
+      toast.warning("Nenhum policial encontrado no filtro.");
       return;
     }
 
     const selecionaveis = policiaisFiltrados.filter((p) => p.advAtual !== "ADV 3");
 
     if (!selecionaveis.length) {
-      alert("Todos os policiais filtrados já estão em ADV 3.");
+      toast.warning("Todos os policiais filtrados já estão em ADV 3.");
       return;
     }
 
@@ -210,7 +213,7 @@ export default function AdvertenciaAdmin() {
     );
 
     if (!todosMesmaProxima) {
-      alert(
+      toast.warning(
         "Os policiais filtrados possuem próximas ADV diferentes. Filtre por Sem ADV, ADV 1 ou ADV 2 antes de aplicar em lote."
       );
       return;
@@ -236,7 +239,7 @@ export default function AdvertenciaAdmin() {
 
   const salvarAdvertencia = async () => {
     if (!funcionaisSelecionadas.length || !semanaReferencia) {
-      alert("Selecione ao menos um policial e a semana.");
+      toast.warning("Selecione ao menos um policial e a semana.");
       return;
     }
 
@@ -249,21 +252,21 @@ export default function AdvertenciaAdmin() {
         semanaReferencia
       });
 
-      alert("Advertência(s) aplicada(s) com sucesso!");
+      toast.success("Advertência(s) aplicada(s) com sucesso!");
       setFuncionaisSelecionadas([]);
       setTipo("ADV 1");
       setSemanaReferencia("");
       await carregarAdvertencias();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao aplicar advertência.");
+      toast.error(err.response?.data?.message || "Erro ao aplicar advertência.");
     } finally {
       setLoading(false);
     }
   };
 
   const excluirAdvertencia = async (id) => {
-    if (!window.confirm("Deseja excluir esta advertência?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja excluir esta advertência?" }))) return;
 
     try {
       await api.delete(`/api/advertencias/${id}`);
@@ -271,29 +274,29 @@ export default function AdvertenciaAdmin() {
       setAdvertenciasSelecionadas((prev) => prev.filter((item) => item !== id));
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir advertência.");
+      toast.error(err.response?.data?.message || "Erro ao excluir advertência.");
     }
   };
 
   const excluirAdvertenciasSelecionadas = async () => {
     if (!advertenciasSelecionadas.length) {
-      alert("Selecione ao menos uma advertência.");
+      toast.warning("Selecione ao menos uma advertência.");
       return;
     }
 
-    if (!window.confirm("Deseja excluir as advertências selecionadas?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja excluir as advertências selecionadas?" }))) return;
 
     try {
       await api.post("/api/advertencias/delete-many", {
         ids: advertenciasSelecionadas
       });
 
-      alert("Advertência(s) removida(s) com sucesso!");
+      toast.success("Advertência(s) removida(s) com sucesso!");
       setAdvertenciasSelecionadas([]);
       await carregarAdvertencias();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao excluir advertências.");
+      toast.error(err.response?.data?.message || "Erro ao excluir advertências.");
     }
   };
 

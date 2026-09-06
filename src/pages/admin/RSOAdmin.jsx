@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./rso-admin.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const formatarDataHora = (valor) => {
   if (!valor) return "-";
   return new Date(valor).toLocaleString("pt-BR");
@@ -288,6 +289,8 @@ const getEquipeTotal = (rso) => {
 ========================================================= */
 
 export default function RSOAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [rsos, setRsos] =
     useState([]);
 
@@ -379,13 +382,13 @@ export default function RSOAdmin() {
         setSelecionado(null);
       }
 
-      alert(
+      toast.success(
         "RSO aprovado e horas contabilizadas com sucesso."
       );
     } catch (err) {
       console.error(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Erro ao aprovar RSO"
       );
@@ -423,7 +426,7 @@ export default function RSOAdmin() {
     } catch (err) {
       console.error(err);
 
-      alert(
+      toast.error(
         err.response?.data?.message ||
           "Erro ao rejeitar RSO"
       );
@@ -706,7 +709,7 @@ export default function RSOAdmin() {
           }
         );
 
-        alert(
+        toast.warning(
           "Horário atualizado manualmente"
         );
 
@@ -714,7 +717,7 @@ export default function RSOAdmin() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
             "Erro ao atualizar horário manual"
@@ -733,9 +736,7 @@ export default function RSOAdmin() {
       }
 
       const confirmar =
-        window.confirm(
-          "Encerrar este RSO manualmente pelo ADM?"
-        );
+        await confirm({ tone: "danger", message: "Encerrar este RSO manualmente pelo ADM?" });
 
       if (!confirmar) {
         return;
@@ -755,7 +756,7 @@ export default function RSOAdmin() {
           }
         );
 
-        alert(
+        toast.warning(
           "RSO encerrado manualmente"
         );
 
@@ -763,7 +764,7 @@ export default function RSOAdmin() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err.response?.data
             ?.message ||
             "Erro ao encerrar manualmente"

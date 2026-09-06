@@ -3,6 +3,7 @@ import api from "../../api/api";
 import "./hierarchy-public.css";
 import { INSIGNIAS } from "../../utils/insignias";
 
+import { useToast } from "../../contexts/ToastContext";
 const ORDEM_CATEGORIAS = [
   "OFICIAIS_SUPERIORES",
   "OFICIAIS_INTERMEDIARIOS",
@@ -138,6 +139,7 @@ const PatenteCell = ({ patente }) => {
 };
 
 export default function HierarchyPublic() {
+  const toast = useToast();
   const [data, setData] = useState(null);
   const [rocam, setRocam] = useState(null);
 
@@ -163,7 +165,7 @@ export default function HierarchyPublic() {
         err
       );
 
-      alert("Erro ao carregar hierarquia");
+      toast.error("Erro ao carregar hierarquia");
     } finally {
       setLoading(false);
     }

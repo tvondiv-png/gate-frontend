@@ -6,6 +6,7 @@ import {
 } from "../../services/profileUpdateRequestAdminService";
 import "./profile-update-requests-admin.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const statusStyle = (status) => {
   if (status === "APROVADA") {
     return {
@@ -84,6 +85,7 @@ function montarResumo(item) {
 }
 
 export default function ProfileUpdateRequestsAdmin() {
+  const toast = useToast();
   const [lista, setLista] = useState([]);
   const [selecionado, setSelecionado] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -98,7 +100,7 @@ export default function ProfileUpdateRequestsAdmin() {
       setLista(Array.isArray(data) ? data : []);
     } catch (error) {
       console.error(error);
-      alert("Erro ao carregar requisições cadastrais");
+      toast.error("Erro ao carregar requisições cadastrais");
       setLista([]);
     } finally {
       setLoading(false);
@@ -132,13 +134,13 @@ export default function ProfileUpdateRequestsAdmin() {
         observacaoAdmin
       });
 
-      alert("Requisição aprovada com sucesso.");
+      toast.success("Requisição aprovada com sucesso.");
       setSelecionado(atualizado);
       setObservacaoAdmin("");
       await carregar();
     } catch (error) {
       console.error(error);
-      alert(error?.response?.data?.message || "Erro ao aprovar requisição");
+      toast.error(error?.response?.data?.message || "Erro ao aprovar requisição");
     } finally {
       setLoadingAction(false);
     }
@@ -148,7 +150,7 @@ export default function ProfileUpdateRequestsAdmin() {
     if (!selecionado) return;
 
     if (!observacaoAdmin.trim()) {
-      alert("Informe a observação da rejeição.");
+      toast.warning("Informe a observação da rejeição.");
       return;
     }
 
@@ -158,13 +160,13 @@ export default function ProfileUpdateRequestsAdmin() {
         observacaoAdmin
       });
 
-      alert("Requisição rejeitada com sucesso.");
+      toast.success("Requisição rejeitada com sucesso.");
       setSelecionado(atualizado);
       setObservacaoAdmin("");
       await carregar();
     } catch (error) {
       console.error(error);
-      alert(error?.response?.data?.message || "Erro ao rejeitar requisição");
+      toast.error(error?.response?.data?.message || "Erro ao rejeitar requisição");
     } finally {
       setLoadingAction(false);
     }

@@ -2,11 +2,14 @@ import { useEffect, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const API_URL =
   import.meta.env.VITE_API_URL ||
   "http://localhost:5000";
 
 export default function GalleryAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [items, setItems] = useState([]);
 
   const [file, setFile] = useState(null);
@@ -63,7 +66,7 @@ export default function GalleryAdmin() {
 
       setItems([]);
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao carregar galeria"
       );
@@ -100,12 +103,12 @@ export default function GalleryAdmin() {
 
   const submit = async () => {
     if (!form.titulo.trim()) {
-      alert("Título é obrigatório");
+      toast.warning("Título é obrigatório");
       return;
     }
 
     if (!file) {
-      alert("Imagem é obrigatória");
+      toast.warning("Imagem é obrigatória");
       return;
     }
 
@@ -157,7 +160,7 @@ export default function GalleryAdmin() {
 
       await load();
 
-      alert(
+      toast.success(
         "Imagem adicionada com sucesso"
       );
     } catch (err) {
@@ -166,7 +169,7 @@ export default function GalleryAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao salvar imagem"
       );
@@ -190,7 +193,7 @@ export default function GalleryAdmin() {
     }
 
     if (!titulo.trim()) {
-      alert(
+      toast.warning(
         "O título não pode ficar vazio"
       );
       return;
@@ -232,7 +235,7 @@ export default function GalleryAdmin() {
 
       await load();
 
-      alert(
+      toast.success(
         "Registro atualizado com sucesso"
       );
     } catch (err) {
@@ -241,7 +244,7 @@ export default function GalleryAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao editar imagem"
       );
@@ -264,7 +267,7 @@ export default function GalleryAdmin() {
         : "Retirar esta imagem da galeria pública?";
 
     if (
-      !window.confirm(mensagem)
+      !(await confirm({ tone: "danger", message: mensagem }))
     ) {
       return;
     }
@@ -285,7 +288,7 @@ export default function GalleryAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao alterar publicação"
       );
@@ -301,11 +304,9 @@ export default function GalleryAdmin() {
     titulo
   ) => {
     const confirmar =
-      window.confirm(
-        `Excluir "${
+      await confirm({ tone: "danger", message: `Excluir "${
           titulo || "esta imagem"
-        }" da galeria?\n\nA imagem também será removida do servidor.`
-      );
+        }" da galeria?\n\nA imagem também será removida do servidor.` });
 
     if (!confirmar) {
       return;
@@ -330,7 +331,7 @@ export default function GalleryAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.response?.data?.message ||
           "Erro ao excluir imagem"
       );

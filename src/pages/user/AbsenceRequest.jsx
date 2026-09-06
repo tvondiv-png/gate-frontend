@@ -2,26 +2,28 @@ import { useState } from "react";
 import api from "../../api/api";
 import "./user-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 export default function AbsenceRequest() {
+  const toast = useToast();
   const [dataInicio, setDataInicio] = useState("");
   const [dataFim, setDataFim] = useState("");
   const [motivo, setMotivo] = useState("");
 
   const submit = async () => {
     if (!dataInicio || !dataFim || !motivo) {
-      alert("Preencha todos os campos");
+      toast.warning("Preencha todos os campos");
       return;
     }
 
     try {
       await api.post("/api/absences", { dataInicio, dataFim, motivo });
-      alert("Solicitação enviada");
+      toast.warning("Solicitação enviada");
       setDataInicio("");
       setDataFim("");
       setMotivo("");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao enviar solicitação");
+      toast.error(err.response?.data?.message || "Erro ao enviar solicitação");
     }
   };
 

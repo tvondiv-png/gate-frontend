@@ -6,6 +6,7 @@ import {
 } from "../../services/penalCodeService";
 import "./user-penal-code.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const QUICK_FILTERS = [
   { key: "TODOS", label: "Todos" },
   { key: "INFRACAO", label: "Infrações" },
@@ -49,6 +50,7 @@ function getRelatedArticles(selected, items) {
 }
 
 export default function UserPenalCode() {
+  const toast = useToast();
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("TODOS");
   const [items, setItems] = useState([]);
@@ -102,7 +104,7 @@ export default function UserPenalCode() {
       setSelected((prev) => prev || lista[0] || null);
     } catch (err) {
       console.error("Erro ao carregar código penal:", err);
-      alert("Erro ao carregar código penal");
+      toast.error("Erro ao carregar código penal");
     } finally {
       setLoading(false);
     }

@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import api from "../../api/api";
 import "../../styles/balanco-operacional-admin.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const MESES = [
   "Janeiro",
   "Fevereiro",
@@ -153,6 +154,8 @@ const desenharTextoComQuebra = (
 };
 
 export default function BalancoOperacionalAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const agora = new Date();
 
   const canvasRef =
@@ -384,7 +387,7 @@ export default function BalancoOperacionalAdmin() {
   const fecharBalanco =
     async () => {
       if (!periodoEhAtual) {
-        alert(
+        toast.warning(
           "O fechamento deve ser feito para o período atual antes de zerar os contadores."
         );
 
@@ -392,9 +395,11 @@ export default function BalancoOperacionalAdmin() {
       }
 
       if (
-        !window.confirm(
-          `Confirmar o fechamento do balanço de ${periodoTexto}?\n\nOs números ficarão arquivados permanentemente.`
-        )
+        !(await confirm({
+          tone: "danger",
+          title: "Fechar balanço",
+          message: `Confirmar o fechamento do balanço de ${periodoTexto}? Os números ficarão arquivados permanentemente.`
+        }))
       ) {
         return;
       }
@@ -453,13 +458,13 @@ export default function BalancoOperacionalAdmin() {
 
         await carregarHistorico();
 
-        alert(
+        toast.success(
           "Balanço fechado com sucesso."
         );
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           err?.response?.data
             ?.message ||
             "Erro ao fechar balanço"
@@ -606,7 +611,7 @@ export default function BalancoOperacionalAdmin() {
     baixar = false
   ) => {
     if (!dados) {
-      alert(
+      toast.warning(
         "Carregue os dados antes de gerar a arte."
       );
 
@@ -1119,7 +1124,7 @@ export default function BalancoOperacionalAdmin() {
         err
       );
 
-      alert(
+      toast.error(
         err?.message ||
           "Erro ao gerar a arte."
       );
@@ -1135,7 +1140,7 @@ export default function BalancoOperacionalAdmin() {
   const zerarContadores =
     async () => {
       if (!fechado) {
-        alert(
+        toast.warning(
           "Feche o balanço mensal antes de zerar os contadores."
         );
 
@@ -1143,9 +1148,12 @@ export default function BalancoOperacionalAdmin() {
       }
 
       if (
-        !window.confirm(
-          "ATENÇÃO\n\nOs contadores atuais serão zerados.\n\nO balanço fechado continuará salvo no histórico.\n\nDeseja continuar?"
-        )
+        !(await confirm({
+          tone: "danger",
+          title: "Zerar contadores",
+          message:
+            "Os contadores atuais serão zerados. O balanço fechado continuará salvo no histórico. Deseja continuar?"
+        }))
       ) {
         return;
       }
@@ -1157,7 +1165,7 @@ export default function BalancoOperacionalAdmin() {
           "/api/apreensoes/zerar"
         );
 
-        alert(
+        toast.success(
           "Contadores zerados com sucesso."
         );
 
@@ -1165,7 +1173,7 @@ export default function BalancoOperacionalAdmin() {
       } catch (err) {
         console.error(err);
 
-        alert(
+        toast.error(
           "Erro ao zerar contadores."
         );
       } finally {

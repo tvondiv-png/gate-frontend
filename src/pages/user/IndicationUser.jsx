@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "./user-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const badgeClass = (status) => {
   if (status === "Aprovado") return "success";
   if (status === "Rejeitado") return "danger";
@@ -10,6 +11,7 @@ const badgeClass = (status) => {
 };
 
 export default function IndicationUser() {
+  const toast = useToast();
   const [form, setForm] = useState({
     idPersonagem: "",
     nomePersonagem: "",
@@ -46,7 +48,7 @@ export default function IndicationUser() {
       !form.cnh ||
       !form.discordId
     ) {
-      alert("Preencha todos os campos");
+      toast.warning("Preencha todos os campos");
       return;
     }
 
@@ -63,9 +65,9 @@ export default function IndicationUser() {
       });
 
       await loadIndications();
-      alert("Indicação enviada com sucesso");
+      toast.success("Indicação enviada com sucesso");
     } catch (err) {
-      alert(err.response?.data?.message || "Erro ao enviar indicação");
+      toast.error(err.response?.data?.message || "Erro ao enviar indicação");
       console.error(err);
     } finally {
       setLoading(false);

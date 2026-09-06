@@ -10,6 +10,7 @@ import {
 import { fetchPenalCodeStats } from "../../services/penalCodeService";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const EMPTY_FORM = {
   artigo: "",
   codigo: "",
@@ -34,6 +35,8 @@ const badgeClass = (value) => {
 };
 
 export default function PenalCodeAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [items, setItems] = useState([]);
   const [stats, setStats] = useState({
     total: 0,
@@ -86,7 +89,7 @@ export default function PenalCodeAdmin() {
       );
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar artigos penais.");
+      toast.error("Erro ao carregar artigos penais.");
       setItems([]);
     } finally {
       setLoading(false);
@@ -133,7 +136,7 @@ export default function PenalCodeAdmin() {
   const salvar = async () => {
     try {
       if (!form.artigo || !form.codigo || !form.titulo || !form.tipo || !form.categoria || !form.descricao) {
-        alert("Preencha artigo, código, título, tipo, categoria e descrição.");
+        toast.warning("Preencha artigo, código, título, tipo, categoria e descrição.");
         return;
       }
 
@@ -148,10 +151,10 @@ export default function PenalCodeAdmin() {
 
       if (editandoId) {
         await updatePenalCodeAdmin(editandoId, payload);
-        alert("Artigo atualizado com sucesso.");
+        toast.success("Artigo atualizado com sucesso.");
       } else {
         await createPenalCodeAdmin(payload);
-        alert("Artigo criado com sucesso.");
+        toast.success("Artigo criado com sucesso.");
       }
 
       setModalOpen(false);
@@ -160,7 +163,7 @@ export default function PenalCodeAdmin() {
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "Erro ao salvar artigo.");
+      toast.error(err?.response?.data?.message || "Erro ao salvar artigo.");
     } finally {
       setSaving(false);
     }
@@ -172,7 +175,7 @@ export default function PenalCodeAdmin() {
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "Erro ao alterar status.");
+      toast.error(err?.response?.data?.message || "Erro ao alterar status.");
     }
   };
 
@@ -182,20 +185,20 @@ export default function PenalCodeAdmin() {
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "Erro ao alterar destaque.");
+      toast.error(err?.response?.data?.message || "Erro ao alterar destaque.");
     }
   };
 
   const excluir = async (id) => {
-    if (!window.confirm("Deseja realmente excluir este artigo?")) return;
+    if (!(await confirm({ tone: "danger", message: "Deseja realmente excluir este artigo?" }))) return;
 
     try {
       await deletePenalCodeAdmin(id);
-      alert("Artigo excluído com sucesso.");
+      toast.success("Artigo excluído com sucesso.");
       await carregar();
     } catch (err) {
       console.error(err);
-      alert(err?.response?.data?.message || "Erro ao excluir artigo.");
+      toast.error(err?.response?.data?.message || "Erro ao excluir artigo.");
     }
   };
 

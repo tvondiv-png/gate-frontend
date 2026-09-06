@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast } from "../../contexts/ToastContext";
 const CATEGORIAS = [
   { value: "OFICIAIS_SUPERIORES", label: "Oficiais Superiores" },
   { value: "OFICIAIS_INTERMEDIARIOS", label: "Oficiais Intermediários" },
@@ -18,6 +19,7 @@ const formatarDataHora = (data) => {
 };
 
 export default function ComandoComunicados() {
+  const toast = useToast();
   const [titulo, setTitulo] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [destino, setDestino] = useState("todos");
@@ -59,22 +61,22 @@ export default function ComandoComunicados() {
 
   const validar = () => {
     if (!titulo.trim()) {
-      alert("Informe o título.");
+      toast.warning("Informe o título.");
       return false;
     }
 
     if (!mensagem.trim()) {
-      alert("Informe a mensagem.");
+      toast.warning("Informe a mensagem.");
       return false;
     }
 
     if (destino === "categoria" && !categoria) {
-      alert("Selecione a categoria.");
+      toast.warning("Selecione a categoria.");
       return false;
     }
 
     if (destino === "funcionais" && !funcionais.trim()) {
-      alert("Informe os funcionais.");
+      toast.warning("Informe os funcionais.");
       return false;
     }
 
@@ -104,13 +106,13 @@ export default function ComandoComunicados() {
       }
 
       const res = await api.post("/api/comando/comunicado", payload);
-      alert(res.data?.message || "Comunicado enviado com sucesso.");
+      toast.success(res.data?.message || "Comunicado enviado com sucesso.");
 
       limpar();
       await carregarHistorico();
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao enviar comunicado.");
+      toast.error(err.response?.data?.message || "Erro ao enviar comunicado.");
     } finally {
       setLoading(false);
     }
@@ -125,7 +127,7 @@ export default function ComandoComunicados() {
       }
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao encerrar comunicado.");
+      toast.error(err.response?.data?.message || "Erro ao encerrar comunicado.");
     }
   };
 
@@ -136,7 +138,7 @@ export default function ComandoComunicados() {
       setDetalheAberto(res.data);
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao abrir detalhe.");
+      toast.error(err.response?.data?.message || "Erro ao abrir detalhe.");
     } finally {
       setLoadingDetalhe(false);
     }

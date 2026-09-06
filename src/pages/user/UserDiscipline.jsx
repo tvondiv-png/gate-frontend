@@ -7,6 +7,7 @@ import {
 } from "../../services/disciplineUserService";
 import "./user-discipline.css";
 
+import { useToast } from "../../contexts/ToastContext";
 function formatarData(valor) {
   if (!valor) return "-";
   return new Date(valor).toLocaleString("pt-BR");
@@ -28,6 +29,7 @@ function getStatusColor(status) {
 }
 
 export default function UserDiscipline() {
+  const toast = useToast();
   const [lista, setLista] = useState([]);
   const [selecionado, setSelecionado] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -55,7 +57,7 @@ export default function UserDiscipline() {
       setSelecionado(data);
     } catch (err) {
       console.error(err);
-      alert("Erro ao carregar processo");
+      toast.error("Erro ao carregar processo");
     } finally {
       setLoadingDetalhe(false);
     }
@@ -81,17 +83,17 @@ export default function UserDiscipline() {
       const atualizado = await confirmarCienciaProcesso(selecionado._id);
       setSelecionado(atualizado);
       await carregar();
-      alert("Ciência registrada com sucesso");
+      toast.success("Ciência registrada com sucesso");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao confirmar ciência");
+      toast.error(err.response?.data?.message || "Erro ao confirmar ciência");
     }
   };
 
   const enviarManifestacao = async () => {
     if (!selecionado?._id) return;
     if (!manifestacao.trim()) {
-      alert("Informe sua manifestação");
+      toast.warning("Informe sua manifestação");
       return;
     }
 
@@ -105,10 +107,10 @@ export default function UserDiscipline() {
       setManifestacao("");
       setTipoManifestacao("RESPOSTA");
       await carregar();
-      alert("Manifestação enviada com sucesso");
+      toast.success("Manifestação enviada com sucesso");
     } catch (err) {
       console.error(err);
-      alert(err.response?.data?.message || "Erro ao enviar manifestação");
+      toast.error(err.response?.data?.message || "Erro ao enviar manifestação");
     }
   };
 

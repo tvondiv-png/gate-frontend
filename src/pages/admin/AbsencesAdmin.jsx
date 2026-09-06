@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import api from "../../api/api";
 import "../../styles/admin-module-premium.css";
 
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 const badgeClass = (status) => {
   if (status === "Aprovada") return "success";
   if (status === "Rejeitada") return "danger";
@@ -10,6 +11,8 @@ const badgeClass = (status) => {
 };
 
 export default function AbsencesAdmin() {
+  const toast = useToast();
+  const confirm = useConfirm();
   const [list, setList] = useState([]);
   const [comentarios, setComentarios] = useState({});
 
@@ -26,7 +29,7 @@ export default function AbsencesAdmin() {
     const comentario = comentarios[id] || "";
 
     if (!comentario.trim()) {
-      alert("Informe o comentário");
+      toast.warning("Informe o comentário");
       return;
     }
 
@@ -157,8 +160,12 @@ export default function AbsencesAdmin() {
               <div className="admin-module-actions">
                 <button
                   className="admin-module-btn danger"
-                  onClick={() => {
-                    if (window.confirm("Excluir esta ausência?")) {
+                  onClick={async () => {
+                    const ok = await confirm({
+                      tone: "danger",
+                      message: "Excluir esta ausência?"
+                    });
+                    if (ok) {
                       api.delete(`/api/absences/${a._id}`).then(load);
                     }
                   }}
