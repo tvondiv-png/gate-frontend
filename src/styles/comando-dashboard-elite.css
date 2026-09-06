@@ -361,3 +361,30 @@
     font-size: 24px;
   }
 }
+/* --- widget Metas + Briefing 24h --- */
+.elite-mini-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+.elite-mini {
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+.elite-mini strong {
+  display: block;
+  font-size: 1.5rem;
+  color: #f5f5f5;
+}
+.elite-mini span {
+  font-size: 0.72rem;
+  color: #9aa4b2;
+}
+.elite-btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}

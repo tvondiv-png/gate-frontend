@@ -97,6 +97,8 @@ export default function ComandoDashboard() {
 
   const [altoComando, setAltoComando] = useState([]);
 
+  const [extra, setExtra] = useState(null);
+
   const [loading, setLoading] = useState(true);
 
   /* =========================================================
@@ -129,6 +131,11 @@ export default function ComandoDashboard() {
           "/api/high-command-notices"
         )
       ]);
+
+      api
+        .get("/api/comando/dashboard-extra")
+        .then((r) => setExtra(r?.data || null))
+        .catch(() => setExtra(null));
 
       setScore(
         Array.isArray(resScore.data)
@@ -428,6 +435,106 @@ export default function ComandoDashboard() {
         </div>
 
       </section>
+
+      {/* =====================================================
+          METAS + BRIEFING 24H
+      ===================================================== */}
+
+      {extra && (
+        <section className="elite-grid-2" style={{ marginTop: 16 }}>
+          <div className="elite-card">
+            <div className="elite-card-header">
+              <h3>Metas do Comando</h3>
+              <button
+                className="elite-btn ghost"
+                onClick={() => navigate("/comando/metas")}
+              >
+                Gerenciar
+              </button>
+            </div>
+            <div className="elite-mini-grid">
+              <div className="elite-mini">
+                <strong>{extra.metas.ativas}</strong>
+                <span>Ativas</span>
+              </div>
+              <div className="elite-mini">
+                <strong>{extra.metas.expiradas}</strong>
+                <span>Prazo encerrado</span>
+              </div>
+              <div className="elite-mini">
+                <strong>{extra.metas.atingimentoMedio}%</strong>
+                <span>Atingimento médio</span>
+              </div>
+            </div>
+            {extra.metas.expiradas > 0 && (
+              <p
+                style={{
+                  marginTop: 10,
+                  fontSize: 13,
+                  color: "#f0a35e"
+                }}
+              >
+                ⏰ {extra.metas.expiradas} meta(s) com prazo encerrado aguardando
+                exclusão do Comando.
+              </p>
+            )}
+          </div>
+
+          <div className="elite-card">
+            <div className="elite-card-header">
+              <h3>Briefing — últimas 24h</h3>
+            </div>
+            <div className="elite-mini-grid">
+              <div className="elite-mini">
+                <strong>{extra.briefing.acoesAprovadas}</strong>
+                <span>Ações aprovadas</span>
+              </div>
+              <div className="elite-mini">
+                <strong>{extra.briefing.advertencias}</strong>
+                <span>Advertências</span>
+              </div>
+              <div className="elite-mini">
+                <strong>{extra.briefing.eventos.length}</strong>
+                <span>Registros no log</span>
+              </div>
+            </div>
+            <div
+              style={{
+                marginTop: 12,
+                maxHeight: 200,
+                overflowY: "auto",
+                display: "flex",
+                flexDirection: "column",
+                gap: 6
+              }}
+            >
+              {extra.briefing.eventos.length === 0 && (
+                <span style={{ fontSize: 13, color: "#8b95a4" }}>
+                  Sem registros nas últimas 24h.
+                </span>
+              )}
+              {extra.briefing.eventos.map((e, i) => (
+                <div
+                  key={i}
+                  style={{
+                    fontSize: 12.5,
+                    color: "#c2cad6",
+                    borderLeft: "2px solid #c9a24d",
+                    paddingLeft: 8
+                  }}
+                >
+                  <strong style={{ color: "#e5e7eb" }}>{e.acao}</strong>
+                  {e.modulo ? ` · ${e.modulo}` : ""} — {e.quem}
+                  <br />
+                  <span style={{ color: "#8b95a4" }}>
+                    {new Date(e.data).toLocaleString("pt-BR")}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* =====================================================
           ACESSOS RÁPIDOS
