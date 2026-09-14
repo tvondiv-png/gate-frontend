@@ -1090,8 +1090,11 @@ export default function RocamEstagiarios() {
                     <button
                       type="button"
                       className="rocam-trainee-btn ghost"
-                      disabled
-                      title="Será conectado na próxima etapa"
+                      onClick={() =>
+                        navigate(
+                          `/rocam/estagiarios/${item.user}`
+                        )
+                      }
                     >
                       Abrir ficha
                     </button>
@@ -1099,17 +1102,11 @@ export default function RocamEstagiarios() {
                     <button
                       type="button"
                       className="rocam-trainee-btn ghost"
-                      disabled
-                      title="Será conectado na próxima etapa"
-                    >
-                      Histórico
-                    </button>
-
-                    <button
-                      type="button"
-                      className="rocam-trainee-btn ghost"
-                      disabled
-                      title="Será conectado na próxima etapa"
+                      onClick={() =>
+                        navigate(
+                          "/rocam/metas"
+                        )
+                      }
                     >
                       Editar metas
                     </button>
@@ -1119,8 +1116,11 @@ export default function RocamEstagiarios() {
                       <button
                         type="button"
                         className="rocam-trainee-btn success"
-                        disabled
-                        title="Aprovação será conectada na próxima etapa"
+                        onClick={() =>
+                          navigate(
+                            `/rocam/estagiarios/${item.user}`
+                          )
+                        }
                       >
                         Aprovar estágio
                       </button>

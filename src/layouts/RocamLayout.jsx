@@ -168,10 +168,6 @@ export default function RocamLayout() {
     contexto?.bracal ===
     true;
 
-  const estagiario =
-    contexto?.estagiario ===
-    true;
-
   const comandoRocam =
     contexto?.comandoRocam ===
     true;
@@ -357,45 +353,6 @@ export default function RocamLayout() {
             </NavLink>
 
           </div>
-
-          {/* =================================================
-              ESTAGIÁRIO ROCAM
-          ================================================= */}
-
-          {estagiario && (
-            <div className="rocam-nav-group">
-
-              <span className="rocam-nav-title">
-                MEU ESTÁGIO
-              </span>
-
-              <NavLink
-                to="/rocam"
-                end
-                className={({
-                  isActive
-                }) =>
-                  `rocam-nav-link ${
-                    isActive
-                      ? "active"
-                      : ""
-                  }`
-                }
-                onClick={
-                  fecharMenu
-                }
-              >
-
-                <span className="rocam-nav-icon">
-                  %
-                </span>
-
-                Meu Progresso
-
-              </NavLink>
-
-            </div>
-          )}
 
           {/* =================================================
               BRAÇAL ROCAM
@@ -756,7 +713,11 @@ export default function RocamLayout() {
 
           </div>
 
-          <div className="rocam-topbar-status">
+          <div
+            className={`rocam-topbar-status ${
+              loading ? "loading" : ""
+            }`}
+          >
 
             {loading
               ? "Carregando..."
