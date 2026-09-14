@@ -342,17 +342,6 @@ export default function AdminLayout() {
 
               icon:
                 "✅"
-            },
-
-            {
-              to:
-                "/admin/logs",
-
-              label:
-                "Logs",
-
-              icon:
-                "🧠"
             }
           ]
         }
@@ -383,6 +372,16 @@ export default function AdminLayout() {
 
                 icon:
                   "🔐"
+              },
+              {
+                to:
+                  "/admin/logs",
+
+                label:
+                  "Logs",
+
+                icon:
+                  "🧠"
               }
             ]
           }
