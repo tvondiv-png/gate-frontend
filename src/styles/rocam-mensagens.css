@@ -139,8 +139,74 @@
     rgba(255,255,255,.05);
 }
 
+.rocam-messages-list article.nao-lida {
+  border-color: rgba(201,162,77,.35);
+
+  background: rgba(201,162,77,.04);
+}
+
 .rocam-messages-list small {
   color: #697687;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rocam-message-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+
+  flex-wrap: wrap;
+}
+
+.rocam-message-badge {
+  padding: 2px 7px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(201,162,77,.4);
+
+  background: rgba(201,162,77,.12);
+
+  color: #e6c982;
+
+  font-size: .5rem;
+  font-weight: 800;
+}
+
+.rocam-message-actions {
+  display: flex;
+  gap: 6px;
+
+  flex-shrink: 0;
+}
+
+.rocam-message-actions button {
+  padding: 5px 9px;
+
+  border-radius: 7px;
+
+  border: 1px solid rgba(255,255,255,.1);
+
+  background: rgba(255,255,255,.04);
+
+  color: #a7b3c1;
+
+  font-size: .53rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.rocam-message-actions button.danger {
+  border-color: rgba(239,68,68,.3);
+
+  background: rgba(239,68,68,.08);
+
+  color: #fca5a5;
 }
 
 .rocam-messages-list h3 {

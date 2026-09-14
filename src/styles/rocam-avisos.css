@@ -131,3 +131,37 @@
 
   line-height: 1.55;
 }
+
+.rocam-notice-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rocam-notice-disable {
+  padding: 4px 9px;
+
+  border-radius: 7px;
+
+  border: 1px solid rgba(239,68,68,.3);
+
+  background: rgba(239,68,68,.08);
+
+  color: #fca5a5;
+
+  font-size: .5rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.rocam-notice-meta {
+  display: block;
+
+  margin-top: 8px;
+
+  color: #505c6c;
+
+  font-size: .5rem;
+}

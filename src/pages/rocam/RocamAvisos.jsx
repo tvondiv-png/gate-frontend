@@ -73,6 +73,23 @@ export default function RocamAvisos() {
       await carregar();
     };
 
+  const desativar =
+    async (id) => {
+      if (
+        !window.confirm(
+          "Desativar este aviso? Ele deixará de aparecer para o efetivo ROCAM."
+        )
+      ) {
+        return;
+      }
+
+      await api.patch(
+        `/api/rocam/comando/avisos/${id}/desativar`
+      );
+
+      await carregar();
+    };
+
   return (
     <div className="rocam-notices-page">
 
@@ -180,9 +197,27 @@ export default function RocamAvisos() {
               }
             >
 
-              <span>
-                {item.prioridade}
-              </span>
+              <div className="rocam-notice-head">
+
+                <span>
+                  {item.prioridade}
+                </span>
+
+                {contexto?.podeGerenciar && (
+                  <button
+                    type="button"
+                    className="rocam-notice-disable"
+                    onClick={() =>
+                      desativar(
+                        item._id
+                      )
+                    }
+                  >
+                    Desativar
+                  </button>
+                )}
+
+              </div>
 
               <h2>
                 {item.titulo}
@@ -191,6 +226,20 @@ export default function RocamAvisos() {
               <p>
                 {item.mensagem}
               </p>
+
+              <small className="rocam-notice-meta">
+                {item.publicadoPor
+                  ?.nome ||
+                  "-"}
+                {" · "}
+                {item.createdAt
+                  ? new Date(
+                      item.createdAt
+                    ).toLocaleString(
+                      "pt-BR"
+                    )
+                  : "-"}
+              </small>
 
             </article>
           )

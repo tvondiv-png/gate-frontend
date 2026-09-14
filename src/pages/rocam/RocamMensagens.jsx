@@ -106,6 +106,46 @@ export default function RocamMensagens() {
       }
     };
 
+  const marcarComoLida =
+    async (id) => {
+      try {
+        await api.patch(
+          `/api/rocam/mensagens/${id}/lida`
+        );
+
+        await carregar();
+      } catch (err) {
+        console.error(
+          "Erro ao marcar mensagem como lida:",
+          err
+        );
+      }
+    };
+
+  const apagar =
+    async (id) => {
+      if (
+        !window.confirm(
+          "Apagar esta mensagem?"
+        )
+      ) {
+        return;
+      }
+
+      try {
+        await api.delete(
+          `/api/rocam/mensagens/${id}`
+        );
+
+        await carregar();
+      } catch (err) {
+        console.error(
+          "Erro ao apagar mensagem:",
+          err
+        );
+      }
+    };
+
   const lista =
     aba === "recebidas"
       ? recebidas
@@ -260,16 +300,65 @@ export default function RocamMensagens() {
             (item) => (
               <article
                 key={item._id}
+                className={
+                  aba === "recebidas" &&
+                  !item.lida
+                    ? "nao-lida"
+                    : ""
+                }
               >
 
-                <small>
-                  {aba ===
-                  "recebidas"
-                    ? item.remetente
-                        ?.nome
-                    : item.destinatario
-                        ?.nome}
-                </small>
+                <div className="rocam-message-head">
+
+                  <small>
+                    {aba ===
+                    "recebidas"
+                      ? item.remetente
+                          ?.nome
+                      : item.destinatario
+                          ?.nome}
+
+                    {aba ===
+                      "recebidas" &&
+                      !item.lida && (
+                        <span className="rocam-message-badge">
+                          Não lida
+                        </span>
+                      )}
+                  </small>
+
+                  <div className="rocam-message-actions">
+
+                    {aba ===
+                      "recebidas" &&
+                      !item.lida && (
+                        <button
+                          type="button"
+                          onClick={() =>
+                            marcarComoLida(
+                              item._id
+                            )
+                          }
+                        >
+                          Marcar como lida
+                        </button>
+                      )}
+
+                    <button
+                      type="button"
+                      className="danger"
+                      onClick={() =>
+                        apagar(
+                          item._id
+                        )
+                      }
+                    >
+                      Apagar
+                    </button>
+
+                  </div>
+
+                </div>
 
                 <h3>
                   {item.assunto}
