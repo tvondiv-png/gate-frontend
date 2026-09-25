@@ -18,6 +18,7 @@ import "./user-dashboard.css";
 import "../../styles/comando-metas.css";
 
 import { useToast } from "../../contexts/ToastContext";
+import { pushSuportado, statusInscricaoPush, ativarPush } from "../../lib/push";
 export default function UserDashboard() {
   const toast = useToast();
   const { user } = useAuth();
@@ -33,6 +34,9 @@ export default function UserDashboard() {
 
   const [metasComando, setMetasComando] = useState([]);
   const [metasTemNaoVista, setMetasTemNaoVista] = useState(false);
+
+  const [pushStatus, setPushStatus] = useState("indisponivel");
+  const [ativandoPush, setAtivandoPush] = useState(false);
 
   const formatarHoras = (min) => {
     if (!min) return "0h";
@@ -187,6 +191,30 @@ export default function UserDashboard() {
   ];
 }, [dashboard]);
 
+  useEffect(() => {
+    if (!user) return;
+    if (!pushSuportado()) {
+      setPushStatus("indisponivel");
+      return;
+    }
+    statusInscricaoPush()
+      .then(setPushStatus)
+      .catch(() => setPushStatus("indisponivel"));
+  }, [user]);
+
+  const ativarNotificacoesPush = async () => {
+    try {
+      setAtivandoPush(true);
+      await ativarPush();
+      setPushStatus("ativo");
+      toast.success("Notificações ativadas neste dispositivo.");
+    } catch (err) {
+      toast.error(err.message || "Não foi possível ativar as notificações.");
+    } finally {
+      setAtivandoPush(false);
+    }
+  };
+
   const marcarMetasVistas = async () => {
     try {
       await api.post("/api/user/dashboard/metas/vistas");
@@ -276,6 +304,27 @@ export default function UserDashboard() {
           </div>
         </div>
       </header>
+
+      {pushStatus === "inativo" && (
+        <section className="user-warning-banner user-metas-banner">
+          <div className="user-warning-icon">🔔</div>
+          <div className="user-warning-content">
+            <h3>Ative as notificações</h3>
+            <p>
+              Receba avisos do Comando, metas e alertas mesmo com o site
+              fechado — instale o app no seu celular ou computador.
+            </p>
+            <button
+              className="user-home-btn"
+              type="button"
+              onClick={ativarNotificacoesPush}
+              disabled={ativandoPush}
+            >
+              {ativandoPush ? "Ativando..." : "Ativar notificações"}
+            </button>
+          </div>
+        </section>
+      )}
 
       {altoComandoAtivo && (
         <section

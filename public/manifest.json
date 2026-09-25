@@ -1,0 +1,19 @@
+{
+  "name": "2º BPChq - Anchieta",
+  "short_name": "GATE Anchieta",
+  "description": "Sistema institucional do 2º Batalhão de Polícia de Choque - Anchieta",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0b1c2d",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/anchieta-logo.png",
+      "sizes": "474x585",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
