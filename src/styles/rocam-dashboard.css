@@ -878,6 +878,13 @@
 .rd-stat.info {
   border-color: rgba(79, 156, 249, 0.4);
 }
+.rd-stat.destaque {
+  border-color: rgba(201, 162, 77, 0.45);
+  background: rgba(201, 162, 77, 0.07);
+}
+.rd-stat.destaque strong {
+  color: #c9a24d;
+}
 
 .rd-list {
   display: flex;

@@ -39,6 +39,8 @@ export default function RocamDashboard() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
+  const [honra, setHonra] = useState(null);
+
   const profile = contexto?.profile;
   const hierarchy = contexto?.hierarchy;
   const papel = contexto?.papelRocam;
@@ -51,6 +53,13 @@ export default function RocamDashboard() {
       .catch(() => toast.error("Erro ao carregar o dashboard ROCAM"))
       .finally(() => setLoading(false));
   }, [toast]);
+
+  useEffect(() => {
+    api
+      .get("/api/rocam/quadro-honra")
+      .then((res) => setHonra(res.data))
+      .catch(() => {});
+  }, []);
 
   return (
     <div className="rocam-dashboard-page">
@@ -98,6 +107,42 @@ export default function RocamDashboard() {
           <strong>{tituloPapel || "Supervisão"}</strong>
         </div>
       </section>
+
+      {/* ============ QUADRO DE HONRA ROCAM ============ */}
+      {honra &&
+        (honra.bracaisAtivos.length > 0 ||
+          honra.estagiariosDestaque.length > 0) && (
+          <section className="rocam-dashboard-card">
+            <div className="rocam-dashboard-card-title">
+              <div>
+                <small>DESTAQUES DO MÊS</small>
+                <h2>Quadro de Honra ROCAM</h2>
+              </div>
+            </div>
+
+            <div className="rd-stat-row">
+              {honra.bracaisAtivos.map((item, i) => (
+                <div key={`bracal-${i}`} className={`rd-stat ${i === 0 ? "destaque" : ""}`}>
+                  <strong>{item.total}</strong>
+                  <span>
+                    {i === 0 ? "🏆 " : ""}
+                    {item.nome} · avaliações
+                  </span>
+                </div>
+              ))}
+
+              {honra.estagiariosDestaque.map((item, i) => (
+                <div key={`estagiario-${i}`} className={`rd-stat ${i === 0 ? "destaque" : ""}`}>
+                  <strong>{item.percentual.toFixed(0)}%</strong>
+                  <span>
+                    {i === 0 ? "⭐ " : ""}
+                    {item.nome} · progresso
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
 
       {loading && (
         <div className="rocam-dashboard-empty">Carregando dados...</div>

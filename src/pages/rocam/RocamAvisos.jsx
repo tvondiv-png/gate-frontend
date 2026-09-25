@@ -52,6 +52,12 @@ export default function RocamAvisos() {
 
   useEffect(() => {
     carregar();
+
+    api
+      .post(
+        "/api/rocam/avisos/marcar-vistos"
+      )
+      .catch(() => {});
   }, []);
 
   const publicar =

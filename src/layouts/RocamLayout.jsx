@@ -32,6 +32,50 @@ export default function RocamLayout() {
     setLoading
   ] = useState(true);
 
+  const [
+    contadores,
+    setContadores
+  ] = useState({
+    mensagens: 0,
+    avisos: 0
+  });
+
+  /* =========================================================
+     CARREGAR CONTADORES (BADGE DE NÃO LIDAS)
+  ========================================================= */
+
+  useEffect(() => {
+    const carregarContadores =
+      async () => {
+        try {
+          const res =
+            await api.get(
+              "/api/rocam/contadores"
+            );
+
+          setContadores(
+            res.data || {
+              mensagens: 0,
+              avisos: 0
+            }
+          );
+        } catch {
+          // silencioso — não é crítico
+        }
+      };
+
+    carregarContadores();
+
+    const intervalo =
+      setInterval(
+        carregarContadores,
+        30000
+      );
+
+    return () =>
+      clearInterval(intervalo);
+  }, []);
+
   /* =========================================================
      CARREGAR CONTEXTO ROCAM
   ========================================================= */
@@ -559,6 +603,32 @@ export default function RocamLayout() {
 
               </NavLink>
 
+              {/* GRÁFICOS */}
+
+              <NavLink
+                to="/rocam/graficos"
+                className={({
+                  isActive
+                }) =>
+                  `rocam-nav-link ${
+                    isActive
+                      ? "active"
+                      : ""
+                  }`
+                }
+                onClick={
+                  fecharMenu
+                }
+              >
+
+                <span className="rocam-nav-icon">
+                  ▤
+                </span>
+
+                Gráficos
+
+              </NavLink>
+
             </div>
           )}
 
@@ -595,6 +665,14 @@ export default function RocamLayout() {
 
                 Mensagens
 
+                {contadores.mensagens > 0 && (
+                  <span className="rocam-nav-badge">
+                    {contadores.mensagens > 99
+                      ? "99+"
+                      : contadores.mensagens}
+                  </span>
+                )}
+
               </NavLink>
 
               <NavLink
@@ -618,6 +696,14 @@ export default function RocamLayout() {
                 </span>
 
                 Avisos
+
+                {contadores.avisos > 0 && (
+                  <span className="rocam-nav-badge">
+                    {contadores.avisos > 99
+                      ? "99+"
+                      : contadores.avisos}
+                  </span>
+                )}
 
               </NavLink>
 
