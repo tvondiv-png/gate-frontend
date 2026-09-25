@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/api";
+import { INSIGNIAS } from "../utils/insignias";
 import "./home.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -63,6 +64,7 @@ export default function Home() {
   const [apreensoes, setApreensoes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [patrulhaResumo, setPatrulhaResumo] = useState(null);
+  const [quadroHonra, setQuadroHonra] = useState(null);
 
   const getMediaUrl = (arquivo) => {
     if (!arquivo) return "";
@@ -108,6 +110,13 @@ export default function Home() {
     }
 
     carregarDados();
+  }, []);
+
+  useEffect(() => {
+    api
+      .get("/api/quadro-honra")
+      .then((res) => setQuadroHonra(res.data || null))
+      .catch(() => setQuadroHonra(null));
   }, []);
 
   useEffect(() => {
@@ -646,6 +655,94 @@ export default function Home() {
         </div>
 
       </section>
+
+      {/* =====================================================
+          QUADRO DE HONRA
+      ===================================================== */}
+
+      {quadroHonra && (
+        <section className="gate-container quadro-honra-section">
+
+          <div className="section-header">
+            <span className="section-tag">RECONHECIMENTO</span>
+            <h2 className="gate-title">Quadro de Honra</h2>
+          </div>
+
+          <div className="quadro-honra-grid">
+
+            {quadroHonra.destaqueMes && (
+              <div className="quadro-honra-card destaque">
+                <span className="qh-kicker">Destaque do mês</span>
+                {INSIGNIAS[quadroHonra.destaqueMes.patente] && (
+                  <img
+                    src={INSIGNIAS[quadroHonra.destaqueMes.patente]}
+                    alt={quadroHonra.destaqueMes.patente}
+                    className="qh-insignia"
+                  />
+                )}
+                <strong>
+                  {quadroHonra.destaqueMes.patente} {quadroHonra.destaqueMes.nome}
+                </strong>
+                <span className="qh-horas">
+                  {quadroHonra.destaqueMes.horas}h de patrulhamento
+                </span>
+              </div>
+            )}
+
+            {quadroHonra.destaqueSemana && (
+              <div className="quadro-honra-card">
+                <span className="qh-kicker">Destaque da semana</span>
+                {INSIGNIAS[quadroHonra.destaqueSemana.patente] && (
+                  <img
+                    src={INSIGNIAS[quadroHonra.destaqueSemana.patente]}
+                    alt={quadroHonra.destaqueSemana.patente}
+                    className="qh-insignia"
+                  />
+                )}
+                <strong>
+                  {quadroHonra.destaqueSemana.patente}{" "}
+                  {quadroHonra.destaqueSemana.nome}
+                </strong>
+                <span className="qh-horas">
+                  {quadroHonra.destaqueSemana.horas}h na semana
+                </span>
+              </div>
+            )}
+
+            {quadroHonra.topMes?.length > 0 && (
+              <div className="quadro-honra-card ranking">
+                <span className="qh-kicker">Top 3 do mês</span>
+                <ol>
+                  {quadroHonra.topMes.map((p, i) => (
+                    <li key={p.funcional}>
+                      <span className="qh-pos">{i + 1}º</span>
+                      <span className="qh-nome">
+                        {p.patente} {p.nome}
+                      </span>
+                      <span className="qh-h">{p.horas}h</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
+          </div>
+
+          {quadroHonra.conquistasRecentes?.length > 0 && (
+            <div className="quadro-honra-feed">
+              <span className="qh-kicker">Conquistas recentes</span>
+              <div className="qh-feed-list">
+                {quadroHonra.conquistasRecentes.map((c, i) => (
+                  <div key={i} className="qh-feed-item">
+                    🏅 <strong>{c.patente} {c.nome}</strong> — {c.titulo}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+        </section>
+      )}
 
       {/* =====================================================
           CAPACIDADES

@@ -174,6 +174,15 @@ export default function UserDashboard() {
       titulo: "Ações",
       valor: dashboard ? dashboard.totalAcoes || 0 : "—",
       subtitulo: "Total de ações aprovadas"
+    },
+    {
+      titulo: "Sequência",
+      valor: dashboard
+        ? `${dashboard.sequenciaSemanas || 0} semana${
+            dashboard.sequenciaSemanas === 1 ? "" : "s"
+          }`
+        : "—",
+      subtitulo: "Seguidas cumprindo a meta mínima"
     }
   ];
 }, [dashboard]);
@@ -503,6 +512,31 @@ export default function UserDashboard() {
                     </div>
                   );
                 })}
+              </div>
+            </section>
+          )}
+
+          {dashboard?.conquistas?.length > 0 && (
+            <section className="user-dashboard-menu-section">
+              <div className="user-dashboard-menu-top">
+                <div>
+                  <h2>Minhas conquistas</h2>
+                  <span>Metas batidas e sequências de patrulhamento.</span>
+                </div>
+              </div>
+
+              <div className="user-metas-lista">
+                {dashboard.conquistas.map((c, i) => (
+                  <div key={i} className="user-meta-item">
+                    <h4>🏅 {c.titulo}</h4>
+                    {c.descricao && (
+                      <div className="um-meta-info">{c.descricao}</div>
+                    )}
+                    <div className="um-meta-info">
+                      {formatarDataHora(c.createdAt)}
+                    </div>
+                  </div>
+                ))}
               </div>
             </section>
           )}

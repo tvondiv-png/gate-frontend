@@ -971,3 +971,120 @@
     box-shadow: 0 0 0 0 rgba(63, 185, 80, 0);
   }
 }
+
+/* ======================================================
+   QUADRO DE HONRA
+   ====================================================== */
+
+.quadro-honra-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+  margin-top: 24px;
+}
+
+.quadro-honra-card {
+  padding: 22px 20px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #0f172a, #070c17);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 6px;
+}
+
+.quadro-honra-card.destaque {
+  border-color: rgba(201, 162, 77, 0.45);
+  box-shadow: 0 0 30px rgba(201, 162, 77, 0.08);
+}
+
+.qh-kicker {
+  font-size: 0.68rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gold, #c9a24d);
+}
+
+.qh-insignia {
+  width: 48px;
+  height: auto;
+  margin: 8px 0 2px;
+}
+
+.quadro-honra-card strong {
+  color: #f5f5f5;
+  font-size: 0.98rem;
+}
+
+.qh-horas {
+  font-size: 0.82rem;
+  color: #9aa4b2;
+}
+
+.quadro-honra-card.ranking {
+  align-items: stretch;
+  text-align: left;
+}
+
+.quadro-honra-card.ranking ol {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quadro-honra-card.ranking li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: #c2cad6;
+}
+
+.qh-pos {
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: var(--gold, #c9a24d);
+  width: 26px;
+}
+
+.qh-nome {
+  flex: 1;
+}
+
+.qh-h {
+  color: #9aa4b2;
+  font-size: 0.8rem;
+}
+
+.quadro-honra-feed {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.qh-feed-list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.qh-feed-item {
+  font-size: 0.86rem;
+  color: #c2cad6;
+}
+
+@media (max-width: 640px) {
+  .quadro-honra-grid {
+    grid-template-columns: 1fr;
+  }
+}
