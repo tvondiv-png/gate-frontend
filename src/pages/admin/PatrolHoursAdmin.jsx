@@ -4,6 +4,7 @@ import api from "../../api/api";
 import "./PatrolHoursAdmin.css";
 
 import { useToast, useConfirm } from "../../contexts/ToastContext";
+import { useAuth } from "../../contexts/AuthContext";
 const formatarTempo = (min = 0) => {
   const valor = Number(min || 0);
 
@@ -456,6 +457,8 @@ function RemovedList({ items, onRestore, weeklyThresholdHours }) {
 export default function PatrolHoursAdmin() {
   const toast = useToast();
   const confirm = useConfirm();
+  const { user } = useAuth();
+  const isSuperadmin = user?.role === "superadmin";
   const [abaRelatorio, setAbaRelatorio] = useState("atual");
 
   const [lista, setLista] = useState([]);
@@ -1564,27 +1567,29 @@ export default function PatrolHoursAdmin() {
           </div>
         </div>
 
-        <div className="patrol-danger-zone no-print">
-          <h3>Administração de períodos</h3>
-          <p>
-            As ações abaixo alteram ou apagam dados de horas. Utilize somente no
-            fechamento correto do período administrativo.
-          </p>
+        {isSuperadmin && (
+          <div className="patrol-danger-zone no-print">
+            <h3>Administração de períodos</h3>
+            <p>
+              As ações abaixo alteram ou apagam dados de horas. Utilize somente no
+              fechamento correto do período administrativo.
+            </p>
 
-          <div className="patrol-actions">
-            <button className="btn btn-warning" onClick={zerarSemana}>
-              Zerar semana
-            </button>
+            <div className="patrol-actions">
+              <button className="btn btn-warning" onClick={zerarSemana}>
+                Zerar semana
+              </button>
 
-            <button className="btn btn-danger" onClick={zerarMes}>
-              Zerar mês
-            </button>
+              <button className="btn btn-danger" onClick={zerarMes}>
+                Zerar mês
+              </button>
 
-            <button className="btn btn-danger" onClick={zerarHistorico}>
-              Apagar histórico
-            </button>
+              <button className="btn btn-danger" onClick={zerarHistorico}>
+                Apagar histórico
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {loading ? (
           <div className="patrol-card">
