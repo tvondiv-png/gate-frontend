@@ -99,6 +99,8 @@ export default function ComandoDashboard() {
 
   const [extra, setExtra] = useState(null);
 
+  const [patrulha, setPatrulha] = useState(null);
+
   const [loading, setLoading] = useState(true);
 
   /* =========================================================
@@ -221,6 +223,33 @@ export default function ComandoDashboard() {
 
   useEffect(() => {
     carregar();
+  }, []);
+
+  /* =========================================================
+     PATRULHAMENTO AO VIVO (atualiza sozinho a cada 30s)
+  ========================================================= */
+
+  useEffect(() => {
+    let ativo = true;
+
+    const carregarPatrulha = () => {
+      api
+        .get("/api/comando/patrulha-ao-vivo")
+        .then((r) => {
+          if (ativo) setPatrulha(r?.data || null);
+        })
+        .catch(() => {
+          if (ativo) setPatrulha(null);
+        });
+    };
+
+    carregarPatrulha();
+    const timer = setInterval(carregarPatrulha, 30000);
+
+    return () => {
+      ativo = false;
+      clearInterval(timer);
+    };
   }, []);
 
   /* =========================================================
@@ -533,6 +562,82 @@ export default function ComandoDashboard() {
               ))}
             </div>
           </div>
+        </section>
+      )}
+
+      {/* =====================================================
+          PATRULHAMENTO AO VIVO
+      ===================================================== */}
+
+      {patrulha && (
+        <section className="elite-card" style={{ marginTop: 16 }}>
+          <div className="elite-card-header">
+            <h3>
+              <span className="live-dot" /> Patrulhamento ao vivo
+            </h3>
+            <span style={{ fontSize: 12, color: "#8b95a4" }}>
+              atualiza a cada 30s
+            </span>
+          </div>
+
+          <div className="elite-mini-grid">
+            <div className="elite-mini">
+              <strong>{patrulha.totalViaturas}</strong>
+              <span>Viaturas ativas</span>
+            </div>
+            <div className="elite-mini">
+              <strong>{patrulha.totalPoliciais}</strong>
+              <span>Policiais em patrulha</span>
+            </div>
+          </div>
+
+          {patrulha.viaturas.length === 0 ? (
+            <p style={{ marginTop: 12, fontSize: 13, color: "#8b95a4" }}>
+              Nenhuma viatura em patrulhamento agora.
+            </p>
+          ) : (
+            <div
+              style={{
+                marginTop: 12,
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
+                gap: 10
+              }}
+            >
+              {patrulha.viaturas.map((v) => (
+                <div
+                  key={v.id}
+                  style={{
+                    padding: "10px 12px",
+                    borderRadius: 8,
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.08)",
+                    borderLeft:
+                      v.tipoPatrulhamento === "ROCAM"
+                        ? "3px solid #f85149"
+                        : "3px solid #4f9cf9"
+                  }}
+                >
+                  <strong style={{ color: "#e5e7eb", fontSize: 13 }}>
+                    {v.viatura}
+                  </strong>
+                  <div style={{ fontSize: 11, color: "#8b95a4", marginBottom: 6 }}>
+                    {v.tipoPatrulhamento === "ROCAM" ? "ROCAM" : "Viatura"} · desde{" "}
+                    {new Date(v.desde).toLocaleTimeString("pt-BR", {
+                      hour: "2-digit",
+                      minute: "2-digit"
+                    })}
+                  </div>
+                  {v.integrantes.map((i, idx) => (
+                    <div key={idx} style={{ fontSize: 12, color: "#c2cad6" }}>
+                      {i.patente} {i.nome}
+                      {i.cargo ? ` · ${i.cargo}` : ""}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       )}
 

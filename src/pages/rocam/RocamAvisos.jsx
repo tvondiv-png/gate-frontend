@@ -8,10 +8,13 @@ import {
 } from "react-router-dom";
 
 import api from "../../api/api";
+import { useConfirm } from "../../contexts/ToastContext";
 
 import "../../styles/rocam-avisos.css";
 
 export default function RocamAvisos() {
+  const confirm = useConfirm();
+
   const {
     contexto
   } =
@@ -76,9 +79,11 @@ export default function RocamAvisos() {
   const desativar =
     async (id) => {
       if (
-        !window.confirm(
-          "Desativar este aviso? Ele deixará de aparecer para o efetivo ROCAM."
-        )
+        !(await confirm({
+          tone: "danger",
+          message:
+            "Desativar este aviso? Ele deixará de aparecer para o efetivo ROCAM."
+        }))
       ) {
         return;
       }

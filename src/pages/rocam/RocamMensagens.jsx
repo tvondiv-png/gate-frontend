@@ -4,10 +4,12 @@ import {
 } from "react";
 
 import api from "../../api/api";
+import { useConfirm } from "../../contexts/ToastContext";
 
 import "../../styles/rocam-mensagens.css";
 
 export default function RocamMensagens() {
+  const confirm = useConfirm();
   const [
     contatos,
     setContatos
@@ -125,9 +127,10 @@ export default function RocamMensagens() {
   const apagar =
     async (id) => {
       if (
-        !window.confirm(
-          "Apagar esta mensagem?"
-        )
+        !(await confirm({
+          tone: "danger",
+          message: "Apagar esta mensagem?"
+        }))
       ) {
         return;
       }

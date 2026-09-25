@@ -388,3 +388,26 @@
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
+
+/* --- indicador "ao vivo" --- */
+.live-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3fb950;
+  margin-right: 6px;
+  box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  animation: live-pulse 1.8s infinite;
+}
+@keyframes live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(63, 185, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0);
+  }
+}

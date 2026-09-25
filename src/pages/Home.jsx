@@ -62,6 +62,7 @@ export default function Home() {
   const [slideAtivo, setSlideAtivo] = useState(0);
   const [apreensoes, setApreensoes] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [patrulhaResumo, setPatrulhaResumo] = useState(null);
 
   const getMediaUrl = (arquivo) => {
     if (!arquivo) return "";
@@ -107,6 +108,29 @@ export default function Home() {
     }
 
     carregarDados();
+  }, []);
+
+  useEffect(() => {
+    let ativo = true;
+
+    const carregarResumo = () => {
+      api
+        .get("/api/rso/publico/resumo")
+        .then((res) => {
+          if (ativo) setPatrulhaResumo(res.data || null);
+        })
+        .catch(() => {
+          if (ativo) setPatrulhaResumo(null);
+        });
+    };
+
+    carregarResumo();
+    const timer = setInterval(carregarResumo, 30000);
+
+    return () => {
+      ativo = false;
+      clearInterval(timer);
+    };
   }, []);
 
   useEffect(() => {
@@ -359,6 +383,21 @@ export default function Home() {
             Operacional e Administrativo
           </strong>
         </div>
+
+        {patrulhaResumo && (
+          <div className="home-summary-card">
+            <small>
+              <span className="live-dot" /> Patrulhamento agora
+            </small>
+
+            <strong>
+              {patrulhaResumo.viaturasAtivas} viatura
+              {patrulhaResumo.viaturasAtivas === 1 ? "" : "s"} ·{" "}
+              {patrulhaResumo.policiaisEmPatrulha} policia
+              {patrulhaResumo.policiaisEmPatrulha === 1 ? "l" : "is"}
+            </strong>
+          </div>
+        )}
 
       </section>
 

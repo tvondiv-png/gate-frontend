@@ -949,3 +949,25 @@
     padding: 12px 16px;
   }
 }
+/* --- indicador "ao vivo" (patrulhamento) --- */
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3fb950;
+  margin-right: 5px;
+  box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  animation: live-pulse-home 1.8s infinite;
+}
+@keyframes live-pulse-home {
+  0% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(63, 185, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0);
+  }
+}
