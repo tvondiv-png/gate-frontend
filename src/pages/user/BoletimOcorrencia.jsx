@@ -11,6 +11,7 @@ import {
 } from "../../services/boletimOcorrenciaService";
 import { exportarBoletimPDF } from "../../lib/exportarBoletimPDF";
 import { RUAS_ANCHIETA } from "../../data/ruasAnchieta";
+import { CIA_POR_BAIRRO } from "../../data/ciasAnchieta";
 import { ARMAS_BOPM } from "../../data/armasBOPM";
 import "./boletim-ocorrencia.css";
 
@@ -44,7 +45,11 @@ const TIPOS_ILICITO = ["Entorpecentes", "Armas", "Munições", "Ilicitos", "Valo
 const SUBTIPOS_ENTORPECENTE = ["Maconha", "Ecstasy (Bala)", "Cocaína (Pó)", "Outro"];
 const SUBTIPOS_ILICITO_DIVERSO = ["Capuz", "Algema", "Lockpick", "Bomba caseira", "Outro"];
 
-const LOCAL_VAZIO = { rua: "", bairro: "" };
+const LOCAL_VAZIO = { rua: "", bairro: "", cia: "" };
+
+function comCia(local) {
+  return { ...local, cia: CIA_POR_BAIRRO[local.bairro] || "" };
+}
 
 const ABORDAGEM_VAZIA = {
   tipo: "ABORDAGEM_PADRAO",
@@ -90,7 +95,9 @@ function CampoLocal({ titulo, local, onChange }) {
   };
 
   const selecionarRua = (item) => {
-    onChange({ rua: item.rua, bairro: item.bairro === "—" ? "" : item.bairro });
+    onChange(
+      comCia({ rua: item.rua, bairro: item.bairro === "—" ? "" : item.bairro })
+    );
     setMostrarSugestoes(false);
   };
 
@@ -101,7 +108,7 @@ function CampoLocal({ titulo, local, onChange }) {
         <input
           value={local.rua}
           onChange={(e) => {
-            onChange({ ...local, rua: e.target.value });
+            onChange(comCia({ ...local, rua: e.target.value }));
             buscarRuas(e.target.value);
             setMostrarSugestoes(true);
           }}
@@ -133,9 +140,16 @@ function CampoLocal({ titulo, local, onChange }) {
         <label>{titulo} — Bairro *</label>
         <input
           value={local.bairro}
-          onChange={(e) => onChange({ ...local, bairro: e.target.value })}
+          onChange={(e) => onChange(comCia({ ...local, bairro: e.target.value }))}
           placeholder="Preenchido pela rua, ou digite manualmente"
         />
+      </div>
+
+      <div className="bopm-field bopm-cia-info">
+        <label>{titulo} — Companhia</label>
+        <span className={local.cia ? "bopm-cia-ok" : "bopm-cia-desconhecida"}>
+          {local.cia || "Não identificada pra este bairro"}
+        </span>
       </div>
     </div>
   );

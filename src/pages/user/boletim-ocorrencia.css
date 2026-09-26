@@ -135,6 +135,22 @@
   min-width: 140px;
 }
 
+.bopm-cia-info span {
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #020b24;
+  font-size: 13px;
+}
+
+.bopm-cia-ok {
+  color: #4ade80;
+}
+
+.bopm-cia-desconhecida {
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .bopm-autocomplete {
   position: relative;
 }

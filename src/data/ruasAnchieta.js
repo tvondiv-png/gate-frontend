@@ -8,9 +8,6 @@
    apareceu num print. Fácil de completar depois: é só
    adicionar { rua, bairro } aqui.
 
-   Única incerteza registrada: "Rua Boba Gato" (Vila Suzana) —
-   nome incomum, o texto no mapa era pequeno demais pra ter
-   100% de certeza da grafia exata.
 ========================================================= */
 
 export const RUAS_ANCHIETA = [
@@ -121,7 +118,7 @@ export const RUAS_ANCHIETA = [
   { rua: "Rua João Alfredo", bairro: "Vila Suzana" },
   { rua: "Av. Jucelino Kubitschek", bairro: "Vila Suzana" },
   { rua: "Rua da Paz", bairro: "Vila Suzana" },
-  { rua: "Rua Boba Gato", bairro: "Vila Suzana" },
+  { rua: "Rua Borba Gato", bairro: "Vila Suzana" },
   { rua: "Rua São Luís", bairro: "Distrito Industrial" },
   { rua: "Rua Parapuã", bairro: "Distrito Industrial" },
   { rua: "Rua Panambi", bairro: "Guaianazes" },
