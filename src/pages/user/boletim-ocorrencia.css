@@ -2,6 +2,8 @@
   display: grid;
   gap: 20px;
   color: #fff;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .bopm-hero {
@@ -301,6 +303,7 @@
 
 .bopm-texto {
   white-space: pre-wrap;
+  overflow-wrap: anywhere;
   font-family: "Courier New", monospace;
   font-size: 13px;
   line-height: 1.55;
@@ -325,12 +328,13 @@
 
 .bopm-historico-row {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 8px;
   align-items: stretch;
 }
 
 .bopm-historico-item {
+  min-width: 0;
   text-align: left;
   display: grid;
   gap: 3px;
@@ -340,6 +344,17 @@
   background: rgba(255, 255, 255, 0.02);
   color: #fff;
   cursor: pointer;
+}
+
+.bopm-historico-item strong,
+.bopm-historico-item span,
+.bopm-historico-item small {
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.bopm-historico-excluir {
+  flex-shrink: 0;
 }
 
 .bopm-historico-excluir {

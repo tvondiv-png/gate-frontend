@@ -606,7 +606,7 @@ export default function BoletimOcorrencia() {
                     className="bopm-artigo-item"
                     onClick={() => adicionarArtigo(a)}
                   >
-                    Art. {a.artigo} — {a.titulo}
+                    {a.artigo} — {a.titulo}
                   </button>
                 ))}
               </div>
@@ -616,7 +616,7 @@ export default function BoletimOcorrencia() {
               <div className="bopm-chips">
                 {artigosSelecionados.map((a) => (
                   <span key={a.artigo} className="bopm-chip">
-                    Art. {a.artigo} — {a.titulo}
+                    {a.artigo} — {a.titulo}
                     <button type="button" onClick={() => removerArtigo(a.artigo)}>
                       ×
                     </button>
