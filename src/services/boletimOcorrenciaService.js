@@ -20,6 +20,11 @@ export async function criarBoletim(payload) {
   return res.data;
 }
 
+export async function previewBoletim(payload) {
+  const res = await api.post("/api/boletins/preview", payload);
+  return res.data;
+}
+
 export async function excluirBoletim(id) {
   const res = await api.delete(`/api/boletins/${id}`);
   return res.data;

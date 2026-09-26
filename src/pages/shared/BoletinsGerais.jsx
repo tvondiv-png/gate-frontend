@@ -37,8 +37,8 @@ export default function BoletinsGerais() {
     return lista.filter((item) => {
       const texto = [
         item.viatura,
-        item.local?.rua,
-        item.local?.bairro,
+        item.localAbordagem?.rua,
+        item.localAbordagem?.bairro,
         item.nomeCriador,
         item.patenteCriador,
         item.funcionalCriador
@@ -101,7 +101,7 @@ export default function BoletinsGerais() {
                   <td>{formatarData(item.createdAt)}</td>
                   <td>{item.viatura}</td>
                   <td>
-                    {item.local?.rua}, {item.local?.bairro}
+                    {item.localAbordagem?.rua}, {item.localAbordagem?.bairro}
                   </td>
                   <td>
                     {item.patenteCriador} {item.nomeCriador}

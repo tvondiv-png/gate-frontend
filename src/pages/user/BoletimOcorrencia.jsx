@@ -6,10 +6,15 @@ import {
   criarBoletim,
   excluirBoletim,
   fetchBoletimById,
-  fetchMeusBoletins
+  fetchMeusBoletins,
+  previewBoletim
 } from "../../services/boletimOcorrenciaService";
 import { exportarBoletimPDF } from "../../lib/exportarBoletimPDF";
+import { RUAS_ANCHIETA } from "../../data/ruasAnchieta";
+import { ARMAS_BOPM } from "../../data/armasBOPM";
 import "./boletim-ocorrencia.css";
+
+const CIDADE_FIXA = "Brasil Capital";
 
 const TIPO_ABORDAGEM = [
   { value: "ABORDAGEM_PADRAO", label: "Abordagem de rotina" },
@@ -22,7 +27,9 @@ const RESULTADO_ABORDAGEM = [
   { value: "PRESO", label: "Preso e conduzido à custódia" },
   { value: "LIBERADO", label: "Liberado no local" },
   { value: "CONDUZIDO_DELEGACIA", label: "Conduzido à delegacia" },
-  { value: "ENCAMINHADO_HOSPITAL", label: "Encaminhado ao hospital" }
+  { value: "HOSPITAL_PRESO", label: "Encaminhado ao hospital e preso" },
+  { value: "HOSPITAL_LIBERADO", label: "Encaminhado ao hospital e liberado" },
+  { value: "OBITO_IML", label: "Alvejado — óbito no local, conduzido ao IML" }
 ];
 
 const PROCEDIMENTOS = [
@@ -32,9 +39,12 @@ const PROCEDIMENTOS = [
   { value: "APOIO_VTR", label: "Apoio de viatura de reforço" }
 ];
 
-const TIPOS_ILICITO = ["Armas", "Munições", "Entorpecentes", "Ilicitos", "Valores"];
+const TIPOS_ILICITO = ["Entorpecentes", "Armas", "Munições", "Ilicitos", "Valores"];
 
-const LOCAL_VAZIO = { rua: "", bairro: "", cidade: "Anchieta", referencia: "" };
+const SUBTIPOS_ENTORPECENTE = ["Maconha", "Ecstasy (Bala)", "Cocaína (Pó)", "Outro"];
+const SUBTIPOS_ILICITO_DIVERSO = ["Capuz", "Algema", "Lockpick", "Bomba caseira", "Outro"];
+
+const LOCAL_VAZIO = { rua: "", bairro: "" };
 
 const ABORDAGEM_VAZIA = {
   tipo: "ABORDAGEM_PADRAO",
@@ -45,12 +55,10 @@ const ABORDAGEM_VAZIA = {
 
 const SUSPEITO_VAZIO = {
   nome: "Não identificado",
+  rg: "",
   vestimenta: "",
   corPele: "",
-  cabelo: "",
-  barba: "",
-  altura: "",
-  porteFisico: ""
+  cabelo: ""
 };
 
 const VEICULO_VAZIO = { possui: false, marca: "", modelo: "", cor: "", placa: "" };
@@ -59,6 +67,78 @@ function formatarData(data) {
   if (!data) return "-";
   const v = new Date(data);
   return Number.isNaN(v.getTime()) ? "-" : v.toLocaleString("pt-BR");
+}
+
+/* =========================================================
+   CAMPO DE RUA COM AUTOCOMPLETE (auto-preenche o bairro)
+========================================================= */
+
+function CampoLocal({ titulo, local, onChange }) {
+  const [sugestoes, setSugestoes] = useState([]);
+  const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
+
+  const buscarRuas = (termo) => {
+    const t = termo.trim().toLowerCase();
+    if (!t) {
+      setSugestoes([]);
+      return;
+    }
+
+    setSugestoes(
+      RUAS_ANCHIETA.filter((r) => r.rua.toLowerCase().includes(t)).slice(0, 8)
+    );
+  };
+
+  const selecionarRua = (item) => {
+    onChange({ rua: item.rua, bairro: item.bairro === "—" ? "" : item.bairro });
+    setMostrarSugestoes(false);
+  };
+
+  return (
+    <div className="bopm-grid-2">
+      <div className="bopm-field bopm-autocomplete">
+        <label>{titulo} — Rua *</label>
+        <input
+          value={local.rua}
+          onChange={(e) => {
+            onChange({ ...local, rua: e.target.value });
+            buscarRuas(e.target.value);
+            setMostrarSugestoes(true);
+          }}
+          onFocus={() => setMostrarSugestoes(sugestoes.length > 0)}
+          onBlur={() => setTimeout(() => setMostrarSugestoes(false), 150)}
+          placeholder="Digite a rua..."
+          autoComplete="off"
+        />
+
+        {mostrarSugestoes && sugestoes.length > 0 && (
+          <div className="bopm-autocomplete-lista">
+            {sugestoes.map((item) => (
+              <button
+                type="button"
+                key={item.rua}
+                onMouseDown={() => selecionarRua(item)}
+              >
+                {item.rua}
+                {item.bairro !== "—" && (
+                  <span className="bopm-autocomplete-bairro"> — {item.bairro}</span>
+                )}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="bopm-field">
+        <label>{titulo} — Bairro *</label>
+        <input
+          value={local.bairro}
+          onChange={(e) => onChange({ ...local, bairro: e.target.value })}
+          placeholder="Preenchido pela rua, ou digite manualmente"
+        />
+      </div>
+    </div>
+  );
 }
 
 export default function BoletimOcorrencia() {
@@ -77,13 +157,18 @@ export default function BoletimOcorrencia() {
   const [buscaArtigo, setBuscaArtigo] = useState("");
   const [artigosSelecionados, setArtigosSelecionados] = useState([]);
 
-  const [local, setLocal] = useState(LOCAL_VAZIO);
+  const [localAbordagem, setLocalAbordagem] = useState(LOCAL_VAZIO);
+  const [houvePerseguicao, setHouvePerseguicao] = useState(false);
+  const [localFinalizacao, setLocalFinalizacao] = useState(LOCAL_VAZIO);
+
   const [abordagem, setAbordagem] = useState(ABORDAGEM_VAZIA);
   const [suspeito, setSuspeito] = useState(SUSPEITO_VAZIO);
   const [veiculoSuspeito, setVeiculoSuspeito] = useState(VEICULO_VAZIO);
   const [ilicitos, setIlicitos] = useState([]);
 
-  const [gerando, setGerando] = useState(false);
+  const [gerandoPreview, setGerandoPreview] = useState(false);
+  const [preview, setPreview] = useState(null);
+  const [salvando, setSalvando] = useState(false);
   const [resultado, setResultado] = useState(null);
 
   const [historico, setHistorico] = useState([]);
@@ -155,6 +240,8 @@ export default function BoletimOcorrencia() {
       setIlicitos(
         rso.apreensoes.map((a) => ({
           tipo: a.tipo,
+          subtipo: "",
+          serial: "",
           quantidade:
             a.tipo === "Valores"
               ? Number(a.quantidade || 0).toLocaleString("pt-BR", {
@@ -223,12 +310,34 @@ export default function BoletimOcorrencia() {
   ======================================================= */
 
   const adicionarIlicito = () => {
-    setIlicitos((prev) => [...prev, { tipo: "Entorpecentes", quantidade: "", descricao: "" }]);
+    setIlicitos((prev) => [
+      ...prev,
+      { tipo: "Entorpecentes", subtipo: "Maconha", serial: "", quantidade: "", descricao: "" }
+    ]);
   };
 
   const atualizarIlicito = (index, campo, valor) => {
     setIlicitos((prev) =>
-      prev.map((item, i) => (i === index ? { ...item, [campo]: valor } : item))
+      prev.map((item, i) => {
+        if (i !== index) return item;
+
+        const atualizado = { ...item, [campo]: valor };
+
+        // ao trocar o tipo, reseta o subtipo pro padrão daquele tipo
+        if (campo === "tipo") {
+          atualizado.subtipo =
+            valor === "Entorpecentes"
+              ? "Maconha"
+              : valor === "Ilicitos"
+              ? "Capuz"
+              : valor === "Armas"
+              ? ARMAS_BOPM[0]
+              : "";
+          atualizado.serial = "";
+        }
+
+        return atualizado;
+      })
     );
   };
 
@@ -253,61 +362,96 @@ export default function BoletimOcorrencia() {
   };
 
   /* =======================================================
-     GERAR BOLETIM
+     MONTAR PAYLOAD
   ======================================================= */
 
-  const gerarBoletim = async () => {
+  const montarPayload = () => ({
+    rso: rsoSelecionado || null,
+    viatura: viatura.trim(),
+    equipe: equipe.filter((i) => i.nome.trim()),
+    naturezaFatos: artigosSelecionados,
+    localAbordagem,
+    localFinalizacao: houvePerseguicao ? localFinalizacao : null,
+    abordagem,
+    suspeito,
+    veiculoSuspeito,
+    ilicitos: ilicitos.filter((i) => i.quantidade.trim() || i.descricao.trim())
+  });
+
+  const validarFormulario = () => {
     if (!viatura.trim()) {
       toast.error("Informe a viatura");
-      return;
+      return false;
     }
 
     if (artigosSelecionados.length === 0) {
       toast.error("Selecione ao menos um artigo na natureza dos fatos");
-      return;
+      return false;
     }
 
-    if (!local.rua.trim() || !local.bairro.trim()) {
-      toast.error("Informe rua e bairro do local");
-      return;
+    if (!localAbordagem.rua.trim() || !localAbordagem.bairro.trim()) {
+      toast.error("Informe rua e bairro do local da abordagem");
+      return false;
     }
 
     if (!abordagem.ordemDadaPor.trim()) {
       toast.error("Informe quem deu a ordem de abordagem");
-      return;
+      return false;
     }
 
+    return true;
+  };
+
+  /* =======================================================
+     PRÉ-VISUALIZAR
+  ======================================================= */
+
+  const gerarPreview = async () => {
+    if (!validarFormulario()) return;
+
     try {
-      setGerando(true);
+      setGerandoPreview(true);
+      const res = await previewBoletim(montarPayload());
+      setPreview(res);
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Erro ao pré-visualizar boletim");
+    } finally {
+      setGerandoPreview(false);
+    }
+  };
 
-      const res = await criarBoletim({
-        rso: rsoSelecionado || null,
-        viatura: viatura.trim(),
-        equipe: equipe.filter((i) => i.nome.trim()),
-        naturezaFatos: artigosSelecionados,
-        local,
-        abordagem,
-        suspeito,
-        veiculoSuspeito,
-        ilicitos: ilicitos.filter((i) => i.quantidade.trim())
-      });
+  const voltarParaAjustar = () => {
+    setPreview(null);
+  };
 
+  /* =======================================================
+     CONFIRMAR E SALVAR
+  ======================================================= */
+
+  const confirmarESalvar = async () => {
+    try {
+      setSalvando(true);
+      const res = await criarBoletim(montarPayload());
       setResultado(res.boletim);
+      setPreview(null);
       toast.success("Boletim gerado com sucesso");
     } catch (err) {
       toast.error(err.response?.data?.message || "Erro ao gerar boletim");
     } finally {
-      setGerando(false);
+      setSalvando(false);
     }
   };
 
   const novoBoletim = () => {
     setResultado(null);
+    setPreview(null);
     setRsoSelecionado("");
     setViatura("");
     setEquipe([]);
     setArtigosSelecionados([]);
-    setLocal(LOCAL_VAZIO);
+    setLocalAbordagem(LOCAL_VAZIO);
+    setHouvePerseguicao(false);
+    setLocalFinalizacao(LOCAL_VAZIO);
     setAbordagem(ABORDAGEM_VAZIA);
     setSuspeito(SUSPEITO_VAZIO);
     setVeiculoSuspeito(VEICULO_VAZIO);
@@ -383,7 +527,7 @@ export default function BoletimOcorrencia() {
         </button>
       </div>
 
-      {aba === "novo" && !resultado && (
+      {aba === "novo" && !preview && !resultado && (
         <>
           <section className="bopm-card">
             <h2>1. Viatura e equipe</h2>
@@ -485,36 +629,30 @@ export default function BoletimOcorrencia() {
           <section className="bopm-card">
             <h2>3. Local</h2>
 
-            <div className="bopm-grid-2">
-              <div className="bopm-field">
-                <label>Rua *</label>
-                <input
-                  value={local.rua}
-                  onChange={(e) => setLocal({ ...local, rua: e.target.value })}
-                />
-              </div>
-              <div className="bopm-field">
-                <label>Bairro *</label>
-                <input
-                  value={local.bairro}
-                  onChange={(e) => setLocal({ ...local, bairro: e.target.value })}
-                />
-              </div>
-              <div className="bopm-field">
-                <label>Cidade</label>
-                <input
-                  value={local.cidade}
-                  onChange={(e) => setLocal({ ...local, cidade: e.target.value })}
-                />
-              </div>
-              <div className="bopm-field">
-                <label>Ponto de referência</label>
-                <input
-                  value={local.referencia}
-                  onChange={(e) => setLocal({ ...local, referencia: e.target.value })}
-                />
-              </div>
-            </div>
+            <CampoLocal
+              titulo="Local da abordagem"
+              local={localAbordagem}
+              onChange={setLocalAbordagem}
+            />
+
+            <label className="bopm-checkbox">
+              <input
+                type="checkbox"
+                checked={houvePerseguicao}
+                onChange={(e) => setHouvePerseguicao(e.target.checked)}
+              />
+              Houve perseguição / fuga — a ocorrência terminou em local diferente
+            </label>
+
+            {houvePerseguicao && (
+              <CampoLocal
+                titulo="Local de finalização da ocorrência"
+                local={localFinalizacao}
+                onChange={setLocalFinalizacao}
+              />
+            )}
+
+            <p className="bopm-muted">Cidade: {CIDADE_FIXA} (fixo)</p>
           </section>
 
           <section className="bopm-card">
@@ -574,7 +712,7 @@ export default function BoletimOcorrencia() {
           </section>
 
           <section className="bopm-card">
-            <h2>5. Ponto do suspeito</h2>
+            <h2>5. Dados do suspeito</h2>
 
             <div className="bopm-grid-2">
               <div className="bopm-field">
@@ -582,6 +720,13 @@ export default function BoletimOcorrencia() {
                 <input
                   value={suspeito.nome}
                   onChange={(e) => setSuspeito({ ...suspeito, nome: e.target.value })}
+                />
+              </div>
+              <div className="bopm-field">
+                <label>RG</label>
+                <input
+                  value={suspeito.rg}
+                  onChange={(e) => setSuspeito({ ...suspeito, rg: e.target.value })}
                 />
               </div>
               <div className="bopm-field">
@@ -603,27 +748,6 @@ export default function BoletimOcorrencia() {
                 <input
                   value={suspeito.cabelo}
                   onChange={(e) => setSuspeito({ ...suspeito, cabelo: e.target.value })}
-                />
-              </div>
-              <div className="bopm-field">
-                <label>Barba</label>
-                <input
-                  value={suspeito.barba}
-                  onChange={(e) => setSuspeito({ ...suspeito, barba: e.target.value })}
-                />
-              </div>
-              <div className="bopm-field">
-                <label>Altura</label>
-                <input
-                  value={suspeito.altura}
-                  onChange={(e) => setSuspeito({ ...suspeito, altura: e.target.value })}
-                />
-              </div>
-              <div className="bopm-field">
-                <label>Porte físico</label>
-                <input
-                  value={suspeito.porteFisico}
-                  onChange={(e) => setSuspeito({ ...suspeito, porteFisico: e.target.value })}
                 />
               </div>
             </div>
@@ -689,7 +813,7 @@ export default function BoletimOcorrencia() {
             <h2>7. Ilícitos encontrados</h2>
 
             {ilicitos.map((item, index) => (
-              <div key={index} className="bopm-repeater-row">
+              <div key={index} className="bopm-ilicito-row">
                 <select
                   value={item.tipo}
                   onChange={(e) => atualizarIlicito(index, "tipo", e.target.value)}
@@ -700,16 +824,74 @@ export default function BoletimOcorrencia() {
                     </option>
                   ))}
                 </select>
+
+                {item.tipo === "Entorpecentes" && (
+                  <select
+                    value={item.subtipo}
+                    onChange={(e) => atualizarIlicito(index, "subtipo", e.target.value)}
+                  >
+                    {SUBTIPOS_ENTORPECENTE.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                )}
+
+                {item.tipo === "Ilicitos" && (
+                  <select
+                    value={item.subtipo}
+                    onChange={(e) => atualizarIlicito(index, "subtipo", e.target.value)}
+                  >
+                    {SUBTIPOS_ILICITO_DIVERSO.map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                )}
+
+                {item.tipo === "Armas" && (
+                  <>
+                    <select
+                      value={item.subtipo}
+                      onChange={(e) => atualizarIlicito(index, "subtipo", e.target.value)}
+                    >
+                      {ARMAS_BOPM.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                    <input
+                      placeholder="Nº de série"
+                      value={item.serial}
+                      onChange={(e) => atualizarIlicito(index, "serial", e.target.value)}
+                    />
+                  </>
+                )}
+
+                {item.tipo === "Munições" && (
+                  <input
+                    placeholder="Arma correspondente (ex: AK 103)"
+                    value={item.subtipo}
+                    onChange={(e) => atualizarIlicito(index, "subtipo", e.target.value)}
+                  />
+                )}
+
                 <input
-                  placeholder={item.tipo === "Valores" ? "Ex: 4.407,00" : "Quantidade"}
+                  placeholder={
+                    item.tipo === "Valores"
+                      ? "Ex: 4.407,00"
+                      : (item.tipo === "Entorpecentes" && item.subtipo === "Outro") ||
+                        (item.tipo === "Ilicitos" && item.subtipo === "Outro")
+                      ? "Descreva o item"
+                      : "Quantidade"
+                  }
                   value={item.quantidade}
                   onChange={(e) => atualizarIlicito(index, "quantidade", e.target.value)}
                 />
-                <input
-                  placeholder="Descrição (opcional)"
-                  value={item.descricao}
-                  onChange={(e) => atualizarIlicito(index, "descricao", e.target.value)}
-                />
+
                 <button type="button" className="bopm-remove" onClick={() => removerIlicito(index)}>
                   ×
                 </button>
@@ -722,11 +904,40 @@ export default function BoletimOcorrencia() {
           </section>
 
           <div className="bopm-actions">
-            <button type="button" className="bopm-btn-primary" disabled={gerando} onClick={gerarBoletim}>
-              {gerando ? "Gerando..." : "Gerar boletim"}
+            <button
+              type="button"
+              className="bopm-btn-primary"
+              disabled={gerandoPreview}
+              onClick={gerarPreview}
+            >
+              {gerandoPreview ? "Gerando..." : "Pré-visualizar boletim"}
             </button>
           </div>
         </>
+      )}
+
+      {aba === "novo" && preview && !resultado && (
+        <section className="bopm-card bopm-resultado">
+          <h2>Pré-visualização</h2>
+          <p className="bopm-muted">
+            Confira o texto abaixo. Se algo estiver errado, volte e ajuste os campos.
+          </p>
+          <pre className="bopm-texto">{preview.textoCompleto}</pre>
+
+          <div className="bopm-actions">
+            <button
+              type="button"
+              className="bopm-btn-primary"
+              disabled={salvando}
+              onClick={confirmarESalvar}
+            >
+              {salvando ? "Salvando..." : "Confirmar e salvar boletim"}
+            </button>
+            <button type="button" className="bopm-btn-secondary" onClick={voltarParaAjustar}>
+              Voltar e ajustar
+            </button>
+          </div>
+        </section>
       )}
 
       {aba === "novo" && resultado && (
@@ -772,7 +983,7 @@ export default function BoletimOcorrencia() {
                 >
                   <strong>{item.viatura}</strong>
                   <span>
-                    {item.local?.rua}, {item.local?.bairro}
+                    {item.localAbordagem?.rua}, {item.localAbordagem?.bairro}
                   </span>
                   <small>{formatarData(item.createdAt)}</small>
                 </button>

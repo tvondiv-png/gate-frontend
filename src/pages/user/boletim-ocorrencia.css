@@ -84,7 +84,9 @@
 .bopm-field input,
 .bopm-field select,
 .bopm-repeater-row input,
-.bopm-repeater-row select {
+.bopm-repeater-row select,
+.bopm-ilicito-row input,
+.bopm-ilicito-row select {
   padding: 11px 13px;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -116,6 +118,59 @@
   grid-template-columns: 1fr 1.4fr 1fr auto;
   gap: 8px;
   align-items: center;
+}
+
+.bopm-ilicito-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.bopm-ilicito-row select,
+.bopm-ilicito-row input {
+  flex: 1;
+  min-width: 140px;
+}
+
+.bopm-autocomplete {
+  position: relative;
+}
+
+.bopm-autocomplete-lista {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  margin-top: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: #0b1530;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.bopm-autocomplete-lista button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 9px 12px;
+  border: 0;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.bopm-autocomplete-lista button:hover {
+  background: rgba(220, 38, 38, 0.12);
+}
+
+.bopm-autocomplete-bairro {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
 }
 
 .bopm-remove {
