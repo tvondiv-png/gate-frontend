@@ -1008,7 +1008,7 @@ export default function BoletimOcorrencia() {
                   title="Excluir boletim"
                   onClick={() => excluirDoHistorico(item._id)}
                 >
-                  🗑
+                  Excluir
                 </button>
               </div>
             ))}
