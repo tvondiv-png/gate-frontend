@@ -1,0 +1,131 @@
+.rd-live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3fb950;
+  margin-right: 5px;
+  box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  animation: rd-live-pulse 1.8s infinite;
+}
+
+@keyframes rd-live-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.6);
+  }
+  70% {
+    box-shadow: 0 0 0 8px rgba(63, 185, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0);
+  }
+}
+
+.rocam-patrulha-viaturas {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.rocam-patrulha-viatura {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-left: 3px solid #f85149;
+}
+
+.rocam-patrulha-viatura strong {
+  display: block;
+  color: #e5e7eb;
+  font-size: 0.86rem;
+}
+
+.rocam-patrulha-viatura small {
+  display: block;
+  color: #8b95a4;
+  font-size: 0.68rem;
+  margin-bottom: 6px;
+}
+
+.rocam-patrulha-integrante {
+  font-size: 0.76rem;
+  color: #c2cad6;
+}
+
+.rocam-patrulha-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.rocam-patrulha-input,
+.rocam-patrulha-select {
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #f8fafc;
+  font-size: 0.8rem;
+}
+
+.rocam-patrulha-input {
+  flex: 1;
+  min-width: 220px;
+}
+
+.rocam-patrulha-table-wrap {
+  overflow-x: auto;
+}
+
+.rocam-patrulha-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.rocam-patrulha-table th,
+.rocam-patrulha-table td {
+  padding: 9px 10px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #d7dde5;
+  white-space: nowrap;
+}
+
+.rocam-patrulha-table th {
+  color: #8b95a4;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.rocam-patrulha-badge {
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 750;
+}
+
+.rocam-patrulha-badge.danger {
+  background: rgba(248, 81, 73, 0.12);
+  color: #f85149;
+}
+
+.rocam-patrulha-badge.warning {
+  background: rgba(210, 153, 34, 0.12);
+  color: #d29922;
+}
+
+.rocam-patrulha-badge.success {
+  background: rgba(63, 185, 80, 0.12);
+  color: #3fb950;
+}
+
+@media (max-width: 600px) {
+  .rocam-patrulha-input {
+    min-width: 0;
+  }
+}

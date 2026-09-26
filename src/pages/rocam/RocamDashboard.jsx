@@ -17,6 +17,16 @@ const TITULO_PAPEL = {
   ESTAGIARIO_ROCAM: "Estagiário ROCAM"
 };
 
+const formatarMinutos = (min) => {
+  const valor = Number(min || 0);
+  if (!valor) return "0h";
+  const h = Math.floor(valor / 60);
+  const m = valor % 60;
+  if (!h) return `${m}min`;
+  if (!m) return `${h}h`;
+  return `${h}h ${m}min`;
+};
+
 const LABEL_STATUS_ESTAGIO = {
   EM_ANDAMENTO: "Em andamento",
   APTO_APROVACAO: "Apto para aprovação",
@@ -107,6 +117,29 @@ export default function RocamDashboard() {
           <strong>{tituloPapel || "Supervisão"}</strong>
         </div>
       </section>
+
+      {/* ============ MINHAS HORAS ============ */}
+      {!loading && data?.minhasHoras && (
+        <section className="rocam-dashboard-card">
+          <div className="rocam-dashboard-card-title">
+            <div>
+              <small>PATRULHAMENTO</small>
+              <h2>Minhas horas</h2>
+            </div>
+          </div>
+
+          <div className="rd-stat-row">
+            <div className="rd-stat">
+              <strong>{formatarMinutos(data.minhasHoras.horasSemanaMin)}</strong>
+              <span>Horas na semana</span>
+            </div>
+            <div className="rd-stat">
+              <strong>{formatarMinutos(data.minhasHoras.horasMesMin)}</strong>
+              <span>Horas no mês</span>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ============ QUADRO DE HONRA ROCAM ============ */}
       {honra &&

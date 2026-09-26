@@ -603,6 +603,32 @@ export default function RocamLayout() {
 
               </NavLink>
 
+              {/* PATRULHA E HORAS */}
+
+              <NavLink
+                to="/rocam/patrulha"
+                className={({
+                  isActive
+                }) =>
+                  `rocam-nav-link ${
+                    isActive
+                      ? "active"
+                      : ""
+                  }`
+                }
+                onClick={
+                  fecharMenu
+                }
+              >
+
+                <span className="rocam-nav-icon">
+                  ⛊
+                </span>
+
+                Patrulha e Horas
+
+              </NavLink>
+
               {/* GRÁFICOS */}
 
               <NavLink

@@ -112,6 +112,7 @@ const RocamComando = lazy(() => import("./pages/rocam/RocamComando"));
 const RocamMensagens = lazy(() => import("./pages/rocam/RocamMensagens"));
 const RocamAvisos = lazy(() => import("./pages/rocam/RocamAvisos"));
 const RocamGraficos = lazy(() => import("./pages/rocam/RocamGraficos"));
+const RocamPatrulha = lazy(() => import("./pages/rocam/RocamPatrulha"));
 
 /* =========================================================
    PUBLIC
@@ -331,6 +332,7 @@ export default function App() {
             <Route path="mensagens" element={<RocamMensagens />} />
             <Route path="avisos" element={<RocamAvisos />} />
             <Route path="graficos" element={<RocamGraficos />} />
+            <Route path="patrulha" element={<RocamPatrulha />} />
           </Route>
 
         </Routes>
