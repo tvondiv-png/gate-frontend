@@ -2,10 +2,15 @@
    RUAS DE BRASIL CAPITAL (mapa do servidor)
 
    Lista extraída dos prints do mapa enviados pelo usuário em
-   2026-09-26. Cobertura de melhor esforço — nem todo texto do
-   mapa estava legível o suficiente pra copiar com segurança,
-   então esta lista tende a estar incompleta, não errada. Fácil
-   de completar depois: é só adicionar { rua, bairro } aqui.
+   2026-09-26 (duas levas — a segunda leva veio com zoom e
+   praticamente tudo ficou legível). Cobertura de melhor
+   esforço — pode faltar alguma rua muito pequena que nunca
+   apareceu num print. Fácil de completar depois: é só
+   adicionar { rua, bairro } aqui.
+
+   Única incerteza registrada: "Rua Boba Gato" (Vila Suzana) —
+   nome incomum, o texto no mapa era pequeno demais pra ter
+   100% de certeza da grafia exata.
 ========================================================= */
 
 export const RUAS_ANCHIETA = [
@@ -37,7 +42,7 @@ export const RUAS_ANCHIETA = [
   { rua: "Rua Júlio Prestes", bairro: "Guarulhos" },
   { rua: "Rua Cachoeira", bairro: "Guarulhos" },
 
-  // Jardins / Perdizes / Jardim América
+  // Jardins
   { rua: "Av. Paulista", bairro: "Jardins" },
   { rua: "Av. Europa", bairro: "Jardins" },
   { rua: "Av. Canadá", bairro: "Jardins" },
@@ -46,56 +51,96 @@ export const RUAS_ANCHIETA = [
   { rua: "Rua Portugal", bairro: "Jardins" },
   { rua: "Rua Itália", bairro: "Jardins" },
   { rua: "Rua México", bairro: "Jardins" },
+  { rua: "Rua Estados Unidos", bairro: "Jardins" },
+
+  // Perdizes
   { rua: "Rua Suécia", bairro: "Perdizes" },
+  { rua: "Rua Suíça", bairro: "Perdizes" },
+  { rua: "Rua Noruega", bairro: "Perdizes" },
   { rua: "Rua Holanda", bairro: "Perdizes" },
   { rua: "Rua França", bairro: "Perdizes" },
   { rua: "Rua Alasca", bairro: "Perdizes" },
+
+  // Jardim América
   { rua: "Rua Costa Rica", bairro: "Jardim América" },
   { rua: "Rua Colômbia", bairro: "Jardim América" },
   { rua: "Av. Atlântica", bairro: "Jardim América" },
   { rua: "Alameda Lorena", bairro: "Jardim América" },
   { rua: "Alameda Rocha Azevedo", bairro: "Jardim América" },
+  { rua: "Av. Ipiranga", bairro: "Jardim América" },
+  { rua: "Rua São João", bairro: "Jardim América" },
+  { rua: "Rua Cuba", bairro: "Jardim América" },
 
-  // Consolação / Santa Cecília / Vila Mariana
+  // Consolação
   { rua: "Rua da Consolação", bairro: "Consolação" },
   { rua: "Alameda Santos", bairro: "Consolação" },
   { rua: "Alameda Tietê", bairro: "Consolação" },
   { rua: "Av. Rio Branco", bairro: "Consolação" },
-  { rua: "Av. Pacaembu", bairro: "Santa Cecília" },
-  { rua: "Av. 13 de Maio", bairro: "Vila Mariana" },
+  { rua: "Rua Peixoto Gomide", bairro: "Consolação" },
+  { rua: "Rua Frei Caneca", bairro: "Consolação" },
+  { rua: "Rua Nestor Pestana", bairro: "Consolação" },
+  { rua: "Rua Bela Cintra", bairro: "Consolação" },
+  { rua: "Rua Gravataí", bairro: "Consolação" },
 
-  // Barra Funda / Bom Retiro / Centro
+  // Santa Cecília
+  { rua: "Av. Pacaembu", bairro: "Santa Cecília" },
+  { rua: "Av. Angélica", bairro: "Santa Cecília" },
+  { rua: "Av. Casper Líbero", bairro: "Santa Cecília" },
+
+  // Vila Mariana
+  { rua: "Av. 13 de Maio", bairro: "Vila Mariana" },
+  { rua: "Rua Cordeiro Galvão", bairro: "Vila Mariana" },
+  { rua: "Rua Galeão Coutinho", bairro: "Vila Mariana" },
+
+  // Barra Funda / Bom Retiro / Centro / Liberdade
   { rua: "Av. do Estado", bairro: "Bom Retiro" },
   { rua: "Marginal Tietê", bairro: "Barra Funda" },
   { rua: "Av. Francisco Matarazzo", bairro: "Barra Funda" },
+  { rua: "Rua Brigadeiro Galvão", bairro: "Barra Funda" },
+  { rua: "Via Elevado Pres. João Goulart", bairro: "Barra Funda" },
   { rua: "Alameda Eduardo Prado", bairro: "Bom Retiro" },
   { rua: "Av. 9 de Julho", bairro: "Bela Vista" },
   { rua: "Av. 23 de Maio", bairro: "Centro" },
+  { rua: "Av. Praça da Sé", bairro: "Centro" },
+  { rua: "Rua São Paulo", bairro: "Centro" },
+  { rua: "Av. Roberto Marinho", bairro: "Liberdade" },
 
   // Vila Alpina / Vila Prudente / Itaquera
   { rua: "Av. Jacu-Pêssego", bairro: "Itaquera" },
   { rua: "Av. Anhaia Mello", bairro: "Vila Prudente" },
   { rua: "Av. Salim Farah Maluf", bairro: "Distrito Industrial" },
   { rua: "Rua Francisco Polito", bairro: "Vila Alpina" },
+  { rua: "Rua Amparo", bairro: "Vila Prudente" },
+  { rua: "Rua João Adolfo", bairro: "Vila Prudente" },
 
-  // Santo Amaro / Vila Suzana / Paraisópolis / Guaianazes
+  // Santo Amaro / Vila Suzana / Distrito Industrial / Paraisópolis / Guaianazes / Brooklin
   { rua: "Av. Santo Amaro", bairro: "Santo Amaro" },
   { rua: "Av. Higienópolis", bairro: "Santo Amaro" },
   { rua: "Av. Aricanduva", bairro: "Itaquera" },
   { rua: "Rua Amador Bueno", bairro: "Santo Amaro" },
   { rua: "Rua João Alfredo", bairro: "Vila Suzana" },
+  { rua: "Av. Jucelino Kubitschek", bairro: "Vila Suzana" },
+  { rua: "Rua da Paz", bairro: "Vila Suzana" },
+  { rua: "Rua Boba Gato", bairro: "Vila Suzana" },
+  { rua: "Rua São Luís", bairro: "Distrito Industrial" },
+  { rua: "Rua Parapuã", bairro: "Distrito Industrial" },
   { rua: "Rua Panambi", bairro: "Guaianazes" },
+  { rua: "Av. Pedro Bueno", bairro: "Paraisópolis" },
+  { rua: "Rua Guararapes", bairro: "Brooklin" },
+  { rua: "Rua Joaquim Nabuco", bairro: "Brooklin" },
 
-  // Lapa / Butantã / Rockford Hills
+  // Lapa / Butantã / Pinheiros / Rockford Hills
   { rua: "Rua Cantareira", bairro: "Lapa" },
   { rua: "Rua 25 de Março", bairro: "Lapa" },
   { rua: "Rua São Nicolau", bairro: "Lapa" },
   { rua: "Av. Washington Luís", bairro: "Butantã" },
   { rua: "Av. Guarapiranga", bairro: "Butantã" },
+  { rua: "Av. Brigadeiro Faria Lima", bairro: "Pinheiros" },
 
   // Rodovias (aparecem em vários bairros — sem bairro fixo)
   { rua: "Rod. Anchieta", bairro: "—" },
   { rua: "Rod. dos Bandeirantes", bairro: "—" },
   { rua: "Rod. Ayrton Senna", bairro: "—" },
-  { rua: "Rod. Transbrasiliana", bairro: "—" }
+  { rua: "Rod. Transbrasiliana", bairro: "—" },
+  { rua: "Rodoanel Mário Covas", bairro: "—" }
 ];
