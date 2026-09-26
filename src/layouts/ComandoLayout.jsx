@@ -55,6 +55,11 @@ export default function ComandoLayout() {
             to: "/comando/consultas",
             label: "Consulta Policial",
             icon: "🔎"
+          },
+          {
+            to: "/comando/boletins",
+            label: "Boletins (BOPM)",
+            icon: "🚨"
           }
         ]
       },

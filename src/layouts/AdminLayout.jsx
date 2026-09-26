@@ -188,6 +188,17 @@ export default function AdminLayout() {
 
               icon:
                 "📊"
+            },
+
+            {
+              to:
+                "/admin/boletins",
+
+              label:
+                "Boletins (BOPM)",
+
+              icon:
+                "🚨"
             }
           ]
         },

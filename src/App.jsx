@@ -78,6 +78,7 @@ const ProfileUpdateRequestsAdmin = lazy(() => import("./pages/admin/ProfileUpdat
 const PenalCodeAdmin = lazy(() => import("./pages/admin/PenalCodeAdmin"));
 const BalancoOperacionalAdmin = lazy(() => import("./pages/admin/BalancoOperacionalAdmin"));
 const HistoriaAdmin = lazy(() => import("./pages/admin/HistoriaAdmin"));
+const BoletinsGerais = lazy(() => import("./pages/shared/BoletinsGerais"));
 
 /* =========================================================
    COMANDO
@@ -280,6 +281,7 @@ export default function App() {
             <Route path="slideshow" element={<HomeSlidesAdmin />} />
             <Route path="codigo-penal" element={<PenalCodeAdmin />} />
             <Route path="historia" element={<HistoriaAdmin />} />
+            <Route path="boletins" element={<BoletinsGerais />} />
           </Route>
 
           {/* ===================================================
@@ -305,6 +307,7 @@ export default function App() {
             <Route path="desempenho" element={<ComandoDesempenho />} />
             <Route path="patrulha" element={<ComandoPatrulha />} />
             <Route path="alto-comando" element={<ComandoAltoComando />} />
+            <Route path="boletins" element={<BoletinsGerais />} />
           </Route>
 
           {/* ===================================================

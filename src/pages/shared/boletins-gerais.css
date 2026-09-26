@@ -1,0 +1,154 @@
+.bg-page {
+  display: grid;
+  gap: 20px;
+  color: #fff;
+}
+
+.bg-hero {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(220, 38, 38, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.bg-kicker {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #f87171;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.bg-hero h1 {
+  margin: 0 0 8px 0;
+  font-size: 30px;
+}
+
+.bg-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bg-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  display: grid;
+  gap: 14px;
+}
+
+.bg-card h2 {
+  margin: 0;
+  font-size: 17px;
+}
+
+.bg-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bg-toolbar input {
+  flex: 1;
+  min-width: 240px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #020b24;
+  color: #fff;
+  outline: none;
+}
+
+.bg-total {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.bg-muted {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+}
+
+.bg-table-wrap {
+  overflow-x: auto;
+}
+
+.bg-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.bg-table th,
+.bg-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  white-space: nowrap;
+}
+
+.bg-table th {
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.bg-btn-ver {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.1);
+  color: #fff;
+  cursor: pointer;
+  font-size: 12.5px;
+}
+
+.bg-btn-ver:hover {
+  background: rgba(220, 38, 38, 0.2);
+}
+
+.bg-texto {
+  white-space: pre-wrap;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #e2e8f0;
+  background: #020b24;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 18px;
+  max-height: 520px;
+  overflow-y: auto;
+}
+
+.bg-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.bg-btn-primary,
+.bg-btn-secondary {
+  padding: 11px 20px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.bg-btn-primary {
+  background: linear-gradient(180deg, #ef4444, #b91c1c);
+  color: #fff;
+}
+
+.bg-btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}

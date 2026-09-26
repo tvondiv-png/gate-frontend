@@ -268,6 +268,13 @@
   gap: 8px;
 }
 
+.bopm-historico-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: stretch;
+}
+
 .bopm-historico-item {
   text-align: left;
   display: grid;
@@ -278,6 +285,20 @@
   background: rgba(255, 255, 255, 0.02);
   color: #fff;
   cursor: pointer;
+}
+
+.bopm-historico-excluir {
+  width: 42px;
+  border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.08);
+  color: #f87171;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.bopm-historico-excluir:hover {
+  background: rgba(239, 68, 68, 0.18);
 }
 
 .bopm-historico-item:hover {

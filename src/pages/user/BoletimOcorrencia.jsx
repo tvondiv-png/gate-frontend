@@ -1,13 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
-import jsPDF from "jspdf";
 import api from "../../api/api";
-import { useToast } from "../../contexts/ToastContext";
+import { useToast, useConfirm } from "../../contexts/ToastContext";
 import { fetchPenalCode } from "../../services/penalCodeService";
 import {
   criarBoletim,
+  excluirBoletim,
   fetchBoletimById,
   fetchMeusBoletins
 } from "../../services/boletimOcorrenciaService";
+import { exportarBoletimPDF } from "../../lib/exportarBoletimPDF";
 import "./boletim-ocorrencia.css";
 
 const TIPO_ABORDAGEM = [
@@ -60,49 +61,9 @@ function formatarData(data) {
   return Number.isNaN(v.getTime()) ? "-" : v.toLocaleString("pt-BR");
 }
 
-/* =========================================================
-   EXPORTAR PDF (client-side, jsPDF — sem custo)
-========================================================= */
-
-function exportarPDF(boletim) {
-  const doc = new jsPDF({ unit: "mm", format: "a4" });
-  const margin = 15;
-  const maxWidth = 180;
-  const lineHeight = 6;
-  let y = 20;
-
-  const linhas = String(boletim.textoCompleto || "").split("\n");
-
-  linhas.forEach((linha) => {
-    const ehTitulo =
-      linha.trim().length > 2 &&
-      linha.trim() === linha.trim().toUpperCase() &&
-      /[A-ZÀ-Ú]/.test(linha);
-
-    const wrapped = doc.splitTextToSize(linha || " ", maxWidth);
-
-    wrapped.forEach((w) => {
-      if (y > 280) {
-        doc.addPage();
-        y = 20;
-      }
-
-      doc.setFont("helvetica", ehTitulo ? "bold" : "normal");
-      doc.setFontSize(ehTitulo ? 11 : 10);
-      doc.text(w, margin, y);
-      y += lineHeight;
-    });
-
-    if (linha.trim() === "") {
-      y += 1;
-    }
-  });
-
-  doc.save(`bopm-${boletim._id || "novo"}.pdf`);
-}
-
 export default function BoletimOcorrencia() {
   const toast = useToast();
+  const confirm = useConfirm();
 
   const [aba, setAba] = useState("novo");
 
@@ -366,6 +327,28 @@ export default function BoletimOcorrencia() {
     fetchBoletimById(id)
       .then((data) => setDetalheHistorico(data))
       .catch(() => toast.error("Erro ao carregar boletim"));
+  };
+
+  const excluirDoHistorico = async (id) => {
+    const ok = await confirm({
+      tone: "danger",
+      message: "Excluir este boletim? Essa ação não pode ser desfeita."
+    });
+
+    if (!ok) return;
+
+    try {
+      await excluirBoletim(id);
+      setHistorico((prev) => prev.filter((item) => item._id !== id));
+
+      if (detalheHistorico?._id === id) {
+        setDetalheHistorico(null);
+      }
+
+      toast.success("Boletim excluído com sucesso");
+    } catch (err) {
+      toast.error(err.response?.data?.message || "Erro ao excluir boletim");
+    }
   };
 
   /* =======================================================
@@ -752,7 +735,7 @@ export default function BoletimOcorrencia() {
           <pre className="bopm-texto">{resultado.textoCompleto}</pre>
 
           <div className="bopm-actions">
-            <button type="button" className="bopm-btn-primary" onClick={() => exportarPDF(resultado)}>
+            <button type="button" className="bopm-btn-primary" onClick={() => exportarBoletimPDF(resultado)}>
               Baixar PDF
             </button>
             <button
@@ -781,18 +764,28 @@ export default function BoletimOcorrencia() {
 
           <div className="bopm-historico-lista">
             {historico.map((item) => (
-              <button
-                key={item._id}
-                type="button"
-                className="bopm-historico-item"
-                onClick={() => abrirDetalheHistorico(item._id)}
-              >
-                <strong>{item.viatura}</strong>
-                <span>
-                  {item.local?.rua}, {item.local?.bairro}
-                </span>
-                <small>{formatarData(item.createdAt)}</small>
-              </button>
+              <div key={item._id} className="bopm-historico-row">
+                <button
+                  type="button"
+                  className="bopm-historico-item"
+                  onClick={() => abrirDetalheHistorico(item._id)}
+                >
+                  <strong>{item.viatura}</strong>
+                  <span>
+                    {item.local?.rua}, {item.local?.bairro}
+                  </span>
+                  <small>{formatarData(item.createdAt)}</small>
+                </button>
+
+                <button
+                  type="button"
+                  className="bopm-historico-excluir"
+                  title="Excluir boletim"
+                  onClick={() => excluirDoHistorico(item._id)}
+                >
+                  🗑
+                </button>
+              </div>
             ))}
           </div>
 
@@ -804,7 +797,7 @@ export default function BoletimOcorrencia() {
                 <button
                   type="button"
                   className="bopm-btn-primary"
-                  onClick={() => exportarPDF(detalheHistorico)}
+                  onClick={() => exportarBoletimPDF(detalheHistorico)}
                 >
                   Baixar PDF
                 </button>
