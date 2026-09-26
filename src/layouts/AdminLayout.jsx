@@ -393,6 +393,16 @@ export default function AdminLayout() {
 
                 icon:
                   "🧠"
+              },
+              {
+                to:
+                  "/admin/limpeza-dados",
+
+                label:
+                  "Limpeza de Dados",
+
+                icon:
+                  "🧹"
               }
             ]
           }

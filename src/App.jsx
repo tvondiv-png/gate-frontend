@@ -78,6 +78,7 @@ const ProfileUpdateRequestsAdmin = lazy(() => import("./pages/admin/ProfileUpdat
 const PenalCodeAdmin = lazy(() => import("./pages/admin/PenalCodeAdmin"));
 const BalancoOperacionalAdmin = lazy(() => import("./pages/admin/BalancoOperacionalAdmin"));
 const HistoriaAdmin = lazy(() => import("./pages/admin/HistoriaAdmin"));
+const LimpezaDados = lazy(() => import("./pages/admin/LimpezaDados"));
 const BoletinsGerais = lazy(() => import("./pages/shared/BoletinsGerais"));
 
 /* =========================================================
@@ -254,6 +255,15 @@ export default function App() {
               element={
                 <ProtectedRoute roles={["superadmin"]}>
                   <UserManagement />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="limpeza-dados"
+              element={
+                <ProtectedRoute roles={["superadmin"]}>
+                  <LimpezaDados />
                 </ProtectedRoute>
               }
             />
