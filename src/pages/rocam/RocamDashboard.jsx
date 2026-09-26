@@ -137,6 +137,18 @@ export default function RocamDashboard() {
               <strong>{formatarMinutos(data.minhasHoras.horasMesMin)}</strong>
               <span>Horas no mês</span>
             </div>
+            <div className="rd-stat destaque">
+              <strong>
+                {formatarMinutos(data.minhasHoras.horasRocamSemanaMin)}
+              </strong>
+              <span>Só ROCAM na semana</span>
+            </div>
+            <div className="rd-stat destaque">
+              <strong>
+                {formatarMinutos(data.minhasHoras.horasRocamMesMin)}
+              </strong>
+              <span>Só ROCAM no mês</span>
+            </div>
           </div>
         </section>
       )}

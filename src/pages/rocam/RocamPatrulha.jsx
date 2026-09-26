@@ -176,17 +176,23 @@ export default function RocamPatrulha() {
             </div>
             <div className={`rd-stat ${resumo.zeroSemana > 0 ? "alerta" : ""}`}>
               <strong>{resumo.zeroSemana}</strong>
-              <span>Sem horas na semana</span>
+              <span>Sem horas de ROCAM na semana</span>
             </div>
-            <div className="rd-stat">
-              <strong>{formatarMinutos(resumo.mediaSemanaMin)}</strong>
-              <span>Média semanal</span>
+            <div className="rd-stat destaque">
+              <strong>{formatarMinutos(resumo.mediaRocamSemanaMin)}</strong>
+              <span>Média de ROCAM na semana</span>
             </div>
-            <div className="rd-stat">
-              <strong>{formatarMinutos(resumo.totalMesMin)}</strong>
-              <span>Total no mês (efetivo)</span>
+            <div className="rd-stat destaque">
+              <strong>{formatarMinutos(resumo.totalRocamMesMin)}</strong>
+              <span>Total de ROCAM no mês (efetivo)</span>
             </div>
           </div>
+
+          <p className="rd-muted" style={{ marginTop: 10 }}>
+            "ROCAM" conta só as horas de RSOs feitos em viatura ROCAM. As
+            colunas "Horas semana/mês" (sem o rótulo) somam viatura comum +
+            ROCAM, igual ao painel ADM.
+          </p>
         </section>
       )}
 
@@ -233,13 +239,15 @@ export default function RocamPatrulha() {
                   <th>Função ROCAM</th>
                   <th>Horas semana</th>
                   <th>Horas mês</th>
+                  <th>ROCAM semana</th>
+                  <th>ROCAM mês</th>
                   <th>Faixa</th>
                 </tr>
               </thead>
               <tbody>
                 {filtrados.length === 0 ? (
                   <tr>
-                    <td colSpan="7" style={{ textAlign: "center" }}>
+                    <td colSpan="9" style={{ textAlign: "center" }}>
                       Nenhum policial encontrado para esse filtro.
                     </td>
                   </tr>
@@ -252,6 +260,8 @@ export default function RocamPatrulha() {
                       <td>{TITULO_PAPEL[item.papelRocam] || item.papelRocam}</td>
                       <td>{formatarMinutos(item.horasSemanaMin)}</td>
                       <td>{formatarMinutos(item.horasMesMin)}</td>
+                      <td>{formatarMinutos(item.horasRocamSemanaMin)}</td>
+                      <td>{formatarMinutos(item.horasRocamMesMin)}</td>
                       <td>
                         <span
                           className={`rocam-patrulha-badge ${badgeClassePatrulha(
