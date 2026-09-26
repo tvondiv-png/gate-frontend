@@ -13,6 +13,7 @@ import AvaliacaoEstagiosUser from "./AvaliacaoEstagiosUser";
 import UserActions from "./UserActions";
 import UserProfileRequests from "./UserProfileRequests";
 import UserPenalCode from "./UserPenalCode";
+import BoletimOcorrencia from "./BoletimOcorrencia";
 
 import "./user-dashboard.css";
 import "../../styles/comando-metas.css";
@@ -234,7 +235,8 @@ export default function UserDashboard() {
     { key: "avaliacao-estagio", label: "Avaliação", icon: "📝" },
     { key: "notifications", label: "Notificações", icon: "🔔" },
     { key: "requisicoes", label: "Requisições", icon: "📨" },
-    { key: "codigo-penal", label: "Código Penal", icon: "📘" }
+    { key: "codigo-penal", label: "Código Penal", icon: "📘" },
+    { key: "boletim", label: "BOPM", icon: "🚨" }
   ];
 
   if (!user) return null;
@@ -299,6 +301,8 @@ export default function UserDashboard() {
                 ? "Requisições"
                 : view === "codigo-penal"
                 ? "Código Penal"
+                : view === "boletim"
+                ? "BOPM"
                 : "RSO"}
             </strong>
           </div>
@@ -719,6 +723,7 @@ export default function UserDashboard() {
         {view === "apresentacao" && <ApresentacaoEstagiariosUser />}
         {view === "requisicoes" && <UserProfileRequests />}
         {view === "codigo-penal" && <UserPenalCode />}
+        {view === "boletim" && <BoletimOcorrencia />}
       </section>
     </div>
   );

@@ -1,0 +1,301 @@
+.bopm-page {
+  display: grid;
+  gap: 20px;
+  color: #fff;
+}
+
+.bopm-hero {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(220, 38, 38, 0.14), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+}
+
+.bopm-kicker {
+  display: inline-block;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: #f87171;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.bopm-hero h1 {
+  margin: 0 0 8px 0;
+  font-size: 32px;
+}
+
+.bopm-hero p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.6;
+}
+
+.bopm-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.bopm-tabs button {
+  padding: 10px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.02);
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.bopm-tabs button.active {
+  border-color: rgba(220, 38, 38, 0.5);
+  background: rgba(220, 38, 38, 0.14);
+  color: #fff;
+}
+
+.bopm-card {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  display: grid;
+  gap: 14px;
+}
+
+.bopm-card h2 {
+  margin: 0;
+  font-size: 17px;
+  color: #f1f5f9;
+}
+
+.bopm-field {
+  display: grid;
+  gap: 6px;
+}
+
+.bopm-field label {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.bopm-field input,
+.bopm-field select,
+.bopm-repeater-row input,
+.bopm-repeater-row select {
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #020b24;
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+}
+
+.bopm-field input:focus,
+.bopm-field select:focus {
+  border-color: rgba(220, 38, 38, 0.55);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.bopm-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.bopm-repeater {
+  display: grid;
+  gap: 8px;
+}
+
+.bopm-repeater-row {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.bopm-remove {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.1);
+  color: #f87171;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.bopm-add {
+  align-self: start;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.25);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.bopm-add:hover {
+  border-color: rgba(220, 38, 38, 0.5);
+  color: #fff;
+}
+
+.bopm-artigo-lista {
+  display: grid;
+  gap: 4px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
+.bopm-artigo-item {
+  text-align: left;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #e2e8f0;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.bopm-artigo-item:hover {
+  border-color: rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.08);
+}
+
+.bopm-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bopm-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(220, 38, 38, 0.4);
+  background: rgba(220, 38, 38, 0.1);
+  color: #fff;
+  font-size: 12.5px;
+}
+
+.bopm-chip button {
+  border: 0;
+  background: transparent;
+  color: #f87171;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.bopm-checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.bopm-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+}
+
+.bopm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.bopm-btn-primary,
+.bopm-btn-secondary {
+  padding: 12px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.bopm-btn-primary {
+  background: linear-gradient(180deg, #ef4444, #b91c1c);
+  color: #fff;
+}
+
+.bopm-btn-primary:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.bopm-btn-secondary {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.bopm-resultado {
+  gap: 16px;
+}
+
+.bopm-texto {
+  white-space: pre-wrap;
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  color: #e2e8f0;
+  background: #020b24;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 18px;
+  max-height: 520px;
+  overflow-y: auto;
+}
+
+.bopm-muted {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+}
+
+.bopm-historico-lista {
+  display: grid;
+  gap: 8px;
+}
+
+.bopm-historico-item {
+  text-align: left;
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  cursor: pointer;
+}
+
+.bopm-historico-item:hover {
+  border-color: rgba(220, 38, 38, 0.4);
+}
+
+.bopm-historico-item span {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 12.5px;
+}
+
+.bopm-historico-item small {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+}
+
+@media (max-width: 640px) {
+  .bopm-repeater-row {
+    grid-template-columns: 1fr;
+  }
+}
