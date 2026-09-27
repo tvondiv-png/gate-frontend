@@ -40,6 +40,26 @@ const formatarData = (data) => {
   return new Date(data).toLocaleDateString("pt-BR");
 };
 
+const formatarDataHora = (data) => {
+  if (!data) return "-";
+  return new Date(data).toLocaleString("pt-BR");
+};
+
+const STATUS_CONCLUIDOS = ["CONCLUIDO", "ARQUIVADO", "SANCAO_APLICADA"];
+
+const SANCAO_LABELS = {
+  ARQUIVAMENTO: "Arquivamento",
+  ORIENTACAO_VERBAL: "Orientação verbal",
+  ADVERTENCIA: "Advertência",
+  SUSPENSAO: "Suspensão",
+  EXONERACAO: "Exoneração",
+  ENCAMINHAMENTO_PENAL: "Encaminhamento penal",
+  PAD_1_3: "PAD 1/3",
+  PAD_2_3: "PAD 2/3",
+  PAD_3_3: "PAD 3/3",
+  OUTRA: "Outra"
+};
+
 const dentroDoPeriodo = (data, inicio, fim) => {
   if (!data) return false;
 
@@ -64,6 +84,7 @@ const dentroDoPeriodo = (data, inicio, fim) => {
 export default function ComandoDisciplina() {
   const [advertencias, setAdvertencias] = useState([]);
   const [casos, setCasos] = useState([]);
+  const [casoSelecionado, setCasoSelecionado] = useState(null);
 
   const [busca, setBusca] = useState("");
   const [fStatus, setFStatus] = useState("");
@@ -383,17 +404,18 @@ export default function ComandoDisciplina() {
               <thead>
                 <tr>
                   <th>Número</th>
+                  <th>Policial</th>
                   <th>Tipo</th>
                   <th>Status</th>
                   <th>Prioridade</th>
                   <th>Data</th>
-                  <th>Descrição</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
                 {casosFiltrados.length === 0 ? (
                   <tr>
-                    <td colSpan="6" style={{ textAlign: "center" }}>
+                    <td colSpan="7" style={{ textAlign: "center" }}>
                       Nenhum caso disciplinar encontrado.
                     </td>
                   </tr>
@@ -401,6 +423,9 @@ export default function ComandoDisciplina() {
                   casosFiltrados.map((item) => (
                     <tr key={item._id}>
                       <td>{item.numero || "-"}</td>
+                      <td>
+                        {item.policial?.patente || ""} {item.policial?.nome || "-"}
+                      </td>
                       <td>{item.tipo || "-"}</td>
                       <td>
                         <span className={`admin-module-badge ${badgeStatus(item.status)}`}>
@@ -413,7 +438,15 @@ export default function ComandoDisciplina() {
                         </span>
                       </td>
                       <td>{formatarData(item.createdAt)}</td>
-                      <td>{item.descricao || "-"}</td>
+                      <td>
+                        <button
+                          className="admin-module-btn"
+                          type="button"
+                          onClick={() => setCasoSelecionado(item)}
+                        >
+                          Ver detalhes
+                        </button>
+                      </td>
                     </tr>
                   ))
                 )}
@@ -422,6 +455,116 @@ export default function ComandoDisciplina() {
           </div>
         </div>
       </section>
+
+      {casoSelecionado && (
+        <div
+          className="admin-module-modal-backdrop"
+          onClick={() => setCasoSelecionado(null)}
+        >
+          <div className="admin-module-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="admin-module-section-title">
+              <div>
+                <h2>{casoSelecionado.numero || "Caso disciplinar"}</h2>
+                <span>
+                  {casoSelecionado.policial?.patente || ""}{" "}
+                  {casoSelecionado.policial?.nome || "Policial não identificado"}
+                </span>
+              </div>
+              <span className={`admin-module-badge ${badgeStatus(casoSelecionado.status)}`}>
+                {casoSelecionado.status}
+              </span>
+            </div>
+
+            <div className="admin-module-kv-grid">
+              <div className="admin-module-kv">
+                <small>Tipo</small>
+                <div>{casoSelecionado.tipo || "-"}</div>
+              </div>
+              <div className="admin-module-kv">
+                <small>Prioridade</small>
+                <div>{casoSelecionado.prioridade || "-"}</div>
+              </div>
+              <div className="admin-module-kv">
+                <small>Aberto em</small>
+                <div>{formatarDataHora(casoSelecionado.createdAt)}</div>
+              </div>
+              <div className="admin-module-kv">
+                <small>Descrição</small>
+                <div>{casoSelecionado.descricao || "-"}</div>
+              </div>
+            </div>
+
+            {STATUS_CONCLUIDOS.includes(casoSelecionado.status) &&
+            casoSelecionado.conclusao?.texto ? (
+              <div className="admin-module-section" style={{ marginTop: 16, padding: 16 }}>
+                <div className="admin-module-section-title">
+                  <div>
+                    <h2>Resultado da conclusão</h2>
+                  </div>
+                </div>
+
+                <p style={{ whiteSpace: "pre-wrap", color: "rgba(255,255,255,0.85)" }}>
+                  {casoSelecionado.conclusao.texto}
+                </p>
+
+                <div className="admin-module-kv-grid" style={{ marginTop: 12 }}>
+                  <div className="admin-module-kv">
+                    <small>Sanção aplicada</small>
+                    <div>
+                      {SANCAO_LABELS[casoSelecionado.sancaoFinal?.tipo] || "-"}
+                    </div>
+                  </div>
+                  <div className="admin-module-kv">
+                    <small>Nível PAD</small>
+                    <div>
+                      {casoSelecionado.sancaoFinal?.padNivel
+                        ? `PAD ${casoSelecionado.sancaoFinal.padNivel}/3`
+                        : "Sem PAD"}
+                    </div>
+                  </div>
+                  <div className="admin-module-kv">
+                    <small>Concluído em</small>
+                    <div>{formatarDataHora(casoSelecionado.conclusao.data)}</div>
+                  </div>
+                  <div className="admin-module-kv">
+                    <small>Concluído por</small>
+                    <div>
+                      {(() => {
+                        const item = [...(casoSelecionado.historico || [])]
+                          .reverse()
+                          .find((h) => h.acao === "PROCESSO_CONCLUIDO");
+                        return item?.autor?.nome
+                          ? `${item.autor.patente || ""} ${item.autor.nome}`.trim()
+                          : "-";
+                      })()}
+                    </div>
+                  </div>
+                </div>
+
+                {casoSelecionado.sancaoFinal?.descricao && (
+                  <p style={{ whiteSpace: "pre-wrap", color: "rgba(255,255,255,0.85)", marginTop: 12 }}>
+                    {casoSelecionado.sancaoFinal.descricao}
+                  </p>
+                )}
+              </div>
+            ) : (
+              <div className="admin-module-alert" style={{ marginTop: 16 }}>
+                Processo ainda em andamento — sem conclusão registrada.
+              </div>
+            )}
+
+            <div className="admin-module-actions" style={{ marginTop: 16 }}>
+              <button
+                className="admin-module-btn"
+                type="button"
+                onClick={() => setCasoSelecionado(null)}
+              >
+                Fechar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

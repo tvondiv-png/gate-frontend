@@ -806,7 +806,12 @@ export default function SjdAdmin() {
                       <div key={i} className="sjd-timeline-item">
                         <strong>{item.acao}</strong>
                         <p>{item.descricao || "-"}</p>
-                        <small>{formatarData(item.createdAt)}</small>
+                        <small>
+                          {formatarData(item.createdAt)}
+                          {item.autor?.nome
+                            ? ` • ${item.autor.patente || ""} ${item.autor.nome}`.trim()
+                            : ""}
+                        </small>
                       </div>
                     ))}
                   </div>
@@ -980,9 +985,69 @@ export default function SjdAdmin() {
                 </div>
               </div>
 
+              {["CONCLUIDO", "ARQUIVADO", "SANCAO_APLICADA"].includes(
+                selecionado.status
+              ) &&
+                selecionado.conclusao?.texto && (
+                  <div className="sjd-decision-box sjd-decision-resumo">
+                    <div className="sjd-subtitle">
+                      <h4>Resultado da conclusão</h4>
+                      <span
+                        className="sjd-count-pill"
+                        style={{ color: STATUS_COLORS[selecionado.status] }}
+                      >
+                        {selecionado.status}
+                      </span>
+                    </div>
+
+                    <p className="sjd-conclusao-texto">{selecionado.conclusao.texto}</p>
+
+                    <div className="sjd-inline-grid">
+                      <div className="sjd-hero-box">
+                        <small>Sanção aplicada</small>
+                        <strong>
+                          {SANCOES.find((s) => s.value === selecionado.sancaoFinal?.tipo)
+                            ?.label || "-"}
+                        </strong>
+                      </div>
+                      <div className="sjd-hero-box">
+                        <small>Nível PAD</small>
+                        <strong>
+                          {selecionado.sancaoFinal?.padNivel
+                            ? `PAD ${selecionado.sancaoFinal.padNivel}/3`
+                            : "Sem PAD"}
+                        </strong>
+                      </div>
+                      <div className="sjd-hero-box">
+                        <small>Concluído em</small>
+                        <strong>{formatarData(selecionado.conclusao.data)}</strong>
+                      </div>
+                      <div className="sjd-hero-box">
+                        <small>Concluído por</small>
+                        <strong>
+                          {(() => {
+                            const item = [...(selecionado.historico || [])]
+                              .reverse()
+                              .find((h) => h.acao === "PROCESSO_CONCLUIDO");
+                            return item?.autor?.nome
+                              ? `${item.autor.patente || ""} ${item.autor.nome}`.trim()
+                              : "-";
+                          })()}
+                        </strong>
+                      </div>
+                    </div>
+
+                    {selecionado.sancaoFinal?.descricao && (
+                      <p className="sjd-conclusao-texto">
+                        {selecionado.sancaoFinal.descricao}
+                      </p>
+                    )}
+                  </div>
+                )}
+
               <div className="sjd-decision-box">
                 <div className="sjd-subtitle">
-                  <h4>Decisão final</h4>
+                  <h4>{selecionado.conclusao?.texto ? "Revisar decisão" : "Decisão final"}</h4>
                   <span className="sjd-count-pill">Encerramento do processo</span>
                 </div>
 

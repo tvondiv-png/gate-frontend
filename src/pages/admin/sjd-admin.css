@@ -466,6 +466,21 @@
     linear-gradient(180deg, rgba(212,160,23,0.08), rgba(212,160,23,0.03));
 }
 
+.sjd-decision-resumo {
+  border-color: rgba(34, 197, 94, 0.4);
+  background:
+    radial-gradient(circle at top right, rgba(34, 197, 94, 0.15), transparent 28%),
+    linear-gradient(180deg, rgba(34, 197, 94, 0.08), rgba(34, 197, 94, 0.03));
+}
+
+.sjd-conclusao-texto {
+  margin: 0;
+  white-space: pre-wrap;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13.5px;
+  line-height: 1.55;
+}
+
 .sjd-inline-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
