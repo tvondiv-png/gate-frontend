@@ -20,7 +20,7 @@ const ORDEM_PATENTES = {
   "Soldado 2ª Classe PM": 14
 };
 
-const TIPOS = ["ADV 1", "ADV 2", "ADV 3"];
+const TIPOS = ["ADV 1", "ADV 2", "ADV 3", "ADV Verbal"];
 
 const ordenarPorPatente = (lista) => {
   return [...lista].sort((a, b) => {
@@ -35,6 +35,7 @@ const ordenarPorPatente = (lista) => {
 const badgeClass = (tipo) => {
   if (tipo === "ADV 3") return "danger";
   if (tipo === "ADV 2") return "warning";
+  if (tipo === "ADV Verbal") return "neutral";
   return "info";
 };
 
@@ -56,6 +57,7 @@ const getAdvertenciasAcumuladas = (tipo) => {
   if (tipo === "ADV 3") return ["ADV 1", "ADV 2", "ADV 3"];
   if (tipo === "ADV 2") return ["ADV 1", "ADV 2"];
   if (tipo === "ADV 1") return ["ADV 1"];
+  if (tipo === "ADV Verbal") return ["ADV Verbal"];
   return [];
 };
 
@@ -114,6 +116,8 @@ export default function AdvertenciaAdmin() {
     const mapa = new Map();
 
     advertencias.forEach((a) => {
+      if (a.tipo === "ADV Verbal") return;
+
       const funcional = Number(a.funcional);
       const atual = mapa.get(funcional);
 

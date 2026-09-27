@@ -26,12 +26,14 @@ const getAdvertenciasAcumuladas = (tipo) => {
   if (tipo === "ADV 3") return ["ADV 1", "ADV 2", "ADV 3"];
   if (tipo === "ADV 2") return ["ADV 1", "ADV 2"];
   if (tipo === "ADV 1") return ["ADV 1"];
+  if (tipo === "ADV Verbal") return ["ADV Verbal"];
   return [];
 };
 
 const badgeAdvertencia = (tipo) => {
   if (tipo === "ADV 3") return "danger";
   if (tipo === "ADV 2") return "warning";
+  if (tipo === "ADV Verbal") return "neutral";
   return "info";
 };
 
@@ -280,6 +282,7 @@ export default function ComandoDisciplina() {
             <option value="ADV 1">ADV 1</option>
             <option value="ADV 2">ADV 2</option>
             <option value="ADV 3">ADV 3</option>
+            <option value="ADV Verbal">ADV Verbal</option>
           </select>
 
           <select
