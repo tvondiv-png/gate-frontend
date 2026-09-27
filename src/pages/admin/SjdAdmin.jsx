@@ -290,6 +290,10 @@ export default function SjdAdmin() {
     return Math.min(100, Math.round((riskScore / 18) * 100));
   }, [riskScore]);
 
+  const estaConcluido = ["CONCLUIDO", "ARQUIVADO", "SANCAO_APLICADA"].includes(
+    selecionado?.status
+  );
+
   const criarCaso = async () => {
     if (!form.policialId || !form.descricao.trim()) {
       toast.warning("Selecione o policial e preencha a descrição");
@@ -726,20 +730,24 @@ export default function SjdAdmin() {
                     )}
                 </div>
 
-                <textarea
-                  className="sjd-textarea"
-                  rows="4"
-                  placeholder="Digite um comentário institucional"
-                  value={comentario}
-                  onChange={(e) => setComentario(e.target.value)}
-                  style={{ marginTop: 12 }}
-                />
+                {!estaConcluido && (
+                  <>
+                    <textarea
+                      className="sjd-textarea"
+                      rows="4"
+                      placeholder="Digite um comentário institucional"
+                      value={comentario}
+                      onChange={(e) => setComentario(e.target.value)}
+                      style={{ marginTop: 12 }}
+                    />
 
-                <div className="sjd-actions-row">
-                  <button className="sjd-btn" type="button" onClick={enviarComentario}>
-                    Adicionar comentário
-                  </button>
-                </div>
+                    <div className="sjd-actions-row">
+                      <button className="sjd-btn" type="button" onClick={enviarComentario}>
+                        Adicionar comentário
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
 
               <div className="sjd-card">
@@ -766,32 +774,34 @@ export default function SjdAdmin() {
                   <div className="sjd-empty">Nenhuma convocação registrada.</div>
                 )}
 
-                <div className="sjd-form-grid" style={{ marginTop: 12 }}>
-                  <textarea
-                    className="sjd-textarea"
-                    rows="4"
-                    placeholder="Mensagem da convocação"
-                    value={convocacao.mensagem}
-                    onChange={(e) => setConvocacao({ ...convocacao, mensagem: e.target.value })}
-                  />
-                  <div className="sjd-stack">
-                    <input
-                      className="sjd-input"
-                      type="datetime-local"
-                      value={convocacao.dataAudiencia}
-                      onChange={(e) => setConvocacao({ ...convocacao, dataAudiencia: e.target.value })}
+                {!estaConcluido && (
+                  <div className="sjd-form-grid" style={{ marginTop: 12 }}>
+                    <textarea
+                      className="sjd-textarea"
+                      rows="4"
+                      placeholder="Mensagem da convocação"
+                      value={convocacao.mensagem}
+                      onChange={(e) => setConvocacao({ ...convocacao, mensagem: e.target.value })}
                     />
-                    <input
-                      className="sjd-input"
-                      value={convocacao.local}
-                      onChange={(e) => setConvocacao({ ...convocacao, local: e.target.value })}
-                      placeholder="Local"
-                    />
-                    <button className="sjd-btn" type="button" onClick={enviarConvocacao}>
-                      Enviar convocação
-                    </button>
+                    <div className="sjd-stack">
+                      <input
+                        className="sjd-input"
+                        type="datetime-local"
+                        value={convocacao.dataAudiencia}
+                        onChange={(e) => setConvocacao({ ...convocacao, dataAudiencia: e.target.value })}
+                      />
+                      <input
+                        className="sjd-input"
+                        value={convocacao.local}
+                        onChange={(e) => setConvocacao({ ...convocacao, local: e.target.value })}
+                        placeholder="Local"
+                      />
+                      <button className="sjd-btn" type="button" onClick={enviarConvocacao}>
+                        Enviar convocação
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
 
               <div className="sjd-card">
@@ -822,172 +832,230 @@ export default function SjdAdmin() {
             </div>
 
             <div className="sjd-stack">
-              <div className="sjd-risk-panel">
-                <div className="sjd-subtitle">
-                  <h4>Gravidade processual</h4>
-                  <span className="sjd-count-pill">Análise automática</span>
-                </div>
+              {!estaConcluido && (
+                <>
+                  <div className="sjd-risk-panel">
+                    <div className="sjd-subtitle">
+                      <h4>Gravidade processual</h4>
+                      <span className="sjd-count-pill">Análise automática</span>
+                    </div>
 
-                <div className="sjd-risk-score">
-                  <strong>{riskScore}</strong>
-                  <span className="sjd-helper">{sugestaoPad.label}</span>
-                </div>
+                    <div className="sjd-risk-score">
+                      <strong>{riskScore}</strong>
+                      <span className="sjd-helper">{sugestaoPad.label}</span>
+                    </div>
 
-                <div className="sjd-risk-progress">
-                  <span style={{ width: `${progressPercent}%` }} />
-                </div>
+                    <div className="sjd-risk-progress">
+                      <span style={{ width: `${progressPercent}%` }} />
+                    </div>
 
-                <div className="sjd-inline-grid">
-                  <div className="sjd-hero-box">
-                    <small>Artigos penais</small>
-                    <strong>{artigosPenaisSelecionados.length}</strong>
+                    <div className="sjd-inline-grid">
+                      <div className="sjd-hero-box">
+                        <small>Artigos penais</small>
+                        <strong>{artigosPenaisSelecionados.length}</strong>
+                      </div>
+                      <div className="sjd-hero-box">
+                        <small>Artigos disciplinares</small>
+                        <strong>{artigosDisciplinaresSelecionados.length}</strong>
+                      </div>
+                      <div className="sjd-hero-box">
+                        <small>Agravantes</small>
+                        <strong>{agravantes.length}</strong>
+                      </div>
+                      <div className="sjd-hero-box">
+                        <small>Atenuantes</small>
+                        <strong>{atenuantes.length}</strong>
+                      </div>
+                    </div>
+
+                    <div className="sjd-actions-row">
+                      <button className="sjd-btn" type="button" onClick={aplicarSugestao}>
+                        Aplicar sugestão automática
+                      </button>
+                    </div>
                   </div>
-                  <div className="sjd-hero-box">
-                    <small>Artigos disciplinares</small>
-                    <strong>{artigosDisciplinaresSelecionados.length}</strong>
+
+                  <div className="sjd-card">
+                    <div className="sjd-subtitle">
+                      <h4>Artigos do Código Penal</h4>
+                      <span className="sjd-count-pill">{artigosPenaisSelecionados.length} selecionado(s)</span>
+                    </div>
+
+                    <input
+                      className="sjd-search"
+                      placeholder="Buscar artigo penal..."
+                      value={buscaArtigoPenal}
+                      onChange={(e) => setBuscaArtigoPenal(e.target.value)}
+                    />
+
+                    <div className="sjd-list-box" style={{ marginTop: 12 }}>
+                      {artigosPenaisFiltrados.map((item) => {
+                        const checked = artigosPenaisSelecionados.some((x) => x.codigo === item.codigo);
+
+                        return (
+                          <label key={item._id || item.codigo} className="sjd-check-item">
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={() => toggleArtigoPenal(item)}
+                            />{" "}
+                            {item.artigo} - {item.titulo}
+                          </label>
+                        );
+                      })}
+                    </div>
+
+                    {artigosPenaisSelecionados.length > 0 && (
+                      <div className="sjd-chip-row" style={{ marginTop: 12 }}>
+                        {artigosPenaisSelecionados.map((item) => (
+                          <span key={item.codigo} className="sjd-chip">
+                            {item.artigo}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <div className="sjd-hero-box">
-                    <small>Agravantes</small>
-                    <strong>{agravantes.length}</strong>
+
+                  <div className="sjd-card">
+                    <div className="sjd-subtitle">
+                      <h4>Regulamento disciplinar</h4>
+                      <span className="sjd-count-pill">{artigosDisciplinaresSelecionados.length} selecionado(s)</span>
+                    </div>
+
+                    <input
+                      className="sjd-search"
+                      placeholder="Buscar regra disciplinar..."
+                      value={buscaArtigoDisciplinar}
+                      onChange={(e) => setBuscaArtigoDisciplinar(e.target.value)}
+                    />
+
+                    <div className="sjd-list-box" style={{ marginTop: 12 }}>
+                      {artigosDisciplinaresFiltrados.map((item) => {
+                        const checked = artigosDisciplinaresSelecionados.some((x) => x.codigo === item.codigo);
+
+                        return (
+                          <label key={item.codigo} className="sjd-check-item">
+                            <input
+                              type="checkbox"
+                              checked={checked}
+                              onChange={() => toggleArtigoDisciplinar(item)}
+                            />{" "}
+                            {item.codigo} - {item.titulo}
+                          </label>
+                        );
+                      })}
+                    </div>
+
+                    {artigosDisciplinaresSelecionados.length > 0 && (
+                      <div className="sjd-chip-row" style={{ marginTop: 12 }}>
+                        {artigosDisciplinaresSelecionados.map((item) => (
+                          <span key={item.codigo} className="sjd-chip">
+                            {item.codigo}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                  <div className="sjd-hero-box">
-                    <small>Atenuantes</small>
-                    <strong>{atenuantes.length}</strong>
+
+                  <div className="sjd-card">
+                    <div className="sjd-subtitle">
+                      <h4>Atenuantes</h4>
+                      <span className="sjd-count-pill">{atenuantes.length}</span>
+                    </div>
+
+                    <div className="sjd-list-box">
+                      {ATENUANTES_BASE.map((item) => (
+                        <label key={item} className="sjd-check-item">
+                          <input
+                            type="checkbox"
+                            checked={atenuantes.includes(item)}
+                            onChange={() => toggleAtenuante(item)}
+                          />{" "}
+                          {item}
+                        </label>
+                      ))}
+                    </div>
                   </div>
-                </div>
 
-                <div className="sjd-actions-row">
-                  <button className="sjd-btn" type="button" onClick={aplicarSugestao}>
-                    Aplicar sugestão automática
-                  </button>
-                </div>
-              </div>
+                  <div className="sjd-card">
+                    <div className="sjd-subtitle">
+                      <h4>Agravantes</h4>
+                      <span className="sjd-count-pill">{agravantes.length}</span>
+                    </div>
 
-              <div className="sjd-card">
-                <div className="sjd-subtitle">
-                  <h4>Artigos do Código Penal</h4>
-                  <span className="sjd-count-pill">{artigosPenaisSelecionados.length} selecionado(s)</span>
-                </div>
+                    <div className="sjd-list-box">
+                      {AGRAVANTES_BASE.map((item) => (
+                        <label key={item} className="sjd-check-item">
+                          <input
+                            type="checkbox"
+                            checked={agravantes.includes(item)}
+                            onChange={() => toggleAgravante(item)}
+                          />{" "}
+                          {item}
+                        </label>
+                      ))}
+                    </div>
+                  </div>
+                </>
+              )}
 
-                <input
-                  className="sjd-search"
-                  placeholder="Buscar artigo penal..."
-                  value={buscaArtigoPenal}
-                  onChange={(e) => setBuscaArtigoPenal(e.target.value)}
-                />
+              {estaConcluido &&
+                (selecionado.artigosPenais?.length > 0 ||
+                  selecionado.artigosDisciplinares?.length > 0 ||
+                  selecionado.atenuantes?.length > 0 ||
+                  selecionado.agravantes?.length > 0) && (
+                  <div className="sjd-card">
+                    <div className="sjd-subtitle">
+                      <h4>Enquadramento considerado</h4>
+                    </div>
 
-                <div className="sjd-list-box" style={{ marginTop: 12 }}>
-                  {artigosPenaisFiltrados.map((item) => {
-                    const checked = artigosPenaisSelecionados.some((x) => x.codigo === item.codigo);
+                    {selecionado.artigosPenais?.length > 0 && (
+                      <>
+                        <small className="sjd-helper">Artigos penais</small>
+                        <div className="sjd-chip-row" style={{ marginTop: 6, marginBottom: 12 }}>
+                          {selecionado.artigosPenais.map((item, i) => (
+                            <span key={i} className="sjd-chip">
+                              {item.artigo || item.codigo}
+                            </span>
+                          ))}
+                        </div>
+                      </>
+                    )}
 
-                    return (
-                      <label key={item._id || item.codigo} className="sjd-check-item">
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => toggleArtigoPenal(item)}
-                        />{" "}
-                        {item.artigo} - {item.titulo}
-                      </label>
-                    );
-                  })}
-                </div>
+                    {selecionado.artigosDisciplinares?.length > 0 && (
+                      <>
+                        <small className="sjd-helper">Regulamento disciplinar</small>
+                        <div className="sjd-chip-row" style={{ marginTop: 6, marginBottom: 12 }}>
+                          {selecionado.artigosDisciplinares.map((item, i) => (
+                            <span key={i} className="sjd-chip">
+                              {item.codigo}
+                            </span>
+                          ))}
+                        </div>
+                      </>
+                    )}
 
-                {artigosPenaisSelecionados.length > 0 && (
-                  <div className="sjd-chip-row" style={{ marginTop: 12 }}>
-                    {artigosPenaisSelecionados.map((item) => (
-                      <span key={item.codigo} className="sjd-chip">
-                        {item.artigo}
-                      </span>
-                    ))}
+                    {selecionado.atenuantes?.length > 0 && (
+                      <>
+                        <small className="sjd-helper">Atenuantes</small>
+                        <p style={{ margin: "6px 0 12px" }}>
+                          {selecionado.atenuantes.join(", ")}
+                        </p>
+                      </>
+                    )}
+
+                    {selecionado.agravantes?.length > 0 && (
+                      <>
+                        <small className="sjd-helper">Agravantes</small>
+                        <p style={{ margin: "6px 0 0" }}>
+                          {selecionado.agravantes.join(", ")}
+                        </p>
+                      </>
+                    )}
                   </div>
                 )}
-              </div>
 
-              <div className="sjd-card">
-                <div className="sjd-subtitle">
-                  <h4>Regulamento disciplinar</h4>
-                  <span className="sjd-count-pill">{artigosDisciplinaresSelecionados.length} selecionado(s)</span>
-                </div>
-
-                <input
-                  className="sjd-search"
-                  placeholder="Buscar regra disciplinar..."
-                  value={buscaArtigoDisciplinar}
-                  onChange={(e) => setBuscaArtigoDisciplinar(e.target.value)}
-                />
-
-                <div className="sjd-list-box" style={{ marginTop: 12 }}>
-                  {artigosDisciplinaresFiltrados.map((item) => {
-                    const checked = artigosDisciplinaresSelecionados.some((x) => x.codigo === item.codigo);
-
-                    return (
-                      <label key={item.codigo} className="sjd-check-item">
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={() => toggleArtigoDisciplinar(item)}
-                        />{" "}
-                        {item.codigo} - {item.titulo}
-                      </label>
-                    );
-                  })}
-                </div>
-
-                {artigosDisciplinaresSelecionados.length > 0 && (
-                  <div className="sjd-chip-row" style={{ marginTop: 12 }}>
-                    {artigosDisciplinaresSelecionados.map((item) => (
-                      <span key={item.codigo} className="sjd-chip">
-                        {item.codigo}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              <div className="sjd-card">
-                <div className="sjd-subtitle">
-                  <h4>Atenuantes</h4>
-                  <span className="sjd-count-pill">{atenuantes.length}</span>
-                </div>
-
-                <div className="sjd-list-box">
-                  {ATENUANTES_BASE.map((item) => (
-                    <label key={item} className="sjd-check-item">
-                      <input
-                        type="checkbox"
-                        checked={atenuantes.includes(item)}
-                        onChange={() => toggleAtenuante(item)}
-                      />{" "}
-                      {item}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div className="sjd-card">
-                <div className="sjd-subtitle">
-                  <h4>Agravantes</h4>
-                  <span className="sjd-count-pill">{agravantes.length}</span>
-                </div>
-
-                <div className="sjd-list-box">
-                  {AGRAVANTES_BASE.map((item) => (
-                    <label key={item} className="sjd-check-item">
-                      <input
-                        type="checkbox"
-                        checked={agravantes.includes(item)}
-                        onChange={() => toggleAgravante(item)}
-                      />{" "}
-                      {item}
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              {["CONCLUIDO", "ARQUIVADO", "SANCAO_APLICADA"].includes(
-                selecionado.status
-              ) &&
+              {estaConcluido &&
                 selecionado.conclusao?.texto && (
                   <div className="sjd-decision-box sjd-decision-resumo">
                     <div className="sjd-subtitle">
@@ -1045,65 +1113,86 @@ export default function SjdAdmin() {
                   </div>
                 )}
 
-              <div className="sjd-decision-box">
-                <div className="sjd-subtitle">
-                  <h4>{selecionado.conclusao?.texto ? "Revisar decisão" : "Decisão final"}</h4>
-                  <span className="sjd-count-pill">Encerramento do processo</span>
+              {!estaConcluido && (
+                <div className="sjd-decision-box">
+                  <div className="sjd-subtitle">
+                    <h4>Decisão final</h4>
+                    <span className="sjd-count-pill">Encerramento do processo</span>
+                  </div>
+
+                  <textarea
+                    className="sjd-textarea"
+                    rows="5"
+                    placeholder="Conclusão do processo"
+                    value={conclusao}
+                    onChange={(e) => setConclusao(e.target.value)}
+                  />
+
+                  <div className="sjd-inline-grid">
+                    <select
+                      className="sjd-select"
+                      value={sancaoFinal.tipo}
+                      onChange={(e) => setSancaoFinal({ ...sancaoFinal, tipo: e.target.value })}
+                    >
+                      {SANCOES.map((s) => (
+                        <option key={s.value} value={s.value}>
+                          {s.label}
+                        </option>
+                      ))}
+                    </select>
+
+                    <select
+                      className="sjd-select"
+                      value={sancaoFinal.padNivel}
+                      onChange={(e) =>
+                        setSancaoFinal({ ...sancaoFinal, padNivel: Number(e.target.value) })
+                      }
+                    >
+                      <option value={0}>Sem PAD</option>
+                      <option value={1}>PAD 1/3</option>
+                      <option value={2}>PAD 2/3</option>
+                      <option value={3}>PAD 3/3</option>
+                    </select>
+                  </div>
+
+                  <textarea
+                    className="sjd-textarea"
+                    rows="4"
+                    placeholder="Descrição complementar da sanção"
+                    value={sancaoFinal.descricao}
+                    onChange={(e) => setSancaoFinal({ ...sancaoFinal, descricao: e.target.value })}
+                  />
+
+                  <div className="sjd-actions-row">
+                    <button className="sjd-btn" type="button" onClick={concluirCaso}>
+                      Concluir processo
+                    </button>
+
+                    <button className="sjd-btn danger" type="button" onClick={excluirCaso}>
+                      Excluir processo
+                    </button>
+                  </div>
                 </div>
+              )}
 
-                <textarea
-                  className="sjd-textarea"
-                  rows="5"
-                  placeholder="Conclusão do processo"
-                  value={conclusao}
-                  onChange={(e) => setConclusao(e.target.value)}
-                />
+              {estaConcluido && (
+                <div className="sjd-card">
+                  <div className="sjd-subtitle">
+                    <h4>Processo encerrado</h4>
+                  </div>
 
-                <div className="sjd-inline-grid">
-                  <select
-                    className="sjd-select"
-                    value={sancaoFinal.tipo}
-                    onChange={(e) => setSancaoFinal({ ...sancaoFinal, tipo: e.target.value })}
-                  >
-                    {SANCOES.map((s) => (
-                      <option key={s.value} value={s.value}>
-                        {s.label}
-                      </option>
-                    ))}
-                  </select>
+                  <p className="sjd-helper">
+                    Este processo já foi concluído e não pode mais ser editado. Só é
+                    possível excluir o registro por completo, se necessário.
+                  </p>
 
-                  <select
-                    className="sjd-select"
-                    value={sancaoFinal.padNivel}
-                    onChange={(e) =>
-                      setSancaoFinal({ ...sancaoFinal, padNivel: Number(e.target.value) })
-                    }
-                  >
-                    <option value={0}>Sem PAD</option>
-                    <option value={1}>PAD 1/3</option>
-                    <option value={2}>PAD 2/3</option>
-                    <option value={3}>PAD 3/3</option>
-                  </select>
+                  <div className="sjd-actions-row">
+                    <button className="sjd-btn danger" type="button" onClick={excluirCaso}>
+                      Excluir processo
+                    </button>
+                  </div>
                 </div>
-
-                <textarea
-                  className="sjd-textarea"
-                  rows="4"
-                  placeholder="Descrição complementar da sanção"
-                  value={sancaoFinal.descricao}
-                  onChange={(e) => setSancaoFinal({ ...sancaoFinal, descricao: e.target.value })}
-                />
-
-                <div className="sjd-actions-row">
-                  <button className="sjd-btn" type="button" onClick={concluirCaso}>
-                    Concluir processo
-                  </button>
-
-                  <button className="sjd-btn danger" type="button" onClick={excluirCaso}>
-                    Excluir processo
-                  </button>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
