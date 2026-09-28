@@ -164,6 +164,9 @@ export default function BoletimOcorrencia() {
   const [meusRSOs, setMeusRSOs] = useState([]);
   const [rsoSelecionado, setRsoSelecionado] = useState("");
 
+  const [viaturasAtivas, setViaturasAtivas] = useState([]);
+  const [viaturaAtivaSelecionada, setViaturaAtivaSelecionada] = useState("");
+
   const [viatura, setViatura] = useState("");
   const [equipe, setEquipe] = useState([]);
 
@@ -197,6 +200,11 @@ export default function BoletimOcorrencia() {
     api
       .get("/api/rso/me")
       .then((res) => setMeusRSOs(Array.isArray(res.data) ? res.data : []))
+      .catch(() => {});
+
+    api
+      .get("/api/rso/ativas")
+      .then((res) => setViaturasAtivas(Array.isArray(res.data) ? res.data : []))
       .catch(() => {});
 
     fetchPenalCode({ limit: 500 })
@@ -268,6 +276,40 @@ export default function BoletimOcorrencia() {
     }
 
     toast.success("Dados da viatura, equipe e apreensões pré-preenchidos.");
+  };
+
+  /* =======================================================
+     ADICIONAR EQUIPE DE UMA VIATURA NA ATIVA (QUALQUER POLICIAL)
+  ======================================================= */
+
+  const adicionarEquipeDaViaturaAtiva = () => {
+    if (!viaturaAtivaSelecionada) return;
+
+    const v = viaturasAtivas.find((x) => x._id === viaturaAtivaSelecionada);
+    if (!v) return;
+
+    if (!viatura.trim()) {
+      setViatura(v.viatura || "");
+    }
+
+    setEquipe((prev) => {
+      const existentes = new Set(
+        prev.map((i) => i.nome.trim().toLowerCase()).filter(Boolean)
+      );
+
+      const novos = (v.equipe || [])
+        .filter((i) => i.nome && !existentes.has(i.nome.trim().toLowerCase()))
+        .map((i) => ({
+          nome: i.nome || "",
+          patente: i.patente || "",
+          funcao: i.cargo || ""
+        }));
+
+      return [...prev, ...novos];
+    });
+
+    toast.success(`Equipe da viatura ${v.viatura} adicionada aos participantes.`);
+    setViaturaAtivaSelecionada("");
   };
 
   /* =======================================================
@@ -556,6 +598,35 @@ export default function BoletimOcorrencia() {
                   </option>
                 ))}
               </select>
+            </div>
+
+            <div className="bopm-field bopm-viatura-ativa">
+              <label>Adicionar participantes de uma viatura na ativa agora</label>
+              <div className="bopm-viatura-ativa-row">
+                <select
+                  value={viaturaAtivaSelecionada}
+                  onChange={(e) => setViaturaAtivaSelecionada(e.target.value)}
+                >
+                  <option value="">
+                    {viaturasAtivas.length
+                      ? "Selecione uma viatura ativa..."
+                      : "Nenhuma viatura na ativa agora"}
+                  </option>
+                  {viaturasAtivas.map((v) => (
+                    <option key={v._id} value={v._id}>
+                      {v.viatura} • {v.equipe.length} policial(is)
+                    </option>
+                  ))}
+                </select>
+                <button
+                  type="button"
+                  className="bopm-add"
+                  disabled={!viaturaAtivaSelecionada}
+                  onClick={adicionarEquipeDaViaturaAtiva}
+                >
+                  + Adicionar equipe
+                </button>
+              </div>
             </div>
 
             <div className="bopm-field">

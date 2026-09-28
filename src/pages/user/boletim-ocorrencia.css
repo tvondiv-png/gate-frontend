@@ -218,6 +218,28 @@
   color: #fff;
 }
 
+.bopm-add:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.bopm-viatura-ativa-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.bopm-viatura-ativa-row select {
+  min-width: 0;
+}
+
+@media (max-width: 560px) {
+  .bopm-viatura-ativa-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .bopm-artigo-lista {
   display: grid;
   gap: 4px;
