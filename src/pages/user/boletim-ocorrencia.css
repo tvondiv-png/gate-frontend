@@ -223,6 +223,23 @@
   cursor: not-allowed;
 }
 
+.bopm-outro-envolvido-item {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.bopm-outro-envolvido-item .bopm-remove {
+  width: auto;
+  height: auto;
+  justify-self: start;
+  padding: 7px 12px;
+  font-size: 13px;
+}
+
 .bopm-viatura-ativa-row {
   display: grid;
   grid-template-columns: 1fr auto;

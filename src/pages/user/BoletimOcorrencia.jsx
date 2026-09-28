@@ -66,6 +66,14 @@ const SUSPEITO_VAZIO = {
   cabelo: ""
 };
 
+const OUTRO_ENVOLVIDO_VAZIO = {
+  nome: "",
+  rg: "",
+  vestimenta: "",
+  corPele: "",
+  cabelo: ""
+};
+
 const VEICULO_VAZIO = { possui: false, marca: "", modelo: "", cor: "", placa: "" };
 
 function formatarData(data) {
@@ -155,6 +163,73 @@ function CampoLocal({ titulo, local, onChange }) {
   );
 }
 
+/* =========================================================
+   CAMPO DE NOME COM BUSCA NA HIERARQUIA (auto-preenche patente)
+========================================================= */
+
+function CampoNomePolicial({ item, hierarquiaLista, onChange }) {
+  const [sugestoes, setSugestoes] = useState([]);
+  const [mostrarSugestoes, setMostrarSugestoes] = useState(false);
+
+  const buscarPoliciais = (termo) => {
+    const t = termo.trim().toLowerCase();
+    if (!t) {
+      setSugestoes([]);
+      return;
+    }
+
+    setSugestoes(
+      hierarquiaLista
+        .filter(
+          (h) =>
+            h.nome.toLowerCase().includes(t) || String(h.funcional).includes(t)
+        )
+        .slice(0, 8)
+    );
+  };
+
+  const selecionarPolicial = (h) => {
+    onChange({
+      ...item,
+      nome: h.nome,
+      patente: h.patente || "",
+      funcional: h.funcional || null
+    });
+    setMostrarSugestoes(false);
+  };
+
+  return (
+    <div className="bopm-autocomplete">
+      <input
+        placeholder="Nome (buscar cadastro ou digitar)"
+        value={item.nome}
+        onChange={(e) => {
+          onChange({ ...item, nome: e.target.value, funcional: null });
+          buscarPoliciais(e.target.value);
+          setMostrarSugestoes(true);
+        }}
+        onFocus={() => setMostrarSugestoes(sugestoes.length > 0)}
+        onBlur={() => setTimeout(() => setMostrarSugestoes(false), 150)}
+        autoComplete="off"
+      />
+
+      {mostrarSugestoes && sugestoes.length > 0 && (
+        <div className="bopm-autocomplete-lista">
+          {sugestoes.map((h) => (
+            <button type="button" key={h._id} onMouseDown={() => selecionarPolicial(h)}>
+              {h.nome}
+              <span className="bopm-autocomplete-bairro">
+                {" "}
+                — {h.patente} • {h.funcional}
+              </span>
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function BoletimOcorrencia() {
   const toast = useToast();
   const confirm = useConfirm();
@@ -166,6 +241,8 @@ export default function BoletimOcorrencia() {
 
   const [viaturasAtivas, setViaturasAtivas] = useState([]);
   const [viaturaAtivaSelecionada, setViaturaAtivaSelecionada] = useState("");
+
+  const [hierarquiaLista, setHierarquiaLista] = useState([]);
 
   const [viatura, setViatura] = useState("");
   const [equipe, setEquipe] = useState([]);
@@ -180,6 +257,7 @@ export default function BoletimOcorrencia() {
 
   const [abordagem, setAbordagem] = useState(ABORDAGEM_VAZIA);
   const [suspeito, setSuspeito] = useState(SUSPEITO_VAZIO);
+  const [outrosEnvolvidos, setOutrosEnvolvidos] = useState([]);
   const [veiculoSuspeito, setVeiculoSuspeito] = useState(VEICULO_VAZIO);
   const [ilicitos, setIlicitos] = useState([]);
 
@@ -205,6 +283,11 @@ export default function BoletimOcorrencia() {
     api
       .get("/api/rso/ativas")
       .then((res) => setViaturasAtivas(Array.isArray(res.data) ? res.data : []))
+      .catch(() => {});
+
+    api
+      .get("/api/hierarchy/public/list")
+      .then((res) => setHierarquiaLista(Array.isArray(res.data) ? res.data : []))
       .catch(() => {});
 
     fetchPenalCode({ limit: 500 })
@@ -317,13 +400,17 @@ export default function BoletimOcorrencia() {
   ======================================================= */
 
   const adicionarIntegrante = () => {
-    setEquipe((prev) => [...prev, { nome: "", patente: "", funcao: "" }]);
+    setEquipe((prev) => [...prev, { nome: "", patente: "", funcao: "", funcional: null }]);
   };
 
   const atualizarIntegrante = (index, campo, valor) => {
     setEquipe((prev) =>
       prev.map((item, i) => (i === index ? { ...item, [campo]: valor } : item))
     );
+  };
+
+  const substituirIntegrante = (index, novoItem) => {
+    setEquipe((prev) => prev.map((item, i) => (i === index ? novoItem : item)));
   };
 
   const removerIntegrante = (index) => {
@@ -402,6 +489,24 @@ export default function BoletimOcorrencia() {
   };
 
   /* =======================================================
+     OUTROS ENVOLVIDOS
+  ======================================================= */
+
+  const adicionarOutroEnvolvido = () => {
+    setOutrosEnvolvidos((prev) => [...prev, { ...OUTRO_ENVOLVIDO_VAZIO }]);
+  };
+
+  const atualizarOutroEnvolvido = (index, campo, valor) => {
+    setOutrosEnvolvidos((prev) =>
+      prev.map((item, i) => (i === index ? { ...item, [campo]: valor } : item))
+    );
+  };
+
+  const removerOutroEnvolvido = (index) => {
+    setOutrosEnvolvidos((prev) => prev.filter((_, i) => i !== index));
+  };
+
+  /* =======================================================
      PROCEDIMENTOS (CHECKBOX)
   ======================================================= */
 
@@ -430,6 +535,7 @@ export default function BoletimOcorrencia() {
     localFinalizacao: houvePerseguicao ? localFinalizacao : null,
     abordagem,
     suspeito,
+    outrosEnvolvidos: outrosEnvolvidos.filter((p) => p.nome.trim()),
     veiculoSuspeito,
     ilicitos: ilicitos.filter((i) => i.quantidade.trim() || i.descricao.trim())
   });
@@ -510,6 +616,7 @@ export default function BoletimOcorrencia() {
     setLocalFinalizacao(LOCAL_VAZIO);
     setAbordagem(ABORDAGEM_VAZIA);
     setSuspeito(SUSPEITO_VAZIO);
+    setOutrosEnvolvidos([]);
     setVeiculoSuspeito(VEICULO_VAZIO);
     setIlicitos([]);
   };
@@ -648,10 +755,10 @@ export default function BoletimOcorrencia() {
                     value={item.patente}
                     onChange={(e) => atualizarIntegrante(index, "patente", e.target.value)}
                   />
-                  <input
-                    placeholder="Nome"
-                    value={item.nome}
-                    onChange={(e) => atualizarIntegrante(index, "nome", e.target.value)}
+                  <CampoNomePolicial
+                    item={item}
+                    hierarquiaLista={hierarquiaLista}
+                    onChange={(novoItem) => substituirIntegrante(index, novoItem)}
                   />
                   <input
                     placeholder="Função"
@@ -835,6 +942,66 @@ export default function BoletimOcorrencia() {
                   onChange={(e) => setSuspeito({ ...suspeito, cabelo: e.target.value })}
                 />
               </div>
+            </div>
+
+            <div className="bopm-repeater bopm-outros-envolvidos">
+              <label>Outros envolvidos (testemunhas, vítimas, terceiros...)</label>
+
+              {outrosEnvolvidos.map((item, index) => (
+                <div key={index} className="bopm-outro-envolvido-item">
+                  <div className="bopm-grid-2">
+                    <div className="bopm-field">
+                      <label>Nome</label>
+                      <input
+                        value={item.nome}
+                        onChange={(e) => atualizarOutroEnvolvido(index, "nome", e.target.value)}
+                      />
+                    </div>
+                    <div className="bopm-field">
+                      <label>RG</label>
+                      <input
+                        value={item.rg}
+                        onChange={(e) => atualizarOutroEnvolvido(index, "rg", e.target.value)}
+                      />
+                    </div>
+                    <div className="bopm-field">
+                      <label>Vestimenta</label>
+                      <input
+                        value={item.vestimenta}
+                        onChange={(e) =>
+                          atualizarOutroEnvolvido(index, "vestimenta", e.target.value)
+                        }
+                      />
+                    </div>
+                    <div className="bopm-field">
+                      <label>Cor de pele</label>
+                      <input
+                        value={item.corPele}
+                        onChange={(e) => atualizarOutroEnvolvido(index, "corPele", e.target.value)}
+                      />
+                    </div>
+                    <div className="bopm-field">
+                      <label>Cabelo</label>
+                      <input
+                        value={item.cabelo}
+                        onChange={(e) => atualizarOutroEnvolvido(index, "cabelo", e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="bopm-remove"
+                    onClick={() => removerOutroEnvolvido(index)}
+                  >
+                    Remover envolvido
+                  </button>
+                </div>
+              ))}
+
+              <button type="button" className="bopm-add" onClick={adicionarOutroEnvolvido}>
+                + Adicionar outro envolvido
+              </button>
             </div>
           </section>
 
