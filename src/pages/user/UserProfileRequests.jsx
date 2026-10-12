@@ -86,7 +86,8 @@ export default function UserProfileRequests() {
     novaFuncional: "",
     dataReferencia: "",
     numeroBoletim: "",
-    nomeInstrutor: ""
+    nomeInstrutor: "",
+    justificativa: ""
   });
 
   const carregar = async () => {
@@ -111,6 +112,10 @@ export default function UserProfileRequests() {
   useEffect(() => {
     carregar();
   }, []);
+
+  // Troca de nome/funcional não tem boletim: só a justificativa
+  const ehAlteracaoCadastral =
+    form.tipo === "ALTERACAO_NOME" || form.tipo === "ALTERACAO_FUNCIONAL";
 
   const tituloDinamico = useMemo(() => {
     if (form.tipo === "CURSO") return "Solicitar inclusão de curso";
@@ -140,7 +145,8 @@ export default function UserProfileRequests() {
       novaFuncional: "",
       dataReferencia: "",
       numeroBoletim: "",
-      nomeInstrutor: ""
+      nomeInstrutor: "",
+      justificativa: ""
     });
   };
 
@@ -154,7 +160,8 @@ export default function UserProfileRequests() {
       novaFuncional: "",
       dataReferencia: "",
       numeroBoletim: "",
-      nomeInstrutor: ""
+      nomeInstrutor: "",
+      justificativa: ""
     });
   };
 
@@ -360,6 +367,22 @@ export default function UserProfileRequests() {
               </div>
             )}
 
+            {ehAlteracaoCadastral ? (
+              <div className="profile-request-field">
+                <label>Justificativa da troca</label>
+                <textarea
+                  rows={4}
+                  value={form.justificativa}
+                  onChange={(e) =>
+                    setForm((prev) => ({
+                      ...prev,
+                      justificativa: e.target.value
+                    }))
+                  }
+                  placeholder="Explique o motivo da troca (ex.: wipe da cidade, novo personagem...)"
+                />
+              </div>
+            ) : (
             <div className="profile-request-row">
               <div className="profile-request-field">
                 <label>Data do boletim / referência</label>
@@ -389,6 +412,7 @@ export default function UserProfileRequests() {
                 />
               </div>
             </div>
+            )}
 
             <div className="profile-request-actions">
               <button type="submit" disabled={loading}>
@@ -436,15 +460,24 @@ export default function UserProfileRequests() {
                   </div>
 
                   <div className="profile-request-meta">
-                    <div>
-                      <small>Data referência</small>
-                      <strong>{formatarData(item?.dadosSolicitados?.dataReferencia)}</strong>
-                    </div>
+                    {item?.dadosSolicitados?.justificativa ? (
+                      <div>
+                        <small>Justificativa</small>
+                        <strong>{item.dadosSolicitados.justificativa}</strong>
+                      </div>
+                    ) : (
+                      <>
+                        <div>
+                          <small>Data referência</small>
+                          <strong>{formatarData(item?.dadosSolicitados?.dataReferencia)}</strong>
+                        </div>
 
-                    <div>
-                      <small>Boletim</small>
-                      <strong>{item?.dadosSolicitados?.numeroBoletim || "-"}</strong>
-                    </div>
+                        <div>
+                          <small>Boletim</small>
+                          <strong>{item?.dadosSolicitados?.numeroBoletim || "-"}</strong>
+                        </div>
+                      </>
+                    )}
 
                     <div>
                       <small>Validado por</small>

@@ -101,7 +101,8 @@
 }
 
 .profile-request-field input,
-.profile-request-field select {
+.profile-request-field select,
+.profile-request-field textarea {
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
@@ -109,6 +110,11 @@
   background: #020617;
   border: 1px solid rgba(201,162,77,0.20);
   color: #fff;
+}
+
+.profile-request-field textarea {
+  resize: vertical;
+  font-family: inherit;
 }
 
 .profile-request-row {

@@ -291,8 +291,14 @@ export default function ProfileUpdateRequestsAdmin() {
                       <span>
                         Solicitante: {item?.solicitante?.funcional} - {item?.solicitante?.nome}
                       </span>
-                      <span>Boletim: {item?.dadosSolicitados?.numeroBoletim || "-"}</span>
-                      <span>Data: {formatarData(item?.dadosSolicitados?.dataReferencia)}</span>
+                      {item?.dadosSolicitados?.justificativa ? (
+                        <span>Justificativa: {item.dadosSolicitados.justificativa}</span>
+                      ) : (
+                        <>
+                          <span>Boletim: {item?.dadosSolicitados?.numeroBoletim || "-"}</span>
+                          <span>Data: {formatarData(item?.dadosSolicitados?.dataReferencia)}</span>
+                        </>
+                      )}
                     </div>
                   </button>
                 );
@@ -350,15 +356,26 @@ export default function ProfileUpdateRequestsAdmin() {
                     <strong>{formatarTipo(selecionado?.tipo)}</strong>
                   </div>
 
-                  <div>
-                    <small>Boletim</small>
-                    <strong>{selecionado?.dadosSolicitados?.numeroBoletim || "-"}</strong>
-                  </div>
+                  {selecionado?.dadosSolicitados?.justificativa ? (
+                    <div style={{ gridColumn: "1 / -1" }}>
+                      <small>Justificativa da troca</small>
+                      <strong style={{ whiteSpace: "pre-wrap" }}>
+                        {selecionado.dadosSolicitados.justificativa}
+                      </strong>
+                    </div>
+                  ) : (
+                    <>
+                      <div>
+                        <small>Boletim</small>
+                        <strong>{selecionado?.dadosSolicitados?.numeroBoletim || "-"}</strong>
+                      </div>
 
-                  <div>
-                    <small>Data referência</small>
-                    <strong>{formatarData(selecionado?.dadosSolicitados?.dataReferencia)}</strong>
-                  </div>
+                      <div>
+                        <small>Data referência</small>
+                        <strong>{formatarData(selecionado?.dadosSolicitados?.dataReferencia)}</strong>
+                      </div>
+                    </>
+                  )}
 
                   <div>
                     <small>Validado por</small>
