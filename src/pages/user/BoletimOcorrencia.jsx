@@ -18,10 +18,43 @@ import "./boletim-ocorrencia.css";
 const CIDADE_FIXA = "Brasil Capital";
 
 const TIPO_ABORDAGEM = [
-  { value: "ABORDAGEM_PADRAO", label: "Abordagem de rotina" },
-  { value: "FUNDADA_SUSPEITA", label: "Fundada suspeita" },
-  { value: "FLAGRANTE", label: "Flagrante delito" },
-  { value: "DENUNCIA", label: "Denúncia" }
+  { value: "ABORDAGEM_PADRAO", label: "Patrulhamento — abordagem de rotina" },
+  { value: "FUNDADA_SUSPEITA", label: "Patrulhamento — fundada suspeita" },
+  { value: "FLAGRANTE", label: "Patrulhamento — flagrante delito" },
+  { value: "DENUNCIA", label: "Denúncia via COPOM" },
+  { value: "ACIONAMENTO_190", label: "Acionamento via 190" },
+  { value: "ALERTA_MONITORAMENTO", label: "Alerta Smart Sampa (monitoramento)" }
+];
+
+// Placeholder do campo "o que a equipe visualizou", por tipo
+const DICA_DESCRICAO = {
+  ABORDAGEM_PADRAO: "Ex.: um indivíduo em uma motocicleta S 1000 RR sem placa",
+  FUNDADA_SUSPEITA: "Ex.: um indivíduo que, ao avistar a viatura, mudou de direção e escondeu algo na cintura",
+  FLAGRANTE: "Ex.: dois indivíduos em uma motocicleta roubando uma caixa registradora",
+  DENUNCIA: "Ex.: a prática de tráfico de drogas por um indivíduo em uma Trailblazer vermelha",
+  ACIONAMENTO_190: "Ex.: disparos de arma de fogo no interior de um McDonald's",
+  ALERTA_MONITORAMENTO: "Ex.: uma Trailblazer de cor preta com queixa de roubo"
+};
+
+const ORDEM_PARADA = [
+  { value: "NAO_SE_APLICA", label: "Abordagem direta (a pé / sem perseguição)" },
+  { value: "ACATOU", label: "Ordem de parada acatada" },
+  { value: "NAO_ACATOU", label: "Não acatou — houve fuga e acompanhamento" }
+];
+
+const DESFECHO_FUGA = [
+  { value: "PAROU", label: "Condutor parou o veículo" },
+  { value: "CERCO", label: "Interceptado / colidiu no cerco" },
+  { value: "DESEMBARCOU_CONTIDO", label: "Desembarcou e foi alcançado a pé" },
+  { value: "COMPARSA_FUGIU", label: "Um ocupante fugiu, o suspeito foi detido" }
+];
+
+const COMPORTAMENTOS = [
+  { value: "COLABOROU", label: "Colaborou" },
+  { value: "RESISTENCIA", label: "Resistiu à abordagem" },
+  { value: "XINGAMENTOS", label: "Xingou / ofendeu a equipe" },
+  { value: "AMEACA", label: "Ameaçou os policiais" },
+  { value: "REACAO_ARMADA", label: "Reagiu armado (legítima defesa)" }
 ];
 
 const RESULTADO_ABORDAGEM = [
@@ -55,12 +88,18 @@ const ABORDAGEM_VAZIA = {
   tipo: "ABORDAGEM_PADRAO",
   ordemDadaPor: "",
   procedimentos: [],
-  resultado: "LIBERADO"
+  resultado: "LIBERADO",
+  descricaoInicial: "",
+  ordemParada: "NAO_SE_APLICA",
+  desfechoFuga: "",
+  comportamento: [],
+  complemento: ""
 };
 
 const SUSPEITO_VAZIO = {
   nome: "Não identificado",
   rg: "",
+  telefone: "",
   vestimenta: "",
   corPele: "",
   cabelo: ""
@@ -510,6 +549,18 @@ export default function BoletimOcorrencia() {
      PROCEDIMENTOS (CHECKBOX)
   ======================================================= */
 
+  const toggleComportamento = (valor) => {
+    setAbordagem((prev) => {
+      const lista = prev.comportamento || [];
+      return {
+        ...prev,
+        comportamento: lista.includes(valor)
+          ? lista.filter((c) => c !== valor)
+          : [...lista, valor]
+      };
+    });
+  };
+
   const toggleProcedimento = (valor) => {
     setAbordagem((prev) => {
       const ativo = prev.procedimentos.includes(valor);
@@ -875,6 +926,73 @@ export default function BoletimOcorrencia() {
               </div>
             </div>
 
+            <div className="bopm-field">
+              <label>O que a equipe visualizou / do que se tratava</label>
+              <input
+                value={abordagem.descricaoInicial}
+                onChange={(e) => setAbordagem({ ...abordagem, descricaoInicial: e.target.value })}
+                placeholder={DICA_DESCRICAO[abordagem.tipo]}
+                maxLength={500}
+              />
+            </div>
+
+            <div className="bopm-grid-2">
+              <div className="bopm-field">
+                <label>Ordem de parada</label>
+                <select
+                  value={abordagem.ordemParada}
+                  onChange={(e) => {
+                    const ordemParada = e.target.value;
+                    setAbordagem({
+                      ...abordagem,
+                      ordemParada,
+                      desfechoFuga: ordemParada === "NAO_ACATOU" ? abordagem.desfechoFuga || "PAROU" : ""
+                    });
+                    // fuga quase sempre termina em outro lugar
+                    if (ordemParada === "NAO_ACATOU") setHouvePerseguicao(true);
+                  }}
+                >
+                  {ORDEM_PARADA.map((o) => (
+                    <option key={o.value} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {abordagem.ordemParada === "NAO_ACATOU" && (
+                <div className="bopm-field">
+                  <label>Como terminou a fuga</label>
+                  <select
+                    value={abordagem.desfechoFuga}
+                    onChange={(e) => setAbordagem({ ...abordagem, desfechoFuga: e.target.value })}
+                  >
+                    {DESFECHO_FUGA.map((o) => (
+                      <option key={o.value} value={o.value}>
+                        {o.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+
+            <label className="bopm-subtitulo">Comportamento do abordado</label>
+            <div className="bopm-checkbox-row">
+              {COMPORTAMENTOS.map((c) => (
+                <label key={c.value} className="bopm-checkbox">
+                  <input
+                    type="checkbox"
+                    checked={(abordagem.comportamento || []).includes(c.value)}
+                    onChange={() => toggleComportamento(c.value)}
+                  />
+                  {c.label}
+                </label>
+              ))}
+            </div>
+
+            <label className="bopm-subtitulo">Procedimentos</label>
+
             <div className="bopm-checkbox-row">
               {PROCEDIMENTOS.map((p) => (
                 <label key={p.value} className="bopm-checkbox">
@@ -901,6 +1019,17 @@ export default function BoletimOcorrencia() {
                 ))}
               </select>
             </div>
+
+            <div className="bopm-field">
+              <label>Informações adicionais (opcional — entra no relato antes dos enquadramentos)</label>
+              <textarea
+                rows={3}
+                value={abordagem.complemento}
+                onChange={(e) => setAbordagem({ ...abordagem, complemento: e.target.value })}
+                placeholder="Ex.: O condutor conseguiu fugir com auxílio de uma BMW M5 vermelha."
+                maxLength={3000}
+              />
+            </div>
           </section>
 
           <section className="bopm-card">
@@ -915,10 +1044,18 @@ export default function BoletimOcorrencia() {
                 />
               </div>
               <div className="bopm-field">
-                <label>RG</label>
+                <label>RG (passaporte)</label>
                 <input
                   value={suspeito.rg}
                   onChange={(e) => setSuspeito({ ...suspeito, rg: e.target.value })}
+                />
+              </div>
+              <div className="bopm-field">
+                <label>Telefone</label>
+                <input
+                  value={suspeito.telefone || ""}
+                  onChange={(e) => setSuspeito({ ...suspeito, telefone: e.target.value })}
+                  placeholder="(11) 90000-0000"
                 />
               </div>
               <div className="bopm-field">
