@@ -1045,3 +1045,42 @@ button:disabled {
     width: 100%;
   }
 }
+/* Remover braçal (2026-10-12) */
+.rocam-bracal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.rocam-bracal-remover {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rocam-bracal-remover:hover:not(:disabled) {
+  background: rgba(239, 68, 68, 0.22);
+}
+
+.rocam-bracal-remover:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.rocam-bracal-remover-nota {
+  font-size: 11px;
+  color: #5e6a79;
+}
+
+.rocam-bracais-modal-actions .confirm.rocam-bracal-confirmar-remocao {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: #fff;
+}

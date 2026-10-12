@@ -170,6 +170,86 @@ export default function RocamBracais() {
   );
 
   /* =======================================================
+     REMOÇÃO DE BRAÇAL
+     Usa o desligamento que já existe
+     (PATCH /comando/desligar/:userId): desativa o vínculo,
+     tira a qualificação da hierarquia e grava histórico.
+  ======================================================= */
+
+  const [
+    pessoaRemocao,
+    setPessoaRemocao
+  ] = useState(null);
+
+  const [
+    motivoRemocao,
+    setMotivoRemocao
+  ] = useState("");
+
+  const [
+    boletimRemocao,
+    setBoletimRemocao
+  ] = useState("");
+
+  const abrirRemocao = (pessoa) => {
+    setErro("");
+    setSucesso("");
+    setPessoaRemocao(pessoa);
+    setMotivoRemocao("");
+    setBoletimRemocao("");
+  };
+
+  const fecharRemocao = () => {
+    if (salvando) return;
+    setPessoaRemocao(null);
+  };
+
+  const removerBracal = async () => {
+    const id =
+      pessoaRemocao?.user?._id ||
+      pessoaRemocao?.user;
+
+    if (!id) {
+      setErro("Policial inválido.");
+      return;
+    }
+
+    if (!motivoRemocao.trim()) {
+      setErro("Informe o motivo da remoção.");
+      return;
+    }
+
+    try {
+      setSalvando(true);
+      setErro("");
+      setSucesso("");
+
+      await api.patch(
+        `/api/rocam/comando/desligar/${id}`,
+        {
+          motivo: motivoRemocao.trim(),
+          numeroBoletim: boletimRemocao.trim()
+        }
+      );
+
+      setSucesso(
+        `${pessoaRemocao.nome || "Policial"} foi removido do efetivo ROCAM.`
+      );
+      setPessoaRemocao(null);
+
+      await carregar();
+    } catch (err) {
+      console.error("Erro ao remover braçal:", err);
+      setErro(
+        err?.response?.data?.message ||
+          "Não foi possível remover o braçal."
+      );
+    } finally {
+      setSalvando(false);
+    }
+  };
+
+  /* =======================================================
      CARREGAR
   ======================================================= */
 
@@ -718,6 +798,23 @@ export default function RocamBracais() {
                       ativa no efetivo ROCAM.
                     </span>
 
+                    {item.papelRocam === "BRACAL_ROCAM" ? (
+                      <button
+                        type="button"
+                        className="rocam-bracal-remover"
+                        onClick={() =>
+                          abrirRemocao(item)
+                        }
+                        disabled={salvando}
+                      >
+                        Remover da ROCAM
+                      </button>
+                    ) : (
+                      <span className="rocam-bracal-remover-nota">
+                        Comando/Subcomando: remover pela tela de Comando
+                      </span>
+                    )}
+
                   </div>
 
                 </article>
@@ -979,6 +1076,90 @@ export default function RocamBracais() {
 
           </div>
 
+        </div>
+      )}
+
+      {/* ===================================================
+          MODAL DE REMOÇÃO
+      =================================================== */}
+
+      {pessoaRemocao && (
+        <div
+          className="rocam-bracais-modal-overlay"
+          onClick={fecharRemocao}
+        >
+          <div
+            className="rocam-bracais-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="rocam-bracais-modal-header">
+              <div>
+                <small>COMANDO ROCAM</small>
+                <h2>Remover Braçal ROCAM</h2>
+                <p>
+                  {pessoaRemocao.patente
+                    ? `${pessoaRemocao.patente} `
+                    : ""}
+                  {pessoaRemocao.nome} • {pessoaRemocao.funcional}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={fecharRemocao}
+                disabled={salvando}
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="rocam-bracais-modal-warning">
+              <strong>O policial sai do efetivo ROCAM</strong>
+              <p>
+                O vínculo ROCAM é encerrado e a qualificação sai
+                da hierarquia. O policial continua no batalhão
+                normalmente e o desligamento fica registrado no
+                histórico ROCAM.
+              </p>
+            </div>
+
+            <div className="rocam-bracais-field">
+              <label>Motivo da remoção *</label>
+              <input
+                value={motivoRemocao}
+                onChange={(e) => setMotivoRemocao(e.target.value)}
+                placeholder="Ex.: cadastro indevido, wipe da cidade, saída a pedido"
+              />
+            </div>
+
+            <div className="rocam-bracais-field">
+              <label>Número do boletim (opcional)</label>
+              <input
+                value={boletimRemocao}
+                onChange={(e) => setBoletimRemocao(e.target.value)}
+              />
+            </div>
+
+            <div className="rocam-bracais-modal-actions">
+              <button
+                type="button"
+                className="cancel"
+                onClick={fecharRemocao}
+                disabled={salvando}
+              >
+                Cancelar
+              </button>
+
+              <button
+                type="button"
+                className="confirm rocam-bracal-confirmar-remocao"
+                onClick={removerBracal}
+                disabled={salvando || !motivoRemocao.trim()}
+              >
+                {salvando ? "Removendo..." : "Confirmar remoção"}
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
